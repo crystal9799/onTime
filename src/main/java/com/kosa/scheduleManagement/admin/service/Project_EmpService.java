@@ -20,11 +20,10 @@ public class Project_EmpService {
 	
 	public void insert_Project_Emp(Project project, List<Emp> emplist) {
 		Project_EmpDao project_empdao = sqlsession.getMapper(Project_EmpDao.class);
-		int index=0;
 		
-		for(int i=0; i<emplist.size(); i++) {
+		for(int index=0; index<emplist.size(); index++) {
 			project_empdao.insertProject_Emp(project.getProject_num(), emplist.get(index).getUser_id());
-			System.out.println("작업완료 : "+i+"번째");
+			System.out.println("작업완료 : "+index+"번째");
 		}
 	}
 }
