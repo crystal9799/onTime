@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.kosa.scheduleManagement.global.dao.EmpDao">
 
 	<!-- 부서번호로 해당부서 사원목록 불러오기 -->
-	<select id="getEmpListByDeptno" resultType="com.kosa.scheduleManagement.global.dto.Emp">
-		select user_id,password,enabled,ename,emp_pic,job,deptno,dhead_num from emp where deptno=#{deptno}
-	</select>
+	<insert id="insertProject_Emp" parameterType="com.kosa.scheduleManagement.global.dto.Project_Sub">
+		INSERT INTO PROJECT_EMP VALUES();
+	</insert>
 </mapper>
 	
