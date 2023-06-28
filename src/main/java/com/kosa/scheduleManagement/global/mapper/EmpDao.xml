@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.kosa.scheduleManagement.global.dao.EmpDao">
 
 	<select id="getEmpListByDeptno" resultType="com.kosa.scheduleManagement.global.dto.Emp">
-		select user_id,ename from emp where deptno=#{deptno}
+		select user_id,password,enabled,ename,emp_pic,job,deptno,dhead_num from emp where deptno=#{deptno}
 	</select>
 </mapper>
 	
