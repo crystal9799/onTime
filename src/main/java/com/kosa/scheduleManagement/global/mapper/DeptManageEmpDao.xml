@@ -20,4 +20,14 @@
     		<select id="getRestEmpListByDeptno" resultType="com.kosa.scheduleManagement.global.dto.Emp">
 		select user_id,ename,emp_pic,job,deptno,dhead_num from emp where deptno=#{deptno}
 	</select>
+	<insert id="insertEmp"
+		parameterType="com.kosa.scheduleManagement.global.dto.EmpDto"
+		useGeneratedKeys="true" keyProperty="user_id">
+		INSERT INTO emp (user_id, deptno, ename, password, enabled, job, dhead_num)
+		VALUES (emp_seq.NEXTVAL, #{deptno}, #{ename}, #{password}, '1',
+		#{job}, #{dhead_num})
+	</insert>
+	<delete id="deleteEmp">
+		delete from emp where user_id = #{user_id}
+	</delete>
 </mapper>
