@@ -11,7 +11,7 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
-	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- Enables the Spring MVC @AdminEmpManageController programming model -->
 	<mvc:annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
@@ -31,8 +31,6 @@
 
 	<context:annotation-config />
 	<context:component-scan base-package="com.kosa.scheduleManagement" />
-	<context:component-scan base-package="com.kosa.scheduleManagement.controller" />
-	<context:component-scan base-package="com.kosa.scheduleManagement.service" />
-	<context:component-scan base-package="com.kosa.scheduleManagement.global.dao" />
+
 	
 </beans:beans>
