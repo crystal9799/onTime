@@ -9,7 +9,7 @@ import com.kosa.scheduleManagement.global.dto.Project;
 import com.kosa.scheduleManagement.global.dto.Project_Sub;
 
 @Service
-public class ProjectService {
+public class Project_Service {
 	
 	private SqlSession sqlsession;
 	

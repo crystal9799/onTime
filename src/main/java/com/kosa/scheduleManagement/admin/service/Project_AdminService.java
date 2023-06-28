@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Service
-public class EmpManageService {
+public class Project_AdminService {
     private SqlSession sqlsession;
 
     @Autowired
