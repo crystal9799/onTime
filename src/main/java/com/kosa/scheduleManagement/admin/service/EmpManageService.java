@@ -18,14 +18,11 @@ public class EmpManageService {
         this.sqlsession = sqlsession;
     }
 
-    public List<Emp> list(int deptno, int cpage, int pagesize) {
+    public List<Emp> getList(int deptno) {
         EmpDao empdao = sqlsession.getMapper(EmpDao.class);
         List<Emp> emplist = null;
-        System.out.println(cpage+ " " + pagesize);
-        int start = cpage * pagesize - (pagesize - 1); // 1*5 -(5-1) = 1
-        int end = cpage * pagesize;
         try {
-            emplist = empdao.getEmpListByDeptno(deptno, start, end);
+            emplist = empdao.getEmpListByDeptno(deptno);
         } catch (Exception e) {
             e.getStackTrace();
             System.out.println("listService : " + e.getMessage());
