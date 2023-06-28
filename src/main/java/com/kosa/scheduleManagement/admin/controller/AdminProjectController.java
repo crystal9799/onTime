@@ -57,9 +57,7 @@ public class AdminProjectController {
 		}
     }
     
-    Project projectA = new Project();
-    List<Emp> emplistA = new ArrayList<Emp>();
-    
+    //프로젝트 생성하고, Project / Project_Sub 에 Insert
     @PostMapping
     public ResponseEntity<String> insertProject(@RequestBody Project_Sub genproject){    	
     	try {
