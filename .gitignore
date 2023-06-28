@@ -78,7 +78,7 @@ local.properties
 .idea/**/dictionaries
 .idea/**/shelf
 
-# AWS User-specific
+# S3Service User-specific
 .idea/**/aws.xml
 
 # Generated files

@@ -1,4 +1,4 @@
 package com.kosa.scheduleManagement.global.aws;
 
-public class AWS {
+public class S3Service {
 }
