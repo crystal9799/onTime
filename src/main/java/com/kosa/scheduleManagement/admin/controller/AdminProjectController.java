@@ -4,6 +4,7 @@ import com.kosa.scheduleManagement.admin.service.Project_AdminService;
 import com.kosa.scheduleManagement.admin.service.Project_Service;
 import com.kosa.scheduleManagement.admin.service.Project_EmpService;
 import com.kosa.scheduleManagement.global.dto.Emp;
+import com.kosa.scheduleManagement.global.dto.Project;
 import com.kosa.scheduleManagement.global.dto.Project_Sub;
 
 import java.util.ArrayList;
@@ -23,8 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/admin")
 @RestController
 public class AdminProjectController {
-    private Project_AdminService empManageService;
-    private Project_Service projectService;
+    private Project_AdminService project_adminservice;
+    private Project_Service project_Service;
     private Project_EmpService project_empservice;
     
     @Autowired
@@ -33,13 +34,13 @@ public class AdminProjectController {
 	}
 
 	@Autowired
-    public void setEmpManageService(Project_AdminService empManageService) {
-        this.empManageService = empManageService;
+    public void setEmpManageService(Project_AdminService project_adminservice) {
+        this.project_adminservice = project_adminservice;
     }
     
     @Autowired
-    public void setProjectService(Project_Service projectService) {
-        this.projectService = projectService;
+    public void setProjectService(Project_Service project_Service) {
+        this.project_Service = project_Service;
     }
     
     //부서번호로 해당부서 사원들 목록 받기.
@@ -49,23 +50,25 @@ public class AdminProjectController {
     	
     	try {
     		System.out.println("정상실행");
-    		list = empManageService.getList(deptno);
+    		list = project_adminservice.getList(deptno);
     		return new ResponseEntity<List<Emp>>(list,HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<List<Emp>>(list,HttpStatus.BAD_REQUEST);
 		}
     }
     
+    Project projectA = new Project();
+    List<Emp> emplistA = new ArrayList<Emp>();
+    
     @PostMapping
     public ResponseEntity<String> insertProject(@RequestBody Project_Sub genproject){    	
     	try {
-			projectService.insertProject(genproject.getProject());
-			
+    		project_Service.insertProject(genproject.getProject());
+			project_empservice.insert_Project_Emp(genproject.getProject(), genproject.getEmplist());
+			return new ResponseEntity<String>("insert success",HttpStatus.OK);
 		} catch (Exception e) {
-			
+			return new ResponseEntity<String>("insert failed",HttpStatus.BAD_REQUEST);
 		}
-    	
-    	return null;
     }
     
     
