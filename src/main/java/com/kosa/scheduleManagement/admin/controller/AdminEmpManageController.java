@@ -30,7 +30,7 @@ public class AdminEmpManageController {
 		this.empManageService = empManageService;
 	}
 
-	// 부서사원 보여주기
+	// 遺��꽌�궗�썝 蹂댁뿬二쇨린
 	@GetMapping
 	public String emplist(int deptno, String ps, String cp, Model model) throws SQLException, ClassNotFoundException {
 		System.out.println("ps : " + ps + "cp : " + cp);
@@ -63,30 +63,30 @@ public class AdminEmpManageController {
 		return "/admin/empManage/empManage";
 	}
 
-////////////////////////////////////////rest 방식 코드 	
+////////////////////////////////////////rest 諛⑹떇 肄붾뱶 	
 
-// rest 부서별 사원 조회
+// rest 遺��꽌蹂� �궗�썝 議고쉶
 	@GetMapping("/rest")
 	public ResponseEntity<List<Emp>> getEmpByDeptno(@RequestParam("deptno") int deptno) {
 		List<Emp> list = new ArrayList();
 
 		try {
 			list = empManageService.getList(deptno);
-			System.out.println("empListByDeptno rest호출");
+			System.out.println("empListByDeptno rest�샇異�");
 			return new ResponseEntity<List<Emp>>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<List<Emp>>(list, HttpStatus.BAD_REQUEST);
 		}
 	}
 
-// 사원생성페이지 보여주기. 부서장의 deptno을 파라미터로 받아와 세션에 저장하고 이를 post요청 시에 emp에 값 넣기.
-// 비동기로 처리할 것.
+// �궗�썝�깮�꽦�럹�씠吏� 蹂댁뿬二쇨린. 遺��꽌�옣�쓽 deptno�쓣 �뙆�씪誘명꽣濡� 諛쏆븘�� �꽭�뀡�뿉 ���옣�븯怨� �씠瑜� post�슂泥� �떆�뿉 emp�뿉 媛� �꽔湲�.
+// 鍮꾨룞湲곕줈 泥섎━�븷 寃�.
 	@GetMapping("/create")
 	public ResponseEntity<Integer> showCreateForm(@RequestParam("deptno") int deptno) {
 		return ResponseEntity.ok(deptno);
 	}
 
-// rest 부서별 사원 생성
+// rest 遺��꽌蹂� �궗�썝 �깮�꽦
 	@PostMapping("/create")
 	public ResponseEntity<String> createEmp(@RequestBody Emp emp, HttpSession session) {
 		int deptno = (int) session.getAttribute("deptno");
@@ -96,23 +96,23 @@ public class AdminEmpManageController {
 		session.removeAttribute("deptno");
 		if (user_id > -1) {
 			message = String.valueOf(user_id);
-			System.out.println("사원 생성 성공");
+			System.out.println("�궗�썝 �깮�꽦 �꽦怨�");
 		} else {
-			message = "사원 생성 실패";
-			System.out.println("사원 생성 실패");
+			message = "�궗�썝 �깮�꽦 �떎�뙣";
+			System.out.println("�궗�썝 �깮�꽦 �떎�뙣");
 		}
 		return ResponseEntity.ok(message);
 	}
 
-//사원 삭제
+//�궗�썝 �궘�젣
 	@GetMapping("/delete")
 	public ResponseEntity<String> deleteEmp(@RequestParam("user_id") long user_id) {
 		int result = empManageService.deleteEmp(user_id);
 		String message = "";
 		if(user_id > -1) {
-			message = user_id + "번 사원이 삭제되었습니다.";
+			message = user_id + "踰� �궗�썝�씠 �궘�젣�릺�뿀�뒿�땲�떎.";
 		}else {
-			message = "삭제 실패";
+			message = "�궘�젣 �떎�뙣";
 		}
 		
 		return ResponseEntity.ok(message);

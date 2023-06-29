@@ -43,8 +43,7 @@
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
 	<!-- 공통빈 -->
-	<bean
-			class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="1"/>
 		<property name="prefix">
 			<value>/WEB-INF/views/</value>
