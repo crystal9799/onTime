@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <nav class="sidebar sidebar-offcanvas flex" id="sidebar">
 	<ul class="nav">
 		<li class="nav-item"><a class="nav-link" href="index.html"> <i
@@ -24,11 +25,20 @@
 			href="pages/documentation/documentation.html"> <i
 				class="icon-paper menu-icon"></i> <span class="menu-title">DeptManage</span>
 		</a></li>
-		<li class="nav-item"><a class="nav-link" data-toggle="collapse"
-			href="#auth" aria-expanded="false" aria-controls="auth"> <i
+		<li class="nav-item"><a id="test" class="nav-link"
+			href="${pageContext.request.contextPath}/mypage.do"> <i
 				class="icon-head menu-icon"></i> <span class="menu-title">Mypage</span></i>
 		</a>
 			</li>
 
 	</ul>
 </nav>
+<script>
+/* $(document).ready(function () {
+	$("#test").on('click',function(){
+		console.log("test 버튼클");
+		window.location='${pageContext.request.contextPath}/mypage.do';
+	})	
+})
+ */
+</script>
