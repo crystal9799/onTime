@@ -6,7 +6,7 @@ import lombok.Data;
 public class Schedule_Board {
 	private int sched_num;
 	private String sched_info;
-	private String sched_prog;
+	private int sched_prog;
 	private int sched_seq;
 	private int project_num;
 }
