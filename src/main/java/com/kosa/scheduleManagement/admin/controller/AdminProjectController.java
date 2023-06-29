@@ -63,10 +63,13 @@ public class AdminProjectController {
     	try { 
     		System.out.println("try블록의 시작");
     		project_Service.insertProject(genproject.getProject());
-			project_empservice.insert_Project_Emp(genproject.getProject(), genproject.getEmplist());
+    		System.out.println("project insert success");
+    		System.out.println("Project : " + genproject.getProject().toString());
+    		System.out.println("List<Emp> : " + genproject.getEmplist().toString());
+			project_empservice.insert_Project_Emp(genproject);
+			System.out.println("empinsert success");
 			return new ResponseEntity<String>("insert success",HttpStatus.OK);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			return new ResponseEntity<String>("insert failed",HttpStatus.BAD_REQUEST);
 		}
     }
