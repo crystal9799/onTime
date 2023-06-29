@@ -44,7 +44,7 @@ public class mypageAajxController {
 		logger.info("originalName: " + file.getOriginalFilename());
 		try {
 			String S3Path = s3service.fileToS3(file);
-			emp.setEmp_pic(S3Path);
+			emp.setEmp_pic(S3Path); 
 			mypageservice.updateEmpInfo(emp);
 			return new ResponseEntity<String>("insert sucess", HttpStatus.OK);
 		} catch (Exception e) {
