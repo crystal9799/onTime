@@ -108,6 +108,13 @@ public class AdminEmpManageController {
 	@GetMapping("/delete")
 	public ResponseEntity<String> deleteEmp(@RequestParam("user_id") long user_id) {
 		int result = empManageService.deleteEmp(user_id);
+		//연관테이블인 자식테이블의 데이터 먼저 삭제
+		
+		//1. schedule 테이블 (selectById해주고, 삭제)
+		
+		//2. project_emp 테이블 (selectById해주고, 삭제)
+		
+		//3. dept 테이블 (만약 user_id가있다면 해당 데이터만 
 		String message = "";
 		if(user_id > -1) {
 			message = user_id + "번 사원이 삭제되었습니다.";

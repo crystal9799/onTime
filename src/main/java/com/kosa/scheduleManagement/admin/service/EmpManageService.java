@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kosa.scheduleManagement.global.dao.DeptManageEmpDao;
-import com.kosa.scheduleManagement.global.dao.EmpDao;
 import com.kosa.scheduleManagement.global.dto.Emp;
+
+
 
 @Service
 public class EmpManageService {
