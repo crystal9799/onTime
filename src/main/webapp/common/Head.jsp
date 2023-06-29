@@ -3,6 +3,8 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- header, nav layout -->
 <script
 	src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 <link rel="stylesheet" href="resources/vendors/feather/feather.css">
@@ -25,6 +27,16 @@
 <!-- endinject -->
 <link rel="shortcut icon" href="resources/images/favicon.png" />
 
+<!-- mypage chart layout link -->
+<!-- chart -->
+<link rel="stylesheet"
+	href="resources/vendors/css/mypage.css">
+
+
+
+
+<!-- script -->
+<!-- header, nav layout -->
 <script src="resources/js/vendor.bundle.base.js"></script>
 <script src="resources/js/Chart.min.js"></script>
 <script src="resources/js/jquery.dataTables.js"></script>
@@ -37,3 +49,8 @@
 <script src="resources/js/todolist.js"></script>
 <script src="resources/js/dashboard.js"></script>
 <script src="resources/js/Chart.roundedBarCharts.js"></script>
+
+
+<!-- mypage chart script -->
+
+
