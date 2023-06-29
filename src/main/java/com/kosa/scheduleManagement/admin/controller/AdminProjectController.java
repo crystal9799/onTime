@@ -69,6 +69,21 @@ public class AdminProjectController {
 		}
     }
     
+    //프로젝트 상세보기
+    @GetMapping("/getProjectDetail")
+    public Project showProject(@RequestParam("project_num") int project_num){
+    	Project project;
+    	
+    	try {
+			project = project_Service.project(project_num);
+			return project;
+		} catch (Exception e) {
+			return null;
+		}
+    }
     
+    //생성된 프로젝트의 목록(네브바용)
+    
+    //프로젝트 상세보기(캘린더 클릭 시)
     
 }
