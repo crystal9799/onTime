@@ -30,10 +30,6 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/admin</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.js</url-pattern>
 	</servlet-mapping>

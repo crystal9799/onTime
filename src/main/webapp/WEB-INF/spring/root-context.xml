@@ -13,8 +13,8 @@
 	<bean id="driverManagerDataSource"
 		  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@192.168.0.38:1521:XE"></property>
-		<property name="username" value="team4"></property>
+		<property name="url" value="jdbc:oracle:thin:@192.168.0.38:49161:XE"></property>
+		<property name="username" value="kosa"></property>
 		<property name="password" value="1004"></property>
 	</bean>
 
@@ -22,14 +22,9 @@
 		<property name="dataSource" ref="driverManagerDataSource" />
 	</bean>
 
-<!-- Mybatis 설정
-기본 자바코드 : SqlMapConfig.xml 에서 설정했던 작업 (DB연결 ,mapper 설정)
-파일 없어지고 설명파일안에서   > SqlSessionFactoryBean
-기존 java 코드 : builder 사용 > Factory 객체 > sqlsession 생성 > 함수사용 
--->
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="driverManagerDataSource"></property>
-		<property name="mapperLocations" value="classpath*:com/kosa/scheduleManagement/global/mapper/*.xml" />
+<!--		<property name="mapperLocations" value="classpath*:/mapper/EmpDao.xml" />-->
 	</bean>
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
@@ -42,7 +37,6 @@
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
-	<!-- 공통빈 -->
 	<bean
 			class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="1"/>
