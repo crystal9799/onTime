@@ -8,6 +8,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					 VALUES(#{project_num}, #{project_start}, #{project_end}, #{project_info}, #{project_name}, #{is_deleted}, #{DEPTNO})
 	</insert>
 	<select id="projectDetail" resultType="com.kosa.scheduleManagement.global.dto.Project">
-		SELECT PROJECT_NUM,PROJECT_START,PROJECT_END,PROJECT_INFO,PROJECT_NAME,DEPTNO WHERE PROJECT_NUM = #{project_num}
+		SELECT PROJECT_NUM,PROJECT_START,PROJECT_END,PROJECT_INFO,PROJECT_NAME,DEPTNO FROM PROJECT WHERE PROJECT_NUM = #{project_num}
 	</select>
 </mapper>

@@ -75,9 +75,13 @@ public class AdminProjectController {
     	Project project;
     	
     	try {
+    		System.out.println("호출");
 			project = project_Service.project(project_num);
+			System.out.println(project.toString());
 			return project;
 		} catch (Exception e) {
+			System.out.println("예외발생");
+			e.getMessage();
 			return null;
 		}
     }
