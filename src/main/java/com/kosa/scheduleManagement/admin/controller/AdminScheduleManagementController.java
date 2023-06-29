@@ -1,4 +1,4 @@
-package com.kosa.scheduleManagement.user.controller;
+package com.kosa.scheduleManagement.admin.controller;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,37 +15,37 @@ import com.kosa.scheduleManagement.user.service.ScheduleService;
 
 @Controller
 @RequestMapping("/admin/")
-public class UserScheduleManagementController {
+public class AdminScheduleManagementController {
 
-	public UserScheduleManagementController() {
+	public AdminScheduleManagementController() {
 		System.out.println("Controller Connection UserSchedule");
 	}
 
 	private ScheduleService service;
 
-	// page load. page data load ÇÇ·æ
+	// page load. page data load í”¼ë£¡
 	@GetMapping("schedule.do")
 	public String getAllList() throws ClassNotFoundException, SQLException {
 		System.out.println("getAllLIst conn");
-		return "test";
+		return "/kanban/temp";
 	}
-
+	
 	@GetMapping("scheduletest.do")
 	public String getAllListestt() throws ClassNotFoundException, SQLException {
 		System.out.println("getAllLIst conn");
-		return "empty";
+		return "/kanban/dataTestPage";
 	}
 	
 	@GetMapping("kanbanviewtest.do")
 	public String kanviewTest() throws ClassNotFoundException, SQLException {
 		System.out.println("view conn");
-		return "viewkanbantest";
+		return "/kanban/viewKanbanTemp";
 	}
 
 	@GetMapping("viewtest.do")
 	public String viewTest() throws ClassNotFoundException, SQLException {
 		System.out.println("view conn");
-		return "viewtest";
+		return "/kanban/modalViewTestPage";
 	}
 
 	/*
