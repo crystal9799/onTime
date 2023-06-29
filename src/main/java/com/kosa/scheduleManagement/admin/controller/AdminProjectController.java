@@ -69,6 +69,20 @@ public class AdminProjectController {
 		}
     }
     
+    @GetMapping
+    public ResponseEntity<List<Project>> projectShow(@RequestParam("project_id") int project_id){
+    	List<Project> plist = new ArrayList<Project>();
+    	
+    	try {
+			System.out.println("정상실행");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	
+		return null;
+    }
+    
     
     
 }
