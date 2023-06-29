@@ -58,17 +58,41 @@ public class AdminProjectController {
     }
     
     //프로젝트 생성하고, Project / Project_Sub 에 Insert
-    @PostMapping
+    @PostMapping("/createProject")
     public ResponseEntity<String> insertProject(@RequestBody Project_Sub genproject){    	
-    	try {
+    	try { 
+    		System.out.println("try블록의 시작");
     		project_Service.insertProject(genproject.getProject());
-			project_empservice.insert_Project_Emp(genproject.getProject(), genproject.getEmplist());
+    		System.out.println("project insert success");
+    		System.out.println("Project : " + genproject.getProject().toString());
+    		System.out.println("List<Emp> : " + genproject.getEmplist().toString());
+			project_empservice.insert_Project_Emp(genproject);
+			System.out.println("empinsert success");
 			return new ResponseEntity<String>("insert success",HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>("insert failed",HttpStatus.BAD_REQUEST);
 		}
     }
     
+    //프로젝트 상세보기
+    @GetMapping("/getProjectDetail")
+    public Project showProject(@RequestParam("project_num") int project_num){
+    	Project project;
+    	
+    	try {
+    		System.out.println("호출");
+			project = project_Service.project(project_num);
+			System.out.println(project.toString());
+			return project;
+		} catch (Exception e) {
+			System.out.println("예외발생");
+			e.getMessage();
+			return null;
+		}
+    }
     
+    //생성된 프로젝트의 목록(네브바용)
+    
+    //프로젝트 상세보기(캘린더 클릭 시)
     
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kosa.scheduleManagement.global.dao.Project_EmpDao;
 import com.kosa.scheduleManagement.global.dto.Emp;
 import com.kosa.scheduleManagement.global.dto.Project;
+import com.kosa.scheduleManagement.global.dto.Project_Sub;
 
 @Service
 public class Project_EmpService {
@@ -18,13 +19,11 @@ public class Project_EmpService {
 		this.sqlsession = sqlsession;
 	}
 	
-	public void insert_Project_Emp(Project project, List<Emp> emplist) {
+	public void insert_Project_Emp(Project_Sub genproject) {
+		System.out.println("Project : " + genproject.getProject().toString());
+		System.out.println("emplist : " + genproject.getEmplist().toString());
 		Project_EmpDao project_empdao = sqlsession.getMapper(Project_EmpDao.class);
-		int index=0;
-		
-		for(int i=0; i<emplist.size(); i++) {
-			project_empdao.insertProject_Emp(project.getProject_num(), emplist.get(index).getUser_id());
-			System.out.println("작업완료 : "+i+"번째");
-		}
+		System.out.println("Project_Emp insert 시작");
+		project_empdao.insertProject_Emp(genproject);
 	}
 }
