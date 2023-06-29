@@ -1,8 +1,10 @@
 package com.kosa.scheduleManagement.global.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Emp {
 	private int user_id;
 	private String password;
