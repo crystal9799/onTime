@@ -3,12 +3,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosa.scheduleManagement.global.dao.Project_EmpDao">
-
-	<insert id="insertProject_Emp" parameterType="com.kosa.scheduleManagement.global.dto.Project_Sub">
-		<foreach item="emp" collection="emplist" separator=";">
-			INSERT INTO Project_Emp (project_num, user_id)
-			VALUES (#{project.project_num}, #{emp.user_id})
-		</foreach>
+	<insert id="insertProject_Emp">
+		INSERT INTO PROJECT_EMP(PROJECT_NUM,USER_ID) VALUES(#{param1},#{param2})
 	</insert>
+	
 </mapper>
 	
