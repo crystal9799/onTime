@@ -6,11 +6,33 @@
 <meta charset="UTF-8">
 <title>mypage</title>
 <jsp:include page="/common/Head.jsp" />
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" />
-<script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
-<script type="text/javascript">
-	
+<script
+	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+<script>
+	$(document).ready(function() {
+		var ctx = $("#chart-line");
+		var totalnum = ${totalSchedNum};
+		var doneNum = ${doneSchedNum};
+		var resultDone = (doneNum/totalnum) * 100;
+		var resultProg = 100 - resultDone;
+		
+		var myLineChart = new Chart(ctx, {
+			type : 'pie',
+			data : {
+				labels : [ "완료", "진행중" ],
+				datasets : [ {
+					data : [ resultDone, resultProg ],
+					backgroundColor : [ "#4b49ac", "#CDCDFF" ]
+				} ]
+			},
+			options : {
+				title : {
+					display : true,
+					text : '업무 진행도'
+				}
+			}
+		});
+	});
 </script>
 </head>
 <body>
@@ -19,27 +41,13 @@
 		<jsp:include page="/common/asideNav.jsp" />
 		<div class="main-panel">
 			<div class="content-wrapper">
-				<div class="col-md-4 col-sm-4  ">
-					<div class="x_panel">
-						<div class="x_title">
-							<h2>Pie Graph</h2>
-							<ul class="nav navbar-right panel_toolbox">
-								<li><a class="collapse-link"><i
-										class="fa fa-chevron-up"></i></a></li>
-								<li class="dropdown"><a href="#" class="dropdown-toggle"
-									data-toggle="dropdown" role="button" aria-expanded="false"><i
-										class="fa fa-wrench"></i></a>
-									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										<a class="dropdown-item" href="#">Settings 1</a> <a
-											class="dropdown-item" href="#">Settings 2</a>
-									</div></li>
-								<li><a class="close-link"><i class="fa fa-close"></i></a></li>
-							</ul>
-							<div class="clearfix"></div>
-						</div>
-						<div class="x_content">
-							<div id="echart_pie" style="height: 350px;"></div>
-
+				<div class="col-sm-8 col-md-6">
+					<div class="card">
+						<div class="card-header">Pie chart</div>
+						<div class="card-body" style="height: 320px">
+							<canvas id="chart-line" width="299" height="200"
+								class="chartjs-render-monitor"
+								style="display: block; width: 400px; height: 250px;"></canvas>
 						</div>
 					</div>
 				</div>
