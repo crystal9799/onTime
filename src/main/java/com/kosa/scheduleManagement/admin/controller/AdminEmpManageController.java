@@ -89,7 +89,7 @@ public class AdminEmpManageController {
 // rest 부서별 사원 생성
 	@PostMapping("/create")
 	public ResponseEntity<String> createEmp(@RequestBody Emp emp, HttpSession session) {
-		int deptno = (int) session.getAttribute("deptno");
+		int deptno = (Integer)session.getAttribute("deptno");
 		String message = "";
 		emp.setDeptno(deptno);
 		int user_id = empManageService.insertEmp(deptno, emp);
