@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kosa.scheduleManagement.global.dao.DeptManageEmpDao;
-import com.kosa.scheduleManagement.global.dao.EmpDao;
 import com.kosa.scheduleManagement.global.dto.Emp;
+
+
+
+
 
 @Service
 public class EmpManageService {
@@ -21,7 +24,7 @@ public class EmpManageService {
 	}
 
 	public int totallistCountByDeptno(int deptno) throws SQLException, ClassNotFoundException {
-		System.out.println("totalë©”ì„œë“œê¹Œì§€ëŠ” ì˜´");
+		System.out.println("total¸Þ¼­µå±îÁö´Â ¿È");
 		DeptManageEmpDao empdao = sqlsession.getMapper(DeptManageEmpDao.class);
 		System.out.println(empdao);
 		int result = -1;
@@ -65,7 +68,9 @@ public class EmpManageService {
 		DeptManageEmpDao empdao = sqlsession.getMapper(DeptManageEmpDao.class);
 		int user_id = -1;
 		try {
+			int dhead_num = empdao.getDheadNumByDeptno(deptno);
 			emp.setDeptno(deptno);
+			emp.setDhead_num(dhead_num);
 			user_id = empdao.insertEmp(emp);
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -74,15 +79,31 @@ public class EmpManageService {
 		return user_id;
 	}
 
-	public int deleteEmp(long user_id) {
+	public boolean deleteEmp(long user_id) {
 		DeptManageEmpDao empdao = sqlsession.getMapper(DeptManageEmpDao.class);
-		int result = -1;
+		boolean result = true;
 		try {
-			result = empdao.deleteEmp(user_id);
+			empdao.updateEmpEnabled(user_id);
 		} catch (Exception e) {
 			e.getStackTrace();
+			result = false;
 			System.out.println("deleteEmpService : " + e.getMessage());
 		}
 		return result;
 	}
+	public boolean updateEmp(Emp enameJobInEmp, int user_id) {
+		DeptManageEmpDao empdao = sqlsession.getMapper(DeptManageEmpDao.class);
+	    Emp oldEmp = empdao.getEmpByUserId(user_id);
+	    System.out.println(oldEmp);
+	    enameJobInEmp.setDeptno(oldEmp.getDeptno());
+	    enameJobInEmp.setDhead_num(oldEmp.getDhead_num());
+	    enameJobInEmp.setEmp_pic(oldEmp.getEmp_pic());
+	    enameJobInEmp.setEnabled(oldEmp.getEnabled());
+	    enameJobInEmp.setPassword(oldEmp.getPassword());
+	    enameJobInEmp.setUser_id(oldEmp.getUser_id());
+		int rowsAffected = empdao.updateEmp(enameJobInEmp);
+		System.out.println(enameJobInEmp);
+	    return rowsAffected > 0;
+	}
+
 }

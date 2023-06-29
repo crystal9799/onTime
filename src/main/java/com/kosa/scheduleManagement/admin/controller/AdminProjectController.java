@@ -43,13 +43,13 @@ public class AdminProjectController {
         this.project_Service = project_Service;
     }
     
-    //ë¶€ì„œë²ˆí˜¸ë¡œ í•´ë‹¹ë¶€ì„œ ì‚¬ì›ë“¤ ëª©ë¡ ë°›ê¸°.
+    //ºÎ¼­¹øÈ£·Î ÇØ´çºÎ¼­ »ç¿øµé ¸ñ·Ï ¹Ş±â.
     @GetMapping
     public ResponseEntity<List<Emp>> empShow(@RequestParam("deptno") int deptno){
     	List<Emp> list = new ArrayList();
     	
     	try {
-    		System.out.println("ì •ìƒì‹¤í–‰");
+    		System.out.println("Á¤»ó½ÇÇà");
     		list = project_adminservice.getList(deptno);
     		return new ResponseEntity<List<Emp>>(list,HttpStatus.OK);
 		} catch (Exception e) {
@@ -57,18 +57,45 @@ public class AdminProjectController {
 		}
     }
     
-    //í”„ë¡œì íŠ¸ ìƒì„±í•˜ê³ , Project / Project_Sub ì— Insert
-    @PostMapping
+    //ÇÁ·ÎÁ§Æ® »ı¼ºÇÏ°í, Project / Project_Sub ¿¡ Insert
+    @PostMapping("/createProject")
     public ResponseEntity<String> insertProject(@RequestBody Project_Sub genproject){    	
-    	try {
+    	try { 
+    		System.out.println("tryºí·ÏÀÇ ½ÃÀÛ");
     		project_Service.insertProject(genproject.getProject());
-			project_empservice.insert_Project_Emp(genproject.getProject(), genproject.getEmplist());
+    		
+    		System.out.println("project insert success");
+    		System.out.println("Project : " + genproject.getProject().toString());
+    		System.out.println("List<Emp> : " + genproject.getEmplist().toString());
+    		
+    		
+			project_empservice.insert_Project_Emp(genproject);
+			System.out.println("empinsert success");
 			return new ResponseEntity<String>("insert success",HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>("insert failed",HttpStatus.BAD_REQUEST);
 		}
     }
     
+    //ÇÁ·ÎÁ§Æ® »ó¼¼º¸±â
+    @GetMapping("/getProjectDetail")
+    public Project showProject(@RequestParam("project_num") int project_num){
+    	Project project;
+    	
+    	try {
+    		System.out.println("È£Ãâ");
+			project = project_Service.project(project_num);
+			System.out.println(project.toString());
+			return project;
+		} catch (Exception e) {
+			System.out.println("¿¹¿Ü¹ß»ı");
+			e.getMessage();
+			return null;
+		}
+    }
     
+    //»ı¼ºµÈ ÇÁ·ÎÁ§Æ®ÀÇ ¸ñ·Ï(³×ºê¹Ù¿ë)
+    
+    //ÇÁ·ÎÁ§Æ® »ó¼¼º¸±â(Ä¶¸°´õ Å¬¸¯ ½Ã)
     
 }

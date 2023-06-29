@@ -28436,7 +28436,8 @@ div.tagsinput span.tag a {
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
   width: calc(100% - 235px);
-  min-height: calc(100vh - 60px);
+  margin-top: 60px;
+  min-height: 100vh;
   display: -webkit-flex;
   display: flex;
   float: right;

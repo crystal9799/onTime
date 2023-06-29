@@ -7,12 +7,15 @@ import com.kosa.scheduleManagement.global.dto.Project_Sub;
 
 public interface ProjectDao {
 	
-	//ë¡œê·¸ì¸í•œ ì‚¬ì›ì˜ í”„ë¡œì íŠ¸ ë¦¬ìŠ¤íŠ¸
+	//·Î±×ÀÎÇÑ »ç¿øÀÇ ÇÁ·ÎÁ§Æ® ¸®½ºÆ®
 	List<Project> getProjectList(int deptno);
 	
-	//í”„ë¡œì íŠ¸ ìƒì„±
+	//ÇÁ·ÎÁ§Æ® »ı¼º
 	int insertProject(Project project);
 	
-	//í”„ë¡œì íŠ¸ ì‚­ì œ
+	//ÇÁ·ÎÁ§Æ® »èÁ¦
 	int deleteProject(int project_num);
+	
+	//ÇÁ·ÎÁ§Æ® µğÅ×ÀÏ
+	Project projectDetail(int project_num);
 }
