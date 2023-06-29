@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,19 +80,22 @@ public class AdminEmpManageController {
 		}
 	}
 
-// 사원생성페이지 보여주기. 부서장의 deptno을 파라미터로 받아와 세션에 저장하고 이를 post요청 시에 emp에 값 넣기.
+// 사원생성페이지 보여주기. 부서장의 deptno을 파라미터로 받아와 세션에 저장하고 이를 post요청 시에 emp에 세션의 deptno 값 넣기.
+// 시큐리티 적용 후에는 사용자의 user_id를 가져오는게 나을까? -> user_id로 emp 조회하기 vs 세션에 deptno를 가지고 사용하기.
 // 비동기로 처리할 것.
 	@GetMapping("/create")
-	public ResponseEntity<Integer> showCreateForm(@RequestParam("deptno") int deptno) {
+	public ResponseEntity<Integer> showCreateForm(@RequestParam("deptno") int deptno, HttpSession session) {
+		session.setAttribute("deptno", deptno);
 		return ResponseEntity.ok(deptno);
 	}
 
 // rest 부서별 사원 생성
 	@PostMapping("/create")
-	public ResponseEntity<String> createEmp(@RequestBody Emp emp, HttpSession session) {
-		int deptno = (int) session.getAttribute("deptno");
+	public ResponseEntity<String> createEmp(@RequestParam("deptno") int deptno, @RequestBody Emp emp, HttpSession session) {
+//		int deptno = (int) session.getAttribute("deptno");
 		String message = "";
 		emp.setDeptno(deptno);
+		System.out.println(emp);
 		int user_id = empManageService.insertEmp(deptno, emp);
 		session.removeAttribute("deptno");
 		if (user_id > -1) {
@@ -101,20 +105,33 @@ public class AdminEmpManageController {
 			message = "사원 생성 실패";
 			System.out.println("사원 생성 실패");
 		}
-		return ResponseEntity.ok(message);
+		return new ResponseEntity<String>(message,HttpStatus.OK);
 	}
 
 //사원 삭제
 	@GetMapping("/delete")
 	public ResponseEntity<String> deleteEmp(@RequestParam("user_id") long user_id) {
-		int result = empManageService.deleteEmp(user_id);
+		//삭제가 완료되면 true를 반환, update enabled 0
+		boolean result = empManageService.deleteEmp(user_id); 
 		String message = "";
-		if(user_id > -1) {
-			message = user_id + "번 사원이 삭제되었습니다.";
-		}else {
+		if(result != true) {
 			message = "삭제 실패";
+			return new ResponseEntity<String>(message,HttpStatus.OK);
+		}else {
+			message = user_id + "번 사원이 삭제되었습니다.";
+			return new ResponseEntity<String>(message,HttpStatus.BAD_REQUEST);
 		}
-		
-		return ResponseEntity.ok(message);
 	}
+	
+	//사원 수정
+	@PutMapping("/update")
+	public ResponseEntity<String> updateEmp(@RequestParam("user_id") int user_id, @RequestBody Emp emp) {
+	    boolean isUpdated = empManageService.updateEmp(emp, user_id);
+	    if (isUpdated) {
+	        return new ResponseEntity<String>("사원 정보가 성공적으로 수정되었습니다.",HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<String>("사원 정보 수정에 실패했습니다.",HttpStatus.OK);
+	    }
+	}
+
 }

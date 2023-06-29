@@ -15,4 +15,7 @@ public interface ProjectDao {
 	
 	//프로젝트 삭제
 	int deleteProject(int project_num);
+	
+	//프로젝트 디테일
+	Project projectDetail(int project_num);
 }

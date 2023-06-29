@@ -25,7 +25,11 @@ public class Project_Service {
 		return projectdao.insertProject(project);
 	}
 	
-	
+	public Project project(int project_num) {
+		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
+		
+		return projectdao.projectDetail(project_num);
+	}
 	
 	
 }
