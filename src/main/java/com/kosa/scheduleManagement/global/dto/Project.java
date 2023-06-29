@@ -11,4 +11,13 @@ public class Project {
 	private String project_name;
 	private char is_deleted;
 	private int deptno;
+	
+	// Getter and Setter for 'deptno'
+    public int getDEPTNO() {
+        return deptno;
+    }
+    
+    public void setDEPTNO(int deptno) {
+        this.deptno = deptno;
+    }
 }

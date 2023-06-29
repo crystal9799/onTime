@@ -58,13 +58,15 @@ public class AdminProjectController {
     }
     
     //프로젝트 생성하고, Project / Project_Sub 에 Insert
-    @PostMapping
+    @PostMapping("/createProject")
     public ResponseEntity<String> insertProject(@RequestBody Project_Sub genproject){    	
-    	try {
+    	try { 
+    		System.out.println("try블록의 시작");
     		project_Service.insertProject(genproject.getProject());
 			project_empservice.insert_Project_Emp(genproject.getProject(), genproject.getEmplist());
 			return new ResponseEntity<String>("insert success",HttpStatus.OK);
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return new ResponseEntity<String>("insert failed",HttpStatus.BAD_REQUEST);
 		}
     }
