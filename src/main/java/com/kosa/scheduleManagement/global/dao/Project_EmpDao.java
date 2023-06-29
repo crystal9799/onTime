@@ -9,5 +9,5 @@ import com.kosa.scheduleManagement.global.dto.Project_Sub;
 
 public interface Project_EmpDao {
 	
-	int insertProject_Emp(Project_Sub project_sub);
+	int insertProject_Emp(int project_num, int user_id);
 }
