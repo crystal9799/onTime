@@ -17,7 +17,8 @@ public class Project_AdminService {
     public void setSqlsession(SqlSession sqlsession) {
         this.sqlsession = sqlsession;
     }
-
+    
+    //사원 목록
     public List<Emp> getList(int deptno) {
         EmpDao empdao = sqlsession.getMapper(EmpDao.class);
         List<Emp> emplist = null;

@@ -6,16 +6,19 @@ import com.kosa.scheduleManagement.global.dto.Project;
 import com.kosa.scheduleManagement.global.dto.Project_Sub;
 
 public interface ProjectDao {
+	//Л═└Л╡╢ М■└К║°Л═²М┼╦
+	List<Project> getAllProjectList();	
 	
-	//╥н╠вюнгя ╩Г©Ьюг га╥на╖ф╝ ╦╝╫╨ф╝
+	//О©╫н╠О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ф╝ О©╫О©╫О©╫О©╫ф╝
 	List<Project> getProjectList(int deptno);
 	
-	//га╥на╖ф╝ ╩Щ╪╨
+	//О©╫О©╫О©╫О©╫О©╫О©╫ф╝ О©╫О©╫О©╫О©╫
 	int insertProject(Project project);
 	
-	//га╥на╖ф╝ ╩Ха╕
+	//О©╫О©╫О©╫О©╫О©╫О©╫ф╝ О©╫О©╫О©╫О©╫
 	int deleteProject(int project_num);
 	
-	//га╥на╖ф╝ ╣Певюо
+	//О©╫О©╫О©╫О©╫О©╫О©╫ф╝ О©╫О©╫О©╫О©╫О©╫О©╫
 	Project projectDetail(int project_num);
+	
 }

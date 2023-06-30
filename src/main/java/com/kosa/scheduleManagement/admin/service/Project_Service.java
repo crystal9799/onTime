@@ -1,5 +1,7 @@
 package com.kosa.scheduleManagement.admin.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,18 +20,24 @@ public class Project_Service {
 		this.sqlsession = sqlsession;
 	}
 	
-	//Project���̺� INSERT
+	//Project���̺� INSERT
 	public int insertProject(Project project) {
 		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
 		
 		return projectdao.insertProject(project);
 	}
 	
+	//프로젝트 상세보기
 	public Project project(int project_num) {
 		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
 		
 		return projectdao.projectDetail(project_num);
 	}
 	
-	
+	//Project 전체 호출
+	public List<Project> getAllProjectList(){
+		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
+		
+		return projectdao.getAllProjectList();
+	}
 }

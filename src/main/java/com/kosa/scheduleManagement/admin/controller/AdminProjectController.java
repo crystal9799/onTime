@@ -43,13 +43,13 @@ public class AdminProjectController {
         this.project_Service = project_Service;
     }
     
-    //ºÎ¼­¹øÈ£·Î ÇØ´çºÎ¼­ »ç¿øµé ¸ñ·Ï ¹Ş±â.
+    //ï¿½Î¼ï¿½ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ø´ï¿½Î¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ş±ï¿½.
     @GetMapping
     public ResponseEntity<List<Emp>> empShow(@RequestParam("deptno") int deptno){
     	List<Emp> list = new ArrayList();
     	
     	try {
-    		System.out.println("Á¤»ó½ÇÇà");
+    		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
     		list = project_adminservice.getList(deptno);
     		return new ResponseEntity<List<Emp>>(list,HttpStatus.OK);
 		} catch (Exception e) {
@@ -57,11 +57,11 @@ public class AdminProjectController {
 		}
     }
     
-    //ÇÁ·ÎÁ§Æ® »ı¼ºÇÏ°í, Project / Project_Sub ¿¡ Insert
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, Project / Project_Sub ï¿½ï¿½ Insert
     @PostMapping("/createProject")
     public ResponseEntity<String> insertProject(@RequestBody Project_Sub genproject){    	
     	try { 
-    		System.out.println("tryºí·ÏÀÇ ½ÃÀÛ");
+    		System.out.println("tryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
     		project_Service.insertProject(genproject.getProject());
     		
     		System.out.println("project insert success");
@@ -77,25 +77,38 @@ public class AdminProjectController {
 		}
     }
     
-    //ÇÁ·ÎÁ§Æ® »ó¼¼º¸±â
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ó¼¼ºï¿½ï¿½ï¿½
     @GetMapping("/getProjectDetail")
     public Project showProject(@RequestParam("project_num") int project_num){
     	Project project;
     	
     	try {
-    		System.out.println("È£Ãâ");
+    		System.out.println("È£ï¿½ï¿½");
 			project = project_Service.project(project_num);
 			System.out.println(project.toString());
 			return project;
 		} catch (Exception e) {
-			System.out.println("¿¹¿Ü¹ß»ı");
+			System.out.println("ï¿½ï¿½ï¿½Ü¹ß»ï¿½");
 			e.getMessage();
 			return null;
 		}
     }
     
-    //»ı¼ºµÈ ÇÁ·ÎÁ§Æ®ÀÇ ¸ñ·Ï(³×ºê¹Ù¿ë)
+    //ìƒì„±ëœ í”„ë¡œì íŠ¸ì˜ ëª©ë¡()
+    @GetMapping("/main.do")
+    public List<Project> callMain() {
+    	List<Project> projectlist;
+    	try {
+			projectlist=project_Service.getAllProjectList();
+			return projectlist;
+		} catch (Exception e) {
+			System.out.println("ì˜ˆì™¸ë°œìƒ");
+			e.getMessage();
+			return null;
+		}
+    	
+    }
     
-    //ÇÁ·ÎÁ§Æ® »ó¼¼º¸±â(Ä¶¸°´õ Å¬¸¯ ½Ã)
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ó¼¼ºï¿½ï¿½ï¿½(Ä¶ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ ï¿½ï¿½)
     
 }
