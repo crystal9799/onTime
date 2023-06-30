@@ -10,24 +10,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             
-            fetch('/admin/main.do')
-            .then(response => response.json())
-            .then(data => {
-                var events = data.map(item => ({
-                    id: item.PROJECT_NUM,
-                    title: item.PROJECT_NAME_STR,
-                    start: item.PROJECT_START_STR,
-                    end: item.PROJECT_END,
-                    extendedProps: {
-                        projectInfo: item.PROJECT_INFO,
-                        isDeleted: item.IS_DELETED,
-                        deptNo: item.DEPTNO
-                    }
-                }));
-            
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: events,
+                events: ${projectlists},
                 eventClick: function(info) {
                     alert('Event: ' + info.event.title);
                     info.jsEvent.preventDefault();

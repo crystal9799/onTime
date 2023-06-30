@@ -44,7 +44,7 @@ public class AdminProjectController {
     }
     
     //부서번호로 해당부서 사원들 목록 받기.
-    @GetMapping
+    @GetMapping("/createProject.do")
     public ResponseEntity<List<Emp>> empShow(@RequestParam("deptno") int deptno){
     	List<Emp> list = new ArrayList();
     	
@@ -58,7 +58,7 @@ public class AdminProjectController {
     }
     
     //프로젝트 생성하고, Project / Project_Sub 에 Insert
-    @PostMapping("/createProject")
+    @PostMapping("/createProjectOk.do")
     public ResponseEntity<String> insertProject(@RequestBody Project_Sub genproject){    	
     	try { 
     		System.out.println("try블록의 시작");
@@ -95,20 +95,20 @@ public class AdminProjectController {
     }
     
     //생성된 프로젝트의 목록()
-    @GetMapping("/main.do")
-    public List<Project> callMain() {
-    	List<Project> projectlist;
-    	try {
-			projectlist=project_Service.getAllProjectList();
-			System.out.println(projectlist.toString());
-			return projectlist;
-		} catch (Exception e) {
-			System.out.println("예외발생");
-			e.getMessage();
-			return null;
-		}
-    	
-    }
+//    @GetMapping("/main.do")
+//    public List<Project> callMain() {
+//    	List<Project> projectlist;
+//    	try {
+//			projectlist=project_Service.getAllProjectList();
+//			System.out.println(projectlist.toString());
+//			return projectlist;
+//		} catch (Exception e) {
+//			System.out.println("예외발생");
+//			e.getMessage();
+//			return null;
+//		}
+//    	
+//    }
     
     //프로젝트 상세보기(캘린더 클릭 시)
     
