@@ -1,4 +1,4 @@
-package com.kosa.scheduleManagement.admin.controller;
+package com.kosa.scheduleManagement.user.controller;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -14,38 +14,42 @@ import com.kosa.scheduleManagement.global.dto.ScheduleBoard;
 import com.kosa.scheduleManagement.user.service.ScheduleService;
 
 @Controller
-@RequestMapping("/admin/")
-public class AdminScheduleManagementController {
+public class KanbanScheduleController {
 
-	public AdminScheduleManagementController() {
-		System.out.println("Controller Connection UserSchedule");
+	public KanbanScheduleController() {
+		System.out.println("Controller Connection Kanban");
 	}
 
 	private ScheduleService service;
 
-	// page load. page data load 피룡
 	@GetMapping("schedule.do")
 	public String getAllList() throws ClassNotFoundException, SQLException {
 		System.out.println("getAllLIst conn");
-		return "/kanban/temp";
+		return "/kanban/kanbanViewPage";
 	}
-	
-	@GetMapping("scheduletest.do")
-	public String getAllListestt() throws ClassNotFoundException, SQLException {
-		System.out.println("getAllLIst conn");
-		return "/kanban/dataTestPage";
-	}
-	
+ 
 	@GetMapping("kanbanviewtest.do")
 	public String kanviewTest() throws ClassNotFoundException, SQLException {
 		System.out.println("view conn");
-		return "/kanban/viewKanbanTemp";
+		return "/kanban/kanbanViewPage";
 	}
 
 	@GetMapping("viewtest.do")
 	public String viewTest() throws ClassNotFoundException, SQLException {
 		System.out.println("view conn");
 		return "/kanban/modalViewTestPage";
+	}
+
+	@GetMapping("datatest.do")
+	public String dataTest() throws ClassNotFoundException, SQLException {
+		System.out.println("view conn");
+		return "/kanban/dataTestPage";
+	}
+
+	@GetMapping("empty.do")
+	public String empty() throws ClassNotFoundException, SQLException {
+		System.out.println("my conn");
+		return "mypage";
 	}
 
 	/*

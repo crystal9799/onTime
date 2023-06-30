@@ -13,8 +13,8 @@ import com.kosa.scheduleManagement.global.dto.ScheduleBoard;
 import com.kosa.scheduleManagement.user.service.ScheduleService;
 
 @RestController
-public class AjaxController {
-	AjaxController() {
+public class KanbanAjaxController {
+	KanbanAjaxController() {
 		System.out.println("AjaxController constructor controller");
 	}
 
@@ -25,14 +25,14 @@ public class AjaxController {
 		this.service = service;
 	}
 
-	@RequestMapping(value = "/admin/insert.ajax", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert.ajax", method = RequestMethod.POST)
 	@ResponseBody
 	public void insertBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
 		System.out.println("ajaxlist insert connection");
 		service.insertBoard(board);
 	}
 
-	@RequestMapping(value = "/admin/listPrev.ajax", method = RequestMethod.POST)
+	@RequestMapping(value = "/listPrev.ajax", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ScheduleBoard> getAllPrev() throws ClassNotFoundException, SQLException {
 		System.out.println("ajaxlist connection");
@@ -41,7 +41,7 @@ public class AjaxController {
 		return list;
 	}
 
-	@RequestMapping(value = "/admin/listCurr.ajax", method = RequestMethod.GET)
+	@RequestMapping(value = "/listCurr.ajax", method = RequestMethod.GET)
 	@ResponseBody
 	public List<ScheduleBoard> getAllCurr() throws ClassNotFoundException, SQLException {
 		System.out.println("ajaxlist connection");
@@ -50,7 +50,7 @@ public class AjaxController {
 		return list;
 	}
 
-	@RequestMapping(value = "/admin/listNext.ajax", method = RequestMethod.GET)
+	@RequestMapping(value = "/listNext.ajax", method = RequestMethod.GET)
 	@ResponseBody
 	public List<ScheduleBoard> getAllNext() throws ClassNotFoundException, SQLException {
 		System.out.println("ajaxlist connection");
@@ -59,14 +59,14 @@ public class AjaxController {
 		return list;
 	}
 
-	@RequestMapping(value = "/admin/update.ajax", method = RequestMethod.POST)
+	@RequestMapping(value = "/update.ajax", method = RequestMethod.POST)
 	@ResponseBody
 	public void updateSave(ScheduleBoard board) throws ClassNotFoundException, SQLException {
 		System.out.println("ajaxlist update connection");
 		service.updateSave(board);
 	}
 
-	@RequestMapping(value = "/admin/delete.ajax", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete.ajax", method = RequestMethod.GET)
 	@ResponseBody
 	public void deleteBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
 		System.out.println("delete connection");
