@@ -100,6 +100,7 @@ public class AdminProjectController {
     	List<Project> projectlist;
     	try {
 			projectlist=project_Service.getAllProjectList();
+			System.out.println(projectlist.toString());
 			return projectlist;
 		} catch (Exception e) {
 			System.out.println("예외발생");
