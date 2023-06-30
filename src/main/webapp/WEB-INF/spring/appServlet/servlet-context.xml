@@ -38,6 +38,7 @@
 	<context:component-scan base-package="com.kosa.scheduleManagement.global" />
 	<context:component-scan base-package="com.kosa.scheduleManagement.global.dao" />
 	<context:component-scan base-package="com.kosa.scheduleManagement.mypage" />
+	<context:component-scan base-package="com.kosa.scheduleManagement.kanban" />
 	<context:component-scan base-package="com.kosa.scheduleManagement.mypage.controller" />
 	<context:component-scan base-package="com.kosa.scheduleManagement.mypage.service" />
 

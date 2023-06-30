@@ -1,7 +1,11 @@
-package com.kosa.scheduleManagement.user.service;
+package com.kosa.scheduleManagement.kanban;
 
+import java.lang.reflect.Array;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +26,33 @@ public class ScheduleService {
 	public void insertBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
 		System.out.println("insert conn");
 		ScheduleBoardDao dao = sqlSession.getMapper(ScheduleBoardDao.class);
-		dao.updateSave(board);
+		List<ScheduleBoard> list = getAllPrev();
+		System.out.println("-----------list All----------");
+		System.out.println(list.toString());
+
+		List<Integer> progList = new ArrayList<Integer>();
+		for (ScheduleBoard s : list) {
+			System.out.println(s);
+			if (s.getSched_prog() == 0) {
+				progList.add(s.getSched_prog());
+				System.out.println("proglist add complete");
+			}
+		}
+
+		int tmp = Collections.max(progList) + 1;
+		board.setSched_seq(tmp);
+		board.setProject_num(10);
+		
+		dao.insertBoard(board);
+
+		System.out.println("max 값: " + tmp);
+		// 마지막 순번 값 ; max(proglist)
+
+		// 이 다음 수로 seq 값 insert
+		// System.out.println(board.getSched_seq());
+		// list.add(0, board);
+
+		// dao.updateSave(board);
 	}
 
 	@Autowired
@@ -61,6 +91,11 @@ public class ScheduleService {
 		ScheduleBoardDao dao = sqlSession.getMapper(ScheduleBoardDao.class);
 		dao.updateSave(board);
 	}
+
+	void lastSeq(List<ScheduleBoard> list) throws ClassNotFoundException, SQLException {
+		System.out.println();
+	}
+
 	/*
 	 * public void updateSave(List<ScheduleBoard> boardlist) throws
 	 * ClassNotFoundException, SQLException { System.out.println("update conn");

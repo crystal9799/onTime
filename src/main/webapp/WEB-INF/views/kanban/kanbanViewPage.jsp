@@ -9,6 +9,7 @@
 <jsp:include page="/common/Head.jsp" />
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
  {
 	padding: 0;
@@ -138,6 +139,10 @@
 }
 </style>
 </head>
+
+<script>
+
+</script>
 <body>
 	<jsp:include page="/common/Header.jsp" />
 	<div class="flex">
@@ -147,8 +152,8 @@
 
 				<div class="modal">
 					<div class="modal_body">
-						Modal<br> <br> <input type="text"
-							placeholder="입력" id="todo-input" /> <br> <br>
+						Modal<br> <br> 
+						<input type="text" placeholder="입력" id="todo-input" /> <br> <br>
 						<button class="addModalBtn" >add</button>
 					</div>
 				</div>
@@ -160,9 +165,10 @@
 				<div class="board">
 					<!-- form 안에 css적용 -->
 					<form id="todo-form">
-						<input type="text" placeholder="New TODO..." id="todo-input" />
-						<button type="submit">add</button>
-						<button class="modalBtn">Modal add</button>
+						<button class="modalBtn">모달 창 테스트 중</button><br><br>
+						<input type="text" placeholder="업무 입력" id="todo-input" />
+						<button type="submit">추가</button>
+
 					</form>
 
 
@@ -225,9 +231,81 @@
         addModalBtn.addEventListener('click', () => {
         	console.log('addBtn modal Click!');
         	
+        	let inputInfo=document.querySelector('#todo-input'); 
+        	console.log(inputInfo.value);   
+        	
     		const dataArray = {
-    				sched_num: $("#sched_num").val(), sched_info: $("#sched_info").val()
+
     				};
+    		
+    		$.ajax({
+    			type : 'POST',
+    			url : "add.ajax",
+    			dataType:"json",
+    			data :{    				
+    				sched_num: 1, sched_info: 'test',
+    				sched_prog:0, sched_seq:3,
+    				project_num:10
+    			},
+    			data : JSON.stringify(dataArray),
+   			 success:function(data){
+ 				alert("성공");
+ 				 print(data)
+ 			 },
+ 			 error:function(request,status,error){
+ 			     console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+ 			  }
+    		});
+        	
+        });
+/*         const addModalBtn = document.querySelector('.addModalBtn');
+        addModalBtn.addEventListener('click', () => {
+        	console.log('addBtn modal Click!');
+        	
+        	let inputInfo=document.querySelector('#todo-input'); 
+        	console.log(inputInfo.value);   
+        	
+    		const dataArray = {
+
+    		}; 
+    		
+    		$.ajax({
+    			type : 'POST',
+    			url : "add.ajax",
+    			dataType:"json",
+    			data :{    				
+    				sched_num: 0, 
+    				sched_info: inputInfo.value,
+    				sched_prog:0,
+    				sched_seq:0,
+    				project_num: 10
+    			},
+    			data : JSON.stringify(dataArray),
+   			 success:function(data){
+ 				alert("성공");
+ 				 print(data)
+ 			 },
+ 			 error:function(request,status,error){
+ 			     console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+ 			  }
+    		});
+        	
+        }); */
+/*         const addModalBtn = document.querySelector('.addModalBtn');
+        addModalBtn.addEventListener('click', () => {
+        	console.log('addBtn modal Click!');
+        	
+        	let inputInfo=document.querySelector('#todo-input'); 
+        	console.log(inputInfo.value);   
+        	
+    		const dataArray = {
+    				sched_num: 0, 
+    				sched_info: inputInfo.value,
+    				sched_prog:0,
+    				sched_seq:0,
+    				project_num: 10
+    		}; 
+    		
     		$.ajax({
     			url : "add.ajax",
     			type : 'POST',
@@ -235,15 +313,10 @@
     			contentType: 'application/json',
     			success : function(data) {
     				console.log("data: " + data);
-    			} 
+    			}
     		});
         	
-        	
-        	
-        	
-        	
-        	
-        });
+        }); */
       </script>
 
 	<script type="text/javascript">

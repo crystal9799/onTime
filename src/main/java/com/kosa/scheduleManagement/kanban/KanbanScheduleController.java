@@ -1,4 +1,4 @@
-package com.kosa.scheduleManagement.user.controller;
+package com.kosa.scheduleManagement.kanban;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosa.scheduleManagement.global.dto.ScheduleBoard;
-import com.kosa.scheduleManagement.user.service.ScheduleService;
 
 @Controller
 public class KanbanScheduleController {
@@ -28,18 +27,6 @@ public class KanbanScheduleController {
 		return "/kanban/kanbanViewPage";
 	}
 
-	@GetMapping("kanbanviewtest.do")
-	public String kanviewTest() throws ClassNotFoundException, SQLException {
-		System.out.println("view conn");
-		return "/kanban/kanbanViewPage";
-	}
-
-	@GetMapping("viewtest.do")
-	public String viewTest() throws ClassNotFoundException, SQLException {
-		System.out.println("view conn");
-		return "/kanban/modalViewTestPage";
-	}
-
 	@GetMapping("datatest.do")
 	public String dataTest() throws ClassNotFoundException, SQLException {
 		System.out.println("view conn");
@@ -53,6 +40,16 @@ public class KanbanScheduleController {
 		return "/kanban/dataTestPage";
 //		return "/kanban/dataTestPage";
 	}
+
+	/*
+	 * @GetMapping("kanbanviewtest.do") public String kanviewTest() throws
+	 * ClassNotFoundException, SQLException { System.out.println("view conn");
+	 * return "/kanban/kanbanViewPage"; }
+	 * 
+	 * @GetMapping("viewtest.do") public String viewTest() throws
+	 * ClassNotFoundException, SQLException { System.out.println("view conn");
+	 * return "/kanban/modalViewTestPage"; }
+	 */
 
 	/*
 	 * @RequestMapping(value = "scheduleList.do", method = RequestMethod.POST)
