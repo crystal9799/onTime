@@ -14,11 +14,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 전체 프로젝트 리스트 -->
 	<select id="getAllProjectList" resultType="com.kosa.scheduleManagement.global.dto.Project">
 		SELECT 
-		PROJECT_NUM AS id,
-		TO_CHAR(project_start, 'YYYY-MM-DD') AS start,
-		TO_CHAR(project_end, 'YYYY-MM-DD')AS end,
-		PROJECT_INFO,
-		PROJECT_NAME AS title,
-		DEPTNO FROM PROJECT
+		    PROJECT_NUM AS "id",
+		    TO_CHAR(PROJECT_START, 'YYYY-MM-DD') AS "start",
+		    TO_CHAR(PROJECT_END, 'YYYY-MM-DD') AS "end",
+		    PROJECT_INFO,
+		    PROJECT_NAME AS "title"
+		from project
 	</select>
 </mapper>
