@@ -25,8 +25,8 @@
 				</ul>
 			</div></li>
 		<li class="nav-item"><a class="nav-link"
-			href="pages/documentation/documentation.html"> 
-			<i class="icon-paper menu-icon"></i> <span class="menu-title">DeptManage</span>
+			href="${pageContext.request.contextPath}/admin/empManage.do?deptno=10"> <i
+				class="icon-paper menu-icon"></i> <span class="menu-title">DeptManage</span>
 		</a></li>
 		<li class="nav-item"><a id="test" class="nav-link"
 			href="${pageContext.request.contextPath}/mypage.do?user_id=6"> 
