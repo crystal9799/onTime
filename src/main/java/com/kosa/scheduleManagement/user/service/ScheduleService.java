@@ -20,7 +20,7 @@ public class ScheduleService {
 	private SqlSession sqlSession;
 
 	public void insertBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
-		System.out.println("update conn");
+		System.out.println("insert conn");
 		ScheduleBoardDao dao = sqlSession.getMapper(ScheduleBoardDao.class);
 		dao.updateSave(board);
 	}

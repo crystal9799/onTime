@@ -61,6 +61,8 @@
 	cursor: pointer;
 }
 
+
+
 /* ---- BOARD ---- */
 .lanes {
 	display: flex;
@@ -146,16 +148,21 @@
 				<div class="modal">
 					<div class="modal_body">
 						Modal<br> <br> <input type="text"
-							placeholder="New TODO..." id="todo-input" /> <br> <br>
-						<button class="addModalBtn">add</button>
+							placeholder="입력" id="todo-input" /> <br> <br>
+						<button class="addModalBtn" >add</button>
 					</div>
 				</div>
+				
+				
+				
+				
+				
 				<div class="board">
 					<!-- form 안에 css적용 -->
 					<form id="todo-form">
 						<input type="text" placeholder="New TODO..." id="todo-input" />
-						<button type="submit">Add +</button>
-						<button class="btn-open-popup">Modal add</button>
+						<button type="submit">add</button>
+						<button class="modalBtn">Modal add</button>
 					</form>
 
 
@@ -183,6 +190,7 @@
 				</div>
 
 
+
 			</div>
 		</div>
 	</div>
@@ -193,7 +201,7 @@
 	<script>
         const body = document.querySelector('body');
         const modal = document.querySelector('.modal');
-        const btnOpenPopup = document.querySelector('.btn-open-popup');
+        const btnOpenPopup = document.querySelector('.modalBtn');
   
         btnOpenPopup.addEventListener('click', () => {
           modal.classList.toggle('show');
@@ -215,6 +223,26 @@
 
         const addModalBtn = document.querySelector('.addModalBtn');
         addModalBtn.addEventListener('click', () => {
+        	console.log('addBtn modal Click!');
+        	
+    		const dataArray = {
+    				sched_num: $("#sched_num").val(), sched_info: $("#sched_info").val()
+    				};
+    		$.ajax({
+    			url : "add.ajax",
+    			type : 'POST',
+    			data : JSON.stringify(dataArray),
+    			contentType: 'application/json',
+    			success : function(data) {
+    				console.log("data: " + data);
+    			} 
+    		});
+        	
+        	
+        	
+        	
+        	
+        	
         });
       </script>
 

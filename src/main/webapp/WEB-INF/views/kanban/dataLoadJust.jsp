@@ -56,13 +56,13 @@
 				<h2>Ajax CRUD</h2>
 				
 				<form id="todo-form">
-					<input type="button" value="추가" id="addBtn"> <br> 
-					전체 목록 
+					<input type="button" value="추가" id="addBtn"> <br>  <br>  <br> 
+					 <br> 전체 목록  <br> 
 					<input type="button" value="전" id="listBtn"> 
 					<input type="button" value="중" id="list	Btn2"> 
-					<input type="button" value="후" id="listBtn3"> <br> 
+					<input type="button" value="후" id="listBtn3"> <br>  <br>  <br> 
 					
-					삭제 
+					삭제  <br> 
 					<input type="button" value="삭제" id="delBtn">
 
 				</form>	

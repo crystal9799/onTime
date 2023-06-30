@@ -14,7 +14,7 @@ public class S3Service {
 	String bucketName = "skglim";
 	
 	public String fileToS3(MultipartFile file) {
-		//ÇÁ·ÎÇÊ ÀÌ¹ÌÁöÀÇ Ãß°¡°æ·Î
+		//í”„ë¡œí•„ ì´ë¯¸ì§€ì˜ ì¶”ê°€ê²½ë¡œ
 		String uploadpath = "skglim/profileImage";
 
 		String img_path="";
@@ -22,10 +22,10 @@ public class S3Service {
 			img_path = UploadFileUtils.uploadFile(uploadpath, file.getOriginalFilename(), file.getBytes());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		}
+		} 
 
 		System.out.println(img_path);
 
-		return img_path;
+		return img_path; 
 	}
 }

@@ -25,12 +25,21 @@ public class KanbanAjaxController {
 		this.service = service;
 	}
 
-	@RequestMapping(value = "/insert.ajax", method = RequestMethod.POST)
+	@RequestMapping(value = "/add.ajax", method = RequestMethod.POST)
 	@ResponseBody
 	public void insertBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
 		System.out.println("ajaxlist insert connection");
 		service.insertBoard(board);
 	}
+
+	/*
+	 * @RequestMapping(value = "/insert.ajax", method = RequestMethod.POST)
+	 * 
+	 * @ResponseBody public void insertBoard(ScheduleBoard board) throws
+	 * ClassNotFoundException, SQLException {
+	 * System.out.println("ajaxlist insert connection"); service.insertBoard(board);
+	 * }
+	 */
 
 	@RequestMapping(value = "/listPrev.ajax", method = RequestMethod.POST)
 	@ResponseBody
