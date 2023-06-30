@@ -15,6 +15,6 @@
 	<a href="${pageContext.request.contextPath}/viewtest.do">ModalPageTest</a><br>
 	<a href="${pageContext.request.contextPath}/kanbanviewtest.do">KanbanonlyViewPageTest</a><br>
 	<a href="${pageContext.request.contextPath}/datatest.do">ajaxDataTestPage</a>
-	<a href="${pageContext.request.contextPath}/empty.do">Temp</a>
+ 
 </body>
 </html>

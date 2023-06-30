@@ -1,4 +1,4 @@
-package com.kosa.scheduleManagement.user.controller;
+package com.kosa.scheduleManagement.kanban;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kosa.scheduleManagement.global.dto.ScheduleBoard;
-import com.kosa.scheduleManagement.user.service.ScheduleService;
 
 @RestController
 public class KanbanAjaxController {
