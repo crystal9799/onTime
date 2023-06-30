@@ -52,5 +52,5 @@
 
 
 <!-- mypage chart script -->
-
+<script src="https://kit.fontawesome.com/b6bfd9ecde.js" crossorigin="anonymous"></script>
 
