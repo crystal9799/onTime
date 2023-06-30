@@ -19,7 +19,9 @@
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/datatest.do">project2</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/admin/schedule.do">project3</a></li>
+						href="${pageContext.request.contextPath}/rowdatatest.do">project3</a></li>
+<%-- 					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/admin/schedule.do">project3</a></li> --%>
 				</ul>
 			</div></li>
 		<li class="nav-item"><a class="nav-link"
