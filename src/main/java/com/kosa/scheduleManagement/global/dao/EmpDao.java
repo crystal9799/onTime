@@ -6,7 +6,7 @@ import com.kosa.scheduleManagement.global.dto.Emp;
 
 
 public interface EmpDao {
-	//Æ¯Á¤ ºÎ¼­ ¼Ò¼Ó »ç¿ø¸®½ºÆ®
+	//íŠ¹ì • ë¶€ì„œ ì†Œì† ì‚¬ì›ë¦¬ìŠ¤íŠ¸
 	List<Emp> getEmpListByDeptno(int deptno);
 	
 	void updateEmpInfo(Emp emp);

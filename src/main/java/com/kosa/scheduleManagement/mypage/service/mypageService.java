@@ -18,67 +18,67 @@ public class mypageService {
 		this.sqlsession = sqlsession;
 	}
 	
-//	»ç¿ø Á¤º¸ ¾÷µ¥ÀÌÆ® 
+//	ì‚¬ì› ì •ë³´ ì—…ë°ì´íŠ¸ 
 	public void updateEmpInfo(Emp emp) {
 		
 		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 		
 		try {
-			System.out.println("service ÁøÀÔ");
+			System.out.println("service ì§„ì…");
 			empdao.updateEmpInfo(emp);
-			System.out.println("userInfo update ¼º°ø");
+			System.out.println("userInfo update ì„±ê³µ");
 		} catch (Exception e) {
 			e.getStackTrace();
-			System.out.println("updateEmpInfoService ¿À·ù :" + e.getMessage());
+			System.out.println("updateEmpInfoService ì˜¤ë¥˜ :" + e.getMessage());
 		}
 	}
 
-//	»ç¿ø Á¤º¸ °¡Á®¿À±â
+//	ì‚¬ì› ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 	public Emp getEmpInfo(int user_id) {
 		EmpDao empdao = sqlsession.getMapper(EmpDao.class);
 		Emp emp = null;
 		
 		try {
-			System.out.println("service Áø");
+			System.out.println("service ì§„");
 			emp = empdao.getEmpInfo(user_id);
-			System.out.println("getEmpInfo ¼º°ø");
+			System.out.println("getEmpInfo ì„±ê³µ");
 		} catch (Exception e) {
 			e.getStackTrace();
-			System.out.println("getEmpInfoService ¿À·ù :" + e.getMessage());
+			System.out.println("getEmpInfoService ì˜¤ë¥˜ :" + e.getMessage());
 		}
 		return emp;
 	}
 	
-//	ÀüÃ¼¾÷¹«ÀÏÁ¤ °³¼ö
+//	ì „ì²´ì—…ë¬´ì¼ì • ê°œìˆ˜
 	public int getTotalSchedNum(int user_id) {
 		Mypage_EmpDao mypage_empdao = sqlsession.getMapper(Mypage_EmpDao.class);
 		
 		int result = -1;
 		
 		try {
-			System.out.println("service ÁøÀÔ");
+			System.out.println("service ì§„ì…");
 			result = mypage_empdao.getTotalSchedNum(user_id);
-			System.out.println("getTotalSchedNum ¼º°ø");
+			System.out.println("getTotalSchedNum ì„±ê³µ");
 		} catch (Exception e) {
 			e.getStackTrace();
-			System.out.println("getTotalSchedNumService ¿À·ù :" + e.getMessage());
+			System.out.println("getTotalSchedNumService ì˜¤ë¥˜ :" + e.getMessage());
 		}
 		return result;
 	}
 	
-//	ÀüÃ¼¾÷¹«ÀÏÁ¤ °³¼ö
+//	ì „ì²´ì—…ë¬´ì¼ì • ê°œìˆ˜
 	public int getDoneSchedNum(int user_id) {
 		Mypage_EmpDao mypage_empdao = sqlsession.getMapper(Mypage_EmpDao.class);
 		
 		int result = -1;
 		
 		try {
-			System.out.println("service ÁøÀÔ");
+			System.out.println("service ì§„ì…");
 			result = mypage_empdao.getDoneSchedNum(user_id);
-			System.out.println("getDoneSchedNum ¼º°ø");
+			System.out.println("getDoneSchedNum ì„±ê³µ");
 		} catch (Exception e) {
 			e.getStackTrace();
-			System.out.println("getDoneSchedNumService ¿À·ù :" + e.getMessage());
+			System.out.println("getDoneSchedNumService ì˜¤ë¥˜ :" + e.getMessage());
 		}
 		return result;
 	}
