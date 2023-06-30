@@ -6,6 +6,8 @@ import com.kosa.scheduleManagement.global.dto.Project;
 import com.kosa.scheduleManagement.global.dto.Project_Sub;
 
 public interface ProjectDao {
+	//전체 프로젝트
+	List<Project> getAllProjectList();	
 	
 	//로그인한 사원의 프로젝트 리스트
 	List<Project> getProjectList(int deptno);
@@ -18,4 +20,5 @@ public interface ProjectDao {
 	
 	//프로젝트 디테일
 	Project projectDetail(int project_num);
+	
 }
