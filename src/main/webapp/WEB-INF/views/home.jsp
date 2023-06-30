@@ -9,26 +9,31 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
+            
+            fetch('/admin/main.do')
+            .then(response => response.json())
+            .then(data => {
+                var events = data.map(item => ({
+                    id: item.PROJECT_NUM,
+                    title: item.PROJECT_NAME,
+                    start: item.PROJECT_START,
+                    end: item.PROJECT_END,
+                    extendedProps: {
+                        projectInfo: item.PROJECT_INFO,
+                        isDeleted: item.IS_DELETED,
+                        deptNo: item.DEPTNO
+                    }
+                }));
+            
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: [
-                    {
-                    	project_id: '11',
-                        title: 'Event 1',
-                        start: '2023-07-01',
-                        end: '2023-07-08',
-                        color: 'tomato',
-                    },
-                    {
-                        title: 'Event 2',
-                        start: '2023-07-02',
-                    },
-                    {
-                        title: 'Event 3',
-                        start: '2023-07-03',
-                    }
-                ]
+                events: events,
+                eventClick: function(info) {
+                    alert('Event: ' + info.event.title);
+                    info.jsEvent.preventDefault();
+                }
             });
+            
             calendar.render();
         });
     </script>
