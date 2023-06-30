@@ -26,6 +26,6 @@ public class S3Service {
 
 		System.out.println(img_path);
 
-		return img_path;
+		return img_path; 
 	}
 }
