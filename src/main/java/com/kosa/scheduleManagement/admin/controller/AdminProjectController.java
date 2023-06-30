@@ -94,7 +94,20 @@ public class AdminProjectController {
 		}
     }
     
-    //생성된 프로젝트의 목록(네브바용)
+    //생성된 프로젝트의 목록()
+    @GetMapping("/main.do")
+    public List<Project> callMain() {
+    	List<Project> projectlist;
+    	try {
+			projectlist=project_Service.getAllProjectList();
+			return projectlist;
+		} catch (Exception e) {
+			System.out.println("예외발생");
+			e.getMessage();
+			return null;
+		}
+    	
+    }
     
     //프로젝트 상세보기(캘린더 클릭 시)
     

@@ -36,6 +36,23 @@ public class mypageController {
 		return	"mypage";
 	}
 	
+	@GetMapping("test_mypage.do")
+	public String test_upload(@RequestParam("user_id") int user_id, Model model) {
+		int totalSchedNum = mypageservice.getTotalSchedNum(user_id);
+		System.out.println(totalSchedNum); 
+		int doneSchedNum = mypageservice.getDoneSchedNum(user_id);
+		System.out.println(doneSchedNum); 
+
+		Emp emp = mypageservice.getEmpInfo(user_id);
+		System.out.println("emp : " + emp);
+		
+		model.addAttribute("emp", emp);
+		model.addAttribute("totalSchedNum", totalSchedNum);
+		model.addAttribute("doneSchedNum", doneSchedNum);
+		
+		return	"test_upload_mypage";
+	}
+	
 //	@GetMapping("mypage.do")
 //	public String mypage(@RequestBody Schedule_Emp schedule_emp) {
 //		int result1 = mypageservice.getTotalSchedNum(schedule_emp.getSchedule().getUser_id());
