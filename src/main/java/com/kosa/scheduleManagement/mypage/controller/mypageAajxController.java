@@ -19,12 +19,12 @@ import com.kosa.scheduleManagement.mypage.service.mypageService;
 @RestController
 @RequestMapping("/mypage")
 public class mypageAajxController {
-	// ë¡œê±°ì‚¬ìš©
+	// ·Î°Å»ç¿ë
 	private static final Logger logger = LoggerFactory.getLogger(mypageAajxController.class);
 
 	private mypageService mypageservice;
 
-	// S3 ì„œë¹„ìŠ¤
+	// S3 ¼­ºñ½º
 	private S3Service s3service;
 
 	@Autowired

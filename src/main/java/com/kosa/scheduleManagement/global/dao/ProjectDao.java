@@ -9,16 +9,16 @@ public interface ProjectDao {
 	//전체 프로젝트
 	List<Project> getAllProjectList();	
 	
-	//로그인한 사원의 프로젝트 리스트
+	//�α����� ����� ������Ʈ ����Ʈ
 	List<Project> getProjectList(int deptno);
 	
-	//프로젝트 생성
+	//������Ʈ ����
 	int insertProject(Project project);
 	
-	//프로젝트 삭제
+	//������Ʈ ����
 	int deleteProject(int project_num);
 	
-	//프로젝트 디테일
+	//������Ʈ ������
 	Project projectDetail(int project_num);
 	
 }
