@@ -2,6 +2,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/macos,eclipse,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,eclipse,intellij
 src/main/kosa/scheduleManagement/global/config/
+src/main/java/com/kosa/scheduleManagement/global/aws/S3Util.java
+
 ### Eclipse ###
 .metadata
 bin/
