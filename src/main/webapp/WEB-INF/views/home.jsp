@@ -8,27 +8,16 @@
     <script src="https://unpkg.com/fullcalendar@5.10.1/main.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
+            var calendarEl = document.getElementById('calendar');    
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: [
-                    {
-                    	project_id: '11',
-                        title: 'Event 1',
-                        start: '2023-07-01',
-                        end: '2023-07-08',
-                        color: 'tomato',
-                    },
-                    {
-                        title: 'Event 2',
-                        start: '2023-07-02',
-                    },
-                    {
-                        title: 'Event 3',
-                        start: '2023-07-03',
-                    }
-                ]
+                events: ${projects},
+                eventClick: function(info) {
+                    alert('Event: ' + info.event.title);
+                    info.jsEvent.preventDefault();
+                }
             });
+            
             calendar.render();
         });
     </script>
