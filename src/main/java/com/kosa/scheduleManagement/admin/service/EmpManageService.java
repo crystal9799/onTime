@@ -24,7 +24,7 @@ public class EmpManageService {
 	}
 
 	public int totallistCountByDeptno(int deptno) throws SQLException, ClassNotFoundException {
-		System.out.println("totalë©”ì„œë“œê¹Œì§€ëŠ” ì˜´");
+		System.out.println("total¸Þ¼­µå±îÁö´Â ¿È");
 		DeptManageEmpDao empdao = sqlsession.getMapper(DeptManageEmpDao.class);
 		System.out.println(empdao);
 		int result = -1;

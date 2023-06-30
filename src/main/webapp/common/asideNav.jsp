@@ -13,12 +13,13 @@
 		</a>
 			<div class="collapse" id="ui-basic">
 				<ul class="nav flex-column sub-menu">
+					<li class="nav-item">
+					<a class="nav-link"
+						href="${pageContext.request.contextPath}/schedule.do">project1</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="pages/ui-features/buttons.html">project1</a></li>
+						href="${pageContext.request.contextPath}/datatest.do">project2</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="pages/ui-features/dropdowns.html">project2</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="pages/ui-features/typography.html">project3</a></li>
+						href="${pageContext.request.contextPath}/admin/schedule.do">project3</a></li>
 				</ul>
 			</div></li>
 		<li class="nav-item"><a class="nav-link"

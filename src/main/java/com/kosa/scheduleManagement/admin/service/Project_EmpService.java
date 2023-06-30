@@ -24,7 +24,7 @@ public class Project_EmpService {
 		System.out.println("Project : " + genproject.getProject().toString());
 		System.out.println("emplist : " + genproject.getEmplist().toString());
 		Project_EmpDao project_empdao = sqlsession.getMapper(Project_EmpDao.class);
-		System.out.println("Project_Emp insert ì‹œìž‘");
+		System.out.println("Project_Emp insert ½ÃÀÛ");
 		
 		for(int i=0; i<genproject.getEmplist().size(); i++) {
 			int project_num= genproject.getProject().getProject_num();

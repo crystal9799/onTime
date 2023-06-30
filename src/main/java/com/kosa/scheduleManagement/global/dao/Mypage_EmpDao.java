@@ -1,9 +1,9 @@
 package com.kosa.scheduleManagement.global.dao;
 
 public interface Mypage_EmpDao {
-	//	ì „ì²´ì—…ë¬´ ê°œìˆ˜ 
+	//	ÀüÃ¼¾÷¹« °³¼ö 
 		int getTotalSchedNum(int user_id);
 		
-	//	ì™„ë£Œì—…ë¬´ ê°œìˆ˜	
+	//	¿Ï·á¾÷¹« °³¼ö	
 		int getDoneSchedNum(int user_id);
 }

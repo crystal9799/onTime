@@ -18,7 +18,7 @@ public class Project_Service {
 		this.sqlsession = sqlsession;
 	}
 	
-	//Projectí…Œì´ë¸” INSERT
+	//ProjectÅ×ÀÌºí INSERT
 	public int insertProject(Project project) {
 		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
 		
