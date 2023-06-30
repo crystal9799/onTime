@@ -15,8 +15,8 @@
             .then(data => {
                 var events = data.map(item => ({
                     id: item.PROJECT_NUM,
-                    title: item.PROJECT_NAME,
-                    start: item.PROJECT_START,
+                    title: item.PROJECT_NAME_STR,
+                    start: item.PROJECT_START_STR,
                     end: item.PROJECT_END,
                     extendedProps: {
                         projectInfo: item.PROJECT_INFO,
