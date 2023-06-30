@@ -22,18 +22,7 @@ public class AdminProjectController_Sync {
 	
 	
 	@GetMapping("/admin/main.do")
-    public String callMain(Model model) {
-    	List<Project> projectlist;
-    	try {
-			projectlist=project_Service.getAllProjectList();
-			System.out.println(projectlist.toString());
-			model.addAttribute("projects",projectlist);
-			return "home";
-		} catch (Exception e) {
-			System.out.println("예외발생");
-			e.getMessage();
-			return null;
-		}
-    	
+    public String callMain() {
+    	return "home";
     }
 }
