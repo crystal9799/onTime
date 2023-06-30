@@ -149,7 +149,7 @@
 	<div class="board">
 		<!-- form 안에 css적용 -->
 		<form id="todo-form">
-			<input type="text" placeholder="New TODO..." id="todo-input" />
+			<input type="text" placeholder="할일 " id="todo-input" />
 			<button type="submit">Add +</button>
 			<button class="btn-open-popup">Modal add</button>
 		</form>
