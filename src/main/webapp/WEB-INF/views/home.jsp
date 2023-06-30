@@ -11,7 +11,7 @@
             var calendarEl = document.getElementById('calendar');    
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: JSON.parse('${projectlists}'),
+                events: ${projects},
                 eventClick: function(info) {
                     alert('Event: ' + info.event.title);
                     info.jsEvent.preventDefault();
