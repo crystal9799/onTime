@@ -7,10 +7,10 @@ import java.io.IOException;
 
 
 @WebFilter(
-		description = "¾î³ëÅ×ÀÌ¼Ç È°¿ëÇÏ±â", 
+		description = "ì–´ë…¸í…Œì´ì…˜ í™œìš©í•˜ê¸°", 
 		urlPatterns = { "/*" }, 
 		initParams = { 
-				@WebInitParam(name = "encoding", value = "UTF-8", description = "ÇÑ±ÛÃ³¸®")
+				@WebInitParam(name = "encoding", value = "UTF-8", description = "í•œê¸€ì²˜ë¦¬")
 		})
 public class EncodingFilter implements Filter {
 

@@ -27,7 +27,7 @@ public class KanbanScheduleController {
 		System.out.println("getAllLIst conn");
 		return "/kanban/kanbanViewPage";
 	}
- 
+
 	@GetMapping("kanbanviewtest.do")
 	public String kanviewTest() throws ClassNotFoundException, SQLException {
 		System.out.println("view conn");
@@ -43,13 +43,15 @@ public class KanbanScheduleController {
 	@GetMapping("datatest.do")
 	public String dataTest() throws ClassNotFoundException, SQLException {
 		System.out.println("view conn");
-		return "/kanban/dataTestPage";
+		return "/kanban/dataLoadJust";
+//		return "/kanban/dataTestPage";
 	}
 
-	@GetMapping("empty.do")
-	public String empty() throws ClassNotFoundException, SQLException {
-		System.out.println("my conn");
-		return "mypage";
+	@GetMapping("rowdatatest.do")
+	public String rowdataTest() throws ClassNotFoundException, SQLException {
+		System.out.println("view conn");
+		return "/kanban/dataTestPage";
+//		return "/kanban/dataTestPage";
 	}
 
 	/*

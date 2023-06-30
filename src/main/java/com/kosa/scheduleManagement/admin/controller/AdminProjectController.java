@@ -43,13 +43,13 @@ public class AdminProjectController {
         this.project_Service = project_Service;
     }
     
-    //�μ���ȣ�� �ش�μ� ����� ��� �ޱ�.
+    //부서번호로 해당부서 사원들 목록 받기.
     @GetMapping
     public ResponseEntity<List<Emp>> empShow(@RequestParam("deptno") int deptno){
     	List<Emp> list = new ArrayList();
     	
     	try {
-    		System.out.println("�������");
+    		System.out.println("정상실행");
     		list = project_adminservice.getList(deptno);
     		return new ResponseEntity<List<Emp>>(list,HttpStatus.OK);
 		} catch (Exception e) {
@@ -57,11 +57,11 @@ public class AdminProjectController {
 		}
     }
     
-    //������Ʈ �����ϰ�, Project / Project_Sub �� Insert
+    //프로젝트 생성하고, Project / Project_Sub 에 Insert
     @PostMapping("/createProject")
     public ResponseEntity<String> insertProject(@RequestBody Project_Sub genproject){    	
     	try { 
-    		System.out.println("try������ ����");
+    		System.out.println("try블록의 시작");
     		project_Service.insertProject(genproject.getProject());
     		
     		System.out.println("project insert success");
@@ -77,18 +77,18 @@ public class AdminProjectController {
 		}
     }
     
-    //������Ʈ �󼼺���
+    //프로젝트 상세보기
     @GetMapping("/getProjectDetail")
     public Project showProject(@RequestParam("project_num") int project_num){
     	Project project;
     	
     	try {
-    		System.out.println("ȣ��");
+    		System.out.println("호출");
 			project = project_Service.project(project_num);
 			System.out.println(project.toString());
 			return project;
 		} catch (Exception e) {
-			System.out.println("���ܹ߻�");
+			System.out.println("예외발생");
 			e.getMessage();
 			return null;
 		}
@@ -109,6 +109,6 @@ public class AdminProjectController {
     	
     }
     
-    //������Ʈ �󼼺���(Ķ���� Ŭ�� ��)
+    //프로젝트 상세보기(캘린더 클릭 시)
     
 }
