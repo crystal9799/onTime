@@ -22,7 +22,7 @@ public class S3Service {
 			img_path = UploadFileUtils.uploadFile(uploadpath, file.getOriginalFilename(), file.getBytes());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		}
+		} 
 
 		System.out.println(img_path);
 
