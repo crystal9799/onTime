@@ -1,5 +1,7 @@
 package com.kosa.scheduleManagement.global.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,4 +16,5 @@ public class Emp {
 	private String job;
 	private int deptno;
 	private int dhead_num;
+	private MultipartFile file;
 }
