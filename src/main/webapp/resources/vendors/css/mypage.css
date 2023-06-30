@@ -5,7 +5,7 @@
 		padding: 1.5rem
 	}
 	.mypageCard {
-		width: 400px;
+		width: 80%;
 	}
 }
 
@@ -14,7 +14,7 @@
 		padding: 1.5rem
 	}
 	.mypageCard {
-		width: 400px;
+		width: 80%;
 	}
 }
 
@@ -23,7 +23,7 @@
 		padding: 1rem
 	}
 	.mypageCard {
-		width: 400px;
+		width: 80%;
 	}
 }
 
@@ -37,19 +37,18 @@
 
 /* 마이페이지 개인 정보 수정 */
 .mypageCard {
-	width: 850px;
+	width: 600px;
 	height: 500px;
 	margin-bottom: 2rem;
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	min-width: 0;
 	word-wrap: break-word;
 	background-color: #fff;
 	background-clip: border-box;
 	border: 1px solid rgba(19, 24, 44, .125);
 	border-radius: .25rem;
-	justify-content: center;
+	justify-content: space-between;
 }
 
 .userAvater {
@@ -65,14 +64,14 @@
 }
 
 .userImageLabel img {
-	border: 6px solid black;
+	border: 2px solid #838383;
 	width: 14rem;
 	height: 14rem;
 	border-radius: 50%;
 	cursor: pointer;
 }
 
-.saveButtonWrapper {
+.imageButtonWrapper {
 	width: 40px;
 	height: 40px;
 	background-color: white;
