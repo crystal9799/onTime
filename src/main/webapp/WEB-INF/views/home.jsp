@@ -8,11 +8,10 @@
     <script src="https://unpkg.com/fullcalendar@5.10.1/main.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            
+            var calendarEl = document.getElementById('calendar');    
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: ${projectlists},
+                events: JSON.parse('${projectlists}'),
                 eventClick: function(info) {
                     alert('Event: ' + info.event.title);
                     info.jsEvent.preventDefault();
