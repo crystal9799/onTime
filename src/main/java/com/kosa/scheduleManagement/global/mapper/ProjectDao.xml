@@ -10,4 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="projectDetail" resultType="com.kosa.scheduleManagement.global.dto.Project">
 		SELECT PROJECT_NUM,PROJECT_START,PROJECT_END,PROJECT_INFO,PROJECT_NAME,DEPTNO FROM PROJECT WHERE PROJECT_NUM = #{project_num}
 	</select>
+	
+	<select id="getAllProjectList" resultType="com.kosa.scheduleManagement.global.dto.Project">
+		SELECT PROJECT_NUM,PROJECT_START,PROJECT_END,PROJECT_INFO,PROJECT_NAME,DEPTNO FROM PROJECT
+	</select>
 </mapper>
