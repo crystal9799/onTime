@@ -2,7 +2,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/macos,eclipse,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,eclipse,intellij
 src/main/kosa/scheduleManagement/global/config/
-src/main/kosa/scheduleManagement/global/aws/config.properties
+src/main/resources/config.properties
 ### Eclipse ###
 .metadata
 bin/
