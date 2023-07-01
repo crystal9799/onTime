@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.kosa.scheduleManagement.global.dao.ScheduleBoardDao">
+
+	<insert id="insertBoard"
+		parameterType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
+		insert into
+		schedule_board(sched_num, sched_info, sched_prog, sched_seq, project_num)
+		values(schedule_seq.NEXTVAL, #{sched_info}, 0, #{sched_seq}, #{project_num})
+	</insert>
+
+	<select id="getAllPrev"
+		resultType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
+		select sched_num, sched_info, sched_seq, project_num from
+		schedule_board
+		where sched_prog=0
+	</select>
+	<select id="getAllCurr"
+		resultType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
+		select sched_num, sched_info, sched_seq, project_num from
+		schedule_board
+		where sched_prog=1
+	</select>
+	<select id="getAllNext"
+		resultType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
+		select sched_num, sched_info, sched_seq, project_num from
+		schedule_board
+		where sched_prog=3
+	</select>
+
+	<update id="updateSave"
+		parameterType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
+		update schedule_board set
+		sched_prog=#{sched_prog},
+		sched_seq=#{sched_seq}
+		where
+		sched_num=#{sched_num}
+	</update>
+
+	<delete id="deleteBoard"
+		parameterType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
+		delete schedule_board
+		where sched_num=#{sched_num};
+	</delete>
+
+</mapper>
+	
