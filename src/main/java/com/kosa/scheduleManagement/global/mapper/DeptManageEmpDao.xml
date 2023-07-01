@@ -10,25 +10,43 @@
 	</select>
 	<select id="getEmpListByDeptno"
 		resultType="com.kosa.scheduleManagement.global.dto.Emp">
-    		  <![CDATA[
-            select * from
-                (
-                    select rownum rn, user_id, ename, emp_pic, job, deptno, dhead_num
-                    from emp
-                    where rownum <= #{param2}
-                )
-            where rn >= #{param1}
-            ]]>
+  <![CDATA[
+    SELECT * FROM (
+      SELECT 
+        ROWNUM AS rn, 
+        user_id, 
+        ename, 
+        emp_pic, 
+        job, 
+        deptno, 
+        dhead_num
+      FROM 
+        emp
+      WHERE 
+        deptno = #{param1} AND
+        ROWNUM <= #{param3}
+    )
+    WHERE rn >= #{param2}  
+    ]]>
+
 	</select>
+
 	<select id="getEmpByUserId"
 		resultType="com.kosa.scheduleManagement.global.dto.Emp">
-		select user_id, password, enabled, ename, emp_pic, job, deptno, dhead_num from emp
+		select user_id, password, enabled, ename, emp_pic, job,
+		deptno, dhead_num from emp
 		where user_id=#{user_id}
 	</select>
 	<select id="getRestEmpListByDeptno"
 		resultType="com.kosa.scheduleManagement.global.dto.Emp">
 		select user_id,ename,emp_pic,job,deptno,dhead_num from emp
 		where deptno=#{deptno}
+	</select>
+	<select id="getDheadNameByDheadNull"
+		resultType="String">
+		select ename from emp
+		where dhead_num IS NULL
+		AND deptno = #{deptno}
 	</select>
 	<select id="getDheadNumByDeptno" resultType="int">
 		select dhead_num

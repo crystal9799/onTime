@@ -2,7 +2,9 @@ package com.kosa.scheduleManagement.admin.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kosa.scheduleManagement.admin.service.EmpManageService;
 import com.kosa.scheduleManagement.global.dto.Emp;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @RequestMapping("/admin")
 @Controller
@@ -44,8 +49,11 @@ public class AdminEmpManageController {
 		}
 
 		int pagesize = Integer.parseInt(ps);
+		System.out.println(pagesize);
 		int cpage = Integer.parseInt(cp);
+		System.out.println(cpage);
 		int totalcount = empManageService.totallistCountByDeptno(deptno);
+		System.out.println(totalcount);
 		int pagecount = 0;
 
 		if (totalcount % pagesize == 0) {
@@ -62,22 +70,56 @@ public class AdminEmpManageController {
 		model.addAttribute("pagesize", pagesize);
 		model.addAttribute("pagecount", pagecount);
 		model.addAttribute("cpage", cpage);
+		
+		System.out.println("elist : " + elist);
+		System.out.println("pagesize : " + pagesize);
+		System.out.println("pagecount : " + pagecount);
+		System.out.println("page : "+ cpage);
+		
 		return "/admin/emp/admin_emp";
 	}
 
 ////////////////////////////////////////rest 방식 코드 	
-
+	
 // rest 부서별 사원 조회 (테스트)
-	@GetMapping("/rest")
-	public ResponseEntity<List<Emp>> getEmpByDeptno(@RequestParam("deptno") int deptno) {
-		List<Emp> list = new ArrayList();
-
+	@GetMapping("/empManage/show.do")
+	public ResponseEntity<Map<String, Object>> getEmpByDeptno(@RequestParam("perPage") int perPage, @RequestParam("deptno") int deptno,@RequestParam(value="page", required = false, defaultValue = "1") int page, HttpSession session) {
+		List<Emp> list = new ArrayList<>();
 		try {
-			list = empManageService.getList(deptno);
-			System.out.println("empListByDeptno rest호출");
-			return new ResponseEntity<List<Emp>>(list, HttpStatus.OK);
+		    list = empManageService.getList(deptno);
+		    String dheadName = empManageService.getDheadNameByDheadNull(deptno);
+		    System.out.println(dheadName);
+		    System.out.println("empListByDeptno rest호출");
+
+		    // 새로운 형식의 JSON 데이터 생성
+		    Map<String, Object> response = new HashMap<>();
+		    response.put("result", true);
+		    Map<String, Object> data = new HashMap<>();
+		    List<Object> contents = new ArrayList<>();
+		    
+		    // 각각의 Emp 객체를 가공하여 contents에 추가
+		    for (Emp emp : list) {
+		        Map<String, Object> empData = new HashMap<>();
+		        empData.put("user_id", emp.getUser_id());
+		        empData.put("ename", emp.getEname());
+		        empData.put("emp_pic", emp.getEmp_pic());
+		        empData.put("job", emp.getJob());
+		        empData.put("deptno", emp.getDeptno());
+		        empData.put("dhead_name", !emp.getEname().equals(dheadName) ? dheadName : "");
+		        empData.put("file", emp.getFile());
+		        contents.add(empData);
+		    }
+		    
+		    data.put("contents", contents);
+		    Map<String, Object> pageData = new HashMap<>();
+		    pageData.put("page", page);
+		    data.put("pagination", pageData);
+		    
+		    response.put("data", data);
+
+		    return new ResponseEntity<>(response, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<List<Emp>>(list, HttpStatus.BAD_REQUEST);
+		    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -109,7 +151,7 @@ public class AdminEmpManageController {
 		return new ResponseEntity<String>(message,HttpStatus.OK);
 	}
 
-//사원 삭제
+	//사원 삭제
 	@GetMapping("/empManage/deleteOk.do")
 	public ResponseEntity<String> deleteEmp(@RequestParam("user_id") long user_id) {
 		//삭제가 완료되면 true를 반환, update enabled 0

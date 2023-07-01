@@ -7,27 +7,20 @@
 	<link href="https://unpkg.com/fullcalendar@5.10.1/main.min.css" rel='stylesheet' />
     <script src="https://unpkg.com/fullcalendar@5.10.1/main.min.js"></script>
     <script>
+    	let projects;
+    	fetch("http://192.168.0.33:8090/Team4_WebProject_2/admin/async")
+    		.then(res => res.json())
+    		.then(data => {
+    			projects = data;
+    		})
+    		
+    	
+    	
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: [
-                    {
-                    	project_id: '11',
-                        title: 'Event 1',
-                        start: '2023-07-01',
-                        end: '2023-07-08',
-                        color: 'tomato',
-                    },
-                    {
-                        title: 'Event 2',
-                        start: '2023-07-02',
-                    },
-                    {
-                        title: 'Event 3',
-                        start: '2023-07-03',
-                    }
-                ]
+                events: projects
             });
             calendar.render();
         });
