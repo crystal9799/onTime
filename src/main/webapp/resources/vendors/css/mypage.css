@@ -1,29 +1,36 @@
 @charset "UTF-8";
 
-@media ( max-width : 1199px) {
+/* 데스크탑 환경 */
+@media only screen and (min-width: 1025px) {
 	.padding {
 		padding: 1.5rem
 	}
 	.mypageCard {
 		width: 80%;
+		background-color: blue;
 	}
 }
 
-@media ( max-width :991.98px) {
-	.padding {
-		padding: 1.5rem
-	}
-	.mypageCard {
-		width: 80%;
-	}
-}
-
-@media ( max-width :767.98px) {
+/* 태블릿 환경 */
+@media only screen and (max-width:767.98px) and (max-width: 1025px) {
 	.padding {
 		padding: 1rem
 	}
 	.mypageCard {
 		width: 80%;
+		background-color: red;
+	}
+}
+
+/* 모바일 환경 */
+@media only screen and (min-width: 767.98px) {
+	.padding {
+		padding: 0.5rem
+	}
+	.mypageCard {
+		min-width: 400px;
+		width: 50%;
+		background-color: yellow;
 	}
 }
 
@@ -54,7 +61,8 @@
 }
 
 .mypageCard {
-	width: 600px;
+	min-width: 600px;
+	width: 65%;
 	min-height: 650px;
 	margin-bottom: 2rem;
 	position: relative;

@@ -1,5 +1,7 @@
 package com.kosa.scheduleManagement.global.dao;
 
+import java.util.List;
+
 import com.kosa.scheduleManagement.global.dto.Dept;
 import com.kosa.scheduleManagement.global.dto.Emp;
 
@@ -19,4 +21,7 @@ public interface Mypage_EmpDao {
 		
 	//	완료업무 개수	
 		int getDoneSchedNum(int user_id);
+		
+	//부사장
+	List<Dept> getMypageAdminDeptInfo(int user_id);
 }

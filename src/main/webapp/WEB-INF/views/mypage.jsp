@@ -5,76 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>mypage</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <jsp:include page="/common/Head.jsp" />
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
-<script>
-	$(document).ready(function() {
-		/* chart */
-		var ctx = $("#chart-line");
-		var totalnum = ${totalSchedNum};
-		var doneNum = ${doneSchedNum};
-		var resultDone = (doneNum/totalnum) * 100;
-		var resultProg = 100 - resultDone;
-		
-		var myLineChart = new Chart(ctx, {
-			type : 'pie',
-			data : {
-				labels : [ "완료", "진행중" ],
-				datasets : [ {
-					data : [ resultDone, resultProg ],
-					backgroundColor : [ "#4b49ac", "#CDCDFF" ]
-				} ]
-			},
-			options : {
-				title : {
-					display : true,
-					text : '업무 진행도'
-				}
-			}
-		});
-		
-		// 회원정보 수정 기능
-		$('#submit').click(
-				async () => {
- 					const emp = {user_id: ${emp.user_id},password:$("#password").val(),emp_pic:$('#emp_pic')[0].files[0].name};
-					var form = $('#userfrom')[0];
-					var formData = new FormData(form);
-					var filedData = $('#fileImageUpload')[0].files[0] ? $('#fileImageUpload')[0].files[0] : null;
-					formData.append('file', filedData);
-					formData.append('key', new Blob([JSON.stringify(emp)], {type: 'application/json'}));
-					
-					 for (var key of formData.keys()) {
-					    console.log(key);
-					  }
-					  for (var value of formData.values()) {
-					    console.log(value);
-					  }
-					
-					$.ajax({
-						url : "mypage/update.do",
-						type : 'POST',
-						data : formData,
-					    processData:false,
-					    contentType:false,
-					    enctype:'multipart/form-data',
-						success : function(data) {
-							console.log("mypageUpdate : " + data);
-						},
-						error : function(request, status, error) {
-							console.log("code:" + request.status + "\n"
-									+ "message:" + request.responseText + "\n"
-									+ "error:" + error);
-						},
-						complete: function() {
-							//location.reload();
-						}
-
-					});
-				});
-
-	}); 
-</script>
 </head>
 <body>
 	<jsp:include page="/common/Header.jsp" />
@@ -150,6 +84,73 @@
 	imageUploadButton.addEventListener('click', (event) =>{
 		fileInput.click();
 	});
+	
+	$(document).ready(function() {
+		/* chart */
+		var ctx = $("#chart-line");
+		var totalnum = ${totalSchedNum};
+		var doneNum = ${doneSchedNum};
+		var resultDone = (doneNum/totalnum) * 100;
+		var resultProg = 100 - resultDone;
+		
+		var myLineChart = new Chart(ctx, {
+			type : 'pie',
+			data : {
+				labels : [ "완료", "진행중" ],
+				datasets : [ {
+					data : [ resultDone, resultProg ],
+					backgroundColor : [ "#4b49ac", "#CDCDFF" ]
+				} ]
+			},
+			options : {
+				title : {
+					display : true,
+					text : '업무 진행도'
+				}
+			}
+		});
+		
+		// 회원정보 수정 기능
+		$('#submit').click(
+				async () => {
+					console.log("회원정보 수정 클릭");
+					const empPic = `$('#emp_pic')[0].files[0].name` ? `$('#emp_pic')[0].files[0].name` : `${emp.emp_pic}`;
+ 					const emp = {user_id: ${emp.user_id},password:$("#password").val(),emp_pic: empPic};
+					var form = $('#userfrom')[0];
+					var formData = new FormData(form);
+					formData.append('file', $('#fileImageUpload')[0].files[0]);
+					formData.append('key', new Blob([JSON.stringify(emp)], {type: 'application/json'}));
+					
+					 for (var key of formData.keys()) {
+					    console.log(key);
+					  }
+					  for (var value of formData.values()) {
+					    console.log(value);
+					  }
+					
+					$.ajax({
+						url : "mypage/update.do",
+						type : 'POST',
+						data : formData,
+					    processData:false,
+					    contentType:false,
+					    enctype:'multipart/form-data',
+						success : function(data) {
+							console.log("mypageUpdate : " + data);
+						},
+						error : function(request, status, error) {
+							console.log("code:" + request.status + "\n"
+									+ "message:" + request.responseText + "\n"
+									+ "error:" + error);
+						},
+						complete: function() {
+							//location.reload();
+						}
+
+					});
+				});
+
+	}); 
 </script>
 </body>
 </html>

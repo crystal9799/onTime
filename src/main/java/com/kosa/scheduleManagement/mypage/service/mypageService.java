@@ -1,10 +1,11 @@
 package com.kosa.scheduleManagement.mypage.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kosa.scheduleManagement.global.dao.EmpDao;
 import com.kosa.scheduleManagement.global.dao.Mypage_EmpDao;
 import com.kosa.scheduleManagement.global.dto.Dept;
 import com.kosa.scheduleManagement.global.dto.Emp;
@@ -65,6 +66,20 @@ public class mypageService {
 		return dept;
 	}
 	
+	public List<Dept> getMypageAdminDeptInfo(int user_id) {
+		Mypage_EmpDao mypage_empdao = sqlsession.getMapper(Mypage_EmpDao.class);
+		List<Dept> dept = null;
+		
+		try {
+			System.out.println("service 진");
+			dept = mypage_empdao.getMypageAdminDeptInfo(user_id);
+			System.out.println("getEmpInfo 성공");
+		} catch (Exception e) {
+			e.getStackTrace();
+			System.out.println("getEmpInfoService 오류 :" + e.getMessage());
+		}
+		return dept;
+	}
 	
 //	전체업무일정 개수
 	public int getTotalSchedNum(int user_id) {
