@@ -7,23 +7,18 @@
 	<link href="https://unpkg.com/fullcalendar@5.10.1/main.min.css" rel='stylesheet' />
     <script src="https://unpkg.com/fullcalendar@5.10.1/main.min.js"></script>
     <script>
-    	let projects;
-    	fetch("http://192.168.0.33:8090/Team4_WebProject_2/admin/async")
-    		.then(res => res.json())
-    		.then(data => {
-    			projects = data;
-    		})
-    		
-    	
-    	
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: projects
-            });
-            calendar.render();
-        });
+	    document.addEventListener('DOMContentLoaded', function() {
+	        fetch("http://localhost:8090/Team4_WebProject_2/admin/async")
+	            .then(res => res.json())
+	            .then(data => {
+	                var calendarEl = document.getElementById('calendar');
+	                var calendar = new FullCalendar.Calendar(calendarEl, {
+	                    initialView: 'dayGridMonth',
+	                    events: data
+	                });
+	                calendar.render();
+	            })
+	    });
     </script>
 </head>
 <body>
