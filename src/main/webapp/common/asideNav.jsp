@@ -6,17 +6,22 @@
 		<li class="nav-item"><a class="nav-link" href="index.html"> <i
 				class="icon-grid menu-icon"></i> <span class="menu-title">Mainpage</span>
 		</a></li>
-		<li class="nav-item">
-		<a class="nav-link" data-toggle="collapse"
+		<li class="nav-item"><a class="nav-link" data-toggle="collapse"
 			href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
 				<i class="icon-layout menu-icon"></i> <span class="menu-title">Project</span>
 				<i class="menu-arrow"></i>
 		</a>
 			<div class="collapse" id="ui-basic">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/schedule.do">project1</a></li>
-					<li class="nav-item"><a class="nav-link" 	href="${pageContext.request.contextPath}/datatest.do">project2</a></li>
-					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/rowdatatest.do">project3</a></li>
+					<li class="nav-item">
+					<a class="nav-link"
+						href="${pageContext.request.contextPath}/schedule.do">project1</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/datatest.do">project2</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/rowdatatest.do">project3</a></li>
+<%-- 					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/admin/schedule.do">project3</a></li> --%>
 				</ul>
 			</div></li>
 		<li class="nav-item"><a class="nav-link"

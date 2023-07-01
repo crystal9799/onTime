@@ -1,7 +1,8 @@
 package com.kosa.scheduleManagement.admin.service;
 
-import com.kosa.scheduleManagement.global.dao.EmpDao;
-import com.kosa.scheduleManagement.global.dto.Emp;
+import java.sql.SQLException;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,12 @@ import com.kosa.scheduleManagement.global.dto.Emp;
 
 @Service
 public class EmpManageService {
-    private SqlSession sqlsession;
+	private SqlSession sqlsession;
 
-    @Autowired
-    public void setSqlsession(SqlSession sqlsession) {
-        this.sqlsession = sqlsession;
-    }
+	@Autowired
+	public void setSqlsession(SqlSession sqlsession) {
+		this.sqlsession = sqlsession;
+	}
 
 	public int totallistCountByDeptno(int deptno) throws SQLException, ClassNotFoundException {
 		System.out.println("total메서드까지는 옴");

@@ -1,6 +1,5 @@
 package com.kosa.scheduleManagement.admin.controller;
 
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,9 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,20 +18,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosa.scheduleManagement.admin.service.EmpManageService;
 import com.kosa.scheduleManagement.global.dto.Emp;
 
-@RequestMapping(value= "/admin", produces = "application/text; charset=UTF-8")
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+@RequestMapping("/admin")
 @Controller
 public class AdminEmpManageController {
-    private EmpManageService empManageService;
+	private EmpManageService empManageService;
 
-    @Autowired
+	@Autowired
+	public void setEmpManageService(EmpManageService empManageService) {
+		this.empManageService = empManageService;
+	}
 
 	// 부서사원 보여주기
 	@GetMapping("empManage.do")
@@ -81,60 +81,47 @@ public class AdminEmpManageController {
 
 ////////////////////////////////////////rest 방식 코드 	
 	
-	// rest 부서별 사원 조회 (테스트)
+// rest 부서별 사원 조회 (테스트)
 	@GetMapping("/empManage/show.do")
-	public ResponseEntity<String> getEmpByDeptno(@RequestParam("perPage") int perPage, @RequestParam("deptno") int deptno, @RequestParam(value = "page", required = false, defaultValue = "1") int page, HttpSession session) {
-	    List<Emp> list = new ArrayList<>();
-	    try {
-	        list = empManageService.getList(deptno);
-	        String dheadName = empManageService.getDheadNameByDheadNull(deptno);
-	        System.out.println(dheadName);
-	        System.out.println("empListByDeptno rest호출");
+	public ResponseEntity<Map<String, Object>> getEmpByDeptno(@RequestParam("perPage") int perPage, @RequestParam("deptno") int deptno,@RequestParam(value="page", required = false, defaultValue = "1") int page, HttpSession session) {
+		List<Emp> list = new ArrayList<>();
+		try {
+		    list = empManageService.getList(deptno);
+		    String dheadName = empManageService.getDheadNameByDheadNull(deptno);
+		    System.out.println(dheadName);
+		    System.out.println("empListByDeptno rest호출");
 
-	        // 새로운 형식의 JSON 데이터 생성
-	        Map<String, Object> response = new HashMap<>();
-	        response.put("result", true);
-	        Map<String, Object> data = new HashMap<>();
-	        List<Object> contents = new ArrayList<>();
+		    // 새로운 형식의 JSON 데이터 생성
+		    Map<String, Object> response = new HashMap<>();
+		    response.put("result", true);
+		    Map<String, Object> data = new HashMap<>();
+		    List<Object> contents = new ArrayList<>();
+		    
+		    // 각각의 Emp 객체를 가공하여 contents에 추가
+		    for (Emp emp : list) {
+		        Map<String, Object> empData = new HashMap<>();
+		        empData.put("user_id", emp.getUser_id());
+		        empData.put("ename", emp.getEname());
+		        empData.put("emp_pic", emp.getEmp_pic());
+		        empData.put("job", emp.getJob());
+		        empData.put("deptno", emp.getDeptno());
+		        empData.put("dhead_name", !emp.getEname().equals(dheadName) ? dheadName : "");
+		        empData.put("file", emp.getFile());
+		        contents.add(empData);
+		    }
+		    
+		    data.put("contents", contents);
+		    Map<String, Object> pageData = new HashMap<>();
+		    pageData.put("page", page);
+		    data.put("pagination", pageData);
+		    
+		    response.put("data", data);
 
-	        // 각각의 Emp 객체를 가공하여 contents에 추가
-	        for (Emp emp : list) {
-	            Map<String, Object> empData = new HashMap<>();
-	            empData.put("user_id", emp.getUser_id());
-	            empData.put("ename", emp.getEname());
-	            empData.put("emp_pic", emp.getEmp_pic());
-	            empData.put("job", emp.getJob());
-	            empData.put("deptno", emp.getDeptno());
-	            empData.put("dhead_name", !emp.getEname().equals(dheadName) ? dheadName : "");
-	            empData.put("file", emp.getFile());
-	            contents.add(empData);
-	        }
-
-	        data.put("contents", contents);
-	        Map<String, Object> pageData = new HashMap<>();
-	        pageData.put("page", page);
-	        data.put("pagination", pageData);
-
-	        response.put("data", data);
-
-	        HttpHeaders headers = new HttpHeaders();
-	        headers.setContentType(MediaType.APPLICATION_JSON);
-	        headers.set(HttpHeaders.ACCEPT_CHARSET, StandardCharsets.UTF_8.name());
-	        ObjectMapper objectMapper = new ObjectMapper();
-	        JsonFactory jsonFactory = objectMapper.getFactory();
-	        JsonGenerator jsonGenerator = jsonFactory.createGenerator(System.out, JsonEncoding.UTF8);
-	        jsonGenerator.setCodec(objectMapper);
-	        String jsonResponse = objectMapper.writeValueAsString(response);
-	        
-	        
-	        System.out.println(jsonResponse);
-	        return ResponseEntity.ok(jsonResponse);
-	    } catch (Exception e) {
-	        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	    }
+		    return new ResponseEntity<>(response, HttpStatus.OK);
+		} catch (Exception e) {
+		    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
-
-
 
 // 사원생성페이지 보여주기. 부서장의 deptno을 파라미터로 받아와 세션에 저장하고 이를 post요청 시에 emp에 세션의 deptno 값 넣기.
 // 시큐리티 적용 후에는 사용자의 user_id를 가져오는게 나을까? -> user_id로 emp 조회하기 vs 세션에 deptno를 가지고 사용하기.
