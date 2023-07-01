@@ -18,8 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    TO_CHAR(PROJECT_START, 'YYYY-MM-DD')AS PROJECT_START,
 		    TO_CHAR(PROJECT_END, 'YYYY-MM-DD')AS PROJECT_END,
 		    PROJECT_INFO,
-		    PROJECT_NAME,
-		    COLOR
+		    PROJECT_NAME
 		from project
 	</select>
 </mapper>

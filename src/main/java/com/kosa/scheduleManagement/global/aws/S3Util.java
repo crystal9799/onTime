@@ -2,9 +2,9 @@ package com.kosa.scheduleManagement.global.aws;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
@@ -27,12 +27,8 @@ public class S3Util {
 	public S3Util() {
 		Properties properties = new Properties();
 
-		try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config.properties")) {
-			if (inputStream != null) {
-                properties.load(inputStream);
-            } else {
-                throw new IOException("config.properties 파일을 찾을 수 없습니다.");
-            }
+		try (FileInputStream fileInputStream = new FileInputStream("config.properties")) {
+			properties.load(fileInputStream);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
