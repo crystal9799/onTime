@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<mvc:annotation-driven />
+	<context:annotation-config />
+	<bean id="driverManagerDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" 
+			/> -->
+		<!-- <property name="url" value="jdbc:oracle:thin:@192.168.0.38:1521:XE"></property> -->
+		<!-- sql 로그 찍기 -->
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+<!-- 		<property name="url"
+			value="jdbc:log4jdbc:oracle:thin:@192.168.0.38:1521:XE" />
+		<property name="username" value="team4"></property>
+		<property name="password" value="1004"></property> -->
+		<property name="url"         
+		value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
+	 	<property name="username"        value="kosa"></property>
+	 	<property name="password"        value="1004"></property>
+	</bean>
+
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="driverManagerDataSource" />
+	</bean>
+
+	<!-- Mybatis 설정 기본 자바코드 : SqlMapConfig.xml 에서 설정했던 작업 (DB연결 ,mapper 설정) 
+		파일 없어지고 설명파일안에서 > SqlSessionFactoryBean 기존 java 코드 : builder 사용 > Factory 
+		객체 > sqlsession 생성 > 함수사용 -->
+	<bean id="sqlSessionFactoryBean"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="driverManagerDataSource"></property>
+		<property name="mapperLocations"
+			value="classpath*:com/kosa/scheduleManagement/global/mapper/*.xml" />
+	</bean>
+
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryBean" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="driverManagerDataSource" />
+	</bean>
+	<tx:annotation-driven
+		transaction-manager="transactionManager" proxy-target-class="true" />
+
+	<!-- 공통빈 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="1"/>
+		<property name="prefix">
+			<value>/WEB-INF/views/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+		<property name="maxUploadSize" value="10485760"></property> <property name="defaultEncoding" 
+		value="UTF-8"></property> </bean> -->
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="1000000000" />
+		<property name="maxInMemorySize" value="1000000000"></property>
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+</beans>

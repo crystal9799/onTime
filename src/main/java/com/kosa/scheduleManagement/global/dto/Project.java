@@ -21,6 +21,7 @@ public class Project {
 	private String project_name;
 	private char is_deleted;
 	private int deptno;
+	private String color;
 	
 	// Getter and Setter for 'deptno'
     public int getDEPTNO() {

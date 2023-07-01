@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosa.scheduleManagement.global.dao.Mypage_EmpDao">
+	<!-- 전체 업무 일정 -->
+	<select id="getTotalSchedNum" resultType="int">
+		select count(*) as totalnum from (select sb.sched_num, sb.project_num, sb.sched_prog from schedule_board sb join schedule s on sb.sched_num = s.sched_num where s.user_id=#{param1})
+	</select>
+	
+	<!-- 완료 일정 -->
+	<select id="getDoneSchedNum" resultType="int">
+		select count(*) as donenum from (select sb.sched_num, sb.project_num, sb.sched_prog from schedule_board sb join schedule s on sb.sched_num = s.sched_num where s.user_id=#{param1} and sb.sched_prog=3)
+	</select>
+</mapper>
