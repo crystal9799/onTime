@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.kosa.scheduleManagement.global.dao.DeptManageEmpDao">
+	<select id="totallistCountByDeptno" resultType="int">
+		select count(*)
+		cnt from emp where deptno=#{deptno}
+	</select>
+	<select id="getEmpListByDeptno"
+		resultType="com.kosa.scheduleManagement.global.dto.Emp">
+    		  <![CDATA[
+            select * from
+                (
+                    select rownum rn, user_id, ename, emp_pic, job, deptno, dhead_num
+                    from emp
+                    where rownum <= #{param2}
+                )
+            where rn >= #{param1}
+            ]]>
+	</select>
+	<select id="getEmpByUserId"
+		resultType="com.kosa.scheduleManagement.global.dto.Emp">
+		select user_id, password, enabled, ename, emp_pic, job, deptno, dhead_num from emp
+		where user_id=#{user_id}
+	</select>
+	<select id="getRestEmpListByDeptno"
+		resultType="com.kosa.scheduleManagement.global.dto.Emp">
+		select user_id,ename,emp_pic,job,deptno,dhead_num from emp
+		where deptno=#{deptno}
+	</select>
+	<select id="getDheadNumByDeptno" resultType="int">
+		select dhead_num
+		from dept
+		where deptno=#{deptno}
+	</select>
+	<insert id="insertEmp"
+		parameterType="com.kosa.scheduleManagement.global.dto.Emp">
+		INSERT INTO emp (user_id, deptno,
+		ename, password,
+		enabled, job, dhead_num)
+		VALUES (emp_seq.NEXTVAL,
+		#{deptno}, #{ename},
+		#{password}, '1',
+		#{job}, #{dhead_num})
+	</insert>
+	<update id="updateEmpEnabled">
+		UPDATE emp
+		SET enabled = 0
+		WHERE user_id = #{user_id}
+	</update>
+	<update id="updateEmp"
+		parameterType="com.kosa.scheduleManagement.global.dto.Emp">
+		UPDATE emp
+		SET ename = #{ename}, job = #{job}
+		WHERE
+		user_id = #{user_id}
+	</update>
+
+</mapper>

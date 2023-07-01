@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosa.scheduleManagement.global.dao.EmpDao">
+
+	<!-- 부서번호로 해당부서 사원목록 불러오기 -->
+	<select id="getEmpListByDeptno" resultType="com.kosa.scheduleManagement.global.dto.Emp">
+		select user_id,password,enabled,ename,emp_pic,job,deptno,dhead_num from emp where deptno=#{deptno}
+	</select>
+	
+	<!-- mypage 사원 정보 -->
+	<select id="getEmpInfo" resultType="com.kosa.scheduleManagement.global.dto.Emp">
+		select e.user_id, e.password, e.emp_pic, d.dname from emp e join dept d on e.deptno = d.deptno where e.user_id=#{param1}
+	</select>
+	
+	<!-- mypage 사원 정보 수정 -->
+	<update id="updateEmpInfo" parameterType="com.kosa.scheduleManagement.global.dto.Emp">
+		update emp set password=#{password}, emp_pic=#{emp_pic} where user_id = #{user_id}
+	</update>
+</mapper>
+	

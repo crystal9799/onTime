@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosa.scheduleManagement.global.dao.ProjectDao">
+	<insert id="insertProject" parameterType="com.kosa.scheduleManagement.global.dto.Project">
+		INSERT INTO PROJECT(PROJECT_NUM   , PROJECT_START   , PROJECT_END   , PROJECT_INFO   , PROJECT_NAME   , IS_DELETED   , DEPTNO) 
+					 VALUES(#{project_num}, #{project_start}, #{project_end}, #{project_info}, #{project_name}, #{is_deleted}, #{DEPTNO})
+	</insert>
+	<select id="projectDetail" resultType="com.kosa.scheduleManagement.global.dto.Project">
+		SELECT PROJECT_NUM,PROJECT_START,PROJECT_END,PROJECT_INFO,PROJECT_NAME,DEPTNO FROM PROJECT WHERE PROJECT_NUM = #{project_num}
+	</select>
+	
+	<select id="getAllProjectList" resultType="com.kosa.scheduleManagement.global.dto.Project">
+		SELECT PROJECT_NUM,PROJECT_START,PROJECT_END,PROJECT_INFO,PROJECT_NAME,DEPTNO FROM PROJECT
+	</select>
+</mapper>
