@@ -3,14 +3,174 @@
 
 <script>
 	  window.onload = function(){
-		  console.log('load');
-
-		  
+		  console.log('load'); 
 	  };
 	  
 	  
+	  /* modal load */
+      const body = document.querySelector('body');
+      const modal = document.querySelector('.modal');
+      const btnOpenPopup = document.querySelector('.modalBtn');
+
+      btnOpenPopup.addEventListener('click', () => {
+        modal.classList.toggle('show');
+			getNameList(); //modal load 시 동적 태그 생성
+
+        if (modal.classList.contains('show')) {
+          body.style.overflow = 'hidden';
+        }
+      });
+
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          modal.classList.toggle('show');
+
+          if (!modal.classList.contains('show')) {
+            body.style.overflow = 'auto';
+          }
+        }
+      });
+
+	  
+		 /* name list load*/
+	  function getNameList(){
+	    	console.log('modal load test');
+			$.ajax({
+				url: "projectEnamelist.ajax",
+				type: "GET", dataType:"json",
+				success : function(data){
+					console.log(data);
+			    	// select 동적 태그 생성 메소드
+			    	
+					for(var i=0; i<data.length; i++){
+						$("#nameList").append('<option id="'+data[i]+'" value="' + data[i] + '">' + data[i] + '</option');
+					}
+				},
+				error :function(){
+					alert("request error!");
+				}
+			}); 
+	  }
+		 
+		 
+		 
+
+		 /*선택된 값 전달*/
+		 /*클라이언트 값 ajax로 보내줌 매핑 필요*/
+	  	function addSchedule(data){
+	 	console.log("ready data send method: "+data);
+
+
+			
+	 	
+		 }
+		 
+		 
+		 /* ajax add */
+       	const addModalBtn = document.querySelector('.addModalBtn');
+        addModalBtn.addEventListener('click', () => {
+        	console.log('add modal Click!');
+ 
+			$.ajax({
+				url : "sheduleAdd.ajax",
+				type : "post",
+  				data : {
+					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
+					project_num : "2", // 클라이언트 값 전달
+					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
+				}, 
+				success : function(data) {
+						console.log("data: "+data);
+			    },
+				error : function() {
+					alert("error");
+				}
+			});
+        	
+        	
+        	
+        });
+			
+        
+		 
+		 /* ajax add */
+/*       	const addModalBtn = document.querySelector('.addModalBtn');
+       addModalBtn.addEventListener('click', () => {
+       	console.log('add modal Click!');
+       	let inputInfo=document.querySelector('#todo-input'); 
+       	let en=$("select[id=nameList] option:selected").text();
+  
+       	console.log("info : "+inputInfo.value);   
+       	console.log($("select[id=nameList] option:selected").text());  
+
+       	
+			$.ajax({
+				url : "sheduleAdd.ajax",
+				type : "post",
+				data : {
+					ename : en, // selected: 값 전달
+					project_num : "28", // 클라이언트 값 전달
+					sched_info : inputInfo.value // 내용 태그 값 전달
+				},
+				success : function(data) {
+							console.log(data);
+			    },
+				error : function() {
+					alert("error");
+				}
+			});
+       	
+       	
+       	
+       }); */
+		 
+		 
+		 /* vo 객체 ajax 전달 방법 */
+		 /* ajax add */
+ /*       	const addModalBtn = document.querySelector('.addModalBtn');
+        addModalBtn.addEventListener('click', () => {
+        	console.log('add modal Click!');
+        	let inputInfo=document.querySelector('#todo-input'); 
+        	console.log(inputInfo.value);   
+        	const dataArray = {
+        			sched_num: 1, sched_info: inputInfo.value,
+        			sched_prog:0, sched_seq:3,
+        			project_num:10
+        			};
+        		$.ajax({
+        			url : "add.ajax",
+        			type : 'POST',
+        			data : JSON.stringify(dataArray),
+        			contentType: 'application/json',
+        			success : function(data) {
+        				console.log("data: " + data);
+        			}
+        		});
+        });
+			 */
+		 
+		 
+		
+
+	/* select 동적 태그 생성 메소드 */
+	function createSelectNameList(data){
+		console.log('create selete ready');
+		 
+/* 		$.ajax({
+		type : "GET",
+		data : data,
+		url : url,
+		success : function(data){
+			for(var i=0; i<data.length; i++){
+				$("#nameList").append('<option value="' + data.data + '">' + data.data + '</option');
+			}
+		}
+		}); */
+	}
+	  
+	  
 	 /* name list load*/
-  	const enamelistBtn = document.querySelector('.enamelistBtn');
+/*   	const enamelistBtn = document.querySelector('.enamelistBtn');
   	enamelistBtn.addEventListener('click', () => {
     	console.log(' enamelistBtn Click!');
 
@@ -25,7 +185,10 @@
 				alert("request error!");
 				}
 		}); 
-    });
+    }); */
+  	
+  	/* foreach 로 돌면서 select 박스 생성 */
+  	
   	
   	
  	/* insert ajax */
@@ -39,44 +202,7 @@
 	 	
 	 	
 
-	 /*클라이언트 값 매핑 필요*/
-  	function ajaxtest(data){
- 	console.log("testmethod; "+data);
- 	
- 	
-/* 	const dataArray = { 
- 			user_id : "1",
- 			project_num : "2",
- 			sched_info : "업무내용"
-			};
-		$.ajax({
-			url : "ajadd.ajax",
-			type : 'POST',
-			data : JSON.stringify(dataArray),
-			contentType: 'application/json',
-			success : function(data) {
-				console.log("data: " + data);
-			} 
-		});
- 	 */
-		$.ajax({
-			url : "uaddSchedule.ajax",
-			type : "post",
-			data : {
-				user_id : "test",
-				project_num : "28",
-				sched_info : "여자"
-			},
-			success : function(data) {
-						
-		     },
-			error : function() {
-				alert("error");
-			}
-		});
-		
- 	
-	 	}
+
  	
  	
 /* 	 	var data = {};
@@ -183,30 +309,12 @@
   	
   	
   	
-	
-        const body = document.querySelector('body');
-        const modal = document.querySelector('.modal');
-        const btnOpenPopup = document.querySelector('.modalBtn');
-  
-        btnOpenPopup.addEventListener('click', () => {
-          modal.classList.toggle('show');
-  
-          if (modal.classList.contains('show')) {
-            body.style.overflow = 'hidden';
-          }
-        });
-  
-        modal.addEventListener('click', (event) => {
-          if (event.target === modal) {
-            modal.classList.toggle('show');
-  
-            if (!modal.classList.contains('show')) {
-              body.style.overflow = 'auto';
-            }
-          }
-        });
- 
-       	const addModalBtn = document.querySelector('.addModalBtn');
+		
+
+        
+        
+        /* add just schedule ajax*/
+/*       	const addModalBtn = document.querySelector('.addModalBtn');
         addModalBtn.addEventListener('click', () => {
         	console.log(' modal Click!');
         	let inputInfo=document.querySelector('#todo-input'); 
@@ -226,7 +334,7 @@
         			}
         		});
 			
-/*         	var memberId = $("#memberId").val();
+        	var memberId = $("#memberId").val();
         	var memberPass = $("#memberPass").val();
         	
         	var param = {
@@ -250,9 +358,10 @@
         		error : function() {
         			alert("errorrrrr");
         		}
-        	}); */ 
-                
+        	});
         }); 
+        	*/ 
+                
 /*         	
         	let inputInfo=document.querySelector('#todo-input'); 
         	console.log(inputInfo.value);   

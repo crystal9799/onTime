@@ -26,12 +26,23 @@
 
 				<div class="modal">
 					<div class="modal_body">
+					
+					
+					<select id="nameList">
+					<option value="0">선택</option>
+					</select>
+					<br>
+<br> <br><br> <br>
 						업무 내용<br>
 						<input type="text" placeholder="입력" id="todo-input" /> <br> <br>
 						
 						
 						
-						<button class="enamelistBtn" >ename load</button>
+						<!-- 버튼 누르면 이름 읽어오는 데이터 실행  -->
+						<!--  모달창 업로드 시 데이터 읽어오는 형태 -->
+						
+<!-- 						<button class="enamelistBtn" >ename load</button> -->
+
 						<button class="addModalBtn" >add</button>
 					</div>
 				</div> 

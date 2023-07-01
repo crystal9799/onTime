@@ -42,11 +42,15 @@ public class KanbanAjaxController {
 	 * System.out.println("board print : " + board); }
 	 */
 	
-	@RequestMapping(value = "/uaddSchedule.ajax", method = { RequestMethod.POST })	
-	public void test(@RequestParam("user_id") String user_id,
+	@RequestMapping(value = "/sheduleAdd.ajax", method = { RequestMethod.POST })	
+	public void test(@RequestParam("ename") String ename,
 	                 @RequestParam("project_num") String project_num,
 	                 @RequestParam("sched_info") String sched_info) {
-	        System.out.println(user_id);
+		
+		//enamd으로 id 값 가져와서 id 값, projectnum 
+		// int 로 변환 필요한지
+//		Schedule schedule=new Schedule();
+	        System.out.println(ename);
 	        System.out.println(project_num);
 	        System.out.println(sched_info);
 	}
@@ -62,17 +66,15 @@ public class KanbanAjaxController {
 		}
 	}
 	
-	@RequestMapping(value = "/addt.ajax")
+	@RequestMapping(value = "/add.ajax")
 	public ResponseEntity<String> insert(@RequestBody ScheduleBoard board, HttpServletRequest request) {
-		System.out.println("boar:" + board);
+		System.out.println("board:" + board);
 		
 		//userid에 대한 값 같이 받아와서
 		//schedule로 전달필요
-		
-		
 		try {
-			service.insertBoard(board);
-			service.insertSchedule(null);
+//			service.insertBoard(board);
+//			service.insertSchedule(null);
 			return new ResponseEntity<String>("insert sucess", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>("insert fail", HttpStatus.BAD_REQUEST);
@@ -89,7 +91,7 @@ public class KanbanAjaxController {
 	 */
 
 	// string 으로 임시 변환 상태 --> emp ;service mapper interface
-	@RequestMapping(value = "/projectemplist.ajax", method = RequestMethod.GET)
+	@RequestMapping(value = "/projectEnamelist.ajax", method = RequestMethod.GET)
 	@ResponseBody
 	public List<String> getEmpListByProject() throws ClassNotFoundException, SQLException {
 		System.out.println("projectemplist controller connection");
