@@ -1,5 +1,10 @@
 package com.kosa.scheduleManagement.global.dto;
 
-public class Dept {
+import lombok.Data;
 
+@Data
+public class Dept {
+	private int deptno;
+	private String dname;
+	private int dhead_num;
 }

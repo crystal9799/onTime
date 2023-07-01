@@ -43,15 +43,17 @@ public class mypageAajxController {
 		System.out.println("controller");
 		System.out.println(file);
 		System.out.println(emp);
-		logger.info("originalName: " + file.getOriginalFilename());
-		if (file.isEmpty()) {
-			return new ResponseEntity<String>("파일이 유효하지 않습니다", HttpStatus.BAD_REQUEST);
-		}	
+		logger.info("originalName: " + file.getOriginalFilename());	
+		String S3Path = "";
 		
 		try {
-			String S3Path = s3service.fileToS3(file);
-			emp.setEmp_pic(S3Path);
-			System.out.println("S3Path" + S3Path);
+			if (file.isEmpty()) {
+				S3Path = emp.getEmp_pic();
+			} else {
+				S3Path = s3service.fileToS3(file);
+				emp.setEmp_pic(S3Path);
+				System.out.println("S3Path" + S3Path);
+			}
 			mypageservice.updateEmpInfo(emp);
 			return new ResponseEntity<String>("insert sucess", HttpStatus.OK);
 		} catch (Exception e) {

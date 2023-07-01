@@ -27,6 +27,10 @@
 	}
 }
 
+.form-control:focus {
+	border-color: #4e4cad;
+}
+
 .cardWrapper {
 	width: 100%;
 	height: 100%;
@@ -36,37 +40,58 @@
 }
 
 /* 마이페이지 개인 정보 수정 */
+.mypageCardHeader {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	padding: 0.8rem 0;
+}
+
+.mypageCardbody {
+	margin-top: 2rem;
+	width: 80%;
+}
+
 .mypageCard {
 	width: 600px;
-	height: 500px;
+	min-height: 650px;
 	margin-bottom: 2rem;
 	position: relative;
 	display: flex;
+	align-items: center;
 	flex-direction: column;
 	word-wrap: break-word;
 	background-color: #fff;
 	background-clip: border-box;
 	border: 1px solid rgba(19, 24, 44, .125);
 	border-radius: .25rem;
-	justify-content: space-between;
+}
+
+.userAvaterWrapper {
+	width: 100%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .userAvater {
-	position: absolute;
-	width: 3rem;
-	height: 3rem;
-	margin-top: -13rem;
-	left: 2rem;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .userImage {
 	visibility: hidden;
+	width: 0px;
 }
 
 .userImageLabel img {
 	border: 2px solid #838383;
-	width: 14rem;
-	height: 14rem;
+	width: 10rem;
+	height: 10rem;
 	border-radius: 50%;
 	cursor: pointer;
 }
@@ -81,23 +106,25 @@
 	justify-content: center;
 	align-items: center;
 	position: absolute;
-	top: 12rem;
-	left: 11rem;
+	top: 7.5rem;
+	right: 0.5rem;
 	cursor: pointer;
 }
 
-.saveButtonWrapper:hover {
-	background-color : #b0b0b0;
+.imageButtonWrapper:hover {
+	background-color : #C1C1FF;
 }
+
+
 
 .saveButton {
-	  color: gray;
+ color: gray;
   font-size: 30px;
-  :hover {
-    color: #d1d1d1;
-  }
 }
 
+.saveButton:hover {
+	color: #d1d1d1;
+}
 
 /*  */
 .card {
