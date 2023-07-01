@@ -42,7 +42,7 @@ public class mypageAajxController {
 	public ResponseEntity<String> mypageUpdate(@RequestPart(value = "key") Emp emp,@RequestPart(value = "file", required=false) MultipartFile file) {
 		System.out.println("controller");
 		System.out.println(file);
-		System.out.println(emp);
+		System.out.println("emppppppp" + emp);
 		logger.info("originalName: " + file.getOriginalFilename());	
 		String S3Path = "";
 		

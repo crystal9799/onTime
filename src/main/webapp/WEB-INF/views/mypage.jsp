@@ -32,7 +32,7 @@
 							</div>
 						</div>
 						<div class="mypageCardbody">
-							<form>
+							<form class="mypageForm">
 								<div class="form-group">
 									<label for="password">아이디(사원번호)</label> <input type="password"
 										class="form-control border rounded-4" id="password" placeholder="${emp.user_id}" readonly="readonly">
@@ -57,7 +57,6 @@
 								style="display: block; width: 400px; height: 250px;"></canvas>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -85,6 +84,47 @@
 		fileInput.click();
 	});
 	
+	// 회원정보 수정 기능
+	$('#submit').click(
+			async () => {
+				console.log("회원정보 수정 클릭");
+				console.log($('#password').val());
+				const empPic = `$('#emp_pic')[0].files[0].name` ? `$('#emp_pic')[0].files[0].name` : `${emp.emp_pic}`;
+					const emp = {user_id: ${emp.user_id}, password: $('#password').val(), emp_pic: empPic};
+				var form = $('#userfrom')[0];
+				var formData = new FormData(form);
+				formData.append('file', $('#fileImageUpload')[0].files[0]);
+				formData.append('key', new Blob([JSON.stringify(emp)], {type: 'application/json'}));
+				
+				 for (var key of formData.keys()) {
+				    console.log(key);
+				  }
+				  for (var value of formData.values()) {
+				    console.log(value);
+				  }
+				
+				$.ajax({
+					url : "mypage/update.do",
+					type : 'POST',
+					data : formData,
+				    processData:false,
+				    contentType:false,
+				    enctype:'multipart/form-data',
+					success : function(data) {
+						console.log("mypageUpdate : " + data);
+					},
+					error : function(request, status, error) {
+						console.log("code:" + request.status + "\n"
+								+ "message:" + request.responseText + "\n"
+								+ "error:" + error);
+					},
+					complete: function() {
+						//location.reload();
+					}
+
+				});
+			});
+	
 	$(document).ready(function() {
 		/* chart */
 		var ctx = $("#chart-line");
@@ -109,47 +149,6 @@
 				}
 			}
 		});
-		
-		// 회원정보 수정 기능
-		$('#submit').click(
-				async () => {
-					console.log("회원정보 수정 클릭");
-					const empPic = `$('#emp_pic')[0].files[0].name` ? `$('#emp_pic')[0].files[0].name` : `${emp.emp_pic}`;
- 					const emp = {user_id: ${emp.user_id},password:$("#password").val(),emp_pic: empPic};
-					var form = $('#userfrom')[0];
-					var formData = new FormData(form);
-					formData.append('file', $('#fileImageUpload')[0].files[0]);
-					formData.append('key', new Blob([JSON.stringify(emp)], {type: 'application/json'}));
-					
-					 for (var key of formData.keys()) {
-					    console.log(key);
-					  }
-					  for (var value of formData.values()) {
-					    console.log(value);
-					  }
-					
-					$.ajax({
-						url : "mypage/update.do",
-						type : 'POST',
-						data : formData,
-					    processData:false,
-					    contentType:false,
-					    enctype:'multipart/form-data',
-						success : function(data) {
-							console.log("mypageUpdate : " + data);
-						},
-						error : function(request, status, error) {
-							console.log("code:" + request.status + "\n"
-									+ "message:" + request.responseText + "\n"
-									+ "error:" + error);
-						},
-						complete: function() {
-							//location.reload();
-						}
-
-					});
-				});
-
 	}); 
 </script>
 </body>
