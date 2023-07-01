@@ -12,6 +12,7 @@
 	href="${pageContext.request.contextPath}/resources/vendors/ti-icons/css/themify-icons.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/vendors/css/vendor.bundle.base.css">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
 <!-- endinject -->
 <!-- Plugin css for this page -->
@@ -65,4 +66,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Project.css">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
