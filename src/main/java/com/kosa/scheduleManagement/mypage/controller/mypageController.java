@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kosa.scheduleManagement.global.dto.Dept;
 import com.kosa.scheduleManagement.global.dto.Emp;
 import com.kosa.scheduleManagement.mypage.service.mypageService;
 
@@ -27,9 +28,12 @@ public class mypageController {
 		System.out.println(doneSchedNum); 
 
 		Emp emp = mypageservice.getEmpInfo(user_id);
+		Dept dept = mypageservice.getMypageDeptInfo(user_id);
 		System.out.println("emp : " + emp);
+		System.out.println("dept : " + dept);
 		
 		model.addAttribute("emp", emp);
+		model.addAttribute("dept", dept);
 		model.addAttribute("totalSchedNum", totalSchedNum);
 		model.addAttribute("doneSchedNum", doneSchedNum);		
 		

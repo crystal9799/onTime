@@ -23,9 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kosa.scheduleManagement.admin.service.EmpManageService;
 import com.kosa.scheduleManagement.global.dto.Emp;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 @RequestMapping("/admin")
 @Controller
 public class AdminEmpManageController {
