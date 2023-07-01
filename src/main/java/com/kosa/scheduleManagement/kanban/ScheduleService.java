@@ -1,6 +1,5 @@
 package com.kosa.scheduleManagement.kanban;
 
-import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kosa.scheduleManagement.global.dao.ScheduleBoardDao;
+import com.kosa.scheduleManagement.global.dao.ScheduleBoard_EmpDao;
+import com.kosa.scheduleManagement.global.dao.ScheduleBoard_Project_EmpDao;
+import com.kosa.scheduleManagement.global.dao.ScheduleDao;
+import com.kosa.scheduleManagement.global.dto.Emp;
+import com.kosa.scheduleManagement.global.dto.Project_Emp;
+import com.kosa.scheduleManagement.global.dto.Schedule;
 import com.kosa.scheduleManagement.global.dto.ScheduleBoard;
 
 @Service
@@ -23,43 +28,85 @@ public class ScheduleService {
 
 	private SqlSession sqlSession;
 
-	public void insertBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
-		System.out.println("insert conn");
-		ScheduleBoardDao dao = sqlSession.getMapper(ScheduleBoardDao.class);
-		List<ScheduleBoard> list = getAllPrev();
-		System.out.println("-----------list All----------");
-		System.out.println(list.toString());
-
-		List<Integer> progList = new ArrayList<Integer>();
-		for (ScheduleBoard s : list) {
-			System.out.println(s);
-			if (s.getSched_prog() == 0) {
-				progList.add(s.getSched_prog());
-				System.out.println("proglist add complete");
-			}
-		}
-
-		int tmp = Collections.max(progList) + 1;
-		board.setSched_seq(tmp);
-		board.setProject_num(10);
-		
-		dao.insertBoard(board);
-
-		System.out.println("max 값: " + tmp);
-		// 마지막 순번 값 ; max(proglist)
-
-		// 이 다음 수로 seq 값 insert
-		// System.out.println(board.getSched_seq());
-		// list.add(0, board);
-
-		// dao.updateSave(board);
-	}
-
 	@Autowired
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
+	public void insertBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
+		List<Integer> progList = new ArrayList<Integer>();
+		for (ScheduleBoard s : getAllPrev())
+			if (s.getSched_prog() == 0)
+				progList.add(s.getSched_seq());
+
+		int tmp = Collections.max(progList) + 1;
+		board.setSched_seq(tmp);
+		// 값 변경에정
+		board.setProject_num(10);
+		
+		// insert 시 user_id 받아와서 스케줄 vo에 저장해서 insert sql 실행
+		// user_id 값 클라이언트 선택해서 보내줄것 ; 컨트롤러에서 받아옴
+		//Schedule schdule=new Schedule(board.getProject_num(), );
+//		schduleDao.insertSchedule();
+
+		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
+		ScheduleDao scheduleDao = sqlSession.getMapper(ScheduleDao.class);
+		boardDao.insertBoard(board);
+		//scheduleDao.inse
+	}
+	
+	public void insertSchedule(Schedule schedule) throws ClassNotFoundException, SQLException {
+		ScheduleDao schduleDao = sqlSession.getMapper(ScheduleDao.class);
+		schduleDao.insertSchedule(schedule);
+	}
+	
+
+	public List<Project_Emp> getAllProjectEmpList() throws ClassNotFoundException, SQLException {
+		System.out.println("emplistservice");
+		ScheduleBoard_Project_EmpDao dao = sqlSession.getMapper(ScheduleBoard_Project_EmpDao.class);
+		List<Project_Emp> enameList = dao.getAllProjectEmpList();
+		return enameList;
+		/*
+		 * List<String> enameList = new ArrayList<String>(); ScheduleBoard_EmpDao empdao
+		 * = sqlSession.getMapper(ScheduleBoard_EmpDao.class); for (Emp e :
+		 * dao.getAllEmpList()) if (e.getDeptno() == 2) enameList.add(e.getEname());
+		 * return enameList;
+		 */
+	}
+
+	/*
+	 * public List<String> getEmpAndProjectEmpList() throws ClassNotFoundException,
+	 * SQLException { System.out.println("getEmpListByProject conn");
+	 * ScheduleBoard_EmpDao empdao =
+	 * sqlSession.getMapper(ScheduleBoard_EmpDao.class);
+	 * ScheduleBoard_Project_EmpDao pjdao =
+	 * sqlSession.getMapper(ScheduleBoard_Project_EmpDao.class); List<Emp> elist =
+	 * empdao.getAllEmpList(); List<Project_Emp> pjlist =
+	 * pjdao.getAllProjectEmpList();
+	 * 
+	 * List<String> resultList = new ArrayList<String>(); for (Project_Emp pe :
+	 * pjlist) { for(int i=0; i<elist.size(); i++) { if(pe.getUser_id()) } }
+	 * 
+	 * return resultList; }
+	 */
+	// string 으로 임시 변환 상태 --> emp ;service mapper interface
+	public List<String> getEmpListByProject() throws ClassNotFoundException, SQLException {
+		System.out.println("getEmpListByProject conn");
+		ScheduleBoard_EmpDao dao = sqlSession.getMapper(ScheduleBoard_EmpDao.class);
+		List<String> list = dao.getEmpListByProject();
+		System.out.println("list: " + list);
+		return list;
+	}
+
+	
+	/*
+	 * public List<Emp> getEmpListByProject() throws ClassNotFoundException,
+	 * SQLException { System.out.println("getEmpListByProject conn");
+	 * ScheduleBoard_EmpDao dao = sqlSession.getMapper(ScheduleBoard_EmpDao.class);
+	 * List<Emp> list = dao.getEmpListByProject(); System.out.println("list: " +
+	 * list); return list; }
+	 */
+	 
 	public List<ScheduleBoard> getAllPrev() throws ClassNotFoundException, SQLException {
 		System.out.println("Prev conn");
 		ScheduleBoardDao dao = sqlSession.getMapper(ScheduleBoardDao.class);

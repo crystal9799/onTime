@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.kosa.scheduleManagement.global.dao.ScheduleBoard_EmpDao">
+	
+ 	<select id="getAllEmpList" resultType="com.kosa.scheduleManagement.global.dto.Emp">
+		select user_id, password, enabled, ename, emp_pic, job, deptno, dhead_num
+		from emp
+	</select>
+	
+ 	<select id="getEmpListByProject" resultType="String">
+		select e.ename
+		from emp e, project_emp pmp
+		where e.user_id = pmp.user_id and pmp.project_num=2
+	</select>
+
+</mapper>
+	
