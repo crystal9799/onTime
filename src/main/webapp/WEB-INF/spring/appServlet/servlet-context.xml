@@ -31,6 +31,14 @@
 
 	<context:annotation-config />
 	<context:component-scan base-package="com.kosa.scheduleManagement" />
+	<context:component-scan base-package="com.kosa.scheduleManagement.admin.controller" />
+	<context:component-scan base-package="com.kosa.scheduleManagement.admin.service" />
+	<context:component-scan base-package="com.kosa.scheduleManagement.global" />
+	<context:component-scan base-package="com.kosa.scheduleManagement.global.dao" />
+	<context:component-scan base-package="com.kosa.scheduleManagement.mypage" />
+	<context:component-scan base-package="com.kosa.scheduleManagement.kanban" />
+	<context:component-scan base-package="com.kosa.scheduleManagement.mypage.controller" />
+	<context:component-scan base-package="com.kosa.scheduleManagement.mypage.service" />
 
 	
 </beans:beans>

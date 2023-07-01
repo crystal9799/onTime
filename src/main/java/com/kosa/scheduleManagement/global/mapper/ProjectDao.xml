@@ -7,4 +7,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO PROJECT(PROJECT_NUM   , PROJECT_START   , PROJECT_END   , PROJECT_INFO   , PROJECT_NAME   , IS_DELETED   , DEPTNO) 
 					 VALUES(#{project_num}, #{project_start}, #{project_end}, #{project_info}, #{project_name}, #{is_deleted}, #{DEPTNO})
 	</insert>
+	<select id="projectDetail" resultType="com.kosa.scheduleManagement.global.dto.Project">
+		SELECT PROJECT_NUM,PROJECT_START,PROJECT_END,PROJECT_INFO,PROJECT_NAME,DEPTNO FROM PROJECT WHERE PROJECT_NUM = #{project_num}
+	</select>
+	
+	<!-- 전체 프로젝트 리스트 -->
+	<select id="getAllProjectList" resultType="com.kosa.scheduleManagement.global.dto.Project">
+		SELECT 
+		    PROJECT_NUM,
+		    TO_CHAR(PROJECT_START, 'YYYY-MM-DD')AS PROJECT_START,
+		    TO_CHAR(PROJECT_END, 'YYYY-MM-DD')AS PROJECT_END,
+		    PROJECT_INFO,
+		    PROJECT_NAME
+		from project
+	</select>
 </mapper>
