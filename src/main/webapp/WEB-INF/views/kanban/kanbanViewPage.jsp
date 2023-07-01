@@ -156,14 +156,22 @@
 						<input type="text" placeholder="입력" id="todo-input" /> <br> <br>
 						<button class="addModalBtn" >add</button>
 					</div>
-				</div> 
+				</div>
+				
+				
+				
+				
+				
 				<div class="board">
 					<!-- form 안에 css적용 -->
 					<form id="todo-form">
 						<button class="modalBtn">모달 창 테스트 중</button><br><br>
 						<input type="text" placeholder="업무 입력" id="todo-input" />
-						<button type="submit">추가</button> 
-					</form> 
+						<button type="submit">추가</button>
+
+					</form>
+
+
 					<div class="lanes">
 						<div class="swim-lane" id="todo-lane">
 							<h3 class="heading">할일</h3>
@@ -177,13 +185,18 @@
 							<h3 class="heading">진행중</h3>
 
 							<p class="task" draggable="true">업무4</p>
-						</div> 
+						</div>
+
 						<div class="swim-lane">
-							<h3 class="heading">완료</h3> 
+							<h3 class="heading">완료</h3>
+
 							<p class="task" draggable="true">업무5</p>
 						</div>
 					</div>
 				</div>
+
+
+
 			</div>
 		</div>
 	</div>
@@ -216,83 +229,35 @@
 
         const addModalBtn = document.querySelector('.addModalBtn');
         addModalBtn.addEventListener('click', () => {
-        	console.log('addBtn modal !Click!');
+        	console.log('addBtn modal Click!');
         	
-/*         	let inputInfo=document.querySelector('#todo-input'); 
-        	console.log(inputInfo.value);    */
+        	let inputInfo=document.querySelector('#todo-input'); 
+        	console.log(inputInfo.value);   
         	
-    		const param = {
-			};
-        	
-    		$.ajax({
-    			url : "test.action",
-    			type : "post",
-    			data : {
-    				sched_num: 1, sched_info: 'test',
-    				sched_prog:0, sched_seq:3,
-    				project_num:10
-    			},
-    			success : function(data) {
-    						console.log(data);
-    		     },
-    			error : function() {
-    				alert("error");
-    			}
-    		});
-        	
-        	
-        });
-        	
-        	
-/* 	        $.ajax({
-	            url: "insertProc.do",
-	            type: "POST",
-	            data: $('#frm').serialize(),
-	            success: function(data){
-	                location.href="listUser.do";
-	            },
-	            error: function(){  alert("신규등록 error");  }
-	        });
-        	 */
-        	
-/*     	    ajax("sendAjax.vo", param);
-        });
+    		const dataArray = {
 
-/*    
-        const ajax = function(url, data){
-            console.log("ajax", url, data);
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", url);
-            xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8;");
-            xhr.responseType = "json";
-            xhr.onload = function(e) {
-                console.log(this, e);
-            };
-            xhr.send(JSON.stringify(data));
-        }  
-    		 */
+    				};
     		
-/*     		$.ajax({
+    		$.ajax({
     			type : 'POST',
     			url : "add.ajax",
     			dataType:"json",
-    			contentType : "application/json",
     			data :{    				
     				sched_num: 1, sched_info: 'test',
     				sched_prog:0, sched_seq:3,
     				project_num:10
     			},
-/*     			data : JSON.stringify(dataArray), 
+    			data : JSON.stringify(dataArray),
    			 success:function(data){
  				alert("성공");
  				 print(data)
  			 },
  			 error:function(request,status,error){
  			     console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
- 			 }
+ 			  }
     		});
         	
-        }); */
+        });
 /*         const addModalBtn = document.querySelector('.addModalBtn');
         addModalBtn.addEventListener('click', () => {
         	console.log('addBtn modal Click!');
