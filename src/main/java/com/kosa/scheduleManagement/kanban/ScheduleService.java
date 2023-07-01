@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import com.kosa.scheduleManagement.global.dao.ScheduleBoardDao;
 import com.kosa.scheduleManagement.global.dao.ScheduleBoard_EmpDao;
 import com.kosa.scheduleManagement.global.dao.ScheduleBoard_Project_EmpDao;
+import com.kosa.scheduleManagement.global.dao.ScheduleDao;
 import com.kosa.scheduleManagement.global.dto.Emp;
 import com.kosa.scheduleManagement.global.dto.Project_Emp;
+import com.kosa.scheduleManagement.global.dto.Schedule;
 import com.kosa.scheduleManagement.global.dto.ScheduleBoard;
 
 @Service
@@ -41,10 +43,23 @@ public class ScheduleService {
 		board.setSched_seq(tmp);
 		// 값 변경에정
 		board.setProject_num(10);
+		
+		// insert 시 user_id 받아와서 스케줄 vo에 저장해서 insert sql 실행
+		// user_id 값 클라이언트 선택해서 보내줄것 ; 컨트롤러에서 받아옴
+		//Schedule schdule=new Schedule(board.getProject_num(), );
+//		schduleDao.insertSchedule();
 
-		ScheduleBoardDao dao = sqlSession.getMapper(ScheduleBoardDao.class);
-		dao.insertBoard(board);
+		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
+		ScheduleDao scheduleDao = sqlSession.getMapper(ScheduleDao.class);
+		boardDao.insertBoard(board);
+		//scheduleDao.inse
 	}
+	
+	public void insertSchedule(Schedule schedule) throws ClassNotFoundException, SQLException {
+		ScheduleDao schduleDao = sqlSession.getMapper(ScheduleDao.class);
+		schduleDao.insertSchedule(schedule);
+	}
+	
 
 	public List<Project_Emp> getAllProjectEmpList() throws ClassNotFoundException, SQLException {
 		System.out.println("emplistservice");

@@ -26,19 +26,25 @@
 	</div>
 	<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 	<script>
+	const pagesize = ${pagesize};
+	const pagecount = ${pagecount};
+	const cpage = ${cpage};
+	const deptno = ${deptno};
+	const dataSource = {
+			  api: {
+			    readData: { url: '/Team4_WebProject_2/admin/empManage/show.do', method: 'GET', initParams: { deptno: ${deptno} } }
+			  }
+			};
       const grid = new tui.Grid({
         el: document.getElementById("grid"),
-        data: {
-          api: {
-            readData: { url: "/api/readData", method: "GET" },
-          },
-        },
+        data: dataSource,
         scrollX: false,
         scrollY: false,
         minBodyHeight: 30,
         rowHeaders: ["rowNum"],
         pageOptions: {
-          perPage: ${pagecount},
+          perPage: pagecount,
+          page: pagesize
         },
         columns: [
           {
@@ -54,8 +60,8 @@
             name: "job",
           },
           {
-            header: "상사",
-            name: "dhead_",
+            header: "부서담당자",
+            name: "dhead_name",
           },
         ],
       });

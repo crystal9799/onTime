@@ -63,7 +63,18 @@ public class EmpManageService {
 		}
 		return emplist;
 	}
-
+	
+	public String getDheadNameByDheadNull(int deptno) {
+		DeptManageEmpDao empdao = sqlsession.getMapper(DeptManageEmpDao.class);
+		String ename = null;
+		try {
+			ename = empdao.getDheadNameByDheadNull(deptno);
+		}catch (Exception e) {
+			e.getStackTrace();
+			System.out.println("listService : " + e.getMessage());
+		}
+		return ename;
+	}
 	public int insertEmp(int deptno, Emp emp) {
 		DeptManageEmpDao empdao = sqlsession.getMapper(DeptManageEmpDao.class);
 		int user_id = -1;

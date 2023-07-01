@@ -8,6 +8,8 @@
 		  
 	  };
 	  
+	  
+	 /* name list load*/
   	const enamelistBtn = document.querySelector('.enamelistBtn');
   	enamelistBtn.addEventListener('click', () => {
     	console.log(' enamelistBtn Click!');
@@ -16,8 +18,8 @@
 			url: "projectemplist.ajax",
 			type: "GET", dataType:"json",
 			success : function(data){
-		    	console.log(data[0]);
- 
+		    	console.log("ajax sucess data: "+data);
+		    	ajaxtest(data);
 				},
 			error :function(){
 				alert("request error!");
@@ -26,9 +28,153 @@
     });
   	
   	
+ 	/* insert ajax */
+ 	/* param 객체로 전달하기 */
+ 	/*scheduleBoard*/
+	 	/* seleted:name data */
+	 	/* boardInfo data */
+ 	/*schedule*/
+	 	/* seleted:name data */
+  	
+	 	
+	 	
+
+	 /*클라이언트 값 매핑 필요*/
+  	function ajaxtest(data){
+ 	console.log("testmethod; "+data);
+ 	
+ 	
+/* 	const dataArray = { 
+ 			user_id : "1",
+ 			project_num : "2",
+ 			sched_info : "업무내용"
+			};
+		$.ajax({
+			url : "ajadd.ajax",
+			type : 'POST',
+			data : JSON.stringify(dataArray),
+			contentType: 'application/json',
+			success : function(data) {
+				console.log("data: " + data);
+			} 
+		});
+ 	 */
+		$.ajax({
+			url : "uaddSchedule.ajax",
+			type : "post",
+			data : {
+				user_id : "test",
+				project_num : "28",
+				sched_info : "여자"
+			},
+			success : function(data) {
+						
+		     },
+			error : function() {
+				alert("error");
+			}
+		});
+		
+ 	
+	 	}
+ 	
+ 	
+/* 	 	var data = {};
+	 	  data["user_id"] = "2";
+	 	  data["project_num"] = "1";
+	 	  data["sched_info"] = "업무내용";
+	   
+	  $.ajax({
+	    type: "POST",
+	    url : "goAjax5.do",
+	    data : JSON.stringify(data),
+	    dataType: "json",
+	    contentType:"application/json;charset=UTF-8",
+	    async: false,
+	    success : function(data, status, xhr) {
+	      console.log(data);
+	    },
+	    error: function(jqXHR, textStatus, errorThrown) {
+	      alert("error= " + errorThrown);
+	    }
+	  }); */
+ 	
+/*  	$.ajax({
+ 		url : "test.ajax",
+ 		type : "post",
+ 		dataType:"json",
+ 		data : {
+ 			user_id : "1",
+ 			project_num : "2",
+ 			sched_info : "업무내용"
+ 		},
+ 		success : function(data) {
+ 			console.log(data);
+ 	     },
+ 		error : function() {
+ 			alert("error");
+ 		}
+ 	}); */
+/* 
+ 	$.ajax({
+		url :'Url',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			nickName : '닉네임',
+		},
+		success: function(data){
+			console.log("성공");
+		}
+	});
+ 	 */
+ 	
+/*  	const dataArray = {
+ 			"user_id" : "1",
+ 			"project_num" : "2",
+ 			"sched_info" : "업무내용"
+			};
+		$.ajax({
+			url : "t.ajax",
+			type : 'POST',
+			data : JSON.stringify(dataArray),
+			contentType: 'application/json',
+			success : function(data) {
+				console.log("data: " + data);
+			}
+		});
+   */
+ 	  
+
  
-  	
-  	
+/*  	
+ 	
+    $.ajax({
+		 type:"post",
+		 url:"t.ajax",
+		 dataType:"json", 
+		 data:{
+	 			user_id : "1",
+	 			project_num : "2",
+	 			sched_info : "업무내용"
+		 },
+		 success:function(data){
+			alert("성공");
+			 print(data)
+		 },
+		 error:function(request,status,error){
+		     console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		  }
+	}); 
+ 	 
+ 	 
+ 	 
+ 	  */
+ 	 
+ 	 
+ 	 
+ 	 
+ 	  
   	
   	
   	
