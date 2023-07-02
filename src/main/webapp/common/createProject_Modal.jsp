@@ -1,12 +1,14 @@
+<meta charset="UTF-8">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
 <!-- 셀렉터 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" /> -->
 <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
 <script type="text/javascript">
@@ -17,7 +19,7 @@
 	       maxItemCount:5,
 	       searchResultLimit:5,
 	       renderChoiceLimit:5
-	     }); 
+	    }); 
 	    
 	    
 	});
@@ -52,11 +54,13 @@
                     </div>
                     <div class="form-group">
                         <label for="project_start">Project Start</label>
-                        <input type="text" class="form-control datepicker" id="project_start">
+                        <br>
+                        <input type="date" id="birthday" name="Project_Start">
                     </div>
                     <div class="form-group">
                         <label for="project_end">Project End</label>
-                        <input type="text" class="form-control datepicker" id="project_end">
+                        <br>
+                        <input type="date" id="birthday" name="Project_End">
                     </div>
                     <div class="form-group">
                         <label for="color">Color</label>
@@ -76,6 +80,8 @@
                     <div class="form-group">
 						<div class="row d-flex justify-content-center mt-100">
 						    <div class="col-md-6"> <select id="choices-multiple-remove-button" placeholder="Select Employee" multiple>
+						            <option value="1">철수</option>>
+						            <option value="2">철수2</option>>
 						            <option value="HTML">HTML</option>
 						            <option value="Jquery">Jquery</option>
 						            <option value="CSS">CSS</option>
@@ -88,7 +94,6 @@
 						            <option value="Hybris">Hybris</option>
 						            <option value="SQL">SQL</option>
 						            <option value="NOSQL">NOSQL</option>
-						            <option value="NodeJS">NodeJS</option>
 						        </select> </div>
 						</div>
                     </div>
@@ -101,13 +106,3 @@
         </div>
     </div>
 </div>
-
-<script>
-$(document).ready(function(){
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd'
-    });
-    $('#multiselect_gamePlatform').multiselect();        
-
-});
-</script>
