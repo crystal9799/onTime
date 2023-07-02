@@ -16,11 +16,13 @@ public interface ScheduleBoardDao {
 	List<ScheduleBoard> getAllNext() throws ClassNotFoundException, SQLException;
 
 //	ScheduleBoard searchByEmp(int sched_num) throws ClassNotFoundException, SQLException;
-
 	void insertBoard(ScheduleBoard scheduleBoard) throws ClassNotFoundException, SQLException;
 	void updateSave(ScheduleBoard scheduleBoard) throws ClassNotFoundException, SQLException;
 //	void updateSave(List<ScheduleBoard> list) throws ClassNotFoundException, SQLException;
 	void deleteBoard(ScheduleBoard scheduleBoard) throws ClassNotFoundException, SQLException;
-	void progUpdate(int sched_seq, String sched_info)throws ClassNotFoundException, SQLException;
+//	void updatePrev(int sched_seq, String sched_info)throws ClassNotFoundException, SQLException;
+	void updatePrev(ScheduleBoard scheduleBoard)throws ClassNotFoundException, SQLException;
+	void updateCurr(ScheduleBoard scheduleBoard)throws ClassNotFoundException, SQLException;
+	void updateNext(ScheduleBoard scheduleBoard)throws ClassNotFoundException, SQLException;
 
 }

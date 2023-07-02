@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.json.JSONParser;
+import org.apache.tomcat.util.json.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.kosa.scheduleManagement.global.dto.Emp;
 import com.kosa.scheduleManagement.global.dto.Project_Emp;
 import com.kosa.scheduleManagement.global.dto.Schedule;
@@ -52,28 +56,67 @@ public class KanbanAjaxController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/scheduleUpdate.ajax")
-	public JSONArray ajaxTest(String data) throws JSONException {
-		// data : JSON.stringify(testArr)
-		// [{num:1, score:90}, {num:2, score:80}, {num:3, score:70}]
-		System.out.println("connntttteeeddd");
-			
-		JSONArray jsonArr = new JSONArray();
-		ObjectMapper mapper = new ObjectMapper();
+	@RequestMapping("/nextUpdate.ajax")
+	public void updateNext(String data) throws JSONException, ParseException, JsonMappingException,
+			JsonProcessingException, ClassNotFoundException, SQLException {
 
-		try {
-			// JSONArray 타입으로 파싱
-			jsonArr = mapper.readValue(data, JSONArray.class);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+		JsonParser jsonParser = new JsonParser();
+		JsonArray jsonArray = (JsonArray) jsonParser.parse(data);
+		for (int i = 0; i < jsonArray.size(); i++) {
+			JsonObject object = (JsonObject) jsonArray.get(i);
+			String sched_info = object.get("sched_info").getAsString();
+			int sched_seq = Integer.parseInt(object.get("sched_seq").getAsString());
+			service.updateNext(sched_seq, sched_info);
 		}
-		
-		System.out.println("jsonArra");
-		for(int i=0; i<jsonArr.size();i++) {
-			System.out.println(jsonArr.get(i));
+	}
+
+	@ResponseBody
+	@RequestMapping("/scheduleUpdate.ajax")
+	public void updatePrev(String data) throws JSONException, ParseException, JsonMappingException,
+			JsonProcessingException, ClassNotFoundException, SQLException {
+
+		JsonParser jsonParser = new JsonParser();
+		JsonArray jsonArray = (JsonArray) jsonParser.parse(data);
+		for (int i = 0; i < jsonArray.size(); i++) {
+			JsonObject object = (JsonObject) jsonArray.get(i);
+			String sched_info = object.get("sched_info").getAsString();
+			int sched_seq = Integer.parseInt(object.get("sched_seq").getAsString());
+
+			service.updatePrev(sched_seq, sched_info);
 		}
- 
-		return null;
+		/*
+		 * JSONArray jsonArr = new JSONArray(); ObjectMapper mapper = new
+		 * ObjectMapper(); jsonArr = mapper.readValue(data, JSONArray.class);
+		 * 
+		 * for (int i = 0; i < jsonArr.size(); i++) {
+		 * System.out.println(jsonArr.get(i)); } JsonParser jsonParser = new
+		 * JsonParser(); JsonArray jsonArray = (JsonArray) jsonParser.parse(data); for
+		 * (int i = 0; i < jsonArray.size(); i++) { JsonObject object = (JsonObject)
+		 * jsonArray.get(i); // int NO = object.get("sched_seq").getAsInt(); String
+		 * sched_info = object.get("sched_info").getAsString(); String sched_seq =
+		 * object.get("sched_seq").getAsString();
+		 * System.out.println("sched_info:"+sched_info);
+		 * System.out.println("sched_seq:"+sched_seq);
+		 */
+
+		/*
+		 * JSONObject jObject = new JSONObject(jsonArr.get(0)); String title2 =
+		 * jObject.getString("sched_info"); System.out.println(title2);
+		 */
+
+		/*
+		 * JSONParser jsonParser = new JSONParser((String) jsonArr.get(0)); // 3. To
+		 * Object Object obj = jsonParser.parse(); // 4. To JsonObject JSONObject
+		 * jsonObj = (JSONObject) obj;
+		 * 
+		 * System.out.println(jsonParser); System.out.println(jsonObj);
+		 * 
+		 * try { // JSONArray 타입으로 파싱 jsonArr = mapper.readValue(data, JSONArray.class);
+		 * } catch (JsonProcessingException e) { e.printStackTrace(); }
+		 * 
+		 * System.out.println("jsonArra"); for(int i=0; i<jsonArr.size();i++) {
+		 * System.out.println(jsonArr.get(i)); }
+		 */
 	}
 
 	/*

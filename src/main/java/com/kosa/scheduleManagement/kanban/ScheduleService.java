@@ -10,6 +10,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.kosa.scheduleManagement.global.dao.ScheduleBoardDao;
 import com.kosa.scheduleManagement.global.dao.ScheduleBoard_EmpDao;
 import com.kosa.scheduleManagement.global.dao.ScheduleBoard_Project_EmpDao;
@@ -18,6 +22,8 @@ import com.kosa.scheduleManagement.global.dto.Emp;
 import com.kosa.scheduleManagement.global.dto.Project_Emp;
 import com.kosa.scheduleManagement.global.dto.Schedule;
 import com.kosa.scheduleManagement.global.dto.ScheduleBoard;
+
+import net.sf.json.JSONArray;
 
 @Service
 public class ScheduleService {
@@ -37,13 +43,28 @@ public class ScheduleService {
 		ScheduleBoard_EmpDao scheduleEmpDao = sqlSession.getMapper(ScheduleBoard_EmpDao.class);
 		return scheduleEmpDao.getUseridByEname(ename);
 	}
-	 
-		public void progUpdate(int sched_seq, String sched_info) throws ClassNotFoundException, SQLException {
-			ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
-			boardDao.progUpdate(sched_seq,sched_info);
-		}
-	
-	
+
+	public void progUpdate(int sched_seq, String sched_info) throws ClassNotFoundException, SQLException {
+		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
+		// boardDao.progUpdate(sched_seq, sched_info);
+	}
+
+	public void updateNext(int sched_seq, String sched_info) throws ClassNotFoundException, SQLException {
+		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
+		ScheduleBoard board = new ScheduleBoard(0, sched_info, 2, sched_seq, 0);
+		boardDao.updateNext(board);
+	}
+
+	public void updatePrev(int sched_seq, String sched_info) throws ClassNotFoundException, SQLException {
+		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
+		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, sched_seq, 0);
+		boardDao.updatePrev(board);
+//			boardDao.updatePrev(sched_seq, sched_info);
+		System.out.println("sched_info:" + sched_info);
+		System.out.println("sched_seq:" + sched_seq);
+
+	}
+
 	public void insertBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
 		board.setSched_seq(createMaxProg());
 		board.setSched_num(createSeq());
@@ -68,6 +89,7 @@ public class ScheduleService {
 		}
 		return tmp;
 	}
+
 	public int createSeq() throws ClassNotFoundException, SQLException {
 		List<Integer> list = new ArrayList<Integer>();
 
@@ -105,9 +127,7 @@ public class ScheduleService {
 		 * return enameList;
 		 */
 	}
-	
-	
-	 
+
 	/*
 	 * public void insertBoard(ScheduleBoard board) throws ClassNotFoundException,
 	 * SQLException { // board seq컬럼 최댓값 구하기 int tmp = 1; if (getAllPrev().size() ==
@@ -154,7 +174,7 @@ public class ScheduleService {
 	 * List<Emp> list = dao.getEmpListByProject(); System.out.println("list: " +
 	 * list); return list; }
 	 */
-	
+
 	public List<ScheduleBoard> getAllList() throws ClassNotFoundException, SQLException {
 		System.out.println("AllList service conn");
 		ScheduleBoardDao dao = sqlSession.getMapper(ScheduleBoardDao.class);
@@ -162,8 +182,6 @@ public class ScheduleService {
 		System.out.println("list size: " + list.size());
 		return list;
 	}
-
-	
 
 	public List<ScheduleBoard> getAllPrev() throws ClassNotFoundException, SQLException {
 		System.out.println("Prev conn");
