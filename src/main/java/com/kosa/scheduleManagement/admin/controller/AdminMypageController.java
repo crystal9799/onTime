@@ -38,10 +38,9 @@ public class AdminMypageController {
 				Mypage_AdminChartInfo mypageAdminChartInfo = new Mypage_AdminChartInfo();
 				int totalnum = mypageAdminService.getMypageAdminProjectTotalNum(user_id, pro.getProject_num());
 				int donenum = mypageAdminService.getMypageAdminProjectDoneNum(user_id, pro.getProject_num());
-				double percentNum = Math.floor(totalnum/donenum);
+				double chartNum = (double) donenum/ (double) totalnum * 100.0;
+				double percentNum = Math.floor(chartNum);
 				mypageAdminChartInfo.setProjectName(pro.getProject_name());
-				mypageAdminChartInfo.setTotalNum(totalnum);
-				mypageAdminChartInfo.setDoneNum(donenum);
 				mypageAdminChartInfo.setProjectSchedulePercent(percentNum);				
 				adminChartInfo.add(mypageAdminChartInfo);
 			};

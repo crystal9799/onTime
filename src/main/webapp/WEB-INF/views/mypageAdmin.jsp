@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,19 +71,21 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>프로젝트1</td>
+												<c:forEach var="chart" items="${chart}">
+													<tr>
+													<td>${chart.projectName}</td>
 													<td>
 														<div class="grogressWrapper">
 															<div class="progress mr-3">
 																<div class="progress-bar bg-success" role="progressbar"
-																	style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+																	style="width: ${chart.projectSchedulePercent}%" aria-valuenow="${chart.projectSchedulePercent}" aria-valuemin="0"
 																	aria-valuemax="100"></div>
-																<span>25%</span>
+																<span>${chart.projectSchedulePercent}%</span>
 															</div>
 														</div>
 													</td>
 												</tr>
+												</c:forEach>
 												<tr>
 													<td>프로젝트2</td>
 													<td>
