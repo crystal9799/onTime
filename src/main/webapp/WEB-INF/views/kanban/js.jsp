@@ -8,28 +8,47 @@
 		  
 		/* kanban list dynamic load */
 		getBoardAllList();
-		  
-		   
+		
+		/*local storage 처리 */
+		
+		
+
 	  };
 	  
+/* 	  function listJustSave(){
+		  const divNode = document.getElementById("content");
+		  console.log(divNode.innerText);
+	  } */
+	  
+	  function localStorageSave(){
+		  console.log('l s load');
+	  }
+	  
+ 
+
+	  
+	  
 	  /* kanban list dynamic create */
+	  /* load list drag & drop event */
 	  function getBoardAllList(){
 			$.ajax({
 				url: "allList.ajax",
 				type: "GET", dataType:"json",
 				success : function(data){
-					
 					$.each(data, function(index){
 						if(data[index].sched_prog==0){
 					    	console.log(data[index].sched_info + ", "+data[index].sched_prog);
 							$("#todo-prev").append
 							('<p class="task" draggable="true">'+data[index].sched_info+'</p>');
+							localStorage.setItem(data[index].sched_num, data[index].sched_info);
 						}else if(data[index].sched_prog==1){
 							$("#todo-curr").append
 							('<p class="task" draggable="true">'+data[index].sched_info+'</p>');
+							localStorage.setItem(data[index].sched_num, data[index].sched_info);
 						}else{
 							$("#todo-next").append
 							('<p class="task" draggable="true">'+data[index].sched_info+'</p>');
+							localStorage.setItem(data[index].sched_num, data[index].sched_info);
 						}
 						
 						const form = document.getElementById("todo-form");
@@ -113,9 +132,200 @@
 					alert("request error!");
 				}
 			}); 
+			
+//			listJustSave();
 	  }
 	  
-	  
+
+		
+		// String 형태로 변환
+
+		
+      $(document).on("click","#saveBtn",function(){
+		var prevList = new Array() ;
+		const divNode = document.getElementById("todo-prev")
+		for(let i=0; i<divNode.children.length; i++){
+			// 객체 생성
+			var data = new Object() ;
+			data.sched_seq = i ;
+			data.sched_info =  divNode.children[i].innerText;
+			// 리스트에 생성된 객체 삽입
+			prevList.push(data) ;
+		}
+		var jsonData = JSON.stringify(prevList) ;
+		console.log(prevList);
+		 
+		console.log("jsonStr : " + jsonData);
+		
+		 $.ajax({
+		        type: "POST",
+		        //Array 형식의 데이터를 전송할 때는 traditional: true 옵션을 적용
+		        traditional: true,
+		        url: "scheduleUpdate.ajax",
+		        //JSON.stringify를 통해 Javascript 객체를 JSON 문자열로 변환
+		        data: {data : JSON.stringify(prevList)},
+		        success: function (data) {
+		            console.log(data);		        	
+		        },
+		        error: function () {
+		            alert('오류 발생');
+		        }
+		    });
+		
+		
+		
+		
+/* 
+		$.ajax({
+			url : "scheduleUpdate.ajax",
+			type : "post",
+				data :   JSON.stringify(prevList), 
+			success : function(data) {
+					console.log('addtest'); 
+		    },
+			error : function() {
+				alert("error");
+			}
+		});
+		 */
+/* 		 $.ajax({
+			  url: "scheduleUpdate.ajax",
+			  type: "POST",
+			  dataType:"JSON",
+			  traditional : true, //필수
+			  data: {list : JSON.stringify(prevList)},
+			  success: function(result){
+			    alert("저장되었습니다.");
+			    self.selectList();
+			  },
+			  error: function (error){
+			  	alert('다시 시도하세요');
+			  }
+			});
+/* 		 */
+ 
+		
+      });	
+/* 	    
+		 */
+		
+		
+		
+		
+		
+		
+     
+/* 		    $.ajax({
+		        url : 'scheduleUpdate.ajax',
+		        type: 'POST',
+ 				data: {"jsonData" : JSON.stringify(prevList)},
+		        dataType:'json',
+		        success: function(data) {
+		            alert('리스트에 추가하였습니다.');
+		        },
+		        error: function(x, e) {
+		            //err msg 출력
+		            $.failMsg('error');
+		        }
+		    }); */
+		    
+
+/*       $(document).on("click","#saveBtn",function(){
+		var prevList = new Array() ;
+		const divNode = document.getElementById("todo-prev")
+		for(let i=0; i<divNode.children.length; i++){
+			// 객체 생성
+			var data = new Object() ;
+			data.sched_seq = i ;
+			data.sched_info =  divNode.children[i].innerText;
+			// 리스트에 생성된 객체 삽입
+			prevList.push(data) ;
+		}
+ 
+		   $.ajax({
+			     method: 'post',
+			     url: 'scheduleUpdate.ajax',
+			     traditional: true,
+			     data: {
+			       data: JSON.stringify(prevList)
+			     },
+			     dataType: 'json',
+			     success: function (res) {
+			        if (res.result) {
+			          alert("완료 되었습니다");
+			        }
+			     }
+		
+		  }); 
+      }); */
+		// 
+/*       $(document).on("click","#saveBtn",function(){
+		var prevList = new Array() ;
+		const divNode = document.getElementById("todo-prev")
+		for(let i=0; i<divNode.children.length; i++){
+			// 객체 생성
+			var data = new Object() ;
+			data.sched_seq = i ;
+			data.sched_info =  divNode.children[i].innerText;
+			// 리스트에 생성된 객체 삽입
+			prevList.push(data) ;
+		}
+		var jsonData = JSON.stringify(prevList) ;
+		console.log(prevList);
+		console.log(jsonData);
+ 
+		$.ajax({
+			url : "scheduleUpdate.ajax",
+			type: "POST", dataType:"json",
+			success : function(jsonData) {
+					console.log('add');  
+		    },
+			error : function() {
+				alert("error");
+			}
+		});
+		
+		
+	  });  */
+      
+      
+/*       $(document).on("click","#saveBtn",function(){
+    	  /* 		  var f= $("#todo-prev").attr('value');
+    	  			  console.log(f); v
+    	  			  const divNode = document.getElementById("todo-prev");
+    	  			for(let i=0; i<divNode.children.length; i++){
+    	  				console.log(i+": " +divNode.children[i].innerText	);
+    	  				// i 가 seq, 0; prog
+    	  			}
+
+     	  			  console.log(divNode.children[0].innerText	);
+    	  			  var tt=localStorage.getItem('2');
+     		  const divNode = document.getElementById("todo-prev");
+    	  			  console.log(divNode.innerText);
+    	  			  
+    	  			  var tt=localStorage.getItem('2');
+    	  			  var t=localStorage.getItem("업무1");
+    	  			  
+    	  			  console.log("2:"+tt);  
+    	  	  });  */
+      
+      
+	  /* ename list dynamic create */
+	  function getNameList(){ 
+			$.ajax({
+				url: "projectEnamelist.ajax",
+				type: "GET", dataType:"json",
+				success : function(data){
+					console.log(data); 
+					for(var i=0; i<data.length; i++){
+						$("#nameList").append('<option id="'+data[i]+'" value="' + data[i] + '">' + data[i] + '</option');
+					}
+				},
+				error :function(){
+					alert("request error!");
+				}
+			}); 
+	  }
 	  
 	  /* modal load */
       const body = document.querySelector('body');
@@ -142,22 +352,7 @@
       });
 
 	  
-		/* ename list dynamic create */
-	  function getNameList(){ 
-			$.ajax({
-				url: "projectEnamelist.ajax",
-				type: "GET", dataType:"json",
-				success : function(data){
-					console.log(data); 
-					for(var i=0; i<data.length; i++){
-						$("#nameList").append('<option id="'+data[i]+'" value="' + data[i] + '">' + data[i] + '</option');
-					}
-				},
-				error :function(){
-					alert("request error!");
-				}
-			}); 
-	  }
+
 		 
 		 
 		 
@@ -193,9 +388,6 @@
 					alert("error");
 				}
 			});
-        	
-        	
-        	
         });
 			
         
@@ -496,7 +688,7 @@
     		}); */
         	
  
- function Drag(){
+/*  function Drag(){
     			const form = document.getElementById("todo-form");
     			const input = document.getElementById("todo-input");
     			const todoLane = document.getElementById("todo-prev");
@@ -571,6 +763,6 @@
     			
     			  return closestTask;
     			};
-    }
+    } */
 
     </script>

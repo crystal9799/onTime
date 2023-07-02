@@ -37,7 +37,13 @@ public class ScheduleService {
 		ScheduleBoard_EmpDao scheduleEmpDao = sqlSession.getMapper(ScheduleBoard_EmpDao.class);
 		return scheduleEmpDao.getUseridByEname(ename);
 	}
- 
+	 
+		public void progUpdate(int sched_seq, String sched_info) throws ClassNotFoundException, SQLException {
+			ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
+			boardDao.progUpdate(sched_seq,sched_info);
+		}
+	
+	
 	public void insertBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
 		board.setSched_seq(createMaxProg());
 		board.setSched_num(createSeq());

@@ -21,4 +21,6 @@ public interface ScheduleBoardDao {
 	void updateSave(ScheduleBoard scheduleBoard) throws ClassNotFoundException, SQLException;
 //	void updateSave(List<ScheduleBoard> list) throws ClassNotFoundException, SQLException;
 	void deleteBoard(ScheduleBoard scheduleBoard) throws ClassNotFoundException, SQLException;
+	void progUpdate(int sched_seq, String sched_info)throws ClassNotFoundException, SQLException;
+
 }

@@ -18,6 +18,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where sched_prog=0 and sched_seq = #{sched_seq}
 	</select>
  -->
+ <update id="progUpdate">
+ update schedule_board set sched_seq=#{sched_seq} where sched_info=#{sched_info};
+ </update>
+ 
  	<select id="getAllList"
 		resultType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
 		select sched_num, sched_info, sched_prog, sched_seq, project_num from

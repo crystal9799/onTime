@@ -1,16 +1,20 @@
 package com.kosa.scheduleManagement.kanban;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,11 +22,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amazonaws.util.json.JSONException;
 import com.amazonaws.util.json.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.kosa.scheduleManagement.global.dto.Emp;
 import com.kosa.scheduleManagement.global.dto.Project_Emp;
 import com.kosa.scheduleManagement.global.dto.Schedule;
 import com.kosa.scheduleManagement.global.dto.ScheduleBoard;
+import com.kosa.scheduleManagement.global.dto.Schedule_Board;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONSerializer;
 
 @RestController
 public class KanbanAjaxController {
@@ -37,8 +51,98 @@ public class KanbanAjaxController {
 		this.service = service;
 	}
 
+	@ResponseBody
+	@RequestMapping("/scheduleUpdate.ajax")
+	public JSONArray ajaxTest(String data) throws JSONException {
+		// data : JSON.stringify(testArr)
+		// [{num:1, score:90}, {num:2, score:80}, {num:3, score:70}]
+		System.out.println("connntttteeeddd");
+			
+		JSONArray jsonArr = new JSONArray();
+		ObjectMapper mapper = new ObjectMapper();
+
+		try {
+			// JSONArray 타입으로 파싱
+			jsonArr = mapper.readValue(data, JSONArray.class);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("jsonArra");
+		for(int i=0; i<jsonArr.size();i++) {
+			System.out.println(jsonArr.get(i));
+		}
+ 
+		return null;
+	}
+
+	/*
+	 * @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+	 * public void updaterInfo(@RequestParam Map<String, Object> paramMap) throws
+	 * Exception { String jsonData = paramMap.get("list").toString(); JSONParser
+	 * parser = new JSONParser(jsonData); System.out.println(parser); // Object obj
+	 * = parser.parse(jsonData);
+	 * 
+	 * // paramMap.put("list", obj); }
+	 */
+
+	/*
+	 * @RequestMapping(path = "/scheduleUpdate.ajax") public @ResponseBody Object
+	 * callCenterResend(@RequestParam String jsonData) {
+	 * 
+	 * Map<String, Object> result = new HashMap<String, Object>(); Map<String,
+	 * Object> paramMap = new HashMap<String, Object>();
+	 * 
+	 * // 직렬화 시켜 가져온 오브젝트 배열을 JSONArray 형식으로 바꿔준다. JSONArray array =
+	 * JSONArray.fromObject(jsonData);
+	 * 
+	 * List<Map<String, Object>> resendList = new ArrayList<Map<String, Object>>();
+	 * 
+	 * for (int i = 0; i < array.size(); i++) { // JSONArray 형태의 값을 가져와 JSONObject 로
+	 * 풀어준다. JSONObject obj = (JSONObject) array.get(i);
+	 * 
+	 * Map<String, Object> resendMap = new HashMap<String, Object>();
+	 * System.out.println(obj);
+	 * 
+	 * resendMap.put("sched_seq", obj.get("sched_seq")); resendMap.put("sched_info",
+	 * obj.get("sched_info"));
+	 * 
+	 * resendList.add(resendMap); } // paramMap.put("resendList", resendList);
+	 * 
+	 * // int cnt = callCenterService.callCenterResend(paramMap);
+	 * 
+	 * result.put("result", "success"); // result.put("cnt", cnt);
+	 * 
+	 * return result; }
+	 */
+
+	/*
+	 * @RequestMapping(path = "/scheduleUpdate.ajax")
+	 * 
+	 * @ResponseBody public Map<String, Object> progUpdate(@RequestParam String
+	 * data){
+	 * System.out.println("controlleerrrrr connneecctttionn--------------------");
+	 * Map<String, Object> result = new HashMap<>(); try { JSONArray jsonArray =
+	 * JSONArray.fromObject(paramData); List<Map<String,Object>> info = new
+	 * ArrayList<Map<String,Object>>(); System.err.println(data); for (Map<String,
+	 * Object> memberInfo : info) { System.out.println(memberInfo.get("memberNo") +
+	 * " : " + memberInfo.get("name")); } result.put("result", true); } catch
+	 * (Exception e) { result.put("result", false); } return result;
+	 * 
+	 * }
+	 */
+	/*
+	 * @RequestMapping(value = "/scheduleUpdate.ajax", method = { RequestMethod.POST
+	 * }) public void progUpdate(@RequestParam("sched_seq") int
+	 * sched_seq, @RequestParam("sched_info") String sched_info) throws
+	 * ClassNotFoundException, SQLException { System.out.println(sched_seq);
+	 * System.out.println(sched_info);
+	 * 
+	 * //service.progUpdate(sched_seq, sched_info ); }
+	 */
+
 	@RequestMapping(value = "/scheduleAdd.ajax", method = { RequestMethod.POST })
-	public void test(@RequestParam("ename") String ename, @RequestParam("project_num") String project_num,
+	public void scheduleAdd(@RequestParam("ename") String ename, @RequestParam("project_num") String project_num,
 			@RequestParam("sched_info") String sched_info) throws ClassNotFoundException, SQLException {
 		/*
 		 * System.out.println(ename); System.out.println(project_num);
@@ -69,7 +173,7 @@ public class KanbanAjaxController {
 		System.out.println("list: " + list);
 		return list;
 	}
-	
+
 	@RequestMapping(value = "/allList.ajax", method = RequestMethod.GET)
 	@ResponseBody
 	public List<ScheduleBoard> getAllList() throws ClassNotFoundException, SQLException {
