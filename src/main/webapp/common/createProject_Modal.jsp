@@ -3,27 +3,11 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap-multiselect.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-multiselect.js"></script>
 
 <script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() {
-	    fetch("http://192.168.0.33:8090/Team4_WebProject_2/admin/createProject.do?deptno=10")
-	        .then(res => res.json())
-	        .then(data => {
-	            const empList = document.querySelector('#empList');
-	
-	            // Clear existing options
-	            empList.innerHTML = '';
-	
-	            // Append new options
-	            data.forEach(emp => {
-	                const option = document.createElement('option');
-	                option.text = emp.ename;
-	                empList.add(option);
-	            });
-	        });
-	});
-	
-	
+    
 </script>
 
 <button type="button" class="custom-btn btn-8" data-toggle="modal" data-target="#createProjectModal">
@@ -64,12 +48,12 @@
                     <div class="form-group">
                         <label for="color">Color</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="colorRadio" id="colorRed" value="red">
-                            <label class="form-check-label" for="colorRed">Red</label>
+                            <input class="form-check-input" type="radio" name="colorRadio" id="color" value="CornflowerBlue">
+                            <label class="form-check-label" for="colorRed">CornflowerBlue</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="colorRadio" id="colorBlue" value="blue">
-                            <label class="form-check-label" for="colorBlue">Blue</label>
+                            <input class="form-check-input" type="radio" name="colorRadio" id="color" value="DarkCyan">
+                            <label class="form-check-label" for="colorBlue">DarkCyan</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="colorRadio" id="colorGreen" value="green">
@@ -77,10 +61,17 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="empList">Employees</label>
-                        <div class="form-control" id="empList">
-                            
-                        </div>
+                        <select id="multiselect_gamePlatform" multiple="multiple" name="gamePlatform">
+						  <option value="PC">PC</option>
+						  <option value="SWITCH">SWITCH</option>
+						  <option value="PS3">PS3</option>
+						  <option value="PS4">PS4</option>
+						  <option value="PS5">PS5</option>
+						  <option value="Xbox 360">Xbox 360</option>
+						  <option value="Xbox One">Xbox One</option>
+						  <option value="Xbox Series X">Xbox Series X</option>
+						  <option value="Xbox Series S">Xbox Series S</option>
+						</select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -97,5 +88,7 @@ $(document).ready(function(){
     $('.datepicker').datepicker({
         format: 'yyyy-mm-dd'
     });
+    $('#multiselect_gamePlatform').multiselect();        
+
 });
 </script>
