@@ -1,12 +1,21 @@
 package com.kosa.scheduleManagement.admin.service;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonEncoding;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosa.scheduleManagement.global.dao.DeptManageEmpDao;
 import com.kosa.scheduleManagement.global.dto.Emp;
 
@@ -115,6 +124,24 @@ public class EmpManageService {
 		int rowsAffected = empdao.updateEmp(enameJobInEmp);
 		System.out.println(enameJobInEmp);
 	    return rowsAffected > 0;
+	}
+
+	public String responseToJson(Map<String, Object> response) throws IOException {
+		HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set(HttpHeaders.ACCEPT_CHARSET, StandardCharsets.UTF_8.name());
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonFactory jsonFactory = objectMapper.getFactory();
+        JsonGenerator jsonGenerator = jsonFactory.createGenerator(System.out, JsonEncoding.UTF8);
+        jsonGenerator.setCodec(objectMapper);
+        String jsonResponse = objectMapper.writeValueAsString(response);
+		return jsonResponse;
+	}
+
+	public boolean updateEmp(int userId, String ename, String job) {
+		DeptManageEmpDao empdao = sqlsession.getMapper(DeptManageEmpDao.class);
+		int rowsAffected = empdao.updateEmpByREST(userId, ename, job);
+		return rowsAffected > 0;
 	}
 
 }

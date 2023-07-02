@@ -15,4 +15,5 @@ public interface DeptManageEmpDao {
     void updateEmpEnabled(long user_id) throws ClassNotFoundException, SQLException;
     int updateEmp(Emp emp);
 	Emp getEmpByUserId(int user_id);
+	int updateEmpByREST(int userId, String ename, String job);
 }
