@@ -10,6 +10,7 @@ public interface ScheduleBoardDao {
 //	HashMap<String, ScheduleBoard> getAllMap() throws ClassNotFoundException, SQLException;
 //	HashMap<String, ScheduleBoard> getAllUpdate() throws ClassNotFoundException, SQLException;
 
+	List<ScheduleBoard> getAllList() throws ClassNotFoundException, SQLException;
 	List<ScheduleBoard> getAllPrev() throws ClassNotFoundException, SQLException;
 	List<ScheduleBoard> getAllCurr() throws ClassNotFoundException, SQLException;
 	List<ScheduleBoard> getAllNext() throws ClassNotFoundException, SQLException;

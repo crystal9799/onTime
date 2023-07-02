@@ -82,7 +82,7 @@
 					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
 				}, 
 				success : function(data) {
-						console.log('add');
+						console.log('add'); 
 			    },
 				error : function() {
 					alert("error");
