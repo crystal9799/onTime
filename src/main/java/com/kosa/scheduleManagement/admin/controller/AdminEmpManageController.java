@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -175,34 +176,45 @@ public class AdminEmpManageController {
 	// 사원 삭제
 	@GetMapping("/empManage/deleteOk.do")
 	public ResponseEntity<String> deleteEmp(@RequestBody Map<String, Object> requestBody) {
-		System.out.println(requestBody);
-		List<Map<String, Object>> checkedRows = (List<Map<String, Object>>) requestBody.get("deletedRows");
-		// 삭제가 완료되면 true를 반환, update enabled 0
-		Map<String, Object> response = new HashMap<>();
-		boolean isDeleted = false;
-		for (Map<String, Object> row : checkedRows) {
-			int userId = (int) row.get("user_id");
-
-			// 삭제 수행 로직
-			isDeleted = empManageService.deleteEmp(userId);
-			if (isDeleted == false)
-				break;
-		}
-		if (isDeleted == false) {
-			response.put("result", false);
-		} else {
-			response.put("result", true);
-			response.put("data", "delete");
-		}
-		String jsonResponse = "";
-		try {
-			jsonResponse = empManageService.responseToJson(response);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ResponseEntity.ok(jsonResponse);
+	    System.out.println(requestBody);
+	    List<Map<String, Object>> checkedRows = (List<Map<String, Object>>) requestBody.get("deletedRows");
+	    
+	    // Get user_id values from checkedRows
+	    List<Integer> userIds = checkedRows.stream()
+	            .map(row -> (int) row.get("user_id"))
+	            .collect(Collectors.toList());
+	    
+	    // 삭제가 완료되면 true를 반환, update enabled 0
+	    Map<String, Object> response = new HashMap<>();
+	    boolean isDeleted = false;
+	    
+	    for (int userId : userIds) {
+	        // 삭제 수행 로직
+	        isDeleted = empManageService.deleteEmp(userId);
+	        
+	        if (!isDeleted) {
+	            break;
+	        }
+	    }
+	    
+	    if (!isDeleted) {
+	        response.put("result", false);
+	    } else {
+	        response.put("result", true);
+	        response.put("data", "delete");
+	    }
+	    
+	    String jsonResponse = "";
+	    
+	    try {
+	        jsonResponse = empManageService.responseToJson(response);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return ResponseEntity.ok(jsonResponse);
 	}
+
 
 	// 사원 수정
 	@PutMapping("/empManage/updateOk.do")

@@ -100,7 +100,7 @@ response.setCharacterEncoding("UTF-8");
 						readData: { url: '/Team4_WebProject_2/admin/empManage/show.do', method: 'GET', initParams: { deptno: ${deptno} } },
 						createData: { url: '/Team4_WebProject_2/admin/empManage/createOk.do', method: 'POST', contentType: 'application/json' },
 						updateData: { url: '/Team4_WebProject_2/admin/empManage/updateOk.do', method: 'PUT', contentType: 'application/json' },
-						deleteData: { url: '/Team4_WebProject_2/admin/empManage/deleteOk.do', method: 'DELETE' }
+						deleteData: { url: '/Team4_WebProject_2/admin/empManage/deleteOk.do', method: 'GET' }
 					}
 				};
 
@@ -370,13 +370,10 @@ response.setCharacterEncoding("UTF-8");
 			 */
 			 deleteBtn.addEventListener('click', async () => {
 				 	console.log("삭제이벤트실행");
-				 	var checkedList = grid.getCheckedRows();
-				 	var test = JSON.stringify(checkedList);
-				 	
-				 	
-				 	const deleteResult = grid.request('deleteData', 
-				 			{checkedOnly : false}
-				 	);
+				 	grid.removeCheckedRows(true);
+				 	const deleteResult = grid.request('deleteData',{
+				 		modifiedOnly: true
+				 	});
 				 	grid.on('response', ev => {
 				 		  const {response} = ev.xhr;
 				 		  const responseObj = JSON.parse(response);
