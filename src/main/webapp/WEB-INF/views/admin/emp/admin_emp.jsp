@@ -116,25 +116,30 @@ response.setCharacterEncoding("UTF-8");
 						page: ${cpage},
 					},
 					rowHeaders: ['checkbox'],
+					header: ['center'],
 					columns: [
 						{
 							header: "사원번호",
 							name: "user_id",
-							width: 10
+							width: 15,
+							align: 'center'
 						},
 						{
 							header: "사원이름",
 							name: "ename",
-							editor: 'text'
+							editor: 'text',
+							align: 'center'
 						},
 						{
 							header: "직종",
 							name: "job",
-							editor: 'text'
+							editor: 'text',
+							align: 'center'
 						},
 						{
 							header: "부서담당자",
-							name: "dhead_name"
+							name: "dhead_name",
+							align: 'center'
 						}
 					],
 				      contextMenu: ({ rowKey, columnName }) => (
