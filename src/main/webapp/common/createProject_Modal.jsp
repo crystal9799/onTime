@@ -1,4 +1,3 @@
-<meta charset="UTF-8">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -46,11 +45,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="project_name">Project Name</label>
-                        <input type="text" class="form-control" id="project_name">
+                        <input type="text" class="form-control" id="project_name" name="project_name">
                     </div>
                     <div class="form-group">
                         <label for="project_info">Project Info</label>
-                        <textarea class="form-control" id="project_info" rows="3"></textarea>
+                        <textarea class="form-control" id="project_info" name="project_info" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="project_start">Project Start</label>
@@ -79,7 +78,8 @@
                     </div>
                     <div class="form-group">
 						<div class="row d-flex justify-content-center mt-100">
-						    <div class="col-md-6"> <select id="choices-multiple-remove-button" placeholder="Select Employee" multiple>
+						    <div class="col-md-6"> 
+						    	<select id="choices-multiple-remove-button" name="user_id" placeholder="Select Employee" multiple>
 						            <option value="1">철수</option>>
 						            <option value="2">철수2</option>>
 						            <option value="HTML">HTML</option>
