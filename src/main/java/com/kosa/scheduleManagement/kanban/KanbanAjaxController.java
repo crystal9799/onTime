@@ -40,51 +40,64 @@ public class KanbanAjaxController {
 	@RequestMapping(value = "/scheduleAdd.ajax", method = { RequestMethod.POST })
 	public void test(@RequestParam("ename") String ename, @RequestParam("project_num") String project_num,
 			@RequestParam("sched_info") String sched_info) throws ClassNotFoundException, SQLException {
+		/*
+		 * System.out.println(ename); System.out.println(project_num);
+		 * System.out.println(sched_info);
+		 */
 
-		System.out.println(ename);
-		System.out.println(project_num);
-		System.out.println(sched_info);
-
-		System.out.println("userid-------------");
 		int user_id = service.getUseridByEname(ename);
-		System.out.println(user_id);
+//		System.out.println(user_id);
 
 		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, 0, 8);
 		Schedule schedule = new Schedule(user_id, 8);
-		
-		System.out.println("controller schedule val: "+schedule);
 
 		service.insertBoard(board);
 		service.insertSchedule(schedule);
+
+		// System.out.println("controller schedule val: "+schedule);
+
 //		service.insertBoard(sched_info);
 // 		service.insertSchedule(userId);
-
 	}
 
-	@RequestMapping(value = "/ajadd.ajax")
-	public ResponseEntity<String> insert() {
-		try {
-//			service.insert(emp);
-			return new ResponseEntity<String>("insert sucess", HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<String>("insert fail", HttpStatus.BAD_REQUEST);
-		}
+	// string 으로 임시 변환 상태 --> emp ;service mapper interface
+	@RequestMapping(value = "/projectEnamelist.ajax", method = RequestMethod.GET)
+	@ResponseBody
+	public List<String> getEmpListByProject() throws ClassNotFoundException, SQLException {
+		System.out.println("projectemplist controller connection");
+		List<String> list = service.getEmpListByProject();
+		System.out.println("list: " + list);
+		return list;
+	}
+	
+	@RequestMapping(value = "/allList.ajax", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ScheduleBoard> getAllList() throws ClassNotFoundException, SQLException {
+		System.out.println("ajaxlist connection");
+		List<ScheduleBoard> list = service.getAllList();
+		System.out.println("list: " + list.toString());
+		return list;
 	}
 
-	@RequestMapping(value = "/add.ajax")
-	public ResponseEntity<String> insert(@RequestBody ScheduleBoard board, HttpServletRequest request) {
-		System.out.println("board:" + board);
+	/*
+	 * @RequestMapping(value = "/ajadd.ajax") public ResponseEntity<String> insert()
+	 * { try { // service.insert(emp); return new
+	 * ResponseEntity<String>("insert sucess", HttpStatus.OK); } catch (Exception e)
+	 * { return new ResponseEntity<String>("insert fail", HttpStatus.BAD_REQUEST); }
+	 * }
+	 */
 
-		// userid에 대한 값 같이 받아와서
-		// schedule로 전달필요
-		try {
-//			service.insertBoard(board);
-//			service.insertSchedule(null);
-			return new ResponseEntity<String>("insert sucess", HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<String>("insert fail", HttpStatus.BAD_REQUEST);
-		}
-	}
+	/*
+	 * @RequestMapping(value = "/add.ajax") public ResponseEntity<String>
+	 * insert(@RequestBody ScheduleBoard board, HttpServletRequest request) {
+	 * System.out.println("board:" + board);
+	 * 
+	 * // userid에 대한 값 같이 받아와서 // schedule로 전달필요 try { //
+	 * service.insertBoard(board); // service.insertSchedule(null); return new
+	 * ResponseEntity<String>("insert sucess", HttpStatus.OK); } catch (Exception e)
+	 * { return new ResponseEntity<String>("insert fail", HttpStatus.BAD_REQUEST); }
+	 * }
+	 */
 
 	/*
 	 * @RequestMapping(value = "/addtest.ajax", method = { RequestMethod.POST })
@@ -101,16 +114,6 @@ public class KanbanAjaxController {
 	 * list = service.getEmpAndProjectEmpList(); System.out.println("list: " +
 	 * list); return list; }
 	 */
-
-	// string 으로 임시 변환 상태 --> emp ;service mapper interface
-	@RequestMapping(value = "/projectEnamelist.ajax", method = RequestMethod.GET)
-	@ResponseBody
-	public List<String> getEmpListByProject() throws ClassNotFoundException, SQLException {
-		System.out.println("projectemplist controller connection");
-		List<String> list = service.getEmpListByProject();
-		System.out.println("list: " + list);
-		return list;
-	}
 
 	/*
 	 * @RequestMapping(value = "/projectemplist.ajax", method = RequestMethod.POST)

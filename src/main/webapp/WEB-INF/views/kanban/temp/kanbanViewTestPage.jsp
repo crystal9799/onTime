@@ -31,8 +31,8 @@
 					<select id="nameList">
 					<option value="0">선택</option>
 					</select>
-					<br>
-<br> <br><br> <br>
+					<br><br> <br><br> <br>
+
 						업무 내용<br>
 						<input type="text" placeholder="입력" id="todo-input" /> <br> <br>
 						
@@ -45,7 +45,7 @@
 
 						<button class="addModalBtn" >add</button>
 					</div>
-				</div> 
+				</div>
 				<div class="board">
 					<!-- form 안에 css적용 -->
 					<form id="todo-form">
@@ -54,22 +54,16 @@
 						<button type="submit">추가</button> 
 					</form> 
 					<div class="lanes">
-						<div class="swim-lane" id="todo-lane">
-							<h3 class="heading">할일</h3>
-
-							<p class="task" draggable="true">업무1</p>
-							<p class="task" draggable="true">업무2</p>
-							<p class="task" draggable="true">업무3</p>
+						<div class="swim-lane" id="todo-prev">
+							<h3 class="heading">업무 시작 전</h3> 
 						</div>
 
-						<div class="swim-lane">
-							<h3 class="heading">진행중</h3>
-
-							<p class="task" draggable="true">업무4</p>
+						<div class="swim-lane" id="todo-curr">
+							<h3 class="heading">업무 진행 중</h3>
+ 
 						</div> 
-						<div class="swim-lane">
-							<h3 class="heading">완료</h3> 
-							<p class="task" draggable="true">업무5</p>
+						<div class="swim-lane" id="todo-next">
+							<h3 class="heading">업무 완료</h3>  
 						</div>
 					</div>
 				</div>
