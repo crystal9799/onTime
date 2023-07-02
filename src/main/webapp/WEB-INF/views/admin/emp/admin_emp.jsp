@@ -39,10 +39,9 @@ response.setCharacterEncoding("UTF-8");
 						<div class="btn-wrapper" style="margin-bottom: 10px;">
 							<button id="saveBtn" class="btnStyle"
 								style="float: right; margin-left: 20px;">수정</button>
-							<button id="registerBtn" class="transactionBtn" class="btnStyle"
-								style="float: right;">등록</button>
 							<button id="appendBtn" class="btnStyle" data-bs-toggle="modal"
 								data-bs-target="#exampleModal" style="float: right;">추가</button>
+							<button id="deleteBtn" class="btnStyle" style="float: right;">삭제</button>
 						</div>
 						<!-- Toast Grid Load -->
 						<div id="grid"></div>
@@ -116,10 +115,12 @@ response.setCharacterEncoding("UTF-8");
 						perPage: ${pagecount},
 						page: ${cpage},
 					},
+					rowHeaders: ['checkbox'],
 					columns: [
 						{
 							header: "사원번호",
-							name: "user_id"
+							name: "user_id",
+							width: 10
 						},
 						{
 							header: "사원이름",
@@ -135,9 +136,119 @@ response.setCharacterEncoding("UTF-8");
 							header: "부서담당자",
 							name: "dhead_name"
 						}
-					]
+					],
+				      contextMenu: ({ rowKey, columnName }) => (
+				    	        [
+				    	          [
+				    	            {
+				    	              name: 'export',
+				    	              label: 'Export',
+				    	              subMenu: [
+				    	                {
+				    	                  name: 'default',
+				    	                  label: 'Default',
+				    	                  subMenu: [
+				    	                    {
+				    	                      name: 'csvExport',
+				    	                      label: 'CSV export',
+				    	                      action: () => {
+				    	                        grid.export('csv');
+				    	                      }
+				    	                    },
+				    	                    {
+				    	                      name: 'excelExport',
+				    	                      label: 'Excel export',
+				    	                      action: () => {
+				    	                        grid.export('xlsx');
+				    	                      }
+				    	                    },
+				    	                  ]
+				    	                },
+				    	                {
+				    	                  name: 'includeHeader',
+				    	                  label: 'includeHeader: false',
+				    	                  subMenu: [
+				    	                    {
+				    	                      name: 'csvExport',
+				    	                      label: 'CSV export',
+				    	                      action: () => {
+				    	                        grid.export('csv', { includeHeader: false });
+				    	                      }
+				    	                    },
+				    	                    {
+				    	                      name: 'excelExport',
+				    	                      label: 'Excel export',
+				    	                      action: () => {
+				    	                        grid.export('xlsx', { includeHeader: false });
+				    	                      }
+				    	                    },
+				    	                  ]
+				    	                },
+				    	                {
+				    	                  name: 'colunmNames',
+				    	                  label: `['name', 'artist']`,
+				    	                  subMenu: [
+				    	                    {
+				    	                      name: 'csvExport',
+				    	                      label: 'CSV export',
+				    	                      action: () => {
+				    	                        grid.export('csv', { columnNames: ['name', 'artist'] });
+				    	                      }
+				    	                    },
+				    	                    {
+				    	                      name: 'excelExport',
+				    	                      label: 'Excel export',
+				    	                      action: () => {
+				    	                        grid.export('xlsx', { columnNames: ['name', 'artist'] });
+				    	                      }
+				    	                    },
+				    	                  ]
+				    	                },
+				    	                {
+				    	                  name: 'onlySelected',
+				    	                  label: 'onlySelected: true',
+				    	                  subMenu: [
+				    	                    {
+				    	                      name: 'csvExport',
+				    	                      label: 'CSV export',
+				    	                      action: () => {
+				    	                        grid.export('csv', { onlySelected: true });
+				    	                      }
+				    	                    },
+				    	                    {
+				    	                      name: 'excelExport',
+				    	                      label: 'Excel export',
+				    	                      action: () => {
+				    	                        grid.export('xlsx', { onlySelected: true });
+				    	                      }
+				    	                    },
+				    	                  ]
+				    	                },
+				    	              ],
+				    	            }
+				    	          ],
+				    	        ]
+				    	      ),
 				});
-			
+				<!-- 테마 적용 -->
+				var Grid = tui.Grid;
+
+				Grid.applyTheme(
+						'striped',
+						{
+							grid: {
+						        border: '#aaa',
+						        text: '#333'
+						    },
+						    cell: {
+						        disabled: {
+						            text: '#999'
+						        },
+						        focused: {
+						        	background: '#FF5733'
+						        }
+						    }
+						});
 			  const gridLoad = async () => {
 			    try {
 			      const response = await fetch('/Team4_WebProject_2/admin/empManage/show.do?deptno=${deptno}');
@@ -249,13 +360,26 @@ response.setCharacterEncoding("UTF-8");
 				 		});
 				    });
 			/**
-			 * '등록' 버튼 수행 이벤트 등록 => 등록
-			 * '추가' 버튼 이후에 저장하는 데이터
+			 * '삭제' 버튼 수행 이벤트 등록 => 삭제
+			 * 동시에 여러명 삭제 가능
 			 */
-			registerBtn.addEventListener('click', () => {
-				// 유효성 검증을 데이터를 반환 받습니다.
-				transactionValidateMsg(grid, 'register');
-			});
+			 deleteBtn.addEventListener('click', async () => {
+				 	console.log("삭제이벤트실행");
+				 	var checkedList = grid.getCheckedRows();
+				 	var test = JSON.stringify(checkedList);
+				 	
+				 	
+				 	const deleteResult = grid.request('deleteData', 
+				 			{checkedOnly : false}
+				 	);
+				 	grid.on('response', ev => {
+				 		  const {response} = ev.xhr;
+				 		  const responseObj = JSON.parse(response);
+
+				 		  console.log('result : ', responseObj.result);
+				 		  console.log('data : ', responseObj.data);
+				 		});
+				    });
 
 			/**
 			 * [함수] dataSource 선언한 API 함수 호출이 발생할 경우 반환값을 리턴해주는 함수 입니다.
@@ -278,6 +402,9 @@ response.setCharacterEncoding("UTF-8");
 						}
 						if (responseObj.data === "update") {
 							alert("사용자 수정이 완료되었습니다.");
+						}
+						if (responseObj.data === "delete") {
+							alert("사용자 삭제가 완료되었습니다.");
 						}
 				} else {
 					alert("해당 처리가 되지 않았습니다. 관리자에게 문의해주세요.");

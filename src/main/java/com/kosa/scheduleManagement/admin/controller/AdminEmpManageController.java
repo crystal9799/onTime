@@ -136,15 +136,15 @@ public class AdminEmpManageController {
 
 // rest 부서별 사원 생성
 	@PostMapping("/empManage/createOk.do")
-	public ResponseEntity<String> createEmp(@RequestParam("deptno") int deptno, @RequestBody Map<String, Object> requestBody,
-			HttpSession session) {
+	public ResponseEntity<String> createEmp(@RequestParam("deptno") int deptno,
+			@RequestBody Map<String, Object> requestBody, HttpSession session) {
 		String message = "";
 		String ename = (String) requestBody.get("ename");
-        String password = (String) requestBody.get("password");
-        String job = (String) requestBody.get("job");
+		String password = (String) requestBody.get("password");
+		String job = (String) requestBody.get("job");
 		Emp emp = new Emp();
 		Map<String, Object> response = new HashMap<>();
-		
+
 		emp.setEname(ename);
 		emp.setPassword(password);
 		emp.setJob(job);
@@ -174,17 +174,34 @@ public class AdminEmpManageController {
 
 	// 사원 삭제
 	@GetMapping("/empManage/deleteOk.do")
-	public ResponseEntity<String> deleteEmp(@RequestParam("user_id") long user_id) {
+	public ResponseEntity<String> deleteEmp(@RequestBody Map<String, Object> requestBody) {
+		System.out.println(requestBody);
+		List<Map<String, Object>> checkedRows = (List<Map<String, Object>>) requestBody.get("deletedRows");
 		// 삭제가 완료되면 true를 반환, update enabled 0
-		boolean result = empManageService.deleteEmp(user_id);
-		String message = "";
-		if (result != true) {
-			message = "삭제 실패";
-			return new ResponseEntity<String>(message, HttpStatus.OK);
-		} else {
-			message = user_id + "번 사원이 삭제되었습니다.";
-			return new ResponseEntity<String>(message, HttpStatus.BAD_REQUEST);
+		Map<String, Object> response = new HashMap<>();
+		boolean isDeleted = false;
+		for (Map<String, Object> row : checkedRows) {
+			int userId = (int) row.get("user_id");
+
+			// 삭제 수행 로직
+			isDeleted = empManageService.deleteEmp(userId);
+			if (isDeleted == false)
+				break;
 		}
+		if (isDeleted == false) {
+			response.put("result", false);
+		} else {
+			response.put("result", true);
+			response.put("data", "delete");
+		}
+		String jsonResponse = "";
+		try {
+			jsonResponse = empManageService.responseToJson(response);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(jsonResponse);
 	}
 
 	// 사원 수정
@@ -209,7 +226,7 @@ public class AdminEmpManageController {
 			response.put("result", true);
 			response.put("data", "update");
 		}
-		
+
 		String jsonResponse = "";
 		try {
 			jsonResponse = empManageService.responseToJson(response);
