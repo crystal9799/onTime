@@ -1,4 +1,4 @@
-package com.kosa.scheduleManagement.mypage.service;
+package com.kosa.scheduleManagement.admin.service;
 
 import java.util.List;
 
@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 import com.kosa.scheduleManagement.global.dao.Mypage_EmpDao;
 import com.kosa.scheduleManagement.global.dto.Dept;
 import com.kosa.scheduleManagement.global.dto.Emp;
+import com.kosa.scheduleManagement.global.dto.Project;
 
 @Service
-public class mypageService {
+public class Mypage_AdminService {
 	private SqlSession sqlsession;
 
 	@Autowired
@@ -66,37 +67,51 @@ public class mypageService {
 		return dept;
 	}
 	
-//	전체업무일정 개수
-	public int getTotalSchedNum(int user_id) {
+	//부서 정보 가져오기
+	public List<Project> getMypageAdminProjectInfo(int user_id) {
 		Mypage_EmpDao mypage_empdao = sqlsession.getMapper(Mypage_EmpDao.class);
-		
-		int result = -1;
+		List<Project> project = null;
 		
 		try {
-			System.out.println("service 진입");
-			result = mypage_empdao.getTotalSchedNum(user_id);
-			System.out.println("getTotalSchedNum 성공");
+			System.out.println("service 진");
+			project = mypage_empdao.getMypageAdminProjectInfo(user_id);
+			System.out.println("getEmpInfo 성공");
 		} catch (Exception e) {
 			e.getStackTrace();
-			System.out.println("getTotalSchedNumService 오류 :" + e.getMessage());
+			System.out.println("getMypageAdminProjectInfoService 오류 :" + e.getMessage());
 		}
-		return result;
+		return project;
 	}
 	
-//	전체업무일정 개수
-	public int getDoneSchedNum(int user_id) {
+	//프로젝트 별 개인 일정 총 수
+	public int getMypageAdminProjectTotalNum(int user_id, int project_num) {
 		Mypage_EmpDao mypage_empdao = sqlsession.getMapper(Mypage_EmpDao.class);
-		
-		int result = -1;
+		int project = -1;
 		
 		try {
-			System.out.println("service 진입");
-			result = mypage_empdao.getDoneSchedNum(user_id);
-			System.out.println("getDoneSchedNum 성공");
+			System.out.println("service 진");
+			project = mypage_empdao.getMypageAdminProjectTotalNum(user_id, project_num);
+			System.out.println("getEmpInfo 성공");
 		} catch (Exception e) {
 			e.getStackTrace();
-			System.out.println("getDoneSchedNumService 오류 :" + e.getMessage());
+			System.out.println("getMypageAdminProjectTotalNumService 오류 :" + e.getMessage());
 		}
-		return result;
+		return project;
+	}
+	
+	//프로젝트 별 완료된 개인 일정 총 수
+	public int getMypageAdminProjectDoneNum(int user_id, int project_num) {
+		Mypage_EmpDao mypage_empdao = sqlsession.getMapper(Mypage_EmpDao.class);
+		int project = -1;
+		
+		try {
+			System.out.println("service 진");
+			project = mypage_empdao.getMypageAdminProjectDoneNum(user_id, project_num);
+			System.out.println("getEmpInfo 성공");
+		} catch (Exception e) {
+			e.getStackTrace();
+			System.out.println("getMypageAdminProjectDoneNumService 오류 :" + e.getMessage());
+		}
+		return project;
 	}
 }

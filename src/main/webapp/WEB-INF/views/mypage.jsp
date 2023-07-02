@@ -39,9 +39,9 @@
 								</div>
 								<div class="form-group">
 									<label for="password">변경 비밀번호</label> <input type="password"
-										class="form-control" id="password" placeholder="password">
+										class="form-control" id="passwordChange" placeholder="password">
 								</div>
-								<div class="form-group">
+ 								<div class="form-group">
 									<label for="password">비밀번호 확인</label> <input type="password"
 										class="form-control" id="confirmPassword" placeholder="password">
 								</div>
@@ -84,48 +84,51 @@
 		fileInput.click();
 	});
 	
-	// 회원정보 수정 기능
-	$('#submit').click(
-			async () => {
-				console.log("회원정보 수정 클릭");
-				console.log($('#password').val());
-				const empPic = `$('#emp_pic')[0].files[0].name` ? `$('#emp_pic')[0].files[0].name` : `${emp.emp_pic}`;
-					const emp = {user_id: ${emp.user_id}, password: $('#password').val(), emp_pic: empPic};
-				var form = $('#userfrom')[0];
-				var formData = new FormData(form);
-				formData.append('file', $('#fileImageUpload')[0].files[0]);
-				formData.append('key', new Blob([JSON.stringify(emp)], {type: 'application/json'}));
-				
-				 for (var key of formData.keys()) {
-				    console.log(key);
-				  }
-				  for (var value of formData.values()) {
-				    console.log(value);
-				  }
-				
-				$.ajax({
-					url : "mypage/update.do",
-					type : 'POST',
-					data : formData,
-				    processData:false,
-				    contentType:false,
-				    enctype:'multipart/form-data',
-					success : function(data) {
-						console.log("mypageUpdate : " + data);
-					},
-					error : function(request, status, error) {
-						console.log("code:" + request.status + "\n"
-								+ "message:" + request.responseText + "\n"
-								+ "error:" + error);
-					},
-					complete: function() {
-						//location.reload();
-					}
-
-				});
-			});
+	
 	
 	$(document).ready(function() {
+		// 회원정보 수정 기능
+		$('#submit').click(function () {
+					console.log("회원정보 수정 클릭");
+					console.log($('#passwordChange').val());
+					const password = document.getElementById('password').value;
+					const empPic = `$('#emp_pic')[0].files[0].name` ? `$('#emp_pic')[0].files[0].name` : `${emp.emp_pic}`;
+						const emp = {user_id: ${emp.user_id}, password: $('#passwordChange').val(), emp_pic: empPic};
+					var form = $('#userfrom')[0];
+					var formData = new FormData(form);
+					formData.append('file', $('#fileImageUpload')[0].files[0]);
+					formData.append('key', new Blob([JSON.stringify(emp)], {type: 'application/json'}));
+					
+					 for (var key of formData.keys()) {
+					    console.log(key);
+					  }
+					  for (var value of formData.values()) {
+					    console.log(value);
+					  }
+					
+					$.ajax({
+						url : "mypage/update.do",
+						type : 'POST',
+						data : formData,
+					    processData:false,
+					    contentType:false,
+					    enctype:'multipart/form-data',
+						success : function(data) {
+							console.log("mypageUpdate : " + data);
+						},
+						error : function(request, status, error) {
+							console.log("code:" + request.status + "\n"
+									+ "message:" + request.responseText + "\n"
+									+ "error:" + error);
+						},
+						complete: function() {
+							//location.reload();
+						}
+
+					});
+				});
+		
+		
 		/* chart */
 		var ctx = $("#chart-line");
 		var totalnum = ${totalSchedNum};
