@@ -3,11 +3,24 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap-multiselect.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-multiselect.js"></script>
+
+<!-- 셀렉터 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+
 
 <script type="text/javascript">
-    
+	$(document).ready(function(){
+	    
+	    var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+	       removeItemButton: true,
+	       maxItemCount:5,
+	       searchResultLimit:5,
+	       renderChoiceLimit:5
+	     }); 
+	    
+	    
+	});
 </script>
 
 <button type="button" class="custom-btn btn-8" data-toggle="modal" data-target="#createProjectModal">
@@ -15,7 +28,7 @@
 </button>
 <style>
 	.datepicker table tr td, .datepicker table tr th {
-    font-size: 0.875em !important;
+    font-size: 0.4em !important;
 	}
 </style>
 <div class="modal fade" id="createProjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -61,17 +74,23 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <select id="multiselect_gamePlatform" multiple="multiple" name="gamePlatform">
-						  <option value="PC">PC</option>
-						  <option value="SWITCH">SWITCH</option>
-						  <option value="PS3">PS3</option>
-						  <option value="PS4">PS4</option>
-						  <option value="PS5">PS5</option>
-						  <option value="Xbox 360">Xbox 360</option>
-						  <option value="Xbox One">Xbox One</option>
-						  <option value="Xbox Series X">Xbox Series X</option>
-						  <option value="Xbox Series S">Xbox Series S</option>
-						</select>
+						<div class="row d-flex justify-content-center mt-100">
+						    <div class="col-md-6"> <select id="choices-multiple-remove-button" placeholder="Select Employee" multiple>
+						            <option value="HTML">HTML</option>
+						            <option value="Jquery">Jquery</option>
+						            <option value="CSS">CSS</option>
+						            <option value="Bootstrap 3">Bootstrap 3</option>
+						            <option value="Bootstrap 4">Bootstrap 4</option>
+						            <option value="Java">Java</option>
+						            <option value="Javascript">Javascript</option>
+						            <option value="Angular">Angular</option>
+						            <option value="Python">Python</option>
+						            <option value="Hybris">Hybris</option>
+						            <option value="SQL">SQL</option>
+						            <option value="NOSQL">NOSQL</option>
+						            <option value="NodeJS">NodeJS</option>
+						        </select> </div>
+						</div>
                     </div>
                 </div>
                 <div class="modal-footer">
