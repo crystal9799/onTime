@@ -22,6 +22,8 @@
 	            });
 	        });
 	});
+	
+	
 </script>
 
 <button type="button" class="custom-btn btn-8" data-toggle="modal" data-target="#createProjectModal">
