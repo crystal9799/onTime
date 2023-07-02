@@ -33,33 +33,61 @@ public class ScheduleService {
 		this.sqlSession = sqlSession;
 	}
 
-	public void insertBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
-		List<Integer> progList = new ArrayList<Integer>();
-		for (ScheduleBoard s : getAllPrev())
-			if (s.getSched_prog() == 0)
-				progList.add(s.getSched_seq());
+	public int getUseridByEname(String ename) throws ClassNotFoundException, SQLException {
+		ScheduleBoard_EmpDao scheduleEmpDao = sqlSession.getMapper(ScheduleBoard_EmpDao.class);
+		return scheduleEmpDao.getUseridByEname(ename);
+	}
 
-		int tmp = Collections.max(progList) + 1;
+	// 클라이언트에서 전달된 info,project 저장된 board 객체 받아와서
+	// SEQ 최댓값만 저장 후 (prog 기본값 0)
+	// MAPPER에서 num;시퀀스값, 전달 예정
+	// 값없을때 예외처리 필요
+	public void insertBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
+		// board seq컬럼 최댓값 구하기
+		int tmp = 1;
+		if (getAllPrev().size() == 0) {
+			tmp = 1;
+		} else {
+			List<Integer> progList = new ArrayList<Integer>();
+			for (ScheduleBoard s : getAllPrev())
+				if (s.getSched_prog() == 0)
+					progList.add(s.getSched_seq());
+
+			tmp = Collections.max(progList) + 1;
+		}
 		board.setSched_seq(tmp);
-		// 값 변경에정
-		board.setProject_num(10);
-		
-		// insert 시 user_id 받아와서 스케줄 vo에 저장해서 insert sql 실행
-		// user_id 값 클라이언트 선택해서 보내줄것 ; 컨트롤러에서 받아옴
-		//Schedule schdule=new Schedule(board.getProject_num(), );
-//		schduleDao.insertSchedule();
+		board.setSched_num(createSeq());
+		// 값 변경에정///////////////////////////////////////////////
+		board.setProject_num(9);
 
 		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
-		ScheduleDao scheduleDao = sqlSession.getMapper(ScheduleDao.class);
 		boardDao.insertBoard(board);
-		//scheduleDao.inse
 	}
-	
+
+	public int createSeq() throws ClassNotFoundException, SQLException {
+		List<Integer> list = new ArrayList<Integer>();
+
+		// 3개 있으면 size4
+		// 0개 size 1
+		if (getAllPrev().size() == 0) {
+			return 1;
+		} else {
+			for (ScheduleBoard s : getAllPrev())
+				list.add(s.getSched_num());
+			int tmp = Collections.max(list) + 1;
+			System.out.println("snum max:" + tmp);
+			return tmp;
+		}
+	}
+
+	//
 	public void insertSchedule(Schedule schedule) throws ClassNotFoundException, SQLException {
-		ScheduleDao schduleDao = sqlSession.getMapper(ScheduleDao.class);
-		schduleDao.insertSchedule(schedule);
+		System.out.println("servie 스캐줄 값 :" + schedule);
+		schedule.setSched_num(createSeq() - 1);
+		System.out.println(schedule.getSched_num());
+		ScheduleDao scheduleDao = sqlSession.getMapper(ScheduleDao.class);
+		scheduleDao.insertSchedule(schedule);
 	}
-	
 
 	public List<Project_Emp> getAllProjectEmpList() throws ClassNotFoundException, SQLException {
 		System.out.println("emplistservice");
@@ -98,7 +126,6 @@ public class ScheduleService {
 		return list;
 	}
 
-	
 	/*
 	 * public List<Emp> getEmpListByProject() throws ClassNotFoundException,
 	 * SQLException { System.out.println("getEmpListByProject conn");
@@ -106,12 +133,12 @@ public class ScheduleService {
 	 * List<Emp> list = dao.getEmpListByProject(); System.out.println("list: " +
 	 * list); return list; }
 	 */
-	 
+
 	public List<ScheduleBoard> getAllPrev() throws ClassNotFoundException, SQLException {
 		System.out.println("Prev conn");
 		ScheduleBoardDao dao = sqlSession.getMapper(ScheduleBoardDao.class);
 		List<ScheduleBoard> list = dao.getAllPrev();
-		System.out.println("list: " + list);
+		System.out.println("list size: " + list.size());
 		return list;
 	}
 

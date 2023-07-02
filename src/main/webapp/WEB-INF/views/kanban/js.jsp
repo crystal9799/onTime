@@ -74,7 +74,7 @@
         	console.log('add modal Click!');
  
 			$.ajax({
-				url : "sheduleAdd.ajax",
+				url : "scheduleAdd.ajax",
 				type : "post",
   				data : {
 					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
@@ -82,7 +82,7 @@
 					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
 				}, 
 				success : function(data) {
-						console.log("data: "+data);
+						console.log('add');
 			    },
 				error : function() {
 					alert("error");

@@ -1,8 +1,12 @@
 package com.kosa.scheduleManagement.global.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ScheduleBoard {
 	private int sched_num;
 	private String sched_info;

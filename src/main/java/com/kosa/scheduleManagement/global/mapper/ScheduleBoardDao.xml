@@ -9,9 +9,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
 		insert into
 		schedule_board(sched_num, sched_info, sched_prog, sched_seq, project_num)
-		values(schedule_seq.NEXTVAL, #{sched_info}, 0, #{sched_seq}, #{project_num})
+		values(#{sched_num}, #{sched_info}, 0, #{sched_seq}, #{project_num})
 	</insert>
-
+	
+<!-- 	<select id="returnSeq" parameterType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
+	select sched_num
+	from schedule_board
+	where sched_prog=0 and sched_seq = #{sched_seq}
+	</select>
+ -->
 	<select id="getAllPrev"
 		resultType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
 		select sched_num, sched_info, sched_seq, project_num from

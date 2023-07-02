@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.amazonaws.util.json.JSONObject;
 import com.kosa.scheduleManagement.global.dto.Emp;
 import com.kosa.scheduleManagement.global.dto.Project_Emp;
+import com.kosa.scheduleManagement.global.dto.Schedule;
 import com.kosa.scheduleManagement.global.dto.ScheduleBoard;
 
 @RestController
@@ -36,25 +37,29 @@ public class KanbanAjaxController {
 		this.service = service;
 	}
 
-	/*
-	 * @RequestMapping(value = "/addtest.ajax", method = { RequestMethod.POST })
-	 * public void test(@RequestBody ScheduleBoard board) throws Exception {
-	 * System.out.println("board print : " + board); }
-	 */
-	
-	@RequestMapping(value = "/sheduleAdd.ajax", method = { RequestMethod.POST })	
-	public void test(@RequestParam("ename") String ename,
-	                 @RequestParam("project_num") String project_num,
-	                 @RequestParam("sched_info") String sched_info) {
+	@RequestMapping(value = "/scheduleAdd.ajax", method = { RequestMethod.POST })
+	public void test(@RequestParam("ename") String ename, @RequestParam("project_num") String project_num,
+			@RequestParam("sched_info") String sched_info) throws ClassNotFoundException, SQLException {
+
+		System.out.println(ename);
+		System.out.println(project_num);
+		System.out.println(sched_info);
+
+		System.out.println("userid-------------");
+		int user_id = service.getUseridByEname(ename);
+		System.out.println(user_id);
+
+		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, 0, 8);
+		Schedule schedule = new Schedule(user_id, 8);
 		
-		//enamd으로 id 값 가져와서 id 값, projectnum 
-		// int 로 변환 필요한지
-//		Schedule schedule=new Schedule();
-	        System.out.println(ename);
-	        System.out.println(project_num);
-	        System.out.println(sched_info);
+		System.out.println("controller schedule val: "+schedule);
+
+		service.insertBoard(board);
+		service.insertSchedule(schedule);
+//		service.insertBoard(sched_info);
+// 		service.insertSchedule(userId);
+
 	}
-	
 
 	@RequestMapping(value = "/ajadd.ajax")
 	public ResponseEntity<String> insert() {
@@ -65,13 +70,13 @@ public class KanbanAjaxController {
 			return new ResponseEntity<String>("insert fail", HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@RequestMapping(value = "/add.ajax")
 	public ResponseEntity<String> insert(@RequestBody ScheduleBoard board, HttpServletRequest request) {
 		System.out.println("board:" + board);
-		
-		//userid에 대한 값 같이 받아와서
-		//schedule로 전달필요
+
+		// userid에 대한 값 같이 받아와서
+		// schedule로 전달필요
 		try {
 //			service.insertBoard(board);
 //			service.insertSchedule(null);
@@ -80,6 +85,13 @@ public class KanbanAjaxController {
 			return new ResponseEntity<String>("insert fail", HttpStatus.BAD_REQUEST);
 		}
 	}
+
+	/*
+	 * @RequestMapping(value = "/addtest.ajax", method = { RequestMethod.POST })
+	 * public void test(@RequestBody ScheduleBoard board) throws Exception {
+	 * System.out.println("board print : " + board); }
+	 */
+
 	/*
 	 * @RequestMapping(value = "/projectemplist.ajax", method = RequestMethod.POST)
 	 * 

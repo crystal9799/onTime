@@ -15,6 +15,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from emp e, project_emp pmp
 		where e.user_id = pmp.user_id and pmp.project_num=2
 	</select>
+	
+	<select id="getUseridByEname" resultType="int">
+		select user_id from emp where ename=#{ename}
+	</select>
 
 </mapper>
 	
