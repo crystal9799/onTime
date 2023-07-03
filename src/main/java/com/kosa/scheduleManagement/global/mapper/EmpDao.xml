@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 부서번호로 해당부서 사원목록 불러오기 -->
 	<select id="getEmpListByDeptno" resultType="com.kosa.scheduleManagement.global.dto.Emp">
-		select user_id,password,enabled,ename,emp_pic,job,deptno,dhead_num from emp where deptno=#{deptno}
+		select user_id,password,enabled,ename,emp_pic,job,deptno,dhead_num from emp where deptno=#{deptno} AND enabled=1
 	</select>
 </mapper>
 	
