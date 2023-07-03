@@ -61,6 +61,7 @@ public class AdminProjectController {
     @PostMapping("/createProjectOk.do")
     public ResponseEntity<String> insertProject(@RequestBody Project_Sub genproject){    	
     	try { 
+    		System.out.println(genproject.toString());
     		System.out.println("try블록의 시작");
     		project_Service.insertProject(genproject.getProject());
     		
