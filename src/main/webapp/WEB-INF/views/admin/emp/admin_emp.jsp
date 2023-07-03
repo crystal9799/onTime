@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 request.setCharacterEncoding("UTF-8");
 response.setCharacterEncoding("UTF-8");
@@ -12,6 +13,7 @@ response.setCharacterEncoding("UTF-8");
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>부서별 사원관리 페이지</title>
 <jsp:include page="/common/Head.jsp" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <link
@@ -23,7 +25,22 @@ response.setCharacterEncoding("UTF-8");
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
 	crossorigin="anonymous"></script>
+<style>
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: 'GmarketSansMedium', sans-serif;
+}
+</style>
 </head>
+
 <body>
 	<jsp:include page="/common/Header.jsp" />
 	<div class="flex">
@@ -37,11 +54,13 @@ response.setCharacterEncoding("UTF-8");
 					<div class="btn-wrapper" style="margin-bottom: 10px;">
 						<!-- 테이블 버튼 구성 -->
 						<div class="btn-wrapper" style="margin-bottom: 10px;">
-							<button id="saveBtn" class="btnStyle"
-								style="float: right; margin-left: 20px;">수정</button>
-							<button id="appendBtn" class="btnStyle" data-bs-toggle="modal"
-								data-bs-target="#exampleModal" style="float: right;">추가</button>
-							<button id="deleteBtn" class="btnStyle" style="float: right;">삭제</button>
+							<button id="deleteBtn" class="btnStyle btn btn-secondary"
+								style="float: right;">삭제</button>
+							<button id="saveBtn" class="btnStyle btn btn-primary "
+								style="float: right; margin-right: 20px;">수정</button>
+							<button id="appendBtn" class="btnStyle btn btn-success"
+								data-bs-toggle="modal" data-bs-target="#exampleModal"
+								style="float: right; margin-right: 20px;">추가</button>
 						</div>
 						<!-- Toast Grid Load -->
 						<div id="grid"></div>
@@ -100,7 +119,7 @@ response.setCharacterEncoding("UTF-8");
 						readData: { url: '/Team4_WebProject_2/admin/empManage/show.do', method: 'GET', initParams: { deptno: ${deptno} } },
 						createData: { url: '/Team4_WebProject_2/admin/empManage/createOk.do', method: 'POST', contentType: 'application/json' },
 						updateData: { url: '/Team4_WebProject_2/admin/empManage/updateOk.do', method: 'PUT', contentType: 'application/json' },
-						deleteData: { url: '/Team4_WebProject_2/admin/empManage/deleteOk.do', method: 'GET', contentType: 'application/json' }
+						deleteData: { url: '/Team4_WebProject_2/admin/empManage/deleteOk.do', method: 'DELETE', contentType: 'application/json' }
 					}
 				};
 
@@ -325,7 +344,15 @@ response.setCharacterEncoding("UTF-8");
 					      console.log('result: ', responseObj.result);
 					      console.log('message: ', responseObj.message);
 					      if (responseObj.data === "insert") {
-								alert("사용자 등록이 완료되었습니다.");
+								Swal.fire(
+										{
+								    		  position: 'center',
+								    		  icon: 'success',
+								    		  title: '사용자 등록이 완료되었습니다.',
+								    		  showConfirmButton: false,
+								    		  timer: 1500
+								    		}
+										);
 							}
 					      location.reload();
 					      
@@ -370,18 +397,40 @@ response.setCharacterEncoding("UTF-8");
 			 */
 			 deleteBtn.addEventListener('click', async () => {
 				 	console.log("삭제이벤트실행");
-				 	grid.removeCheckedRows(true);
-				 	const deleteResult = grid.request('deleteData',{
-				 		modifiedOnly: true
+				 	const checkedData = grid.getCheckedRows();
+				 	console.log(checkedData);
+				 	
+				    // user_id만 추출하여 data 배열에 담기
+				 	/* const data = jsonData.map(item => item.user_id); */
+				 	fetch('/Team4_WebProject_2/admin/empManage/deleteOk.do', {
+				 	  method: 'POST',
+				 	  headers: {
+				 	    'Content-Type': 'application/json'
+				 	  },
+				 	  // data 배열을 매개변수로 보내기
+				 	  body: JSON.stringify(checkedData)
+				 	})
+				 	.then(response => response.json())
+				 	.then(responseObj => {
+				 		console.log('result: ', responseObj.result);
+					    console.log('message: ', responseObj.message);
+				 	 if (responseObj.data === "delete") {
+				 		Swal.fire(
+				 				{
+						    		  position: 'center',
+						    		  icon: 'success',
+						    		  title: '사용자 삭제가 완료되었습니다.',
+						    		  showConfirmButton: false,
+						    		  timer: 1500
+						    		}
+				 				);
+						}
+				 	location.reload();
+				 	})
+				 	.catch(error => {
+				 	  console.error('Error:', error);
 				 	});
-				 	grid.on('response', ev => {
-				 		  const {response} = ev.xhr;
-				 		  const responseObj = JSON.parse(response);
-
-				 		  console.log('result : ', responseObj.result);
-				 		  console.log('data : ', responseObj.data);
-				 		});
-				    });
+ });
 
 			/**
 			 * [함수] dataSource 선언한 API 함수 호출이 발생할 경우 반환값을 리턴해주는 함수 입니다.
@@ -400,16 +449,24 @@ response.setCharacterEncoding("UTF-8");
 					console.log(contents);
 
 						if (responseObj.data === "insert") {
-							alert("사용자 등록이 완료되었습니다.");
+							Swal.fire("사용자 등록이 완료되었습니다.");
 						}
 						if (responseObj.data === "update") {
-							alert("사용자 수정이 완료되었습니다.");
-						}
+							Swal.fire(
+					 				{
+							    		  position: 'center',
+							    		  icon: 'success',
+							    		  title: '사용자 수정 완료되었습니다.',
+							    		  showConfirmButton: false,
+							    		  timer: 1500
+							    		}
+					 				);
+							}
 						if (responseObj.data === "delete") {
-							alert("사용자 삭제가 완료되었습니다.");
+							Swal.fire("사용자 삭제가 완료되었습니다.");
 						}
 				} else {
-					alert("해당 처리가 되지 않았습니다. 관리자에게 문의해주세요.");
+					Swal.fire("해당 처리가 되지 않았습니다. 관리자에게 문의해주세요.");
 				}
 
 				console.log('result:', responseObj.result, "data:", responseObj.data);
