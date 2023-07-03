@@ -50,6 +50,13 @@ public class ScheduleService {
 		// boardDao.progUpdate(sched_seq, sched_info);
 	}
 
+	public void deleteBoard(int sched_num) throws ClassNotFoundException, SQLException {
+		System.out.println("conn service del");
+		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
+		ScheduleBoard board = new ScheduleBoard(sched_num, "", 0, 0, 0);
+		boardDao.deleteBoard(board);
+	}
+
 	public void updateNext(int sched_num, int sched_seq, String sched_info)
 			throws ClassNotFoundException, SQLException {
 		System.out.println("updateNext serviece====================================");
@@ -60,6 +67,7 @@ public class ScheduleService {
 		System.out.println("sched_info:" + sched_info);
 		System.out.println("sched_seq:" + sched_seq);
 	}
+
 	public void updatePrev(int sched_num, int sched_seq, String sched_info)
 			throws ClassNotFoundException, SQLException {
 		System.out.println("serviece====================================");
@@ -71,7 +79,7 @@ public class ScheduleService {
 		System.out.println("sched_info:" + sched_info);
 		System.out.println("sched_seq:" + sched_seq);
 	}
-	
+
 	public void updateCurr(int sched_num, int sched_seq, String sched_info)
 			throws ClassNotFoundException, SQLException {
 		System.out.println("serviece====================================");
@@ -240,12 +248,11 @@ public class ScheduleService {
 		dao.updateSave(board);
 	}
 
-	public void deleteBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
-		System.out.println("update conn");
-		ScheduleBoardDao dao = sqlSession.getMapper(ScheduleBoardDao.class);
-		dao.updateSave(board);
-	}
-
+	/*
+	 * public void deleteBoard(ScheduleBoard board) throws ClassNotFoundException,
+	 * SQLException { System.out.println("update conn"); ScheduleBoardDao dao =
+	 * sqlSession.getMapper(ScheduleBoardDao.class); dao.updateSave(board); }
+	 */
 	void lastSeq(List<ScheduleBoard> list) throws ClassNotFoundException, SQLException {
 		System.out.println();
 	}

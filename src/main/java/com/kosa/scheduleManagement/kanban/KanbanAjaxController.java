@@ -208,6 +208,12 @@ public class KanbanAjaxController {
 	 * 
 	 * //service.progUpdate(sched_seq, sched_info ); }
 	 */
+	
+
+	@RequestMapping(value = "/scheduleDel.ajax", method = { RequestMethod.POST })
+	public void deleteBoard(@RequestParam("sched_num") String sched_num) throws ClassNotFoundException, SQLException {
+		service.deleteBoard(Integer.parseInt(sched_num));
+	}
 
 	@RequestMapping(value = "/scheduleAdd.ajax", method = { RequestMethod.POST })
 	public void scheduleAdd(@RequestParam("ename") String ename, @RequestParam("project_num") String project_num,
@@ -371,11 +377,11 @@ public class KanbanAjaxController {
 		service.updateSave(board);
 	}
 
-	@RequestMapping(value = "/delete.ajax", method = RequestMethod.GET)
-	@ResponseBody
-	public void deleteBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
-		System.out.println("delete connection");
-		service.deleteBoard(board);
-	}
-
+	/*
+	 * @RequestMapping(value = "/delete.ajax", method = RequestMethod.GET)
+	 * 
+	 * @ResponseBody public void deleteBoard(ScheduleBoard board) throws
+	 * ClassNotFoundException, SQLException {
+	 * System.out.println("delete connection"); service.deleteBoard(board); }
+	 */
 }

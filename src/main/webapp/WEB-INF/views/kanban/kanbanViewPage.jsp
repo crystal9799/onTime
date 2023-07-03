@@ -13,6 +13,16 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/kanban/style.jsp" />
+<style>
+      p {
+        cursor: pointer;
+      }
+      .jbBox {
+        border: 1px solid #bcbcbc;
+        padding: 20px;
+        background-color:#4b49ac;
+      }
+</style>
 </head>
 
 <body>
@@ -38,10 +48,10 @@
 					<form id="todo-form">
 						<button class="modalBtn">모달테스트 중</button>
 						<br> <br> <input type="text" placeholder="업무 입력" id="todo-input" />
-						<button type="submit">추가</button>
+<!-- 						<button type="submit">추가</button> -->
 						<button id="saveBtn">save</button>
-						<a class="nav-link"
-						href="${pageContext.request.contextPath}/getProjectDetail.do">temp refresh</a>
+						<button id="delBtn">del</button>
+						<button><a href="${pageContext.request.contextPath}/getProjectDetail.do" style="text-decoration:none; color:black">refresh</a></button>
 	<!-- 					<button id="refreshBtn" href="${pageContext.request.contextPath}/getProjectDetail.do">refresh</button> -->
 					</form>
 

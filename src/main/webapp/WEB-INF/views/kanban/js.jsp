@@ -5,25 +5,72 @@
 	  window.onload = function(){
 		  console.log('load');
 
-		  
+          $(document).on("click","#moveBtn",function(event){
+              alert($(this).text());
+          });
+ 
 		/* kanban list dynamic load */
 		getBoardAllList();
 		
 		/*local storage 처리 */
 		
+		var iv;
+		var i;
 		
-
+        $( 'p' ).click( function() {
+            $( this ).toggleClass( 'jbBox' );
+        	i=$(this).attr('id');
+        	iv="#"+$(this).attr('id');
+        	console.log('iv: '+iv);
+        	console.log('i: '+i);
+            
+//            var i="#"+$(this).attr('id');
+ //           var t=$(this).text();
+//            var v="<br><button>삭제</button>";
+ //           console.log(v);
+ //           $(i).append(v);
+  //          document.getElementById(i).append(v);
+            
+          });
+		
+        $("#delBtn").click( function() {
+        	console.log('test');
+        	console.log(iv);
+        	console.log(i);
+        	$(iv).remove();
+        	
+			$.ajax({
+				url : "scheduleDel.ajax",
+				type : "post",
+  				data : {
+					sched_num : i 
+				}, 
+				success : function(data) {
+						console.log('del'); 
+			    },
+				error : function() {
+					alert("error");
+				}
+			});
+        	
+        	
+        });
+ 
 	  };
+	 
+	  
+/* 	  
+	  $(".dj-tok .mem-list > li").click(function() {
+			$(".mem-list > li").removeClass("active");
+			$(this).addClass("active");
+		})
+	   */
 	  
 /* 	  function listJustSave(){
 		  const divNode = document.getElementById("content");
 		  console.log(divNode.innerText);
 	  } */
-	  
-	  function localStorageSave(){
-		  console.log('l s load');
-	  }
-	  
+ 
 	  
 	  
 	  /* refresh */
@@ -152,6 +199,7 @@
 		// String 형태로 변환
 
 		
+		////update ajax /////
       $(document).on("click","#saveBtn",function(){
 //  		document.getElementById("1").innerText="바뀜";
     	  
