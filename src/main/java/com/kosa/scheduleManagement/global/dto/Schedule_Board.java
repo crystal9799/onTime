@@ -1,5 +1,7 @@
 package com.kosa.scheduleManagement.global.dto;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data

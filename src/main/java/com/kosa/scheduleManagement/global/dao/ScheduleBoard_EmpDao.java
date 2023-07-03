@@ -8,5 +8,6 @@ import com.kosa.scheduleManagement.global.dto.Emp;
 public interface ScheduleBoard_EmpDao {
 	List<Emp> getAllEmpList() throws ClassNotFoundException, SQLException;
 	List<String> getEmpListByProject() throws ClassNotFoundException, SQLException;
+	int getUseridByEname(String ename) throws ClassNotFoundException, SQLException;
 //		List<Emp> getEmpListByProject() throws ClassNotFoundException, SQLException;
 }
