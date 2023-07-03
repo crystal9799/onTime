@@ -3,10 +3,14 @@ package com.kosa.scheduleManagement.admin.service;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.ibatis.session.SqlSession;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -18,10 +22,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosa.scheduleManagement.global.dao.DeptManageEmpDao;
 import com.kosa.scheduleManagement.global.dto.Emp;
-
-
-
-
 
 @Service
 public class EmpManageService {
@@ -72,18 +72,19 @@ public class EmpManageService {
 		}
 		return emplist;
 	}
-	
+
 	public String getDheadNameByDheadNull(int deptno) {
 		DeptManageEmpDao empdao = sqlsession.getMapper(DeptManageEmpDao.class);
 		String ename = null;
 		try {
 			ename = empdao.getDheadNameByDheadNull(deptno);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.getStackTrace();
 			System.out.println("listService : " + e.getMessage());
 		}
 		return ename;
 	}
+
 	public int insertEmp(int deptno, Emp emp) {
 		DeptManageEmpDao empdao = sqlsession.getMapper(DeptManageEmpDao.class);
 		int user_id = -1;
@@ -111,30 +112,31 @@ public class EmpManageService {
 		}
 		return result;
 	}
+
 	public boolean updateEmp(Emp enameJobInEmp, int user_id) {
 		DeptManageEmpDao empdao = sqlsession.getMapper(DeptManageEmpDao.class);
-	    Emp oldEmp = empdao.getEmpByUserId(user_id);
-	    System.out.println(oldEmp);
-	    enameJobInEmp.setDeptno(oldEmp.getDeptno());
-	    enameJobInEmp.setDhead_num(oldEmp.getDhead_num());
-	    enameJobInEmp.setEmp_pic(oldEmp.getEmp_pic());
-	    enameJobInEmp.setEnabled(oldEmp.getEnabled());
-	    enameJobInEmp.setPassword(oldEmp.getPassword());
-	    enameJobInEmp.setUser_id(oldEmp.getUser_id());
+		Emp oldEmp = empdao.getEmpByUserId(user_id);
+		System.out.println(oldEmp);
+		enameJobInEmp.setDeptno(oldEmp.getDeptno());
+		enameJobInEmp.setDhead_num(oldEmp.getDhead_num());
+		enameJobInEmp.setEmp_pic(oldEmp.getEmp_pic());
+		enameJobInEmp.setEnabled(oldEmp.getEnabled());
+		enameJobInEmp.setPassword(oldEmp.getPassword());
+		enameJobInEmp.setUser_id(oldEmp.getUser_id());
 		int rowsAffected = empdao.updateEmp(enameJobInEmp);
 		System.out.println(enameJobInEmp);
-	    return rowsAffected > 0;
+		return rowsAffected > 0;
 	}
 
 	public String responseToJson(Map<String, Object> response) throws IOException {
 		HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set(HttpHeaders.ACCEPT_CHARSET, StandardCharsets.UTF_8.name());
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonFactory jsonFactory = objectMapper.getFactory();
-        JsonGenerator jsonGenerator = jsonFactory.createGenerator(System.out, JsonEncoding.UTF8);
-        jsonGenerator.setCodec(objectMapper);
-        String jsonResponse = objectMapper.writeValueAsString(response);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.set(HttpHeaders.ACCEPT_CHARSET, StandardCharsets.UTF_8.name());
+		ObjectMapper objectMapper = new ObjectMapper();
+		JsonFactory jsonFactory = objectMapper.getFactory();
+		JsonGenerator jsonGenerator = jsonFactory.createGenerator(System.out, JsonEncoding.UTF8);
+		jsonGenerator.setCodec(objectMapper);
+		String jsonResponse = objectMapper.writeValueAsString(response);
 		return jsonResponse;
 	}
 
@@ -144,4 +146,27 @@ public class EmpManageService {
 		return rowsAffected > 0;
 	}
 
+	public List<Integer> getUserIds(JSONArray jsonArray) {
+		List<Integer> userIds = new ArrayList<>();
+		for (int i = 0; i < jsonArray.length(); i++) {
+			int user_id = jsonArray.getJSONObject(i).getInt("user_id");
+
+			System.out.println("user_id: " + user_id);
+			userIds.add(user_id);
+		}
+		return userIds;
+	}
+
+	public List<Integer> getUserIds(String sData) {
+		List<Integer> userIds = new ArrayList<>();
+
+		Pattern pattern = Pattern.compile("user_id=(\\d+)");
+		Matcher matcher = pattern.matcher(sData);
+
+		while (matcher.find()) {
+		    int userId = Integer.parseInt(matcher.group(1));
+		    userIds.add(userId);
+		}
+		return userIds;
+	}
 }
