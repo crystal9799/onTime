@@ -36,7 +36,7 @@ public class ScheduleBoardController {
 		List<ScheduleBoard> prevList = service.getAllPrev();
 		List<ScheduleBoard> currList = service.getAllCurr();
 		List<ScheduleBoard> nextList = service.getAllNext();
-		
+
 		System.out.println("plist: ");
 		System.out.println(prevList);
 
@@ -45,6 +45,5 @@ public class ScheduleBoardController {
 		model.addAttribute("nlist", nextList);
 
 		return "/kanban/kanbanViewPage";
-//			return "/kanban/kanbanViewPage";
 	}
 }

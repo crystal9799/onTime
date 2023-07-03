@@ -78,7 +78,7 @@
 
 
 
-	<jsp:include page="/WEB-INF/views/kanban/temp/testjs.jsp" />
+	<jsp:include page="/WEB-INF/views/kanban/js.jsp" />
 
 </body>
 </html>

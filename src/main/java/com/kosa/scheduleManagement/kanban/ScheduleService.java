@@ -1,5 +1,6 @@
 package com.kosa.scheduleManagement.kanban;
 
+import java.net.MulticastSocket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -49,21 +50,51 @@ public class ScheduleService {
 		// boardDao.progUpdate(sched_seq, sched_info);
 	}
 
-	public void updateNext(int sched_seq, String sched_info) throws ClassNotFoundException, SQLException {
+	public void updateNext(int sched_num, int sched_seq, String sched_info)
+			throws ClassNotFoundException, SQLException {
+		System.out.println("updateNext serviece====================================");
 		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
-		ScheduleBoard board = new ScheduleBoard(0, sched_info, 2, sched_seq, 0);
+		ScheduleBoard board = new ScheduleBoard(sched_num, sched_info, 2, sched_seq, 0);
 		boardDao.updateNext(board);
+		System.out.println("sched_num:" + sched_num);
+		System.out.println("sched_info:" + sched_info);
+		System.out.println("sched_seq:" + sched_seq);
 	}
-
-	public void updatePrev(int sched_seq, String sched_info) throws ClassNotFoundException, SQLException {
+	public void updatePrev(int sched_num, int sched_seq, String sched_info)
+			throws ClassNotFoundException, SQLException {
+		System.out.println("serviece====================================");
 		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
-		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, sched_seq, 0);
+		ScheduleBoard board = new ScheduleBoard(sched_num, sched_info, 0, sched_seq, 0);
 		boardDao.updatePrev(board);
 //			boardDao.updatePrev(sched_seq, sched_info);
+		System.out.println("sched_num:" + sched_num);
+		System.out.println("sched_info:" + sched_info);
+		System.out.println("sched_seq:" + sched_seq);
+	}
+	
+	public void updateCurr(int sched_num, int sched_seq, String sched_info)
+			throws ClassNotFoundException, SQLException {
+		System.out.println("serviece====================================");
+		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
+		ScheduleBoard board = new ScheduleBoard(sched_num, sched_info, 1, sched_seq, 0);
+		boardDao.updateCurr(board);
+//			boardDao.updatePrev(sched_seq, sched_info);
+		System.out.println("sched_num:" + sched_num);
 		System.out.println("sched_info:" + sched_info);
 		System.out.println("sched_seq:" + sched_seq);
 
 	}
+
+	/*
+	 * public void updateCurr(int sched_num, int sched_seq, String sched_info)
+	 * throws ClassNotFoundException, SQLException { ScheduleBoardDao boardDao =
+	 * sqlSession.getMapper(ScheduleBoardDao.class); ScheduleBoard board = new
+	 * ScheduleBoard(0, sched_info, 1, sched_seq, 0); boardDao.updateCurr(board); //
+	 * boardDao.updatePrev(sched_seq, sched_info); System.out.println("sched_info:"
+	 * + sched_info); System.out.println("sched_seq:" + sched_seq);
+	 * 
+	 * }
+	 */
 
 	public void insertBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
 		board.setSched_seq(createMaxProg());

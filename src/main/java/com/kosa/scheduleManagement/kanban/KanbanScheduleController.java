@@ -50,7 +50,7 @@ public class KanbanScheduleController {
 		model.addAttribute("plist", prevList);
 		System.out.println(prevList);
 		
-		return "/kanban/temp/kanbantest";
+		return "/kanban/temp/kanbanViewTestPage";
 //		return "/kanban/kanbanViewPage";
 	}
 
