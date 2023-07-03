@@ -100,7 +100,7 @@ response.setCharacterEncoding("UTF-8");
 						readData: { url: '/Team4_WebProject_2/admin/empManage/show.do', method: 'GET', initParams: { deptno: ${deptno} } },
 						createData: { url: '/Team4_WebProject_2/admin/empManage/createOk.do', method: 'POST', contentType: 'application/json' },
 						updateData: { url: '/Team4_WebProject_2/admin/empManage/updateOk.do', method: 'PUT', contentType: 'application/json' },
-						deleteData: { url: '/Team4_WebProject_2/admin/empManage/deleteOk.do', method: 'GET', contentType: 'application/json' }
+						deleteData: { url: '/Team4_WebProject_2/admin/empManage/deleteOk.do', method: 'DELETE', contentType: 'application/json' }
 					}
 				};
 

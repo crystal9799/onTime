@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 
@@ -85,8 +86,20 @@ public class S3Util {
 	// 파일 URL
 	public String getFileURL(String bucketName, String fileName) {
 		System.out.println("넘어오는 파일명 : " + fileName);
-		String imgName = (fileName).replace(File.separatorChar, '/');
-		return conn.generatePresignedUrl(new GeneratePresignedUrlRequest(bucketName, imgName)).toString();
+//		String imgName = (fileName).replace(File.separatorChar, '/');
+//		return conn.generatePresignedUrl(new GeneratePresignedUrlRequest(bucketName, imgName)).toString();
+		String getObjectUrl = "https://jumun-bucket.s3.ap-northeast-2.amazonaws.com/"+fileName;
+		
+		return getObjectUrl;
 	}
+	
+	public String getObjectUrl(String bucketName, String fileName) {
+	    String imgName = (fileName).replace(File.separatorChar, '/');
+	    GeneratePresignedUrlRequest request = new GeneratePresignedUrlRequest(bucketName, imgName);
+	    URL objectUrl = conn.generatePresignedUrl(request);
+	    return objectUrl.toString();
+	}
+
+
 
 }
