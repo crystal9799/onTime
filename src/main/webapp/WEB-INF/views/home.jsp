@@ -18,6 +18,7 @@
 	                var calendarEl = document.getElementById('calendar');
 	                var calendar = new FullCalendar.Calendar(calendarEl, {
 	                    initialView: 'dayGridMonth',
+	                    navLinks: true, //month,week,day 선택
 	                    events: data
 	                });
 	                calendar.render();

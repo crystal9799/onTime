@@ -12,7 +12,9 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-
+	
+	
+	
     fetch("http://192.168.0.33:8090/Team4_WebProject_2/admin/createProject.do?deptno=10")
     .then(res => res.json())
     .then(data => {
@@ -34,7 +36,7 @@ $(document).ready(function(){
         // create a new instance of Choices to refresh the UI.
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
             removeItemButton: true,
-            maxItemCount:5,
+            maxItemCount:10,
             searchResultLimit:8,
             renderChoiceLimit:8
         });
@@ -63,11 +65,15 @@ $(document).ready(function(){
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form>
+            <form action="/createProjectOk.do">
                 <div class="modal-body">
+                	<div class="form-group">
+                		<label for="project_num">Project Number</label>
+                		<input type="number" class="form-control" id="project_num" name="id" value="11" disabled="disabled">
+                	</div>
                     <div class="form-group">
                         <label for="project_name">Project Name</label>
-                        <input type="text" class="form-control" id="project_name" name="project_name">
+                        <input type="text" class="form-control" id="project_name" name="title">
                     </div>
                     <div class="form-group">
                         <label for="project_info">Project Info</label>
@@ -76,12 +82,12 @@ $(document).ready(function(){
                     <div class="form-group">
                         <label for="project_start">Project Start</label>
                         <br>
-                        <input type="date" id="birthday" name="Project_Start">
+                        <input type="date" id="birthday" name="start">
                     </div>
                     <div class="form-group">
                         <label for="project_end">Project End</label>
                         <br>
-                        <input type="date" id="birthday" name="Project_End">
+                        <input type="date" id="birthday" name="end">
                     </div>
                     <div class="form-group">
                         <label for="color">Color</label>
@@ -102,20 +108,7 @@ $(document).ready(function(){
 						<div class="row d-flex justify-content-center mt-100">
 						    <div class="col-md-6"> 
 						    	<select id="choices-multiple-remove-button" name="user_id" placeholder="Select Employee" multiple>
-						            <option value="1">철수</option>>
-						            <option value="2">철수2</option>>
-						            <option value="HTML">HTML</option>
-						            <option value="Jquery">Jquery</option>
-						            <option value="CSS">CSS</option>
-						            <option value="Bootstrap 3">Bootstrap 3</option>
-						            <option value="Bootstrap 4">Bootstrap 4</option>
-						            <option value="Java">Java</option>
-						            <option value="Javascript">Javascript</option>
-						            <option value="Angular">Angular</option>
-						            <option value="Python">Python</option>
-						            <option value="Hybris">Hybris</option>
-						            <option value="SQL">SQL</option>
-						            <option value="NOSQL">NOSQL</option>
+						            
 						        </select> </div>
 						</div>
                     </div>
