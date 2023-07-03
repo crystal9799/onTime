@@ -43,13 +43,11 @@ public class mypageAajxController {
 		System.out.println("controller");
 		System.out.println(file);
 		System.out.println("emppppppp" + emp);
-		logger.info("originalName: " + file.getOriginalFilename());	
 		String S3Path = "";
 		
 		try {
-			if (file.isEmpty()) {
-				S3Path = emp.getEmp_pic();
-			} else {
+			if (file != null) {			
+				logger.info("originalName: " + file.getOriginalFilename());	
 				S3Path = s3service.fileToS3(file);
 				emp.setEmp_pic(S3Path);
 				System.out.println("S3Path" + S3Path);
