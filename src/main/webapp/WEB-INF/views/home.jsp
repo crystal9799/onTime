@@ -30,7 +30,6 @@
 			<div class="content-wrapper">
 				<jsp:include page="/common/createProject_Modal.jsp" />
 				<div id='calendar'></div>
-				
 			</div>
 		</div>
 	</div>

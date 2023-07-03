@@ -126,7 +126,7 @@
 		// 회원정보 수정 기능
 		$('#submit').click(function () {
 					console.log("회원정보 수정 클릭");
-					console.log($('#password').val());
+					console.log($('#passwordChange').val());
 					const password = document.getElementById('password').value;
 					const empPic = `$('#emp_pic')[0].files[0].name` ? `$('#emp_pic')[0].files[0].name` : `${emp.emp_pic}`;
 						const emp = {user_id: ${emp.user_id}, password: $('#passwordChange').val(), emp_pic: empPic};
