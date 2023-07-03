@@ -67,11 +67,13 @@
  	const fileInputButton = document.getElementById('fileImageUpload').files;
 	const preview = document.getElementById('fileImg');
 	const imageUploadButton = document.getElementById('imageButtonWrapper');
+	var fileChange = false;
 	
 	fileInput.addEventListener('change', (event) =>{
 		const file = event.target.files[0];
 		console.log(file);
 		const reader = new FileReader();
+		fileChange = true;
 		
 		reader.onload = (e) => {
 			preview.src = e.target.result;
@@ -84,15 +86,13 @@
 		fileInput.click();
 	});
 	
-	
-	
 	$(document).ready(function() {
 		// 회원정보 수정 기능
 		$('#submit').click(function () {
 					console.log("회원정보 수정 클릭");
 					console.log($('#passwordChange').val());
 					const password = document.getElementById('password').value;
-					const empPic = `$('#emp_pic')[0].files[0].name` ? `$('#emp_pic')[0].files[0].name` : `${emp.emp_pic}`;
+					const empPic = (fileChange==true) ? `$('#emp_pic')[0].files[0].name` : `${emp.emp_pic}`;
 						const emp = {user_id: ${emp.user_id}, password: $('#passwordChange').val(), emp_pic: empPic};
 					var form = $('#userfrom')[0];
 					var formData = new FormData(form);
@@ -124,7 +124,6 @@
 						complete: function() {
 							//location.reload();
 						}
-
 					});
 				});
 		

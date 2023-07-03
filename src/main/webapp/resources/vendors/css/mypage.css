@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+body {
+	font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica,
+		Arial, sans-serif;
+}
+
 /* 데스크탑 환경 */
 @media only screen and (min-width: 1025px) {
 	.padding {
@@ -121,14 +127,12 @@
 }
 
 .imageButtonWrapper:hover {
-	background-color : #C1C1FF;
+	background-color: #C1C1FF;
 }
 
-
-
 .saveButton {
- color: gray;
-  font-size: 30px;
+	color: gray;
+	font-size: 30px;
 }
 
 .saveButton:hover {
@@ -173,15 +177,15 @@ card-footer, .card-header {
 	width: 100%;
 }
 
-.chartjs-render-monitor {                       
+.chartjs-render-monitor {
 	margin-bottom: 2rem;
 }
 
 /* 부사장 프로젝트 차트 css */
- .grogressWrapper span{
- 	position: absolute;
- 	top: 4px;
- 	left: 150px;
+.grogressWrapper span {
+	position: absolute;
+	top: 4px;
+	left: 150px;
 	width: 100%;
 	color: black;
-} 
+}
