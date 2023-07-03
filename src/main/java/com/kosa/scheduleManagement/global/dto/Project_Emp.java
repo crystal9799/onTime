@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Project_Emp {
-	private int project_num;
 	private int user_id;
+	private int project_num;
 }

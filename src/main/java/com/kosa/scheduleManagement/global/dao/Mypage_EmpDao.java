@@ -2,8 +2,11 @@ package com.kosa.scheduleManagement.global.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.kosa.scheduleManagement.global.dto.Dept;
 import com.kosa.scheduleManagement.global.dto.Emp;
+import com.kosa.scheduleManagement.global.dto.Project;
 
 public interface Mypage_EmpDao {
 	
@@ -23,5 +26,9 @@ public interface Mypage_EmpDao {
 		int getDoneSchedNum(int user_id);
 		
 	//부사장
-	List<Dept> getMypageAdminDeptInfo(int user_id);
+	List<Project> getMypageAdminProjectInfo(int user_id);
+	
+	int getMypageAdminProjectTotalNum(@Param("user_id") int user_id, @Param("project_num") int project_num);
+	
+	int getMypageAdminProjectDoneNum(@Param("user_id") int user_id, @Param("project_num") int project_num);
 }

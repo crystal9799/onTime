@@ -1,21 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+	pageEncoding="UTF-8"%>	
+	
 <script>
-	
-	
-	
-
-
-
-
-
-
-
-
-
-
-/* ----------------------- modal & DragDrop -----------------------*/
 const body = document.querySelector('body');
 const modal = document.querySelector('.modal');
 const btnOpenPopup = document.querySelector('.btn-open-popup');
@@ -118,4 +104,9 @@ const insertAboveTask = (zone, mouseY) => {
 
   return closestTask;
 };
+
+
+
+
 </script>
+ 
