@@ -6,7 +6,7 @@
 	namespace="com.kosa.scheduleManagement.global.dao.DeptManageEmpDao">
 	<select id="totallistCountByDeptno" resultType="int">
 		select count(*)
-		cnt from emp where deptno=#{deptno}
+		cnt from emp where deptno=#{deptno} and enabled =1
 	</select>
 	<select id="getEmpListByDeptno"
 		resultType="com.kosa.scheduleManagement.global.dto.Emp">
@@ -24,7 +24,8 @@
         emp
       WHERE 
         deptno = #{param1} AND
-        ROWNUM <= #{param3}
+        ROWNUM <= #{param3} AND
+        enabled = 1
     )
     WHERE rn >= #{param2}  
     ]]>
@@ -40,7 +41,9 @@
 	<select id="getRestEmpListByDeptno"
 		resultType="com.kosa.scheduleManagement.global.dto.Emp">
 		select user_id,ename,emp_pic,job,deptno,dhead_num from emp
-		where deptno=#{deptno}
+		where deptno=#{deptno} 
+		and
+		enabled=1
 	</select>
 	<select id="getDheadNameByDheadNull" resultType="String">
 		select ename
