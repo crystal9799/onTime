@@ -174,7 +174,7 @@ public class AdminEmpManageController {
 	}
 
 	// 사원 삭제
-	@GetMapping("/empManage/deleteOk.do")
+	@PostMapping("/empManage/deleteOk.do")
 	public ResponseEntity<String> deleteEmp(@RequestBody Map<String, Object> requestBody) {
 		System.out.println(requestBody);
 		List<Map<String, Object>> checkedRows = (List<Map<String, Object>>) requestBody.get("deletedRows");
