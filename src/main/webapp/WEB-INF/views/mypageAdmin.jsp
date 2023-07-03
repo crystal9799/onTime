@@ -133,9 +133,45 @@
 			 var eng = passwordValue.search(/[a-z]/ig);
 			 var spe = passwordValue.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
-			
-			if($("#passwordChange").val() == "" || $("#passwordConfirm").val() == "" ) {
-				Swal.fire('변경 실패','비밀번호를 입력해주세요', 'warning');
+			if (fileChange == true && $("#passwordChange").val() == "" && $("#passwordConfirm").val() == "") {
+				const empPic = `$('#emp_pic')[0].files[0].name`;
+				const emp = {user_id: ${emp.user_id}, password: `${emp.password}`, emp_pic: empPic};
+				var form = $('#userfrom')[0];
+				var formData = new FormData(form);
+				formData.append('file', $('#fileImageUpload')[0].files[0]);
+				 formData.append('key', new Blob([JSON.stringify(emp)], {type: 'application/json'}));
+					
+				 for (var key of formData.keys()) {
+				    console.log(key);
+				  }
+				  for (var value of formData.values()) {
+				    console.log(value);
+				  }
+				
+				$.ajax({
+					url : "update.do",
+					type : 'POST',
+					data : formData,
+				    processData:false,
+				    contentType:false,
+				    enctype:'multipart/form-data',
+					success : function(data) {
+						console.log("mypageUpdate : " + data);
+					},
+					error : function(request, status, error) {
+						console.log("code:" + request.status + "\n"
+								+ "message:" + request.responseText + "\n"
+								+ "error:" + error);
+					},
+					complete: function() {
+						//location.reload();
+					}
+				});
+				Swal.fire('변경 완료','변경되었습니다.', 'success');
+				return true;
+			}else if(($("#passwordChange").val() == "" && fileChange == false) || ($("#passwordConfirm").val() == "" && fileChange == false)) {
+				Swal.fire('변경 실패','모든 비밀번호를 입력해주세요', 'warning');
+				return false;
 			} else if (passwordValue.length < 8 || passwordValue.length > 20){
 				 Swal.fire('변경 실패','8자리 ~ 20자리 이내로 입력해주세요.', 'warning');
 			  return false;
