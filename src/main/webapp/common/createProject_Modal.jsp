@@ -3,11 +3,10 @@
 
 
 <!-- 셀렉터 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" /> -->
 <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
 <script type="text/javascript">
@@ -43,7 +42,38 @@ $(document).ready(function(){
 
     })
     .catch(error => console.error('Error:', error));
+	
+    $('form').submit(function(event) {
+        event.preventDefault();
 
+        var formData = {};
+        var projectData = {};
+        var emplistData = [];
+
+        // 프로젝트 정보
+        projectData.id = $('#project_num').val();
+        projectData.start = $('#start').val();
+        projectData.end = $('#end').val();
+        projectData.project_info = $('#project_info').val();
+        projectData.title = $('#project_name').val();
+        projectData.color = $('input[name="colorRadio"]:checked').val();
+
+        // 직원 목록
+        $('#choices-multiple-remove-button option:selected').each(function() {
+            var empData = {};
+            empData.user_id = $(this).val();
+            emplistData.push(empData);
+        });
+
+        formData.project = projectData;
+        formData.emplist = emplistData;
+
+        var jsonData = JSON.stringify(formData);
+
+        // jsonData를 서버로 전송하는 코드 추가
+
+        console.log(jsonData);
+    });
 });
 
 </script>  
@@ -82,12 +112,12 @@ $(document).ready(function(){
                     <div class="form-group">
                         <label for="project_start">Project Start</label>
                         <br>
-                        <input type="date" id="birthday" name="start">
+                        <input type="date" id="start" name="start">
                     </div>
                     <div class="form-group">
                         <label for="project_end">Project End</label>
                         <br>
-                        <input type="date" id="birthday" name="end">
+                        <input type="date" id="end" name="end">
                     </div>
                     <div class="form-group">
                         <label for="color">Color</label>
