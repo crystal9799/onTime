@@ -21,6 +21,7 @@
 	                    events: data
 	                });
 	                calendar.render();
+	                //<option value="1">철수</option>>
 	            })
 	    });
     </script>

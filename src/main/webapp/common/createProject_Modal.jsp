@@ -11,17 +11,39 @@
 
 
 <script type="text/javascript">
-	$(document).ready(function(){
-	    
-	    var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
-	       removeItemButton: true,
-	       maxItemCount:5,
-	       searchResultLimit:5,
-	       renderChoiceLimit:5
-	    }); 
-	    
-	    
-	});
+$(document).ready(function(){
+
+    fetch("http://192.168.0.33:8090/Team4_WebProject_2/admin/createProject.do?deptno=10")
+    .then(res => res.json())
+    .then(data => {
+        const select = document.getElementById("choices-multiple-remove-button");
+
+        // 기존의 option 태그들을 모두 제거
+        while(select.firstChild) {
+            select.removeChild(select.firstChild);
+        }
+
+        data.forEach(emp=>{
+            let option = document.createElement('option');
+            option.text = emp.ename;
+            option.value = emp.user_id;
+            select.add(option);
+        });
+
+        // After populating the <select> with new <option> elements, 
+        // create a new instance of Choices to refresh the UI.
+        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+            removeItemButton: true,
+            maxItemCount:5,
+            searchResultLimit:8,
+            renderChoiceLimit:8
+        });
+
+    })
+    .catch(error => console.error('Error:', error));
+
+});
+
 </script>  
 
 <button type="button" class="custom-btn btn-8" data-toggle="modal" data-target="#createProjectModal">
