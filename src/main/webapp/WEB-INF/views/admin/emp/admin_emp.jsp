@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 request.setCharacterEncoding("UTF-8");
 response.setCharacterEncoding("UTF-8");
@@ -12,6 +13,7 @@ response.setCharacterEncoding("UTF-8");
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>부서별 사원관리 페이지</title>
 <jsp:include page="/common/Head.jsp" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <link
@@ -325,7 +327,7 @@ response.setCharacterEncoding("UTF-8");
 					      console.log('result: ', responseObj.result);
 					      console.log('message: ', responseObj.message);
 					      if (responseObj.data === "insert") {
-								alert("사용자 등록이 완료되었습니다.");
+								Swal.fire("사용자 등록이 완료되었습니다.");
 							}
 					      location.reload();
 					      
@@ -388,9 +390,9 @@ response.setCharacterEncoding("UTF-8");
 				 		console.log('result: ', responseObj.result);
 					    console.log('message: ', responseObj.message);
 				 	 if (responseObj.data === "delete") {
-							alert("사용자 삭제가 완료되었습니다.");
+				 		Swal.fire("사용자 삭제가 완료되었습니다.");
 						}
-				      location.reload();
+				 	location.reload();
 				 	})
 				 	.catch(error => {
 				 	  console.error('Error:', error);
@@ -414,16 +416,16 @@ response.setCharacterEncoding("UTF-8");
 					console.log(contents);
 
 						if (responseObj.data === "insert") {
-							alert("사용자 등록이 완료되었습니다.");
+							Swal.fire("사용자 등록이 완료되었습니다.");
 						}
 						if (responseObj.data === "update") {
-							alert("사용자 수정이 완료되었습니다.");
+							Swal.fire("사용자 수정이 완료되었습니다.");
 						}
 						if (responseObj.data === "delete") {
-							alert("사용자 삭제가 완료되었습니다.");
+							Swal.fire("사용자 삭제가 완료되었습니다.");
 						}
 				} else {
-					alert("해당 처리가 되지 않았습니다. 관리자에게 문의해주세요.");
+					Swal.fire("해당 처리가 되지 않았습니다. 관리자에게 문의해주세요.");
 				}
 
 				console.log('result:', responseObj.result, "data:", responseObj.data);
