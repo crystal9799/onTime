@@ -59,7 +59,7 @@
 	  };
       $("#addBtn").click( function() {
     	 console.log("addd test"); 
-    	 
+    	  
     	 $.ajax({
 				url : "scheduleAdd.ajax",
 				type : "post",
