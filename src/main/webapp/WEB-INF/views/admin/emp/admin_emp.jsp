@@ -370,18 +370,55 @@ response.setCharacterEncoding("UTF-8");
 			 */
 			 deleteBtn.addEventListener('click', async () => {
 				 	console.log("삭제이벤트실행");
-				 	grid.removeCheckedRows(true);
-				 	const deleteResult = grid.request('deleteData',{
-				 		modifiedOnly: true
+				 	const checkedData = grid.getCheckedRows();
+				 	console.log(checkedData);
+				 	
+				    // user_id만 추출하여 data 배열에 담기
+				 	/* const data = jsonData.map(item => item.user_id); */
+				 	fetch('/Team4_WebProject_2/admin/empManage/deleteOk.do', {
+				 	  method: 'POST',
+				 	  headers: {
+				 	    'Content-Type': 'application/json'
+				 	  },
+				 	  // data 배열을 매개변수로 보내기
+				 	  body: JSON.stringify(checkedData)
+				 	})
+				 	.then(response => response.json())
+				 	.then(result => {
+				 	  // 서버로부터의 응답 처리
+				 	  console.log(result);
+				 	 if (responseObj.data === "insert") {
+							alert("사용자 등록이 완료되었습니다.");
+						}
+				      location.reload();
+				 	})
+				 	.catch(error => {
+				 	  console.error('Error:', error);
 				 	});
-				 	grid.on('response', ev => {
-				 		  const {response} = ev.xhr;
-				 		  const responseObj = JSON.parse(response);
-
-				 		  console.log('result : ', responseObj.result);
-				 		  console.log('data : ', responseObj.data);
-				 		});
-				    });
+				 	/* fetch('/Team4_WebProject_2/admin/empManage/createOk.do?deptno='+${deptno}, {
+					    method: 'POST',
+					    headers: {
+					      'Content-Type': 'application/json'
+					    },
+					    body: JSON.stringify(data)
+					  })
+					    .then(response => response.json())
+					    .then(responseObj => {
+					      // Handle the response from the server
+					      console.log('result: ', responseObj.result);
+					      console.log('message: ', responseObj.message);
+					      if (responseObj.data === "insert") {
+								alert("사용자 등록이 완료되었습니다.");
+							}
+					      location.reload();
+					      
+					    })
+					    .catch(error => {
+					      // Handle any errors that occur during the request
+					      console.error('Error:', error);
+					    });
+ */
+ });
 
 			/**
 			 * [함수] dataSource 선언한 API 함수 호출이 발생할 경우 반환값을 리턴해주는 함수 입니다.
