@@ -384,40 +384,17 @@ response.setCharacterEncoding("UTF-8");
 				 	  body: JSON.stringify(checkedData)
 				 	})
 				 	.then(response => response.json())
-				 	.then(result => {
-				 	  // 서버로부터의 응답 처리
-				 	  console.log(result);
-				 	 if (responseObj.data === "insert") {
-							alert("사용자 등록이 완료되었습니다.");
+				 	.then(responseObj => {
+				 		console.log('result: ', responseObj.result);
+					    console.log('message: ', responseObj.message);
+				 	 if (responseObj.data === "delete") {
+							alert("사용자 삭제가 완료되었습니다.");
 						}
 				      location.reload();
 				 	})
 				 	.catch(error => {
 				 	  console.error('Error:', error);
 				 	});
-				 	/* fetch('/Team4_WebProject_2/admin/empManage/createOk.do?deptno='+${deptno}, {
-					    method: 'POST',
-					    headers: {
-					      'Content-Type': 'application/json'
-					    },
-					    body: JSON.stringify(data)
-					  })
-					    .then(response => response.json())
-					    .then(responseObj => {
-					      // Handle the response from the server
-					      console.log('result: ', responseObj.result);
-					      console.log('message: ', responseObj.message);
-					      if (responseObj.data === "insert") {
-								alert("사용자 등록이 완료되었습니다.");
-							}
-					      location.reload();
-					      
-					    })
-					    .catch(error => {
-					      // Handle any errors that occur during the request
-					      console.error('Error:', error);
-					    });
- */
  });
 
 			/**
