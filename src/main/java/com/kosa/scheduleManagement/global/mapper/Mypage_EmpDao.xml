@@ -28,7 +28,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 부서장 -->
-	<select id="getMypageAdminDeptInfo" resultType="com.kosa.scheduleManagement.global.dto.Dept">
+	<!-- 부서장이 맡은 프로젝트 정보 -->
+	<select id="getMypageAdminProjectInfo" resultType="com.kosa.scheduleManagement.global.dto.Project">
 		select p.project_num, p.project_name from emp e join project p on e.deptno = p.deptno where e.user_id=#{user_id}
 	</select>
+	
+	<!-- 프로젝트 내 총 개인일정  -->
+	<select id="getMypageAdminProjectTotalNum" resultType="int">
+		select count(*) as totalBoardNum from emp e join project p on e.deptno = p.deptno join schedule_board sb on p.project_num=sb.project_num where e.user_id=#{user_id} and sb.project_num=#{project_num}
+	</select>
+	
+	<!-- 프로젝트 내 총 완료된 개인일정  -->
+	<select id="getMypageAdminProjectDoneNum" parameterType="com.kosa.scheduleManagement.global.dto.Project_Emp" resultType="int">
+		select count(*) as doneBoardNum from emp e join project p on e.deptno = p.deptno join schedule_board sb on p.project_num=sb.project_num where sb.sched_prog=2 and e.user_id=#{user_id} and sb.project_num=#{project_num}
+	</select>
+	
 </mapper>
