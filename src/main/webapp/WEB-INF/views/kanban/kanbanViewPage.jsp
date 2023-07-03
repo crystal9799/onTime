@@ -35,23 +35,28 @@
 				<!-- modal -->
 				<div class="modal">
 					<div class="modal_body">
-					<select id="nameList">
+										모달 테스트 창<br><br><br><br>
+					사원<br> <select id="nameList">
 					<option value="0">선택</option>
 					</select>
 					<br><br> <br><br> <br>
 						업무 내용<br>
 						<input type="text" placeholder="입력" id="todo-input" /> <br> <br>
-						<button class="addModalBtn" >add</button>
+						<!-- <a type=button class="addModalBtn" style="text-decoration:none; color:black"><button>add</button></a> -->
+						<br><br><br><br><br><br>  
+						<a id="addBtn" href="${pageContext.request.contextPath}/getProjectDetail.do" style="text-decoration:none; color:black">Add Test</a>
+						<br><br><br>
+						<button class="btn btn-primary w-100" id="modalClose">cancel</button>
 					</div>
 				</div>
 				<div class="board">
 					<form id="todo-form">
-						<button class="modalBtn">모달테스트 중</button>
-						<br> <br> <input type="text" placeholder="업무 입력" id="todo-input" />
+						<button class="modalBtn">add</button>
+<!-- 						<br> <br> <input type="text" placeholder="업무 입력" id="todo-input" /> -->
 <!-- 						<button type="submit">추가</button> -->
 						<button id="saveBtn">save</button>
 						<button id="delBtn">del</button>
-						<button><a href="${pageContext.request.contextPath}/getProjectDetail.do" style="text-decoration:none; color:black">refresh</a></button>
+						<button><a href="${pageContext.request.contextPath}/getProjectDetail.do" style="text-decoration:none; color:black">refresh</a></button><br>
 	<!-- 					<button id="refreshBtn" href="${pageContext.request.contextPath}/getProjectDetail.do">refresh</button> -->
 					</form>
 

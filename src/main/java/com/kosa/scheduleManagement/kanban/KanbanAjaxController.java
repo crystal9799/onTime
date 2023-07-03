@@ -71,10 +71,8 @@ public class KanbanAjaxController {
 			service.updatePrev(sched_num, sched_seq, sched_info);
 		}
 	}
-	
-	
+
 ////////////////////////////////////////////////
- 
 
 	@ResponseBody
 	@RequestMapping("/scheduleCurrUpdate.ajax")
@@ -92,10 +90,11 @@ public class KanbanAjaxController {
 			service.updateCurr(sched_num, sched_seq, sched_info);
 		}
 	}
+
 	@ResponseBody
 	@RequestMapping("/scheduleNextUpdate.ajax")
 	public void updateNext(String data) throws JSONException, ParseException, JsonMappingException,
-	JsonProcessingException, ClassNotFoundException, SQLException {
+			JsonProcessingException, ClassNotFoundException, SQLException {
 		System.out.println("next   conrtroollerrrrr -----------------------------------");
 		JsonParser jsonParser = new JsonParser();
 		JsonArray jsonArray = (JsonArray) jsonParser.parse(data);
@@ -104,12 +103,12 @@ public class KanbanAjaxController {
 			String sched_info = object.get("sched_info").getAsString();
 			int sched_seq = Integer.parseInt(object.get("sched_seq").getAsString());
 			int sched_num = Integer.parseInt(object.get("sched_num").getAsString());
-			System.out.println("next --------------------------------controller val: " + sched_info + ", " + sched_seq + ", " + sched_num);
+			System.out.println("next --------------------------------controller val: " + sched_info + ", " + sched_seq
+					+ ", " + sched_num);
 			service.updateNext(sched_num, sched_seq, sched_info);
 		}
 	}
 
- 
 	/*
 	 * JSONArray jsonArr = new JSONArray(); ObjectMapper mapper = new
 	 * ObjectMapper(); jsonArr = mapper.readValue(data, JSONArray.class);
@@ -208,7 +207,6 @@ public class KanbanAjaxController {
 	 * 
 	 * //service.progUpdate(sched_seq, sched_info ); }
 	 */
-	
 
 	@RequestMapping(value = "/scheduleDel.ajax", method = { RequestMethod.POST })
 	public void deleteBoard(@RequestParam("sched_num") String sched_num) throws ClassNotFoundException, SQLException {
@@ -218,24 +216,22 @@ public class KanbanAjaxController {
 	@RequestMapping(value = "/scheduleAdd.ajax", method = { RequestMethod.POST })
 	public void scheduleAdd(@RequestParam("ename") String ename, @RequestParam("project_num") String project_num,
 			@RequestParam("sched_info") String sched_info) throws ClassNotFoundException, SQLException {
-		/*
-		 * System.out.println(ename); System.out.println(project_num);
-		 * System.out.println(sched_info);
-		 */
+		System.out.println("add controller");
+		System.out.println(ename);
+		System.out.println(project_num);
+		System.out.println(sched_info);
 
-		int user_id = service.getUseridByEname(ename);
-//		System.out.println(user_id);
+		int user_id = service.getUseridByEname(ename); 
+		System.out.println(user_id);
 
-		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, 0, 8);
-		Schedule schedule = new Schedule(user_id, 8);
+		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, 0, 2);
+		Schedule schedule = new Schedule(user_id, 2);
+
+		System.out.println(sched_info);
 
 		service.insertBoard(board);
 		service.insertSchedule(schedule);
 
-		// System.out.println("controller schedule val: "+schedule);
-
-//		service.insertBoard(sched_info);
-// 		service.insertSchedule(userId);
 	}
 
 	// string 으로 임시 변환 상태 --> emp ;service mapper interface

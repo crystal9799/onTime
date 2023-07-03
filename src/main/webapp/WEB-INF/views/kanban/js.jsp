@@ -52,12 +52,84 @@
 					alert("error");
 				}
 			});
-        	
-        	
         });
- 
+        
+        
+
 	  };
-	 
+      $("#addBtn").click( function() {
+    	 console.log("addd test"); 
+    	 
+    	 $.ajax({
+				url : "scheduleAdd.ajax",
+				type : "post",
+				data : {
+					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
+					project_num : "2", // 클라이언트 값 전달
+					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
+				}, 
+				success : function(data) {
+						console.log('add'); 
+			    },
+				error : function() {
+					alert("error");
+				}
+			});
+      });
+
+
+	  const modal2 = document.querySelector('.modal_body');
+      $("#modalClose").click( function() {
+     		console.log('testbtn');
+     		modal2.style.display = "none";
+      });
+/*       		$.ajax({
+				url : "scheduleAdd.ajax",
+				type : "post",
+				data : {
+					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
+					project_num : "2", // 클라이언트 값 전달
+					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
+				}, 
+				success : function(data) {
+						console.log('add'); 
+			    },
+				error : function() {
+					alert("error");
+				}
+			});   */
+
+/* ajax add */
+ /*    	const addModalBtn = document.querySelector('.addModalBtn');
+     addModalBtn.addEventListener('click', () => {
+     	console.log('add modal Click!');
+
+			$.ajax({
+				url : "scheduleAdd.ajax",
+				type : "post",
+				data : {
+					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
+					project_num : "2", // 클라이언트 값 전달
+					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
+				}, 
+				success : function(data) {
+						console.log('add'); 
+			    },
+				error : function() {
+					alert("error");
+				}
+			});
+     }); */
+			
+     
+     
+     
+     
+     
+     
+     
+     
+     
 	  
 /* 	  
 	  $(".dj-tok .mem-list > li").click(function() {
@@ -467,7 +539,7 @@
 
       btnOpenPopup.addEventListener('click', () => {
         modal.classList.toggle('show');
-			getNameList(); //modal load 시 동적 태그 생성
+			getNameList();
 
         if (modal.classList.contains('show')) {
           body.style.overflow = 'hidden';
@@ -507,29 +579,7 @@
 
 
 		 
-		 
-		 /* ajax add */
-       	const addModalBtn = document.querySelector('.addModalBtn');
-        addModalBtn.addEventListener('click', () => {
-        	console.log('add modal Click!');
- 
-			$.ajax({
-				url : "scheduleAdd.ajax",
-				type : "post",
-  				data : {
-					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
-					project_num : "2", // 클라이언트 값 전달
-					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
-				}, 
-				success : function(data) {
-						console.log('add'); 
-			    },
-				error : function() {
-					alert("error");
-				}
-			});
-        });
-			
+
         
 		 
 		 /* ajax add */
