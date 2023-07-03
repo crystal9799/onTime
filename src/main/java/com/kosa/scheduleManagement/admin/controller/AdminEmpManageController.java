@@ -1,10 +1,12 @@
 package com.kosa.scheduleManagement.admin.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kosa.scheduleManagement.admin.service.EmpManageService;
 import com.kosa.scheduleManagement.global.dto.Emp;
 
-@RequestMapping("/admin")
+@RequestMapping(value = "/admin", produces = "application/text; charset=UTF-8")
 @Controller
 public class AdminEmpManageController {
 	private EmpManageService empManageService;
@@ -42,7 +44,7 @@ public class AdminEmpManageController {
 			cp = "1";
 		}
 		if (ps == null || ps.trim().equals("")) {
-			ps = "5";
+			ps = "1";
 		}
 
 		int pagesize = Integer.parseInt(ps);
@@ -67,56 +69,60 @@ public class AdminEmpManageController {
 		model.addAttribute("pagesize", pagesize);
 		model.addAttribute("pagecount", pagecount);
 		model.addAttribute("cpage", cpage);
-		
+
 		System.out.println("elist : " + elist);
 		System.out.println("pagesize : " + pagesize);
 		System.out.println("pagecount : " + pagecount);
-		System.out.println("page : "+ cpage);
-		
+		System.out.println("page : " + cpage);
+
 		return "/admin/emp/admin_emp";
 	}
 
 ////////////////////////////////////////rest 방식 코드 	
-	
-// rest 부서별 사원 조회 (테스트)
+
+	// rest 부서별 사원 조회 (테스트)
 	@GetMapping("/empManage/show.do")
-	public ResponseEntity<Map<String, Object>> getEmpByDeptno(@RequestParam("perPage") int perPage, @RequestParam("deptno") int deptno,@RequestParam(value="page", required = false, defaultValue = "1") int page, HttpSession session) {
+	public ResponseEntity<String> getEmpByDeptno(@RequestParam("deptno") int deptno,
+			@RequestParam(value = "page", required = false, defaultValue = "1") int page, HttpSession session) {
 		List<Emp> list = new ArrayList<>();
 		try {
-		    list = empManageService.getList(deptno);
-		    String dheadName = empManageService.getDheadNameByDheadNull(deptno);
-		    System.out.println(dheadName);
-		    System.out.println("empListByDeptno rest호출");
+			list = empManageService.getList(deptno);
+			String dheadName = empManageService.getDheadNameByDheadNull(deptno);
+			System.out.println(dheadName);
+			System.out.println("empListByDeptno rest호출");
 
-		    // 새로운 형식의 JSON 데이터 생성
-		    Map<String, Object> response = new HashMap<>();
-		    response.put("result", true);
-		    Map<String, Object> data = new HashMap<>();
-		    List<Object> contents = new ArrayList<>();
-		    
-		    // 각각의 Emp 객체를 가공하여 contents에 추가
-		    for (Emp emp : list) {
-		        Map<String, Object> empData = new HashMap<>();
-		        empData.put("user_id", emp.getUser_id());
-		        empData.put("ename", emp.getEname());
-		        empData.put("emp_pic", emp.getEmp_pic());
-		        empData.put("job", emp.getJob());
-		        empData.put("deptno", emp.getDeptno());
-		        empData.put("dhead_name", !emp.getEname().equals(dheadName) ? dheadName : "");
-		        empData.put("file", emp.getFile());
-		        contents.add(empData);
-		    }
-		    
-		    data.put("contents", contents);
-		    Map<String, Object> pageData = new HashMap<>();
-		    pageData.put("page", page);
-		    data.put("pagination", pageData);
-		    
-		    response.put("data", data);
+			// 새로운 형식의 JSON 데이터 생성
+			Map<String, Object> response = new HashMap<>();
+			response.put("result", true);
+			Map<String, Object> data = new HashMap<>();
+			List<Object> contents = new ArrayList<>();
 
-		    return new ResponseEntity<>(response, HttpStatus.OK);
+			// 각각의 Emp 객체를 가공하여 contents에 추가
+			for (Emp emp : list) {
+				Map<String, Object> empData = new HashMap<>();
+				empData.put("user_id", emp.getUser_id());
+				empData.put("ename", emp.getEname());
+				empData.put("emp_pic", emp.getEmp_pic());
+				empData.put("job", emp.getJob());
+				empData.put("deptno", emp.getDeptno());
+				empData.put("dhead_name", !emp.getEname().equals(dheadName) ? dheadName : "");
+				empData.put("file", emp.getFile());
+				contents.add(empData);
+			}
+
+			data.put("contents", contents);
+			Map<String, Object> pageData = new HashMap<>();
+			pageData.put("page", page);
+			data.put("pagination", pageData);
+
+			response.put("data", data);
+
+			String jsonResponse = empManageService.responseToJson(response);
+
+			System.out.println(jsonResponse);
+			return ResponseEntity.ok(jsonResponse);
 		} catch (Exception e) {
-		    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -131,47 +137,116 @@ public class AdminEmpManageController {
 
 // rest 부서별 사원 생성
 	@PostMapping("/empManage/createOk.do")
-	public ResponseEntity<String> createEmp(@RequestParam("deptno") int deptno, @RequestBody Emp emp, HttpSession session) {
-//		int deptno = (int) session.getAttribute("deptno");
+	public ResponseEntity<String> createEmp(@RequestParam("deptno") int deptno,
+			@RequestBody Map<String, Object> requestBody, HttpSession session) {
 		String message = "";
+		String ename = (String) requestBody.get("ename");
+		String password = (String) requestBody.get("password");
+		String job = (String) requestBody.get("job");
+		Emp emp = new Emp();
+		Map<String, Object> response = new HashMap<>();
+
+		emp.setEname(ename);
+		emp.setPassword(password);
+		emp.setJob(job);
 		emp.setDeptno(deptno);
 		System.out.println(emp);
 		int user_id = empManageService.insertEmp(deptno, emp);
 		session.removeAttribute("deptno");
 		if (user_id > -1) {
 			message = String.valueOf(user_id);
+			response.put("result", true);
+			response.put("message", "사원 생성 성공");
+			response.put("data", "insert");
 			System.out.println("사원 생성 성공");
 		} else {
 			message = "사원 생성 실패";
 			System.out.println("사원 생성 실패");
 		}
-		return new ResponseEntity<String>(message,HttpStatus.OK);
+		String jsonResponse = "";
+		try {
+			jsonResponse = empManageService.responseToJson(response);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(jsonResponse);
 	}
 
-	//사원 삭제
+	// 사원 삭제
 	@GetMapping("/empManage/deleteOk.do")
-	public ResponseEntity<String> deleteEmp(@RequestParam("user_id") long user_id) {
-		//삭제가 완료되면 true를 반환, update enabled 0
-		boolean result = empManageService.deleteEmp(user_id); 
-		String message = "";
-		if(result != true) {
-			message = "삭제 실패";
-			return new ResponseEntity<String>(message,HttpStatus.OK);
-		}else {
-			message = user_id + "번 사원이 삭제되었습니다.";
-			return new ResponseEntity<String>(message,HttpStatus.BAD_REQUEST);
-		}
-	}
-	
-	//사원 수정
-	@PutMapping("/empManage/updateOk.do")
-	public ResponseEntity<String> updateEmp(@RequestParam("user_id") int user_id, @RequestBody Emp emp) {
-	    boolean isUpdated = empManageService.updateEmp(emp, user_id);
-	    if (isUpdated) {
-	        return new ResponseEntity<String>("사원 정보가 성공적으로 수정되었습니다.",HttpStatus.OK);
-	    } else {
-	        return new ResponseEntity<String>("사원 정보 수정에 실패했습니다.",HttpStatus.OK);
+	public ResponseEntity<String> deleteEmp(@RequestBody Map<String, Object> requestBody) {
+	    System.out.println(requestBody);
+	    List<Map<String, Object>> checkedRows = (List<Map<String, Object>>) requestBody.get("deletedRows");
+	    
+	    // Get user_id values from checkedRows
+	    List<Integer> userIds = checkedRows.stream()
+	            .map(row -> (int) row.get("user_id"))
+	            .collect(Collectors.toList());
+	    
+	    // 삭제가 완료되면 true를 반환, update enabled 0
+	    Map<String, Object> response = new HashMap<>();
+	    boolean isDeleted = false;
+	    
+	    for (int userId : userIds) {
+	        // 삭제 수행 로직
+	        isDeleted = empManageService.deleteEmp(userId);
+	        
+	        if (!isDeleted) {
+	            break;
+	        }
 	    }
+	    
+	    if (!isDeleted) {
+	        response.put("result", false);
+	    } else {
+	        response.put("result", true);
+	        response.put("data", "delete");
+	    }
+	    
+	    String jsonResponse = "";
+	    
+	    try {
+	        jsonResponse = empManageService.responseToJson(response);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return ResponseEntity.ok(jsonResponse);
+	}
+
+
+	// 사원 수정
+	@PutMapping("/empManage/updateOk.do")
+	public ResponseEntity<String> updateEmp(@RequestBody Map<String, Object> requestBody) {
+		List<Map<String, Object>> updatedRows = (List<Map<String, Object>>) requestBody.get("updatedRows");
+		boolean isUpdated = false;
+		Map<String, Object> response = new HashMap<>();
+		for (Map<String, Object> row : updatedRows) {
+			int userId = (int) row.get("user_id");
+			String ename = (String) row.get("ename");
+			String job = (String) row.get("job");
+
+			// 업데이트 수행 로직
+			isUpdated = empManageService.updateEmp(userId, ename, job);
+			if (isUpdated == false)
+				break;
+		}
+		if (isUpdated == false) {
+			response.put("result", false);
+		} else {
+			response.put("result", true);
+			response.put("data", "update");
+		}
+
+		String jsonResponse = "";
+		try {
+			jsonResponse = empManageService.responseToJson(response);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(jsonResponse);
 	}
 
 }
