@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,6 +36,24 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "login";
+	}
+	
+	//GET 요청
+	//join.jsp 화면
+	@GetMapping("/join")  //  /joinus/join.htm
+	public String join() {
+		return "login";
+	}
+	
+	//POST 요청
+	@PostMapping("/join")
+	public String join2() {
+		return "home";
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "home";
 	}
 	
 }

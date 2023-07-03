@@ -9,9 +9,8 @@
 
 <security:http auto-config="true">
 	<security:csrf disabled="true" />
-	
 		<security:form-login login-page="/"
-		                     default-target-url="/index.htm"
+		                     default-target-url="/login"
 		                     authentication-failure-url="/joinus/login.htm?error" />
 		<security:logout     logout-success-url="/"/>
 	
@@ -21,13 +20,13 @@
 
 	<security:authentication-manager>
 		<security:authentication-provider>
-			<security:jdbc-user-service data-source-ref="driverManagerDataSource" 
-			 users-by-username-query="SELECT USER_ID, PASSWORD, 1 enabled FROM member where userid=?"
-			 authorities-by-username-query="select m.USERID , r.ROLE_NAME  
-							           from member m join roll r 
-							           on m.userid = r.userid 
-							           where m.userid=?" />
-			<security:password-encoder ref="bCryptPasswordEncoder"/>
+			<security:jdbc-user-service data-source-ref="driverManagerDataSource"
+ 				users-by-username-query="SELECT USER_ID, PASSWORD, 1 enabled FROM emp where user_id=?"
+ 				authorities-by-username-query="select e.USER_ID, a.AUTH 
+								           		from emp e join authority a
+								           		on e.user_id = a.user_id 
+								           		where e.user_id=?"
+ 				/>
 		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>
