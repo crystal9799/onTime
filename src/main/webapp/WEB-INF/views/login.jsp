@@ -19,7 +19,7 @@
               </div>
               <h4>Hello! let's get started</h4>
               <h6 class="font-weight-light">Sign in to continue.</h6>
-              <form class="pt-3" action="/WebProject_2/join" method="post" name='f'>
+              <form class="pt-3" action="${pageContext.request.contextPath}/login" method="post" name='f'>
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" name="username" id="exampleInputEmail1" placeholder="Username">
                 </div>
