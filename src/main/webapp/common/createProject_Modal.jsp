@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
 <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <script type="text/javascript">
@@ -45,11 +46,12 @@ $(document).ready(function(){
 	
     $('form').submit(function(event) {
         event.preventDefault();
-
+		
         var formData = {};
         var projectData = {};
         var emplistData = [];
-
+		const modal = document.getElementById("createProjectModal");
+		
         // 프로젝트 정보
         projectData.id = $('#project_num').val();
         projectData.start = $('#start').val();
@@ -73,8 +75,36 @@ $(document).ready(function(){
         // jsonData를 서버로 전송하는 코드 추가
 
         console.log(jsonData);
+        
+        fetch('/Team4_WebProject_2/admin/createProjectOk.do',{
+        	method: 'POST',
+        	headers: {
+        		'Content-Type': 'application/json'
+        	},
+        	body: jsonData
+        })
+        .then(res => res.json())
+        .then(data => {
+        	console.log(data);
+        	modal.style.display='none';
+        })
+        .catch(error =>{
+        	console.error('Error:', error);
+        })
+        
+    });
+    
+    $('#regist').click(()=>{
+    	Swal.fire({
+    		  position: 'center',
+    		  icon: 'success',
+    		  title: 'Create Project.',
+    		  showConfirmButton: false,
+    		  timer: 1500
+    		})
     });
 });
+
 
 </script>  
 
@@ -95,7 +125,7 @@ $(document).ready(function(){
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/createProjectOk.do">
+            <form id="createProjectForm">
                 <div class="modal-body">
                 	<div class="form-group">
                 		<label for="project_num">Project Number</label>
@@ -144,8 +174,9 @@ $(document).ready(function(){
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+                    <button type="submit" class="btn btn-primary" id="regist">regist</button>
+                    <a href="/Team4_WebProject_2/admin/main.do" type="button" class="btn btn-success" id="save">Save</a>
                 </div>
             </form>
         </div>
