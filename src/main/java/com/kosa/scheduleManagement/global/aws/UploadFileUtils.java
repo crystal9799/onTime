@@ -30,10 +30,10 @@ public class UploadFileUtils {
 		// S3Util 의 fileUpload 메서드로 파일을 업로드한다.
 		s3.fileUpload(bucketName, uploadPath + uploadedFileName, byteData);
 
-		logger.info(uploadedFileName);
-// s3.fileUpload(bucketName, new File(fileName))
+		String objectUrl = s3.getFileURL(bucketName, uploadPath + uploadedFileName);
+		System.out.println("Object URL: " + objectUrl);
 
-		return uploadedFileName;
+		return objectUrl;
 
 	}
 

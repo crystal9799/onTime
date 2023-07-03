@@ -15,9 +15,7 @@ public class S3Service {
 	
 	public String fileToS3(MultipartFile file) {
 		//프로필 이미지의 추가경로
-//		String uploadpath = "skglim/profileImage";
-
-		String uploadpath = "";
+		String uploadpath = "skglim/profileImage";
 		String img_path="";
 		try {
 			img_path = UploadFileUtils.uploadFile(uploadpath, file.getOriginalFilename(), file.getBytes());
