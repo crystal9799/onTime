@@ -16,10 +16,16 @@
 	                var calendar = new FullCalendar.Calendar(calendarEl, {
 	                    initialView: 'dayGridMonth',
 	                    navLinks: true, //month,week,day 선택
-	                    events: data
+	                    events: data,
+	                    eventClick: function(event){
+	                        $('#eventModal .modal-title').text(event.title);
+	                        $('#eventModal .event-start').text(event.start.format('YYYY-MM-DD'));
+	                        $('#eventModal .event-end').text(event.end.format('YYYY-MM-DD'));
+	                        $('#eventModal').modal('show');
+	                    }
 	                });
 	                calendar.render();
-	                //<option value="1">철수</option>>
+	                
 	            })
 	    });
     </script>
