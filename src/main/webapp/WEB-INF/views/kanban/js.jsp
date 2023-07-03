@@ -70,7 +70,7 @@
 				}, 
 				success : function(data) {
 						console.log('add'); 
-			    },
+			    }, 
 				error : function() {
 					alert("error");
 				}
