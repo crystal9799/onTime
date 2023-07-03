@@ -16,7 +16,7 @@ import com.kosa.scheduleManagement.global.dto.ScheduleBoard;
 public class KanbanScheduleController {
 
 	public KanbanScheduleController() {
-		System.out.println("Controller Connection Kanban");
+		/* System.out.println("Controller Connection Kanban"); */
 	}
 
 	private ScheduleService service;
@@ -24,21 +24,20 @@ public class KanbanScheduleController {
 	@GetMapping("schedule.do")
 	public String getAllList() throws ClassNotFoundException, SQLException {
 		System.out.println("getAllLIst conn");
-		return "/kanban/kanbanViewPage";
+		return "/kanban/temp/kanbanViewTestPage";
+//		return "/kanban/kanbanViewPage";
 	}
 
 	@GetMapping("datatest.do")
 	public String dataTest() throws ClassNotFoundException, SQLException {
 		System.out.println("view conn");
-		return "/kanban/dataLoadJust";
-//		return "/kanban/dataTestPage";
+		return "/kanban/dataLoadJust"; 
 	}
 
 	@GetMapping("rowdatatest.do")
 	public String rowdataTest() throws ClassNotFoundException, SQLException {
 		System.out.println("view conn");
-		return "/kanban/dataTestPage";
-//		return "/kanban/dataTestPage";
+		return "/kanban/dataTestPage"; 
 	}
 
 	/*

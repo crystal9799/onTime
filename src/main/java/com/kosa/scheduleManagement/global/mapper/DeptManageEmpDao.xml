@@ -42,9 +42,9 @@
 		select user_id,ename,emp_pic,job,deptno,dhead_num from emp
 		where deptno=#{deptno}
 	</select>
-	<select id="getDheadNameByDheadNull"
-		resultType="String">
-		select ename from emp
+	<select id="getDheadNameByDheadNull" resultType="String">
+		select ename
+		from emp
 		where dhead_num IS NULL
 		AND deptno = #{deptno}
 	</select>
@@ -74,6 +74,12 @@
 		SET ename = #{ename}, job = #{job}
 		WHERE
 		user_id = #{user_id}
+	</update>
+	<update id="updateEmpByREST" >
+		UPDATE emp
+		SET ename = #{param2},
+		job = #{param3}
+		WHERE user_id = #{param1}
 	</update>
 
 </mapper>
