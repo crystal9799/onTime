@@ -5,8 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper
 	namespace="com.kosa.scheduleManagement.global.dao.ScheduleDao">
 
-	<insert id="insertSchedule"
-		parameterType="com.kosa.scheduleManagement.global.dto.Schedule">
+	<insert id="insertSchedule" parameterType="com.kosa.scheduleManagement.global.dto.Schedule">
 		insert into
 		schedule(user_id, sched_num)
 		values(#{user_id}, #{sched_num})
