@@ -94,7 +94,7 @@ $(document).ready(function(){
       		  showConfirmButton: false,
       		  timer: 1500
       		})
-      		let newProject = documnet.createElement("li");
+      		/* let newProject = documnet.createElement("li");
         	newProject.setAttribute("class", "nav-item");
         	newProject.appendTo($('.nav flex-column sub-menu'));
         	
@@ -102,7 +102,7 @@ $(document).ready(function(){
         	newLink.setAttribute("class", "nav-link");
         	newLink.setAttribute("href", "/Team4_WebProject/schedule.do?project_num="+projectData.id);
         	newLink.setAttribute("value", projectData.title);
-        	newLink.appendTo(newProject);
+        	newLink.appendTo(newProject); */
         })
         
         .catch(error =>{
@@ -194,7 +194,7 @@ $(document).ready(function(){
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
                     <button type="submit" class="btn btn-primary" id="regist">regist</button>
-                    <a href="/Team4_WebProject_2/admin/main.do" type="button" class="btn btn-success" id="save">Save</a>
+                    <a href="/Team4_WebProject_2/main.do" type="button" class="btn btn-success" id="save">Save</a>
                 </div>
             </form>
         </div>

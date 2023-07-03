@@ -17,10 +17,17 @@
 	                    initialView: 'dayGridMonth',
 	                    navLinks: true, //month,week,day 선택
 	                    events: data,
-	                    eventClick: function(event){
-	                        $('#eventModal .modal-title').text(event.title);
-	                        $('#eventModal .event-start').text(event.start.format('YYYY-MM-DD'));
-	                        $('#eventModal .event-end').text(event.end.format('YYYY-MM-DD'));
+	                    eventClick: function(info){
+	                    	
+	                    	var event = info.event;
+	                    	
+	                    	$('#project_num').text(event.id);
+	                    	$('#project_name').text(event.title);
+	                    	$('#project_info').text(event.extendedProps.project_info);
+	                    	$('#start').text(event.start.toISOString().slice(0, 10));
+	                    	$('#end').text(event.end.toISOString().slice(0, 10));
+
+	                        // 모달을 보여줍니다.
 	                        $('#eventModal').modal('show');
 	                    }
 	                });
@@ -37,6 +44,7 @@
 		<div class="main-panel">
 			<div class="content-wrapper">
 				<jsp:include page="/common/createProject_Modal.jsp" />
+				<jsp:include page="/common/detailProject_Modal.jsp" />
 				<div id='calendar'></div>
 			</div>
 		</div>
