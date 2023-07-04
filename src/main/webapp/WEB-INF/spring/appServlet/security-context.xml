@@ -11,7 +11,7 @@
 	<security:csrf disabled="true" />
 		<security:form-login login-page="/"
 		                     default-target-url="/login"
-		                     authentication-failure-url="/joinus/login.htm?error" />
+		                     authentication-failure-url="/error" />
 		<security:logout     logout-success-url="/"/>
 	
 <!-- 		<security:intercept-url pattern="/customer/*Reg.htm" access="hasRole('ROLE_USER')" />

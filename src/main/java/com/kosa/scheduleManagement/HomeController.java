@@ -56,4 +56,9 @@ public class HomeController {
 		return "home";
 	}
 	
+	@GetMapping("/error")
+	public String error() {
+		return "404";
+	}
+	
 }
