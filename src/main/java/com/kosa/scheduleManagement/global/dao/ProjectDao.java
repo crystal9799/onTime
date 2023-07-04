@@ -1,6 +1,7 @@
 package com.kosa.scheduleManagement.global.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kosa.scheduleManagement.global.dto.Project;
 import com.kosa.scheduleManagement.global.dto.Project_Sub;
@@ -23,5 +24,8 @@ public interface ProjectDao {
 	
 	//시퀀스
 	int getSeq();
+	
+	//프로젝트 이름
+	List<Map<String, Object>> getprojectList(int user_id);
 	
 }

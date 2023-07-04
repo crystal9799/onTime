@@ -141,23 +141,16 @@ public class AdminProjectController {
     
     //로그인한 유저가 속한 프로젝트 리스트
     @GetMapping("/projectlist.do")
-    public ResponseEntity<List<Map<String, Integer>>> getProjectList(@RequestParam int user_id){
-    	//프로젝트 리스트 저장하는 맵 리스트(ResponseEntity 사용)
-    	List<Map<String,Integer>> projectlist = new ArrayList<Map<String,Integer>>();
-    	//프로젝트번호 리스트
-    	List<Integer> pnumlist;
-    	try {
-    		pnumlist = project_empservice.getProjectList(user_id);
-    		for(int i=0; i<pnumlist.size(); i++) {
-    			Map<String, Integer> project = new HashMap<String,Integer>();
-    			project.put("project_num",pnumlist.get(i));
-    			projectlist.add(project);
-    			System.out.println(project.toString());
-    		}
-    		return new ResponseEntity<List<Map<String,Integer>>>(projectlist,HttpStatus.OK);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
+    public ResponseEntity<List<Map<String, Object>>> getProjectList(@RequestParam int user_id){
+        List<Map<String,Object>> projectlist = new ArrayList<Map<String,Object>>();
+        try {
+            projectlist = project_Service.getProjectList(user_id);
+            
+            return new ResponseEntity<List<Map<String,Object>>>(projectlist,HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     };
+    
 }

@@ -3,6 +3,7 @@
 <%@ page session="false"%>
 <html lang=ko">
 <head>
+
 	<title>Home</title>
 	<jsp:include page="/common/Head.jsp" />
  	<link href="https://unpkg.com/fullcalendar@5.10.1/main.min.css" rel='stylesheet' />
@@ -48,8 +49,8 @@
 	                calendar.render();
 	                
 	            }) 
-
-			 fetch("${pageContext.request.contextPath}/admin/projectlist.do?user_id=${emp.user_id}")
+	
+			 /* fetch("${pageContext.request.contextPath}/admin/projectlist.do?user_id=${emp.user_id}")
 				.then(res => res.json())
 				.then(data => {
 					const defaultLink = "${pageContext.request.contextPath}/getProjectDetail.do?project_id=";
@@ -76,7 +77,7 @@
 
 			        	console.log("newProject after append:", newProject);
 					}
-				})
+				}) */
 	    });
     </script>
 </head>

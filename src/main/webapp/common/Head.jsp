@@ -49,10 +49,11 @@
 <script src="${pageContext.request.contextPath}/resources/js/todolist.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/dashboard.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/Chart.roundedBarCharts.js"></script>
-
+<script src="${pageContext.request.contextPath}/resources/js/genNav.js"></script>
 
 <!-- mypage chart script -->
 <script src="https://kit.fontawesome.com/b6bfd9ecde.js" crossorigin="anonymous"></script>
+
 
 
 <!-- Main -->
@@ -71,3 +72,4 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script> --%>
 
+<jsp:include page="/common/genNav.jsp"></jsp:include>
