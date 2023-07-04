@@ -24,5 +24,6 @@ public interface ScheduleBoardDao {
 	void updatePrev(ScheduleBoard scheduleBoard)throws ClassNotFoundException, SQLException;
 	void updateCurr(ScheduleBoard scheduleBoard)throws ClassNotFoundException, SQLException;
 	void updateNext(ScheduleBoard scheduleBoard)throws ClassNotFoundException, SQLException;
+	String getSinfoByUserId(int sched_num)throws ClassNotFoundException, SQLException;
 
 }

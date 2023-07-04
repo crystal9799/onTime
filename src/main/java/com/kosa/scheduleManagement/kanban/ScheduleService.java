@@ -19,10 +19,13 @@ import com.kosa.scheduleManagement.global.dao.ScheduleBoardDao;
 import com.kosa.scheduleManagement.global.dao.ScheduleBoard_EmpDao;
 import com.kosa.scheduleManagement.global.dao.ScheduleBoard_Project_EmpDao;
 import com.kosa.scheduleManagement.global.dao.ScheduleDao;
+import com.kosa.scheduleManagement.global.dao.ScheduleProjectDao;
 import com.kosa.scheduleManagement.global.dto.Emp;
+import com.kosa.scheduleManagement.global.dto.Project;
 import com.kosa.scheduleManagement.global.dto.Project_Emp;
 import com.kosa.scheduleManagement.global.dto.Schedule;
 import com.kosa.scheduleManagement.global.dto.ScheduleBoard;
+import com.kosa.scheduleManagement.global.dto.Schedule_Project;
 
 import net.sf.json.JSONArray;
 
@@ -40,6 +43,11 @@ public class ScheduleService {
 		this.sqlSession = sqlSession;
 	}
 
+	public String getSinfoByUserId(int sched_num) throws ClassNotFoundException, SQLException {
+		ScheduleBoardDao scheduleDao = sqlSession.getMapper(ScheduleBoardDao.class);
+		return scheduleDao.getSinfoByUserId(sched_num);
+	}
+	
 	public int getUseridByEname(String ename) throws ClassNotFoundException, SQLException {
 		ScheduleBoard_EmpDao scheduleEmpDao = sqlSession.getMapper(ScheduleBoard_EmpDao.class);
 		return scheduleEmpDao.getUseridByEname(ename);
@@ -48,6 +56,12 @@ public class ScheduleService {
 	public void progUpdate(int sched_seq, String sched_info) throws ClassNotFoundException, SQLException {
 		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
 		// boardDao.progUpdate(sched_seq, sched_info);
+	}
+	
+	public List<Schedule_Project> getProject(int project_num)  throws ClassNotFoundException, SQLException {
+		ScheduleProjectDao boardDao= sqlSession.getMapper(ScheduleProjectDao.class);
+		List<Schedule_Project> p=boardDao.getProject(2);
+		return p;
 	}
 
 	public void deleteBoard(int sched_num) throws ClassNotFoundException, SQLException {
