@@ -16,11 +16,24 @@
 	                var calendar = new FullCalendar.Calendar(calendarEl, {
 	                    initialView: 'dayGridMonth',
 	                    navLinks: true, //month,week,day 선택
-	                    events: data
+	                    events: data,
+	                    eventClick: function(info){
+	                    	
+	                    	var event = info.event;
+	                    	
+	                    	$('#project_num').text(event.id);
+	                    	$('#project_name').text(event.title);
+	                    	$('#project_info').text(event.extendedProps.project_info);
+	                    	$('#start').text(event.start.toISOString().slice(0, 10));
+	                    	$('#end').text(event.end.toISOString().slice(0, 10));
+
+	                        // 모달을 보여줍니다.
+	                        $('#eventModal').modal('show');
+	                    }
 	                });
 	                calendar.render();
-	                //<option value="1">철수</option>>
-	            })
+	                
+	            }) 
 	    });
     </script>
 </head>
@@ -31,6 +44,7 @@
 		<div class="main-panel">
 			<div class="content-wrapper">
 				<jsp:include page="/common/createProject_Modal.jsp" />
+				<jsp:include page="/common/detailProject_Modal.jsp" />
 				<div id='calendar'></div>
 			</div>
 		</div>

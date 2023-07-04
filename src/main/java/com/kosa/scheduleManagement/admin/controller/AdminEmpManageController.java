@@ -30,6 +30,7 @@ import com.kosa.scheduleManagement.global.dto.Emp;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 @RequestMapping(value = "/admin", produces = "application/text; charset=UTF-8")
 @Controller
 public class AdminEmpManageController {
@@ -219,6 +220,46 @@ public class AdminEmpManageController {
 //	}
 
 	@PostMapping("/empManage/deleteOk.do")
+	public ResponseEntity<String> deleteEmp(@RequestBody Map<String, Object> requestBody) {
+	    System.out.println(requestBody);
+	    List<Map<String, Object>> checkedRows = (List<Map<String, Object>>) requestBody.get("deletedRows");
+	    
+	    // Get user_id values from checkedRows
+	    List<Integer> userIds = checkedRows.stream()
+	            .map(row -> (int) row.get("user_id"))
+	            .collect(Collectors.toList());
+	    
+	    // 삭제가 완료되면 true를 반환, update enabled 0
+	    Map<String, Object> response = new HashMap<>();
+	    boolean isDeleted = false;
+	    
+	    for (int userId : userIds) {
+	        // 삭제 수행 로직
+	        isDeleted = empManageService.deleteEmp(userId);
+	        
+	        if (!isDeleted) {
+	            break;
+	        }
+	    }
+	    
+	    if (!isDeleted) {
+	        response.put("result", false);
+	    } else {
+	        response.put("result", true);
+	        response.put("data", "delete");
+	    }
+	    
+	    String jsonResponse = "";
+	    
+	    try {
+	        jsonResponse = empManageService.responseToJson(response);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return ResponseEntity.ok(jsonResponse);
+	}
+
 	public ResponseEntity<String> deleteEmp(@RequestBody Object data ) {
 		System.out.println(data);
 		String sData = String.valueOf(data);
