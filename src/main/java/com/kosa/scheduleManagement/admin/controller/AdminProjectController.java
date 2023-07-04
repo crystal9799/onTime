@@ -1,25 +1,26 @@
 package com.kosa.scheduleManagement.admin.controller;
 
-import com.kosa.scheduleManagement.admin.service.Project_AdminService;
-import com.kosa.scheduleManagement.admin.service.Project_Service;
-import com.kosa.scheduleManagement.admin.service.Project_EmpService;
-import com.kosa.scheduleManagement.global.dto.Emp;
-import com.kosa.scheduleManagement.global.dto.Project;
-import com.kosa.scheduleManagement.global.dto.Project_Sub;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.kosa.scheduleManagement.admin.service.Project_AdminService;
+import com.kosa.scheduleManagement.admin.service.Project_EmpService;
+import com.kosa.scheduleManagement.admin.service.Project_Service;
+import com.kosa.scheduleManagement.global.dto.Emp;
+import com.kosa.scheduleManagement.global.dto.Project;
+import com.kosa.scheduleManagement.global.dto.Project_Sub;
 
 @RequestMapping("/admin")
 @RestController
@@ -59,8 +60,8 @@ public class AdminProjectController {
     
     //프로젝트 생성하고, Project / Project_Sub 에 Insert
     @PostMapping("/createProjectOk.do")
-    public ResponseEntity<String> insertProject(@RequestBody Project_Sub genproject){    	
-    	try { 
+    public ResponseEntity<Map<String, String>> insertProject(@RequestBody Project_Sub genproject){    	
+    	try {
     		System.out.println(genproject.toString());
     		System.out.println("try블록의 시작");
     		project_Service.insertProject(genproject.getProject());
@@ -72,9 +73,13 @@ public class AdminProjectController {
     		
 			project_empservice.insert_Project_Emp(genproject);
 			System.out.println("empinsert success");
-			return new ResponseEntity<String>("insert success",HttpStatus.OK);
+			Map<String, String> result = new HashMap<String, String>();
+			result.put("message", "success");
+			return new ResponseEntity<Map<String, String>>(result,HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<String>("insert failed",HttpStatus.BAD_REQUEST);
+			Map<String, String> result = new HashMap<String, String>();
+			result.put("message", "fail");
+			return new ResponseEntity<Map<String, String>>(result,HttpStatus.BAD_REQUEST);
 		}
     }
     

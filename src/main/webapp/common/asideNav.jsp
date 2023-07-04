@@ -3,7 +3,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <nav class="sidebar sidebar-offcanvas flex" id="sidebar">
 	<ul class="nav">
-		<li class="nav-item"><a class="nav-link" href="admin/main.do"> <i
+		<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/main.do"> <i
 				class="icon-grid menu-icon"></i> <span class="menu-title">Mainpage</span>
 		</a></li>
 		<li class="nav-item"><a class="nav-link" data-toggle="collapse"
