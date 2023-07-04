@@ -58,6 +58,25 @@ public class AdminProjectController {
 		}
     }
     
+    //시퀀스 불러오기
+    @GetMapping("/getSeq.do")
+    public  ResponseEntity<Map<String,Integer>> getSeq(){
+    	int seq;
+    	Map<String,Integer> project_num;
+    	try {
+    		System.out.println("try실행");
+    		seq = project_Service.getSeq();	
+    		System.out.println("seq 의 값은 : "+seq);
+    		project_num = new HashMap<String, Integer>();
+    		project_num.put("seq", seq);
+    		return new ResponseEntity<Map<String,Integer>>(project_num,HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			project_num = new HashMap<String, Integer>();
+			return new ResponseEntity<Map<String,Integer>>(project_num,HttpStatus.BAD_REQUEST);
+		}
+    }
+    
     //프로젝트 생성하고, Project / Project_Sub 에 Insert
     @PostMapping("/createProjectOk.do")
     public ResponseEntity<Map<String, String>> insertProject(@RequestBody Project_Sub genproject){    	
@@ -115,7 +134,5 @@ public class AdminProjectController {
 		}
     	
     }
-    
-    //프로젝트 상세보기(캘린더 클릭 시)
     
 }

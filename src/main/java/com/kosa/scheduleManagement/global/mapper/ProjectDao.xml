@@ -12,6 +12,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT PROJECT_NUM,PROJECT_START,PROJECT_END,PROJECT_INFO,PROJECT_NAME,DEPTNO FROM PROJECT WHERE PROJECT_NUM = #{project_num}
 	</select>
 	
+	<!-- 다음 시퀀스 불러오기 -->
+	<select id="getSeq" resultType="java.lang.Integer">
+		SELECT PROJECT_SEQ.NEXTVAL FROM DUAL
+	</select>
+	
 	<!-- 전체 프로젝트 리스트 -->
 	<select id="getAllProjectList" resultType="com.kosa.scheduleManagement.global.dto.Project">
 		SELECT 
