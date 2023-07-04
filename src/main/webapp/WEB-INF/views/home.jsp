@@ -21,11 +21,17 @@
 	                    	
 	                    	var event = info.event;
 	                    	
-	                    	$('#project_num').text(event.id);
-	                    	$('#project_name').text(event.title);
-	                    	$('#project_info').text(event.extendedProps.project_info);
-	                    	$('#start').text(event.start.toISOString().slice(0, 10));
-	                    	$('#end').text(event.end.toISOString().slice(0, 10));
+	                        console.log(event.id); // Log each field to the console
+	                        console.log(event.title);
+	                        console.log(event.extendedProps.project_info);
+	                        console.log(event.start.toISOString().slice(0, 10));
+	                        console.log(event.end.toISOString().slice(0, 10));
+	                    	
+	                    	$('#project_num2').val(event.id);
+	                    	$('#project_name2').val(event.title);
+	                    	$('#project_info2').text(event.extendedProps.project_info);
+	                    	$('#start2').val(event.start.toISOString().slice(0, 10));
+	                    	$('#end2').val(event.end.toISOString().slice(0, 10));
 
 	                        // 모달을 보여줍니다.
 	                        $('#eventModal').modal('show');

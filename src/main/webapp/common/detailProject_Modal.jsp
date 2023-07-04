@@ -8,21 +8,21 @@
             </div>
                 <div class="modal-body">
                 	<label for="project_num">Project Number</label>
-                	<input type="number" class="form-control" id="project_num" name="id" disabled="disabled">
+                	<input type="number" class="form-control" id="project_num2" name="id" disabled="disabled">
                 	
                 	<label for="project_name">Project Name</label>
-                    <input type="text" class="form-control" id="project_name" name="title" disabled="disabled">
+                    <input type="text" class="form-control" id="project_name2" name="title" disabled="disabled">
                     
                     <label for="project_info">Project Info</label>
-                    <textarea class="form-control" id="project_info" name="project_info" rows="3" disabled="disabled"></textarea>
+                    <textarea class="form-control" id="project_info2" name="project_info" rows="3" disabled="disabled"></textarea>
                         
                     <label for="project_start">Project Start</label>
                     <br>
-                    <input type="date" id="start" name="start" disabled="disabled">
+                    <input type="date" id="start2" name="start" disabled="disabled">
                     <br>
                     <label for="project_end">Project End</label>
                     <br>
-                    <input type="date" id="end" name="end" disabled="disabled">
+                    <input type="date" id="end2" name="end" disabled="disabled">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>

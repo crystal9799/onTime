@@ -112,15 +112,7 @@ $(document).ready(function(){
         
     });
     
-    /* $('#regist').click(()=>{
-    	Swal.fire({
-    		  position: 'center',
-    		  icon: 'success',
-    		  title: 'Create Project.',
-    		  showConfirmButton: false,
-    		  timer: 1500
-    		})
-    }); */
+
 });
 
 
