@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="false"%>
 <html lang=ko">
 <head>
@@ -9,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Project.css">
     <script>
 	    document.addEventListener('DOMContentLoaded', function() {
-	        fetch("http://localhost:9090/WebProject_2/admin/async")
+	        fetch('http://192.168.0.33:8090/Team4_WebProject_2/admin/async')
 	            .then(res => res.json())
 	            .then(data => {
 	                var calendarEl = document.getElementById('calendar');

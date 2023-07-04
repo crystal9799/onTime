@@ -12,7 +12,17 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	
+    $('#createBttn').click(function() {
+        let seq;
+        //시퀀스
+        fetch('http://192.168.0.33:8090/Team4_WebProject_2/admin/getSeq.do')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data.seq);
+                seq = data.seq;
+                $('#project_num').val(seq);
+            })
+    });
 	
 	
     fetch("http://192.168.0.33:8090/Team4_WebProject_2/admin/createProject.do?deptno=10")
@@ -52,7 +62,9 @@ $(document).ready(function(){
         var emplistData = [];
 		const modal = document.getElementById("createProjectModal");
 		var nav = document.createElement("li");
-		
+		let seq;
+ 		
+ 			
         // 프로젝트 정보
         projectData.id = $('#project_num').val();
         projectData.start = $('#start').val();
@@ -94,15 +106,26 @@ $(document).ready(function(){
       		  showConfirmButton: false,
       		  timer: 1500
       		})
-      		/* let newProject = documnet.createElement("li");
-        	newProject.setAttribute("class", "nav-item");
-        	newProject.appendTo($('.nav flex-column sub-menu'));
-        	
-        	let newLink = document.createElement("a");
-        	newLink.setAttribute("class", "nav-link");
-        	newLink.setAttribute("href", "/Team4_WebProject/schedule.do?project_num="+projectData.id);
-        	newLink.setAttribute("value", projectData.title);
-        	newLink.appendTo(newProject); */
+/*       		//네브바 만들기
+      		console.log("Creating newProject");
+        	let newProject = $("<li></li>").addClass("nav-item");
+        	console.log("newProject:", newProject);
+
+        	newProject.appendTo($('.nav.flex-column.sub-menu'));
+
+        	console.log("Creating newLink");
+        	let newLink = $("<a></a>")
+        	    .addClass("nav-link")
+        	    .attr("href", "{pageContext.request.contextPath}/schedule.do?project_num=" + projectData.id)
+        	    .text(projectData.title);
+
+        	console.log("newLink:", newLink);
+
+        	newLink.appendTo(newProject);
+
+        	console.log("newProject after append:", newProject); */
+
+
         })
         
         .catch(error =>{
@@ -112,22 +135,13 @@ $(document).ready(function(){
         
     });
     
-     $('#save').click(()=>{
-    	Swal.fire({
-    		  position: 'center',
-    		  icon: 'success',
-    		  title: 'Send Meil To Resisted Employees',
-    		  showConfirmButton: false,
-    		  timer: 1500
-    		})
-    		location.reload();
-    }); 
+
 });
 
 
 </script>  
 
-<button type="button" class="custom-btn btn-8" data-toggle="modal" data-target="#createProjectModal">
+<button type="button" class="custom-btn btn-8" data-toggle="modal" data-target="#createProjectModal" id="createBttn">
     Create Project
 </button>
 <style>
@@ -179,7 +193,7 @@ $(document).ready(function(){
                             <label class="form-check-label" for="colorBlue">DarkCyan</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="colorRadio" id="colorGreen" value="green">
+                            <input class="form-check-input" type="radio" name="colorRadio" id="color" value="green">
                             <label class="form-check-label" for="colorGreen">Green</label>
                         </div>
                     </div>
@@ -195,8 +209,7 @@ $(document).ready(function(){
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
                     <button type="submit" class="btn btn-primary" id="regist">regist</button>
-                    <!-- <a href="/Team4_WebProject_2/main.do" type="button" class="btn btn-success" id="save">Save</a> -->
-                    <button type="button" class="btn btn-success" id="save">Save</button>
+                    <a href="/Team4_WebProject_2/main.do" type="button" class="btn btn-success" id="save">Save</a>
                 </div>
             </form>
         </div>
