@@ -32,4 +32,12 @@ public class Project_EmpService {
 			project_empdao.insertProject_Emp(project_num,user_id);			
 		}
 	}
+	
+	//프로젝트id 리스트
+	public List<Integer> getProjectList(int user_id){
+		Project_EmpDao project_empdao = sqlsession.getMapper(Project_EmpDao.class);
+		System.out.println("프로젝트 리스트 추출");
+		System.out.println(project_empdao.getProjectList(user_id).toString());
+		return project_empdao.getProjectList(user_id);
+	}
 }
