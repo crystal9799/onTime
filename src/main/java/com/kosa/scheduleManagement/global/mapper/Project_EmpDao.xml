@@ -7,5 +7,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO PROJECT_EMP(PROJECT_NUM,USER_ID) VALUES(#{param1},#{param2})
 	</insert>
 	
+	<!-- 로그인한 유저가 속한 project_num -->
+ 	<select id="getProjectList" resultType="java.lang.Integer">
+		SELECT DISTINCT PROJECT_NUM 
+		FROM PROJECT_EMP 
+		WHERE USER_ID = #{user_id}
+	</select>
 </mapper>
 	
