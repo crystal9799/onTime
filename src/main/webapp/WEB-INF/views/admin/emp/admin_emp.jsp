@@ -85,6 +85,10 @@ body {
 									class="form-control" id="enameInput">
 							</div>
 							<div class="form-group">
+								<label for="emailInput">이메일</label> <input type="text"
+									class="form-control" id="emailInput">
+							</div>
+							<div class="form-group">
 								<label for="passwordInput">비밀번호:</label> <input type="text"
 									class="form-control" id="passwordInput">
 							</div>
@@ -314,6 +318,7 @@ body {
 				  const ename = enameInput.value;
 				  const password = passwordInput.value;
 				  const job = jobInput.value;
+				  const email = emailInput.value;
 
 				  // Close the modal
 				  modal.style.display = 'none';
@@ -322,14 +327,17 @@ body {
 				  enameInput.value = '';
 				  passwordInput.value = '';
 				  jobInput.value = '';
+				  emailInput.value = '';
 
 				  
 				  // Create an object to store the form data
 				  const data = {
 				    ename: ename,
 				    password: password,
-				    job: job
+				    job: job,
+				    email: email
 				  };
+				  console.log(data);
 				  // Send a request to create a new row
 				  fetch('/Team4_WebProject_2/admin/empManage/createOk.do?deptno='+${deptno}, {
 					    method: 'POST',
