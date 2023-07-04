@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosa.scheduleManagement.global.dto.ScheduleBoard;
@@ -30,12 +31,12 @@ public class ScheduleBoardController {
 	}
 
 	@GetMapping("getProjectDetail.do")
-	public String getd(Model model) throws ClassNotFoundException, SQLException {
+	public String getd(@RequestParam int project_num, Model model) throws ClassNotFoundException, SQLException {
 		System.out.println("getAllDetail conn");
-
-		List<ScheduleBoard> prevList = service.getAllPrev();
-		List<ScheduleBoard> currList = service.getAllCurr();
-		List<ScheduleBoard> nextList = service.getAllNext();
+		
+		List<ScheduleBoard> prevList = service.getAllPrev(project_num);
+		List<ScheduleBoard> currList = service.getAllCurr(project_num);
+		List<ScheduleBoard> nextList = service.getAllNext(project_num);
 
 		System.out.println("plist: ");
 		System.out.println(prevList);

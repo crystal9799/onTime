@@ -38,26 +38,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		project_num from
 		schedule_board
 	</select>
-	<select id="getAllPrev"
-		resultType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
+	<select id="getAllPrev" resultType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
 		select sched_num, sched_info, sched_prog, sched_seq,
 		project_num from
 		schedule_board
-		where sched_prog=0
+		where sched_prog=0 and project_num=#{project_num}
 	</select>
 	<select id="getAllCurr"
 		resultType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
 		select sched_num, sched_info, sched_prog, sched_seq,
 		project_num from
 		schedule_board
-		where sched_prog=1
+		where sched_prog=1 and project_num=#{project_num}
 	</select>
 	<select id="getAllNext"
 		resultType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
 		select sched_num, sched_info, sched_prog, sched_seq,
 		project_num from
 		schedule_board
-		where sched_prog=2
+		where sched_prog=2 and project_num=#{project_num}
 	</select>
 
 	<update id="updateSave"
