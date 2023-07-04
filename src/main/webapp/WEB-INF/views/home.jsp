@@ -33,7 +33,7 @@
 	                });
 	                calendar.render();
 	                
-	            })
+	            }) 
 	    });
     </script>
 </head>
