@@ -114,7 +114,7 @@
 						<div class="pro" id="todo-p"> 
 							<c:forEach var="p" items="${p}">
 <%-- 							<h3 class="heading" href="#">[ Project ${p.project_num} ] ${p.project_name}</h3> --%>
-							<h3 class="heading" href="#">[ P2023-0${p.project_num} ]  :  ${p.project_name}<i class="fa fa-trash" aria-hidden="true" id="delBtn" type="button"></i></h3>
+							<h3 class="heading" id ="h2" href="#">[ P2023-0${p.project_num} ]  :  ${p.project_name}<i class="fa fa-trash" aria-hidden="true" id="delBtn" type="button"></i></h3>
 							<div class="p-inner">
 									시작 일자 : <p>${p.project_start}</p><br>
 									종료 일자 : <p>${p.project_end}</p><br>

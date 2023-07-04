@@ -64,7 +64,6 @@
 	overflow: scroll;
 	height: 100%;
 }
-
 .heading {
 	font-size: 22px;
 	font-weight: bold;
@@ -125,9 +124,9 @@ border:none;
 }
  #saveBtn{
 	font:bold;
-	font-size:45px;
+	font-size:47px;
 	color:#4b49ac;  
-	margin-right:530px; 
+	margin-right:30px; 
 	float: right;
 } 
 .swim-lane p{
@@ -156,8 +155,13 @@ border:none;
 	color:#4b49ac;
 }
 
+
+#h2{
+	margin-top: 25px;
+}
+
 .pro{
-	padding : 40px 20px 20px 20px;
+	padding : 10px 25px 60px 25px;
 	display: flex;
 	flex-direction: column;
 	gap: 12px; 
@@ -165,7 +169,7 @@ border:none;
 	background-color:#4B49AC;
 	border-radius: 4px;
 	width: 500px;
-	min-height: 500px;
+	height:550px;
 	flex-shrink: 0;
 	color:#fff;
 	
@@ -177,11 +181,7 @@ border:none;}
 #closeBtn{
 background-color:#fff;
 } 
-
-.pro > p{
-
-}
-
+ 
 /* #task {
 	background: white;
 	color: black;
@@ -193,14 +193,14 @@ background-color:#fff;
 } */
 
 .p-inner {
-	padding : 55px 40px 30px 50px;
+	padding : 40px 40px 30px 50px;
 	background: white;
 	color: black;
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
 	border-radius: 4px;
 	font-size: 20px;
 	width: 680x;
-	min-height: 430px; 
+	min-height: 420px; 
 }
 
 .is-dragging {
