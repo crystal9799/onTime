@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,7 @@ import com.kosa.scheduleManagement.global.dto.Emp;
 import com.kosa.scheduleManagement.global.dto.Project;
 import com.kosa.scheduleManagement.global.dto.Project_Sub;
 
+@CrossOrigin(origins = "http://localhost:8090, http://localhost:9090")
 @RequestMapping("/admin")
 @RestController
 public class AdminProjectController {
