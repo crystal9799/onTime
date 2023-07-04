@@ -1,6 +1,7 @@
 package com.kosa.scheduleManagement.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,11 @@ public class Project_Service {
 	public int getSeq() {
 		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
 		return projectdao.getSeq();
+	}
+	
+	public List<Map<String, Object>> getProjectList(int user_id){
+	    ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
+	    
+	    return projectdao.getprojectList(user_id);
 	}
 }
