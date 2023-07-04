@@ -112,7 +112,16 @@ $(document).ready(function(){
         
     });
     
-
+     $('#save').click(()=>{
+    	Swal.fire({
+    		  position: 'center',
+    		  icon: 'success',
+    		  title: 'Send Meil To Resisted Employees',
+    		  showConfirmButton: false,
+    		  timer: 1500
+    		})
+    		location.reload();
+    }); 
 });
 
 
@@ -186,7 +195,8 @@ $(document).ready(function(){
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
                     <button type="submit" class="btn btn-primary" id="regist">regist</button>
-                    <a href="/Team4_WebProject_2/main.do" type="button" class="btn btn-success" id="save">Save</a>
+                    <!-- <a href="/Team4_WebProject_2/main.do" type="button" class="btn btn-success" id="save">Save</a> -->
+                    <button type="button" class="btn btn-success" id="save">Save</button>
                 </div>
             </form>
         </div>
