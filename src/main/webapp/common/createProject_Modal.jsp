@@ -51,6 +51,7 @@ $(document).ready(function(){
         var projectData = {};
         var emplistData = [];
 		const modal = document.getElementById("createProjectModal");
+		var nav = document.createElement("li");
 		
         // 프로젝트 정보
         projectData.id = $('#project_num').val();
@@ -86,15 +87,32 @@ $(document).ready(function(){
         .then(res => res.json())
         .then(data => {
         	console.log(data);
-        	modal.style.display='none';
+        	Swal.fire({
+      		  position: 'center',
+      		  icon: 'success',
+      		  title: 'Create Project.',
+      		  showConfirmButton: false,
+      		  timer: 1500
+      		})
+      		/* let newProject = documnet.createElement("li");
+        	newProject.setAttribute("class", "nav-item");
+        	newProject.appendTo($('.nav flex-column sub-menu'));
+        	
+        	let newLink = document.createElement("a");
+        	newLink.setAttribute("class", "nav-link");
+        	newLink.setAttribute("href", "/Team4_WebProject/schedule.do?project_num="+projectData.id);
+        	newLink.setAttribute("value", projectData.title);
+        	newLink.appendTo(newProject); */
         })
+        
         .catch(error =>{
         	console.error('Error:', error);
+        	console.log("에러뜸");
         })
         
     });
     
-    $('#regist').click(()=>{
+    /* $('#regist').click(()=>{
     	Swal.fire({
     		  position: 'center',
     		  icon: 'success',
@@ -102,7 +120,7 @@ $(document).ready(function(){
     		  showConfirmButton: false,
     		  timer: 1500
     		})
-    });
+    }); */
 });
 
 
@@ -133,21 +151,21 @@ $(document).ready(function(){
                 	</div>
                     <div class="form-group">
                         <label for="project_name">Project Name</label>
-                        <input type="text" class="form-control" id="project_name" name="title">
+                        <input type="text" class="form-control" id="project_name" name="title" required>
                     </div>
                     <div class="form-group">
                         <label for="project_info">Project Info</label>
-                        <textarea class="form-control" id="project_info" name="project_info" rows="3"></textarea>
+                        <textarea class="form-control" id="project_info" name="project_info" rows="3" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="project_start">Project Start</label>
                         <br>
-                        <input type="date" id="start" name="start">
+                        <input type="date" id="start" name="start" required>
                     </div>
                     <div class="form-group">
                         <label for="project_end">Project End</label>
                         <br>
-                        <input type="date" id="end" name="end">
+                        <input type="date" id="end" name="end" required>
                     </div>
                     <div class="form-group">
                         <label for="color">Color</label>
@@ -167,7 +185,7 @@ $(document).ready(function(){
                     <div class="form-group">
 						<div class="row d-flex justify-content-center mt-100">
 						    <div class="col-md-6"> 
-						    	<select id="choices-multiple-remove-button" name="user_id" placeholder="Select Employee" multiple>
+						    	<select id="choices-multiple-remove-button" name="user_id" placeholder="Select Employee" multiple required>
 						            
 						        </select> </div>
 						</div>
@@ -176,7 +194,7 @@ $(document).ready(function(){
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
                     <button type="submit" class="btn btn-primary" id="regist">regist</button>
-                    <a href="/Team4_WebProject_2/admin/main.do" type="button" class="btn btn-success" id="save">Save</a>
+                    <a href="/Team4_WebProject_2/main.do" type="button" class="btn btn-success" id="save">Save</a>
                 </div>
             </form>
         </div>
