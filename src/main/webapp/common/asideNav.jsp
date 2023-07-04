@@ -29,7 +29,7 @@
 				class="icon-paper menu-icon"></i> <span class="menu-title">DeptManage</span>
 		</a></li>
 		<li class="nav-item"><a id="test" class="nav-link"
-			href="${pageContext.request.contextPath}/mypage.do?user_id=6"> 
+			href="${pageContext.request.contextPath}/mypage.do?user_id=${emp.user_id}"> 
 			<i class="icon-head menu-icon"></i> <span class="menu-title">Mypage</span></i>
 		</a>
 			</li>

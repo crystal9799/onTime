@@ -10,7 +10,7 @@
 <security:http auto-config="true">
 	<security:csrf disabled="true" />
 		<security:form-login login-page="/"
-		                     default-target-url="/login"
+		                     default-target-url="/main.do"
 		                     authentication-failure-url="/error" />
 		<security:logout     logout-success-url="/"/>
 	

@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.kosa.scheduleManagement.global.dao.Mypage_EmpDao">
 	<!-- mypage 사원 정보 -->
 	<select id="getEmpInfo" resultType="com.kosa.scheduleManagement.global.dto.Emp">
-		select user_id, password, emp_pic from emp where user_id=#{user_id}
+		select user_id, password, ename, emp_pic, deptno from emp where user_id=#{user_id}
 	</select>
 	
 	<select id="getMypageDeptInfo" resultType="com.kosa.scheduleManagement.global.dto.Dept">
