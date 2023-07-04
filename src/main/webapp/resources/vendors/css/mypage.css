@@ -174,7 +174,7 @@ card-footer, .card-header {
 
 .grogressWrapper {
 	position: relative;
-	width: 100%;
+	width: 90%;
 }
 
 .chartjs-render-monitor {
@@ -185,7 +185,7 @@ card-footer, .card-header {
 .grogressWrapper span {
 	position: absolute;
 	top: 4px;
-	left: 150px;
+	left: 155px;
 	width: 100%;
 	color: black;
 }
