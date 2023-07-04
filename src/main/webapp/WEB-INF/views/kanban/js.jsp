@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 	  window.onload = function(){
 		  console.log('load');
@@ -374,8 +374,14 @@
 				            alert('오류 발생');
 				        }
 				    });
-		 
-		 
+		 <!-- 알림창 -->
+			     	Swal.fire({
+			     		  position: 'center',
+			     		  icon: 'success',
+			     		  title: 'Save Schedule',
+			     		  showConfirmButton: false,
+			     		  timer: 1500
+			     		})
 		 
 	
       });	

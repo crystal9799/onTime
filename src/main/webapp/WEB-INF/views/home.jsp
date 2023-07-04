@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Project.css">
     <script>
 	    document.addEventListener('DOMContentLoaded', function() {
-	        fetch("http://localhost:8090/Team4_WebProject_2/admin/async")
+	        fetch("http://localhost:9090/WebProject_2/admin/async")
 	            .then(res => res.json())
 	            .then(data => {
 	                var calendarEl = document.getElementById('calendar');
@@ -21,14 +21,27 @@
 	                    	
 	                    	var event = info.event;
 	                    	
-	                    	$('#project_num').text(event.id);
-	                    	$('#project_name').text(event.title);
-	                    	$('#project_info').text(event.extendedProps.project_info);
-	                    	$('#start').text(event.start.toISOString().slice(0, 10));
-	                    	$('#end').text(event.end.toISOString().slice(0, 10));
+	                        console.log(event.id); // Log each field to the console
+	                        console.log(event.title);
+	                        console.log(event.extendedProps.project_info);
+	                        console.log(event.start.toISOString().slice(0, 10));
+	                        console.log(event.end.toISOString().slice(0, 10));
+	                    	
+	                    	$('#project_num2').val(event.id);
+	                    	$('#project_name2').val(event.title);
+	                    	$('#project_info2').text(event.extendedProps.project_info);
+	                    	$('#start2').val(event.start.toISOString().slice(0, 10));
+	                    	$('#end2').val(event.end.toISOString().slice(0, 10));
 
 	                        // 모달을 보여줍니다.
 	                        $('#eventModal').modal('show');
+	                        $('#eventModal').on('shown.bs.modal', function (event) {
+	                            let defaultLink = "/Team4_WebProject_2/schedule.do?project_num=";
+	                            let project_num = $('#project_num2').val();
+	                            let hrefLink = defaultLink + project_num;
+	                            console.log(hrefLink);
+	                            $('#toschedule').attr("href", hrefLink);
+	                        });
 	                    }
 	                });
 	                calendar.render();
