@@ -106,15 +106,26 @@ $(document).ready(function(){
       		  showConfirmButton: false,
       		  timer: 1500
       		})
-      		/* let newProject = documnet.createElement("li");
-        	newProject.setAttribute("class", "nav-item");
-        	newProject.appendTo($('.nav flex-column sub-menu'));
-        	
-        	let newLink = document.createElement("a");
-        	newLink.setAttribute("class", "nav-link");
-        	newLink.setAttribute("href", "/Team4_WebProject/schedule.do?project_num="+projectData.id);
-        	newLink.setAttribute("value", projectData.title);
-        	newLink.appendTo(newProject); */
+/*       		//네브바 만들기
+      		console.log("Creating newProject");
+        	let newProject = $("<li></li>").addClass("nav-item");
+        	console.log("newProject:", newProject);
+
+        	newProject.appendTo($('.nav.flex-column.sub-menu'));
+
+        	console.log("Creating newLink");
+        	let newLink = $("<a></a>")
+        	    .addClass("nav-link")
+        	    .attr("href", "{pageContext.request.contextPath}/schedule.do?project_num=" + projectData.id)
+        	    .text(projectData.title);
+
+        	console.log("newLink:", newLink);
+
+        	newLink.appendTo(newProject);
+
+        	console.log("newProject after append:", newProject); */
+
+
         })
         
         .catch(error =>{
