@@ -293,7 +293,20 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>4.0.1.RELEASE</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<!-- 메일전송 의존성 -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<!-- 메일전송 라이브러리 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

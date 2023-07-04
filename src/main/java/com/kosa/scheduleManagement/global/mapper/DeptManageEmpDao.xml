@@ -35,7 +35,7 @@
 	<select id="getEmpByUserId"
 		resultType="com.kosa.scheduleManagement.global.dto.Emp">
 		select user_id, password, enabled, ename, emp_pic, job,
-		deptno, dhead_num from emp
+		deptno, dhead_num, email from emp
 		where user_id=#{user_id}
 	</select>
 	<select id="getRestEmpListByDeptno"

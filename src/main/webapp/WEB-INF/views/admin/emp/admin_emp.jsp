@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="se"
+	uri="http://www.springframework.org/security/tags"%>
 <%
 request.setCharacterEncoding("UTF-8");
 response.setCharacterEncoding("UTF-8");
@@ -52,16 +54,18 @@ body {
 				<div>
 					<!-- 테이블 추가 이벤트 -->
 					<div class="btn-wrapper" style="margin-bottom: 10px;">
-						<!-- 테이블 버튼 구성 -->
-						<div class="btn-wrapper" style="margin-bottom: 10px;">
-							<button id="deleteBtn" class="btnStyle btn btn-secondary"
-								style="float: right;">삭제</button>
-							<button id="saveBtn" class="btnStyle btn btn-primary "
-								style="float: right; margin-right: 20px;">수정</button>
-							<button id="appendBtn" class="btnStyle btn btn-success"
-								data-bs-toggle="modal" data-bs-target="#exampleModal"
-								style="float: right; margin-right: 20px;">추가</button>
-						</div>
+						<se:authorize access="hasRole('ROLE_ADMIN')">
+							<!-- 테이블 버튼 구성 -->
+							<div class="btn-wrapper" style="margin-bottom: 10px;">
+								<button id="deleteBtn" class="btnStyle btn btn-secondary"
+									style="float: right;">삭제</button>
+								<button id="saveBtn" class="btnStyle btn btn-primary "
+									style="float: right; margin-right: 20px;">수정</button>
+								<button id="appendBtn" class="btnStyle btn btn-success"
+									data-bs-toggle="modal" data-bs-target="#exampleModal"
+									style="float: right; margin-right: 20px;">추가</button>
+							</div>
+						</se:authorize>
 						<!-- Toast Grid Load -->
 						<div id="grid"></div>
 					</div>

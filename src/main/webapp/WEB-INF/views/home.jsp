@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Project.css">
     <script>
 	    document.addEventListener('DOMContentLoaded', function() {
-	        fetch('http://192.168.0.33:8090/Team4_WebProject_2/admin/async')
+	        fetch('${pageContext.request.contextPath}/admin/async')
 	            .then(res => res.json())
 	            .then(data => {
 	                var calendarEl = document.getElementById('calendar');

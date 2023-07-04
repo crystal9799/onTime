@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -22,6 +23,9 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosa.scheduleManagement.global.dao.DeptManageEmpDao;
 import com.kosa.scheduleManagement.global.dto.Emp;
+import com.kosa.scheduleManagement.global.dto.Project;
+import com.kosa.scheduleManagement.global.dto.Project_Sub;
+import com.kosa.scheduleManagement.global.utils.MailSender;
 
 @Service
 public class EmpManageService {
@@ -31,6 +35,7 @@ public class EmpManageService {
 	public void setSqlsession(SqlSession sqlsession) {
 		this.sqlsession = sqlsession;
 	}
+
 
 	public int totallistCountByDeptno(int deptno) throws SQLException, ClassNotFoundException {
 		System.out.println("total메서드까지는 옴");
@@ -164,8 +169,8 @@ public class EmpManageService {
 		Matcher matcher = pattern.matcher(sData);
 
 		while (matcher.find()) {
-		    int userId = Integer.parseInt(matcher.group(1));
-		    userIds.add(userId);
+			int userId = Integer.parseInt(matcher.group(1));
+			userIds.add(userId);
 		}
 		return userIds;
 	}

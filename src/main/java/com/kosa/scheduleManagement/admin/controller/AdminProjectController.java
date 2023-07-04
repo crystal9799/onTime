@@ -16,101 +16,138 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kosa.scheduleManagement.admin.service.EmpManageService;
 import com.kosa.scheduleManagement.admin.service.Project_AdminService;
 import com.kosa.scheduleManagement.admin.service.Project_EmpService;
 import com.kosa.scheduleManagement.admin.service.Project_Service;
 import com.kosa.scheduleManagement.global.dto.Emp;
 import com.kosa.scheduleManagement.global.dto.Project;
 import com.kosa.scheduleManagement.global.dto.Project_Sub;
+import com.kosa.scheduleManagement.global.utils.MailSendService;
+import com.kosa.scheduleManagement.global.utils.MailSender;
 
 @CrossOrigin(origins = "http://localhost:8090, http://localhost:9090")
 @RequestMapping("/admin")
 @RestController
 public class AdminProjectController {
-    private Project_AdminService project_adminservice;
-    private Project_Service project_Service;
-    private Project_EmpService project_empservice;
-    
-    @Autowired
-    public void setProject_empservice(Project_EmpService project_empservice) {
+	private Project_AdminService project_adminservice;
+	private Project_Service project_Service;
+	private Project_EmpService project_empservice;
+	private MailSendService mailSendService;
+
+	@Autowired
+	public void setProject_empservice(Project_EmpService project_empservice) {
 		this.project_empservice = project_empservice;
 	}
 
 	@Autowired
-    public void setEmpManageService(Project_AdminService project_adminservice) {
-        this.project_adminservice = project_adminservice;
-    }
-    
-    @Autowired
-    public void setProjectService(Project_Service project_Service) {
-        this.project_Service = project_Service;
-    }
-    
-    //부서번호로 해당부서 사원들 목록 받기.
-    @GetMapping("/createProject.do")
-    public ResponseEntity<List<Emp>> empShow(@RequestParam("deptno") int deptno){
-    	List<Emp> list = new ArrayList();
-    	
-    	try {
-    		System.out.println("정상실행");
-    		list = project_adminservice.getList(deptno);
-    		return new ResponseEntity<List<Emp>>(list,HttpStatus.OK);
+	public void setEmpManageService(Project_AdminService project_adminservice) {
+		this.project_adminservice = project_adminservice;
+	}
+
+	@Autowired
+	public void setProjectService(Project_Service project_Service) {
+		this.project_Service = project_Service;
+	}
+
+	@Autowired
+	public void setMailSendService(MailSendService mailSendService) {
+		this.mailSendService = mailSendService;
+	}
+
+	// 부서번호로 해당부서 사원들 목록 받기.
+	@GetMapping("/createProject.do")
+	public ResponseEntity<List<Emp>> empShow(@RequestParam("deptno") int deptno) {
+		List<Emp> list = new ArrayList();
+
+		try {
+			System.out.println("정상실행");
+			list = project_adminservice.getList(deptno);
+			return new ResponseEntity<List<Emp>>(list, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<List<Emp>>(list,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<List<Emp>>(list, HttpStatus.BAD_REQUEST);
 		}
-    }
-    
-    //시퀀스 불러오기
-    @GetMapping("/getSeq.do")
-    public  ResponseEntity<Map<String,Integer>> getSeq(){
-    	int seq;
-    	Map<String,Integer> project_num;
-    	try {
-    		System.out.println("try실행");
-    		seq = project_Service.getSeq();	
-    		System.out.println("seq 의 값은 : "+seq);
-    		project_num = new HashMap<String, Integer>();
-    		project_num.put("seq", seq);
-    		return new ResponseEntity<Map<String,Integer>>(project_num,HttpStatus.OK);
+	}
+
+	// 시퀀스 불러오기
+	@GetMapping("/getSeq.do")
+	public ResponseEntity<Map<String, Integer>> getSeq() {
+		int seq;
+		Map<String, Integer> project_num;
+		try {
+			System.out.println("try실행");
+			seq = project_Service.getSeq();
+			System.out.println("seq 의 값은 : " + seq);
+			project_num = new HashMap<String, Integer>();
+			project_num.put("seq", seq);
+			return new ResponseEntity<Map<String, Integer>>(project_num, HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			project_num = new HashMap<String, Integer>();
-			return new ResponseEntity<Map<String,Integer>>(project_num,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String, Integer>>(project_num, HttpStatus.BAD_REQUEST);
 		}
-    }
-    
-    //프로젝트 생성하고, Project / Project_Sub 에 Insert
-    @PostMapping("/createProjectOk.do")
-    public ResponseEntity<Map<String, String>> insertProject(@RequestBody Project_Sub genproject){    	
-    	try {
-    		System.out.println(genproject.toString());
-    		System.out.println("try블록의 시작");
-    		project_Service.insertProject(genproject.getProject());
-    		
-    		System.out.println("project insert success");
-    		System.out.println("Project : " + genproject.getProject().toString());
-    		System.out.println("List<Emp> : " + genproject.getEmplist().toString());
-    		
-    		
+	}
+
+	// 프로젝트 생성하고, Project / Project_Sub 에 Insert
+	@PostMapping("/createProjectOk.do")
+	public ResponseEntity<Map<String, String>> insertProject(@RequestBody Project_Sub genproject) {
+		try {
+			System.out.println(genproject.toString());
+			System.out.println("try블록의 시작");
+			project_Service.insertProject(genproject.getProject());
+
+			System.out.println("project insert success");
+			System.out.println("Project : " + genproject.getProject().toString());
+			System.out.println("List<Emp> : " + genproject.getEmplist().toString());
+
 			project_empservice.insert_Project_Emp(genproject);
 			System.out.println("empinsert success");
+
+			try {
+				System.out.println("mail전송 로직 실행");
+				boolean isSuccess = mailSendService.sendMail(genproject);
+
+				System.out.println("메일전송성공 결과 : " + isSuccess);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+
 			Map<String, String> result = new HashMap<String, String>();
 			result.put("message", "success");
-			return new ResponseEntity<Map<String, String>>(result,HttpStatus.OK);
+			return new ResponseEntity<Map<String, String>>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			Map<String, String> result = new HashMap<String, String>();
 			result.put("message", "fail");
-			return new ResponseEntity<Map<String, String>>(result,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String, String>>(result, HttpStatus.BAD_REQUEST);
 		}
-    }
-    
-    //프로젝트 상세보기
-    @GetMapping("/getProjectDetail")
-    public Project showProject(@RequestParam("project_num") int project_num){
-    	Project project;
-    	
-    	try {
-    		System.out.println("호출");
+	}
+
+//	@PostMapping("/sendMail")
+//	public ResponseEntity<Map<String, String>> sendMail(@RequestBody Project_Sub genproject) {
+//		try {
+//			// mail전송
+//			boolean isSuccess = mailSendService.sendMail(genproject);
+//
+//			System.out.println("메일전송성공 결과 : " + isSuccess);
+//
+//			Map<String, String> result = new HashMap<String, String>();
+//			result.put("message", "success");
+//
+//			return new ResponseEntity<Map<String, String>>(result, HttpStatus.OK);
+//		} catch (Exception e) {
+//			Map<String, String> result = new HashMap<String, String>();
+//			result.put("message", "fail");
+//			return new ResponseEntity<Map<String, String>>(result, HttpStatus.BAD_REQUEST);
+//		}
+//	}
+
+	// 프로젝트 상세보기
+	@GetMapping("/getProjectDetail")
+	public Project showProject(@RequestParam("project_num") int project_num) {
+		Project project;
+
+		try {
+			System.out.println("호출");
 			project = project_Service.project(project_num);
 			System.out.println(project.toString());
 			return project;
@@ -119,14 +156,14 @@ public class AdminProjectController {
 			e.getMessage();
 			return null;
 		}
-    }
-    
-    //생성된 프로젝트의 목록()
-    @GetMapping("/async")
-    public List<Project> callMain() {
-    	List<Project> projectlist;
-    	try {
-			projectlist=project_Service.getAllProjectList();
+	}
+
+	// 생성된 프로젝트의 목록()
+	@GetMapping("/async")
+	public List<Project> callMain() {
+		List<Project> projectlist;
+		try {
+			projectlist = project_Service.getAllProjectList();
 			System.out.println(projectlist.toString());
 			return projectlist;
 		} catch (Exception e) {
@@ -134,28 +171,28 @@ public class AdminProjectController {
 			System.out.println(e.getMessage());
 			return null;
 		}
-    	
-    }
-    
-    //로그인한 유저가 속한 프로젝트 리스트
-    @GetMapping("/projectlist.do")
-    public ResponseEntity<List<Map<String, Integer>>> getProjectList(@RequestParam int user_id){
-    	//프로젝트 리스트 저장하는 맵 리스트(ResponseEntity 사용)
-    	List<Map<String,Integer>> projectlist = new ArrayList<Map<String,Integer>>();
-    	//프로젝트번호 리스트
-    	List<Integer> pnumlist;
-    	try {
-    		pnumlist = project_empservice.getProjectList(user_id);
-    		for(int i=0; i<pnumlist.size(); i++) {
-    			Map<String, Integer> project = new HashMap<String,Integer>();
-    			project.put("project_num",pnumlist.get(i));
-    			projectlist.add(project);
-    			System.out.println(project.toString());
-    		}
-    		return new ResponseEntity<List<Map<String,Integer>>>(projectlist,HttpStatus.OK);
+
+	}
+
+	// 로그인한 유저가 속한 프로젝트 리스트
+	@GetMapping("/projectlist.do")
+	public ResponseEntity<List<Map<String, Integer>>> getProjectList(@RequestParam int user_id) {
+		// 프로젝트 리스트 저장하는 맵 리스트(ResponseEntity 사용)
+		List<Map<String, Integer>> projectlist = new ArrayList<Map<String, Integer>>();
+		// 프로젝트번호 리스트
+		List<Integer> pnumlist;
+		try {
+			pnumlist = project_empservice.getProjectList(user_id);
+			for (int i = 0; i < pnumlist.size(); i++) {
+				Map<String, Integer> project = new HashMap<String, Integer>();
+				project.put("project_num", pnumlist.get(i));
+				projectlist.add(project);
+				System.out.println(project.toString());
+			}
+			return new ResponseEntity<List<Map<String, Integer>>>(projectlist, HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
 		}
-    };
+	};
 }
