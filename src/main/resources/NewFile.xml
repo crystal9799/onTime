@@ -18,10 +18,10 @@
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.naver.com" /> <!-- 메일서버 호스트 -->
 		<property name="port" value="465" /> <!-- 메일서버 포트번호 -->
-		<!-- <property name="username" value="${naverUsername}" /> 자신의 이메일 아이디 
-			<property name="password" value="${naverPassword}" /> 자신의 비밀번호 -->
-		<property name="username" value="douzon4@naver.com" /> <!-- 자신의 이메일 아이디 -->
-		<property name="password" value="qwer1234" /> <!-- 자신의 비밀번호 -->
+		<property name="username" value="${naverUsername}" />
+		<property name="password" value="${naverPassword}" />
+		<!-- <property name="username" value="douzon4@naver.com" /> 자신의 이메일 아이디 
+			<property name="password" value="qwer1234" /> 자신의 비밀번호 -->
 		<!-- 보안연결 SSL과 관련된 설정 -->
 		<property name="javaMailProperties">
 			<props>
@@ -33,8 +33,7 @@
 				<prop key="mail.debug">true</prop>
 				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
 				<prop key="mail.smtp.ssl.enable">true</prop> <!-- SSL 활성화 -->
-				<!-- <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
-				<prop key="mail.smtp.ssl.ciphersuites">TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384</prop> -->
+				<!-- <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop> <prop key="mail.smtp.ssl.ciphersuites">TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384</prop> -->
 			</props>
 		</property>
 	</bean>
