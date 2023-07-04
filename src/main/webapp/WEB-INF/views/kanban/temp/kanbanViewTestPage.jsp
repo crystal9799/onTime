@@ -1,11 +1,11 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>kanban test page</title>
+<title>kanban test page check</title>
 <jsp:include page="/common/Head.jsp" />
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
@@ -40,26 +40,34 @@
 				<div class="board">
 					<!-- form 안에 css적용 -->
 					<form id="todo-form">
-						<button class="modalBtn">모달 창 테스트 중</button>
-						<br> <br> <input type="text" placeholder="업무 입력"
-							id="todo-input" />
+						<button class="modalBtn">모달테스트 중</button>
+						<br> <br> <input type="text" placeholder="업무 입력" id="todo-input" />
 						<button type="submit">추가</button>
 						<button id="saveBtn">save</button>
 					</form>
-					<div class="lanes" id="content">
-						<div class="swim-lane">
+					<div class="lanes" id="content" >
+						<div class="swim-lane" id="todo-prev">
 							<h3 class="heading">업무 시작 전</h3>
-							<div id="todo-prev"></div>
+								<c:forEach var="plist" items="${plist}">
+									<p class="task" draggable="true">${plist.sched_info}</p>
+								</c:forEach>
 						</div>
 
 						<div class="swim-lane" >
 							<h3 class="heading">업무 진행 중</h3>
 							<div id="todo-curr">
-						</div>
+							<c:forEach var="clist" items="${clist}">
+								<p class="task" draggable="true">${clist.sched_info}</p>
+							</c:forEach>
+							</div>
 						</div>
 						<div class="swim-lane">
 							<h3 class="heading">업무 완료</h3>
-							<div id="todo-next"></div>
+							<div id="todo-next">
+							<c:forEach var="nlist" items="${nlist}">
+								<p class="task" draggable="true">${nlist.sched_info}</p>
+							</c:forEach>
+							</div>
 						</div>
 					</div>
 				</div>

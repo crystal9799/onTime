@@ -56,68 +56,92 @@ public class KanbanAjaxController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/nextUpdate.ajax")
-	public void updateNext(String data) throws JSONException, ParseException, JsonMappingException,
+	@RequestMapping("/scheduleUpdate.ajax")
+	public void updatePrev(String data) throws JSONException, ParseException, JsonMappingException,
 			JsonProcessingException, ClassNotFoundException, SQLException {
-
+		System.out.println("prev  conrtroollerrrrr -----------------------------------");
 		JsonParser jsonParser = new JsonParser();
 		JsonArray jsonArray = (JsonArray) jsonParser.parse(data);
 		for (int i = 0; i < jsonArray.size(); i++) {
 			JsonObject object = (JsonObject) jsonArray.get(i);
 			String sched_info = object.get("sched_info").getAsString();
 			int sched_seq = Integer.parseInt(object.get("sched_seq").getAsString());
-			service.updateNext(sched_seq, sched_info);
+			int sched_num = Integer.parseInt(object.get("sched_num").getAsString());
+			System.out.println("controller val: " + sched_info + ", " + sched_seq + ", " + sched_num);
+			service.updatePrev(sched_num, sched_seq, sched_info);
+		}
+	}
+
+////////////////////////////////////////////////
+
+	@ResponseBody
+	@RequestMapping("/scheduleCurrUpdate.ajax")
+	public void updateCurr(String data) throws JSONException, ParseException, JsonMappingException,
+			JsonProcessingException, ClassNotFoundException, SQLException {
+		System.out.println("currrrr    conrtroollerrrrr -----------------------------------");
+		JsonParser jsonParser = new JsonParser();
+		JsonArray jsonArray = (JsonArray) jsonParser.parse(data);
+		for (int i = 0; i < jsonArray.size(); i++) {
+			JsonObject object = (JsonObject) jsonArray.get(i);
+			String sched_info = object.get("sched_info").getAsString();
+			int sched_seq = Integer.parseInt(object.get("sched_seq").getAsString());
+			int sched_num = Integer.parseInt(object.get("sched_num").getAsString());
+			System.out.println("controller val: " + sched_info + ", " + sched_seq + ", " + sched_num);
+			service.updateCurr(sched_num, sched_seq, sched_info);
 		}
 	}
 
 	@ResponseBody
-	@RequestMapping("/scheduleUpdate.ajax")
-	public void updatePrev(String data) throws JSONException, ParseException, JsonMappingException,
+	@RequestMapping("/scheduleNextUpdate.ajax")
+	public void updateNext(String data) throws JSONException, ParseException, JsonMappingException,
 			JsonProcessingException, ClassNotFoundException, SQLException {
-
+		System.out.println("next   conrtroollerrrrr -----------------------------------");
 		JsonParser jsonParser = new JsonParser();
 		JsonArray jsonArray = (JsonArray) jsonParser.parse(data);
 		for (int i = 0; i < jsonArray.size(); i++) {
 			JsonObject object = (JsonObject) jsonArray.get(i);
 			String sched_info = object.get("sched_info").getAsString();
 			int sched_seq = Integer.parseInt(object.get("sched_seq").getAsString());
-
-			service.updatePrev(sched_seq, sched_info);
+			int sched_num = Integer.parseInt(object.get("sched_num").getAsString());
+			System.out.println("next --------------------------------controller val: " + sched_info + ", " + sched_seq
+					+ ", " + sched_num);
+			service.updateNext(sched_num, sched_seq, sched_info);
 		}
-		/*
-		 * JSONArray jsonArr = new JSONArray(); ObjectMapper mapper = new
-		 * ObjectMapper(); jsonArr = mapper.readValue(data, JSONArray.class);
-		 * 
-		 * for (int i = 0; i < jsonArr.size(); i++) {
-		 * System.out.println(jsonArr.get(i)); } JsonParser jsonParser = new
-		 * JsonParser(); JsonArray jsonArray = (JsonArray) jsonParser.parse(data); for
-		 * (int i = 0; i < jsonArray.size(); i++) { JsonObject object = (JsonObject)
-		 * jsonArray.get(i); // int NO = object.get("sched_seq").getAsInt(); String
-		 * sched_info = object.get("sched_info").getAsString(); String sched_seq =
-		 * object.get("sched_seq").getAsString();
-		 * System.out.println("sched_info:"+sched_info);
-		 * System.out.println("sched_seq:"+sched_seq);
-		 */
-
-		/*
-		 * JSONObject jObject = new JSONObject(jsonArr.get(0)); String title2 =
-		 * jObject.getString("sched_info"); System.out.println(title2);
-		 */
-
-		/*
-		 * JSONParser jsonParser = new JSONParser((String) jsonArr.get(0)); // 3. To
-		 * Object Object obj = jsonParser.parse(); // 4. To JsonObject JSONObject
-		 * jsonObj = (JSONObject) obj;
-		 * 
-		 * System.out.println(jsonParser); System.out.println(jsonObj);
-		 * 
-		 * try { // JSONArray 타입으로 파싱 jsonArr = mapper.readValue(data, JSONArray.class);
-		 * } catch (JsonProcessingException e) { e.printStackTrace(); }
-		 * 
-		 * System.out.println("jsonArra"); for(int i=0; i<jsonArr.size();i++) {
-		 * System.out.println(jsonArr.get(i)); }
-		 */
 	}
+
+	/*
+	 * JSONArray jsonArr = new JSONArray(); ObjectMapper mapper = new
+	 * ObjectMapper(); jsonArr = mapper.readValue(data, JSONArray.class);
+	 * 
+	 * for (int i = 0; i < jsonArr.size(); i++) {
+	 * System.out.println(jsonArr.get(i)); } JsonParser jsonParser = new
+	 * JsonParser(); JsonArray jsonArray = (JsonArray) jsonParser.parse(data); for
+	 * (int i = 0; i < jsonArray.size(); i++) { JsonObject object = (JsonObject)
+	 * jsonArray.get(i); // int NO = object.get("sched_seq").getAsInt(); String
+	 * sched_info = object.get("sched_info").getAsString(); String sched_seq =
+	 * object.get("sched_seq").getAsString();
+	 * System.out.println("sched_info:"+sched_info);
+	 * System.out.println("sched_seq:"+sched_seq);
+	 */
+
+	/*
+	 * JSONObject jObject = new JSONObject(jsonArr.get(0)); String title2 =
+	 * jObject.getString("sched_info"); System.out.println(title2);
+	 */
+
+	/*
+	 * JSONParser jsonParser = new JSONParser((String) jsonArr.get(0)); // 3. To
+	 * Object Object obj = jsonParser.parse(); // 4. To JsonObject JSONObject
+	 * jsonObj = (JSONObject) obj;
+	 * 
+	 * System.out.println(jsonParser); System.out.println(jsonObj);
+	 * 
+	 * try { // JSONArray 타입으로 파싱 jsonArr = mapper.readValue(data, JSONArray.class);
+	 * } catch (JsonProcessingException e) { e.printStackTrace(); }
+	 * 
+	 * System.out.println("jsonArra"); for(int i=0; i<jsonArr.size();i++) {
+	 * System.out.println(jsonArr.get(i)); }
+	 */
 
 	/*
 	 * @RequestMapping(method = RequestMethod.POST, produces = "application/json")
@@ -184,27 +208,30 @@ public class KanbanAjaxController {
 	 * //service.progUpdate(sched_seq, sched_info ); }
 	 */
 
+	@RequestMapping(value = "/scheduleDel.ajax", method = { RequestMethod.POST })
+	public void deleteBoard(@RequestParam("sched_num") String sched_num) throws ClassNotFoundException, SQLException {
+		service.deleteBoard(Integer.parseInt(sched_num));
+	}
+
 	@RequestMapping(value = "/scheduleAdd.ajax", method = { RequestMethod.POST })
 	public void scheduleAdd(@RequestParam("ename") String ename, @RequestParam("project_num") String project_num,
 			@RequestParam("sched_info") String sched_info) throws ClassNotFoundException, SQLException {
-		/*
-		 * System.out.println(ename); System.out.println(project_num);
-		 * System.out.println(sched_info);
-		 */
+		System.out.println("add controller");
+		System.out.println(ename);
+		System.out.println(project_num);
+		System.out.println(sched_info);
 
-		int user_id = service.getUseridByEname(ename);
-//		System.out.println(user_id);
+		int user_id = service.getUseridByEname(ename); 
+		System.out.println(user_id);
 
-		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, 0, 8);
-		Schedule schedule = new Schedule(user_id, 8);
+		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, 0, 2);
+		Schedule schedule = new Schedule(user_id, 2);
+
+		System.out.println(sched_info);
 
 		service.insertBoard(board);
 		service.insertSchedule(schedule);
 
-		// System.out.println("controller schedule val: "+schedule);
-
-//		service.insertBoard(sched_info);
-// 		service.insertSchedule(userId);
 	}
 
 	// string 으로 임시 변환 상태 --> emp ;service mapper interface
@@ -346,11 +373,11 @@ public class KanbanAjaxController {
 		service.updateSave(board);
 	}
 
-	@RequestMapping(value = "/delete.ajax", method = RequestMethod.GET)
-	@ResponseBody
-	public void deleteBoard(ScheduleBoard board) throws ClassNotFoundException, SQLException {
-		System.out.println("delete connection");
-		service.deleteBoard(board);
-	}
-
+	/*
+	 * @RequestMapping(value = "/delete.ajax", method = RequestMethod.GET)
+	 * 
+	 * @ResponseBody public void deleteBoard(ScheduleBoard board) throws
+	 * ClassNotFoundException, SQLException {
+	 * System.out.println("delete connection"); service.deleteBoard(board); }
+	 */
 }
