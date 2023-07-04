@@ -35,7 +35,7 @@
 	<select id="getEmpByUserId"
 		resultType="com.kosa.scheduleManagement.global.dto.Emp">
 		select user_id, password, enabled, ename, emp_pic, job,
-		deptno, dhead_num from emp
+		deptno, dhead_num, email from emp
 		where user_id=#{user_id}
 	</select>
 	<select id="getRestEmpListByDeptno"
@@ -59,10 +59,10 @@
 	<insert id="insertEmp"
 		parameterType="com.kosa.scheduleManagement.global.dto.Emp">
 		INSERT INTO emp (user_id, deptno,
-		ename, password,
+		ename,  email, password,
 		enabled, job, dhead_num)
 		VALUES (emp_seq.NEXTVAL,
-		#{deptno}, #{ename},
+		#{deptno}, #{ename}, #{email},
 		#{password}, '1',
 		#{job}, #{dhead_num})
 	</insert>
