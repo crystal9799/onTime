@@ -40,4 +40,10 @@ public class Project_Service {
 		System.out.println(projectdao.getAllProjectList().toString());
 		return projectdao.getAllProjectList();
 	}
+	
+	//현재 시퀀스
+	public int getSeq() {
+		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
+		return projectdao.getSeq();
+	}
 }
