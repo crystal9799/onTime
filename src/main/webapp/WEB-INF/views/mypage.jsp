@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +54,7 @@
 							</form>
 						</div>
 					</div>
+					<se:authorize access="hasRole('ROLE_USER')">
 					<div class="card">
 						<div class="card-header">Pie chart</div>
 						<div class="card-body">
@@ -59,6 +63,40 @@
 								style="display: block; width: 400px; height: 250px;"></canvas>
 						</div>
 					</div>
+					</se:authorize>
+					<se:authorize access="hasRole('ROLE_ADMIN')">
+						<div class="card">
+						<div class="card-header">프로젝트별 진행 차트</div>
+						<div class="card-body">
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th width="37%">프로젝트명</th>
+													<th width="63%">진행률</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="chart" items="${chart}">
+													<tr>
+														<td>${chart.projectName}</td>
+														<td>
+															<div class="grogressWrapper">
+																<div class="progress mr-3">
+																	<div class="progress-bar bg-success" role="progressbar"
+																		style="width: ${chart.projectSchedulePercent}%"
+																		aria-valuenow="${chart.projectSchedulePercent}"
+																		aria-valuemin="0" aria-valuemax="100"></div>
+																	<span>${chart.projectSchedulePercent}%</span>
+																</div>
+															</div>
+														</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+						</div>
+					</div>
+					</se:authorize>
 				</div>
 			</div>
 		</div>
