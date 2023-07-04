@@ -57,10 +57,63 @@
         
 
 	  };
+	  
+	  
+	  
+
+/*       $(document).on("click","#addBtn",function(){
+		console.log('addbtn');	  
+		
+		
+      }); */
+	
+      
+      
+      /*기존 add*/
+/*       $("#addBtn").click( function() {
+     	 console.log("addd test"); 
+ 
+     	 $.ajax({
+ 				url : "scheduleAdd.ajax",
+ 				type : "post",
+ 				data : {
+ 					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
+ 					project_num : "2", // 클라이언트 값 전달
+ 					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
+ 				}, 
+ 				success : function(data) {
+ 						console.log('add'); 
+ 			    }, 
+ 				error : function() {
+ 					alert("error");
+ 				}  
+ 			});
+       }); */
+	  
+/*        let s="<p>";
+    	s+=$("#todo-input").val;
+       s+="</p>";
+       var redBox = $('<p>나는추가되는 p태그야</p>').addClass('new');
+       $('#hi').append(redBox);
+        */
+	  
       $("#addBtn").click( function() {
-    	 console.log("addd test"); 
-    	  
-    	 $.ajax({
+    	 console.log("addd test");
+    	 
+/*     		var html = '';
+    		
+    		html += '<p class="task" draggable="true">dynamic5</p>';
+    		console.log(html);
+    		
+    		$("#todo_prev").append(html); */
+    	 
+//    		let tt=$("#");
+    		let t="<p class='task' draggable='true'>";
+    		t+=$("#todo-input").val();
+    		t+="</p>";
+    		$("#todo-prev").append(t);
+    		
+    		$.ajax({
 				url : "scheduleAdd.ajax",
 				type : "post",
 				data : {
@@ -75,6 +128,39 @@
 					alert("error");
 				}  
 			});
+    	 
+/*      	 let s=document.querySelector('#todo-input').value;
+    	 $("#todo-prev").append($("<p class="'task'" draggable="'true'">").text(s));  */
+    	 
+   /*  	 let vt=document.querySelector('#todo-input').value;
+    	 let vaa=`<p class="task" draggable="true">document.querySelector('#todo-input').value</p>`;
+    	 
+    	 var s="<p class="'task'" draggable="'true'">";
+    	 s+=document.querySelector('#todo-input').value;
+    	 s+="</p>"; */
+    	 
+//    	 let vs="<p class="'task'" draggable="'true'">"+vt+"</p>";
+	   	 console.log(s);
+		
+	//	let v1=`<p class="task" draggable="true">$("#todo-input").val</p>`;
+		//let v2=`<p class="task" draggable="true">vt</p>`;
+//		console.log(v1);
+    	  
+/*     	 $.ajax({
+				url : "scheduleAdd.ajax",
+				type : "post",
+				data : {
+					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
+					project_num : "2", // 클라이언트 값 전달
+					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
+				}, 
+				success : function(data) {
+						console.log('add'); 
+			    }, 
+				error : function() {
+					alert("error");
+				}  
+			}); */
       });
 
 
@@ -158,7 +244,6 @@
 
 	  
 	  
-	  /* kanban list dynamic create */
 	  /* load list drag & drop event */
 	  function getBoardAllList(){
 			$.ajax({
@@ -166,6 +251,7 @@
 				type: "GET", dataType:"json",
 				success : function(data){
 					$.each(data, function(index){
+						  /* kanban list dynamic create */
 /* 						if(data[index].sched_prog==0){
 					    	console.log(data[index].sched_info + ", "+data[index].sched_prog);
 							$("#todo-prev").append
@@ -263,14 +349,9 @@
 				}
 			}); 
 			
-//			listJustSave();
 	  }
 	  
-
-		
-		// String 형태로 변환
-
-		
+ 
 		////update ajax /////
       $(document).on("click","#saveBtn",function(){
 //  		document.getElementById("1").innerText="바뀜";
@@ -283,11 +364,12 @@
 			data.sched_seq = i ;
 			data.sched_info =  divNode.children[i].innerText;
 			data.sched_num =  divNode.children[i].id;
+			
 			//console.log("data -- test ");
 			//console.log(divNode.children[i]);
 			//console.log(divNode.children[i].id);
 			
-//			data.sched_num =  divNode.children[i].innerText;
+//			data.sched_num =  divaNode.children[i].innerText;
 			// 리스트에 생성된 객체 삽입
 			prevList.push(data) ;
 		}

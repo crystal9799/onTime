@@ -85,9 +85,6 @@
 					</div>
 				</div>
 
-
-
-
 				<jsp:include page="/WEB-INF/views/kanban/js.jsp" />
 </body>
 </html>
