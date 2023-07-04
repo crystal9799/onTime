@@ -19,20 +19,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</select> -->
 	<update id="updatePrev"
 		parameterType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
-		update schedule_board set sched_seq=#{sched_seq} where
-		sched_info=#{sched_info}
+		update schedule_board set sched_seq=#{sched_seq}, sched_prog=0 where sched_num=#{sched_num}
 	</update>
 
 	<update id="updateCurr"
 		parameterType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
-		update schedule_board set sched_seq=#{sched_seq} where
-		sched_info=#{sched_info}
+		update schedule_board set sched_seq=#{sched_seq}, sched_prog=1 where sched_num=#{sched_num}
 	</update>
 
 	<update id="updateNext"
 		parameterType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
-		update schedule_board set sched_seq=#{sched_seq} where
-		sched_info=#{sched_info}
+		update schedule_board set sched_seq=#{sched_seq}, sched_prog=2 where sched_num=#{sched_num}
 	</update>
 
 	<select id="getAllList"

@@ -15711,7 +15711,7 @@ button.bg-secondary:focus {
 }
 
 .bg-success, .swal2-modal .swal2-buttonswrapper .swal2-styled.swal2-confirm, .settings-panel .color-tiles .tiles.success {
-  background-color: #57B657 !important;
+  background-color: #4e4cad !important;
 }
 
 a.bg-success:hover, .swal2-modal .swal2-buttonswrapper a.swal2-styled.swal2-confirm:hover, .settings-panel .color-tiles a.tiles.success:hover, a.bg-success:focus, .swal2-modal .swal2-buttonswrapper a.swal2-styled.swal2-confirm:focus, .settings-panel .color-tiles a.tiles.success:focus,

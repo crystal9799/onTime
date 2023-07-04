@@ -5,25 +5,155 @@
 	  window.onload = function(){
 		  console.log('load');
 
-		  
+          $(document).on("click","#moveBtn",function(event){
+              alert($(this).text());
+          });
+ 
 		/* kanban list dynamic load */
 		getBoardAllList();
 		
 		/*local storage 처리 */
 		
+		var iv;
+		var i;
 		
+        $( 'p' ).click( function() {
+            $( this ).toggleClass( 'jbBox' );
+        	i=$(this).attr('id');
+        	iv="#"+$(this).attr('id');
+        	console.log('iv: '+iv);
+        	console.log('i: '+i);
+            
+//            var i="#"+$(this).attr('id');
+ //           var t=$(this).text();
+//            var v="<br><button>삭제</button>";
+ //           console.log(v);
+ //           $(i).append(v);
+  //          document.getElementById(i).append(v);
+            
+          });
+		
+        $("#delBtn").click( function() {
+        	console.log('test');
+        	console.log(iv);
+        	console.log(i);
+        	$(iv).remove();
+        	
+			$.ajax({
+				url : "scheduleDel.ajax",
+				type : "post",
+  				data : {
+					sched_num : i 
+				}, 
+				success : function(data) {
+						console.log('del'); 
+			    },
+				error : function() {
+					alert("error");
+				}
+			});
+        });
+        
+        
 
 	  };
+      $("#addBtn").click( function() {
+    	 console.log("addd test"); 
+    	  
+    	 $.ajax({
+				url : "scheduleAdd.ajax",
+				type : "post",
+				data : {
+					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
+					project_num : "2", // 클라이언트 값 전달
+					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
+				}, 
+				success : function(data) {
+						console.log('add'); 
+			    }, 
+				error : function() {
+					alert("error");
+				}  
+			});
+      });
+
+
+	  const modal2 = document.querySelector('.modal_body');
+      $("#modalClose").click( function() {
+     		console.log('testbtn');
+     		modal2.style.display = "none";
+      });
+/*       		$.ajax({
+				url : "scheduleAdd.ajax",
+				type : "post",
+				data : {
+					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
+					project_num : "2", // 클라이언트 값 전달
+					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
+				}, 
+				success : function(data) {
+						console.log('add'); 
+			    },
+				error : function() {
+					alert("error");
+				}
+			});   */
+
+/* ajax add */
+ /*    	const addModalBtn = document.querySelector('.addModalBtn');
+     addModalBtn.addEventListener('click', () => {
+     	console.log('add modal Click!');
+
+			$.ajax({
+				url : "scheduleAdd.ajax",
+				type : "post",
+				data : {
+					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
+					project_num : "2", // 클라이언트 값 전달
+					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
+				}, 
+				success : function(data) {
+						console.log('add'); 
+			    },
+				error : function() {
+					alert("error");
+				}
+			});
+     }); */
+			
+     
+     
+     
+     
+     
+     
+     
+     
+     
+	  
+/* 	  
+	  $(".dj-tok .mem-list > li").click(function() {
+			$(".mem-list > li").removeClass("active");
+			$(this).addClass("active");
+		})
+	   */
 	  
 /* 	  function listJustSave(){
 		  const divNode = document.getElementById("content");
 		  console.log(divNode.innerText);
 	  } */
+ 
 	  
-	  function localStorageSave(){
-		  console.log('l s load');
-	  }
 	  
+	  /* refresh */
+/* 	  const refreshBtn = document.querySelector('#refreshBtn');
+	  refreshBtn.addEventListener('click', () => {
+		  console.log('refresh Click!');
+		  
+	 
+ 
+	});
+	   */
  
 
 	  
@@ -36,7 +166,7 @@
 				type: "GET", dataType:"json",
 				success : function(data){
 					$.each(data, function(index){
-						if(data[index].sched_prog==0){
+/* 						if(data[index].sched_prog==0){
 					    	console.log(data[index].sched_info + ", "+data[index].sched_prog);
 							$("#todo-prev").append
 							('<p class="task" draggable="true">'+data[index].sched_info+'</p>');
@@ -49,7 +179,7 @@
 							$("#todo-next").append
 							('<p class="task" draggable="true">'+data[index].sched_info+'</p>');
 							localStorage.setItem(data[index].sched_num, data[index].sched_info);
-						}
+						} */
 						
 						const form = document.getElementById("todo-form");
 						const input = document.getElementById("todo-input");
@@ -141,22 +271,28 @@
 		// String 형태로 변환
 
 		
+		////update ajax /////
       $(document).on("click","#saveBtn",function(){
+//  		document.getElementById("1").innerText="바뀜";
+    	  
 		var prevList = new Array() ;
-		const divNode = document.getElementById("todo-prev")
-		for(let i=0; i<divNode.children.length; i++){
+		const divNode = document.getElementById("todo-prev");
+		for(let i=1; i<divNode.children.length; i++){
 			// 객체 생성
 			var data = new Object() ;
 			data.sched_seq = i ;
 			data.sched_info =  divNode.children[i].innerText;
+			data.sched_num =  divNode.children[i].id;
+			//console.log("data -- test ");
+			//console.log(divNode.children[i]);
+			//console.log(divNode.children[i].id);
+			
+//			data.sched_num =  divNode.children[i].innerText;
 			// 리스트에 생성된 객체 삽입
 			prevList.push(data) ;
 		}
-		var jsonData = JSON.stringify(prevList) ;
-		console.log(prevList);
-		 
-		console.log("jsonStr : " + jsonData);
-		
+//		console.log(document.getElementById("1").innerText);
+//		var jsonData = JSON.stringify(prevList) ;
 		 $.ajax({
 		        type: "POST",
 		        //Array 형식의 데이터를 전송할 때는 traditional: true 옵션을 적용
@@ -165,14 +301,84 @@
 		        //JSON.stringify를 통해 Javascript 객체를 JSON 문자열로 변환
 		        data: {data : JSON.stringify(prevList)},
 		        success: function (data) {
-		            console.log(data);		        	
+		            console.log("PREVLIST"+data);		        	
 		        },
 		        error: function () {
 		            alert('오류 발생');
 		        }
 		    });
-		
-		
+		 
+			var currList = new Array() ;
+			const divNode2 = document.getElementById("todo-curr");
+			for(let i=1; i<divNode2.children.length; i++){
+				// 객체 생성
+				var data2 = new Object() ;
+				data2.sched_seq = i ;
+				data2.sched_info =  divNode2.children[i].innerText;
+				data2.sched_num =  divNode2.children[i].id;
+				//console.log("data -- test ");
+				//console.log(divNode.children[i]);
+				//console.log(divNode.children[i].id);
+				
+//				data.sched_num =  divNode.children[i].innerText;
+				// 리스트에 생성된 객체 삽입
+				currList.push(data2) ;
+			}
+//			console.log(document.getElementById("1").innerText);
+//			var jsonData = JSON.stringify(prevList) ;
+			 $.ajax({
+			        type: "POST",
+			        //Array 형식의 데이터를 전송할 때는 traditional: true 옵션을 적용
+			        traditional: true,
+			        url: "scheduleCurrUpdate.ajax",
+			        //JSON.stringify를 통해 Javascript 객체를 JSON 문자열로 변환
+			        data: {data : JSON.stringify(currList)},
+			        success: function (data) {
+			            console.log("currList"+data);		        	
+			        },
+			        error: function () {
+			            alert('오류 발생');
+			        }
+			    });
+			 
+			 
+				var nextList = new Array() ;
+				const divNode3 = document.getElementById("todo-next");
+				for(let i=1; i<divNode3.children.length; i++){
+					// 객체 생성
+					var data3 = new Object() ;
+					data3.sched_seq = i ;
+					data3.sched_info =  divNode3.children[i].innerText;
+					data3.sched_num =  divNode3.children[i].id;
+					//console.log("data -- test ");
+					//console.log(divNode.children[i]);
+					//console.log(divNode.children[i].id);
+					
+//					data.sched_num =  divNode.children[i].innerText;
+					// 리스트에 생성된 객체 삽입
+					nextList.push(data3) ;
+				}
+//				console.log(document.getElementById("1").innerText);
+//				var jsonData = JSON.stringify(prevList) ;
+				 $.ajax({
+				        type: "POST",
+				        //Array 형식의 데이터를 전송할 때는 traditional: true 옵션을 적용
+				        traditional: true,
+				        url: "scheduleNextUpdate.ajax",
+				        //JSON.stringify를 통해 Javascript 객체를 JSON 문자열로 변환
+				        data: {data : JSON.stringify(nextList)},
+				        success: function (data) {
+				            console.log("nextList"+data);		        	
+				        },
+				        error: function () {
+				            alert('오류 발생');
+				        }
+				    });
+		 
+		 
+		 
+	
+      });	
 		
 		
 /* 
@@ -204,8 +410,7 @@
 			});
 /* 		 */
  
-		
-      });	
+
 /* 	    
 		 */
 		
@@ -311,7 +516,7 @@
       
       
 	  /* ename list dynamic create */
-	  function getNameList(){ 
+	  function getNameList(){
 			$.ajax({
 				url: "projectEnamelist.ajax",
 				type: "GET", dataType:"json",
@@ -334,7 +539,7 @@
 
       btnOpenPopup.addEventListener('click', () => {
         modal.classList.toggle('show');
-			getNameList(); //modal load 시 동적 태그 생성
+			getNameList();
 
         if (modal.classList.contains('show')) {
           body.style.overflow = 'hidden';
@@ -366,30 +571,15 @@
 			
 	 	
 		 }
+
+
+
+
+
+
+
 		 
-		 
-		 /* ajax add */
-       	const addModalBtn = document.querySelector('.addModalBtn');
-        addModalBtn.addEventListener('click', () => {
-        	console.log('add modal Click!');
- 
-			$.ajax({
-				url : "scheduleAdd.ajax",
-				type : "post",
-  				data : {
-					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
-					project_num : "2", // 클라이언트 값 전달
-					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
-				}, 
-				success : function(data) {
-						console.log('add'); 
-			    },
-				error : function() {
-					alert("error");
-				}
-			});
-        });
-			
+
         
 		 
 		 /* ajax add */

@@ -21,7 +21,7 @@ public class AdminProjectController_Sync {
     }
 	
 	
-	@GetMapping("/admin/main.do")
+	@GetMapping("/main.do")
 
     public String callMain() {
     	return "home";

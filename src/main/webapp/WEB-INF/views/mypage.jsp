@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+
 </head>
 <body>
 	<jsp:include page="/common/Header.jsp" />
