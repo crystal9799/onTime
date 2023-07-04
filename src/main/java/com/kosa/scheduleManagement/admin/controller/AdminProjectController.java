@@ -94,6 +94,8 @@ public class AdminProjectController {
     		
 			project_empservice.insert_Project_Emp(genproject);
 			System.out.println("empinsert success");
+			
+			
 			Map<String, String> result = new HashMap<String, String>();
 			result.put("message", "success");
 			return new ResponseEntity<Map<String, String>>(result,HttpStatus.OK);

@@ -24,7 +24,6 @@ $(document).ready(function(){
             })
     });
 	
-	
     fetch("${pageContext.request.contextPath}/admin/createProject.do?deptno=${emp.deptno}")
     .then(res => res.json())
     .then(data => {
@@ -163,7 +162,7 @@ $(document).ready(function(){
                 <div class="modal-body">
                 	<div class="form-group">
                 		<label for="project_num">Project Number</label>
-                		<input type="number" class="form-control" id="project_num" name="id" value="11" disabled="disabled">
+                		<input type="number" class="form-control" id="project_num" name="id" disabled="disabled">
                 	</div>
                     <div class="form-group">
                         <label for="project_name">Project Name</label>
@@ -210,7 +209,7 @@ $(document).ready(function(){
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
                     <button type="submit" class="btn btn-primary" id="regist">regist</button>
-                    <a href="/Team4_WebProject_2/main.do" type="button" class="btn btn-success" id="save">Save</a>
+                    <a href="${pageContext.request.contextPath}/main.do" type="button" class="btn btn-success" id="save">Save</a>
                 </div>
             </form>
         </div>
