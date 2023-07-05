@@ -74,9 +74,9 @@
 					<div class="btnClass">
 						<div>
 							<span> 
-							<i class="fa fa-plus" id="modalBtn" aria-hidden="true" type="button"></i>
-							<i class="fa fa-floppy-o" aria-hidden="true" id="saveBtn" type="button"></i> <a
-								href="${pageContext.request.contextPath}/getProjectDetail.do"
+							<i class="fa fa-plus" id="modalBtn" aria-hidden="true" type="button"></i> 
+							<i class="fa fa-floppy-o" aria-hidden="true" id="saveBtn" type="button"></i> 
+							<a href="${pageContext.request.contextPath}/getProjectDetail.do"
 								id="reBtn" class="fa fa-refresh" type="button"
 								style="text-decoration: none; color: #4b49ac;"> </a>
 
@@ -111,8 +111,8 @@
 						<div class="pro" id="todo-p">
 							<c:forEach var="p" items="${p}">
 								<h3 class="heading" href="#">
-									[ P2023-0${p.project_num} ] : ${p.project_name}
-									<i class="fa fa-trash" aria-hidden="true" id="delBtn"
+									[ P2023-0${p.project_num} ] : ${p.project_name}<i
+										class="fa fa-trash" aria-hidden="true" id="delBtn"
 										type="button"></i>
 								</h3>
 								<div class="p-inner">
