@@ -158,11 +158,25 @@ public class AdminProjectController {
 	}
 
     //로그인한 유저가 속한 프로젝트 리스트
-    @GetMapping("/projectlist.do")
+	@GetMapping("/projectlist.do")
     public ResponseEntity<List<Map<String, Object>>> getProjectList(@RequestParam int user_id){
         List<Map<String,Object>> projectlist = new ArrayList<Map<String,Object>>();
         try {
             projectlist = project_Service.getProjectList(user_id);
+            
+            return new ResponseEntity<List<Map<String,Object>>>(projectlist,HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    };
+    
+    //어드민이 보는 네브바
+    @GetMapping("/projectlist_Admin.do")
+    public ResponseEntity<List<Map<String, Object>>> getProjectList_Admin(@RequestParam int deptno){
+        List<Map<String,Object>> projectlist = new ArrayList<Map<String,Object>>();
+        try {
+            projectlist = project_Service.getProjectList_Admin(deptno);
             
             return new ResponseEntity<List<Map<String,Object>>>(projectlist,HttpStatus.OK);
         } catch (Exception e) {

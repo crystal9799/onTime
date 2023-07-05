@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function() {
 	
-		fetch("${pageContext.request.contextPath}/admin/projectlist.do?user_id="+${emp.user_id})
+		fetch("${pageContext.request.contextPath}/admin/projectlist_Admin.do?deptno="+${emp.deptno})
 						.then(res => res.json())
 						.then(data => {
 							const defaultLink = "${pageContext.request.contextPath}/getProjectDetail.do?project_id=";
@@ -31,5 +31,5 @@
 					        	console.log("newProject after append:", newProject);
 							}
 						})
-					}); 
+					});
 </script>

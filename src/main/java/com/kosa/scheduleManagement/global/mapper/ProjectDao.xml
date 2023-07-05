@@ -30,10 +30,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from project
 	</select>
 	
+	<!-- 유저용 Nav생성 -->
 	<select id="getprojectList" resultType="java.util.Map">
 		SELECT DISTINCT p.PROJECT_NUM, p.PROJECT_NAME
         FROM project p
         INNER JOIN project_emp pe ON p.PROJECT_NUM = pe.PROJECT_NUM
         WHERE pe.USER_ID = #{user_id}
+	</select>
+	
+	<!-- 어드민용 Nav생성 -->
+	<select id="getprojectList_Admin" resultType="java.util.Map">
+		SELECT DISTINCT p.PROJECT_NUM, p.PROJECT_NAME
+        FROM project p
+        INNER JOIN project_emp pe ON p.PROJECT_NUM = pe.PROJECT_NUM
+        WHERE P.DEPTNO = #{deptno}
 	</select>
 </mapper>

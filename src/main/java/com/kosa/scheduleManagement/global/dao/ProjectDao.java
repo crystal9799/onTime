@@ -28,4 +28,5 @@ public interface ProjectDao {
 	//프로젝트 이름
 	List<Map<String, Object>> getprojectList(int user_id);
 	
+	List<Map<String, Object>> getprojectList_Admin(int deptno);
 }
