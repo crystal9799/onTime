@@ -19,6 +19,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getUseridByEname" resultType="int">
 		select user_id from emp where ename=#{ename}
 	</select>
-
 </mapper>
 	

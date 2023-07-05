@@ -214,7 +214,7 @@ public class KanbanAjaxController {
 	}
 
 	@RequestMapping(value = "/scheduleAdd.ajax", method = { RequestMethod.POST })
-	public void scheduleAdd(@RequestParam("ename") String ename, @RequestParam("project_num") String project_num,
+	public void scheduleAdd(@RequestParam("ename") String ename, @RequestParam("project_num") int project_num,
 			@RequestParam("sched_info") String sched_info) throws ClassNotFoundException, SQLException {
 		System.out.println("add controller");
 		System.out.println(ename);
@@ -229,7 +229,7 @@ public class KanbanAjaxController {
 
 		System.out.println(sched_info);
 
-		service.insertBoard(board);
+		service.insertBoard(board, project_num);
 		service.insertSchedule(schedule);
 
 	}
@@ -341,27 +341,27 @@ public class KanbanAjaxController {
 
 	@RequestMapping(value = "/listPrev.ajax", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ScheduleBoard> getAllPrev() throws ClassNotFoundException, SQLException {
+	public List<ScheduleBoard> getAllPrev(@RequestParam("project_num") int project_num) throws ClassNotFoundException, SQLException {
 		System.out.println("ajaxlist connection");
-		List<ScheduleBoard> list = service.getAllPrev();
+		List<ScheduleBoard> list = service.getAllPrev(project_num);
 		System.out.println("list: " + list);
 		return list;
 	}
 
 	@RequestMapping(value = "/listCurr.ajax", method = RequestMethod.GET)
 	@ResponseBody
-	public List<ScheduleBoard> getAllCurr() throws ClassNotFoundException, SQLException {
+	public List<ScheduleBoard> getAllCurr(@RequestParam("project_num") int project_num) throws ClassNotFoundException, SQLException {
 		System.out.println("ajaxlist connection");
-		List<ScheduleBoard> list = service.getAllNext();
+		List<ScheduleBoard> list = service.getAllNext(project_num);
 		System.out.println("list: " + list);
 		return list;
 	}
 
 	@RequestMapping(value = "/listNext.ajax", method = RequestMethod.GET)
 	@ResponseBody
-	public List<ScheduleBoard> getAllNext() throws ClassNotFoundException, SQLException {
+	public List<ScheduleBoard> getAllNext(@RequestParam("project_num") int project_num) throws ClassNotFoundException, SQLException {
 		System.out.println("ajaxlist connection");
-		List<ScheduleBoard> list = service.getAllNext();
+		List<ScheduleBoard> list = service.getAllNext(project_num);
 		System.out.println("list: " + list);
 		return list;
 	}

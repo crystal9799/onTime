@@ -154,7 +154,7 @@ public class ScheduleService {
 		scheduleDao.insertSchedule(schedule);
 	}
 
-	public List<Project_Emp> getAllProjectEmpList() throws ClassNotFoundException, SQLException {
+	public List<Project_Emp> getAllProjectEmpListByProject() throws ClassNotFoundException, SQLException {
 		System.out.println("emplistservice");
 		ScheduleBoard_Project_EmpDao dao = sqlSession.getMapper(ScheduleBoard_Project_EmpDao.class);
 		List<Project_Emp> enameList = dao.getAllProjectEmpList();

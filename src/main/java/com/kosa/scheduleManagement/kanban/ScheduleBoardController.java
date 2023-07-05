@@ -31,7 +31,7 @@ public class ScheduleBoardController {
 	}
 
 	@GetMapping("getProjectDetail.do")
-	public String getd(@RequestParam int project_num, Model model) throws ClassNotFoundException, SQLException {
+	public String getd(@RequestParam("project_num") int project_num, Model model) throws ClassNotFoundException, SQLException {
 		System.out.println("getAllDetail conn");
 		
 		List<ScheduleBoard> prevList = service.getAllPrev(project_num);
