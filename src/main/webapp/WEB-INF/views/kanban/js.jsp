@@ -136,6 +136,7 @@
 //    		let tt=$("#");
     		let t="<p class='task' draggable='true'>";
     		t+=$("#todo-input").val();
+    		console.log(t);
     		t+="</p>";
     		$("#todo-prev").append(t);
     		
