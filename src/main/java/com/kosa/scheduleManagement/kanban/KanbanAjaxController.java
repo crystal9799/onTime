@@ -208,6 +208,13 @@ public class KanbanAjaxController {
 	 * //service.progUpdate(sched_seq, sched_info ); }
 	 */
 
+	@RequestMapping(value = "/getSinfo.ajax", method = { RequestMethod.POST })
+	public void getSinfo(@RequestParam("sched_num") String sched_num) throws ClassNotFoundException, SQLException {
+		System.out.println("getSinfo ccccc");
+		String  board=service.getSinfoByUserId(Integer.parseInt(sched_num));
+		System.out.println(board);
+	}
+
 	@RequestMapping(value = "/scheduleDel.ajax", method = { RequestMethod.POST })
 	public void deleteBoard(@RequestParam("sched_num") String sched_num) throws ClassNotFoundException, SQLException {
 		service.deleteBoard(Integer.parseInt(sched_num));
@@ -221,7 +228,7 @@ public class KanbanAjaxController {
 		System.out.println(project_num);
 		System.out.println(sched_info);
 
-		int user_id = service.getUseridByEname(ename); 
+		int user_id = service.getUseridByEname(ename);
 		System.out.println(user_id);
 
 		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, 0, 2);

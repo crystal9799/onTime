@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.kosa.scheduleManagement.global.dao.ScheduleProjectDao">
+
+	<select id="getProject"
+		resultType="com.kosa.scheduleManagement.global.dto.Schedule_Project">
+		select project_num, project_start, project_end, project_info, project_name, deptno from project where project_num=#{project_num}
+	</select>
+ 
+</mapper>
+	

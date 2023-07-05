@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kosa.scheduleManagement.global.dto.Project;
 import com.kosa.scheduleManagement.global.dto.ScheduleBoard;
+import com.kosa.scheduleManagement.global.dto.Schedule_Project;
 import com.kosa.scheduleManagement.kanban.ScheduleService;
 
 @Controller
@@ -31,20 +33,27 @@ public class ScheduleBoardController {
 	}
 
 	@GetMapping("getProjectDetail.do")
-	public String getd(@RequestParam("project_num") int project_num, Model model) throws ClassNotFoundException, SQLException {
+	public String getScheduleList(Model model) throws ClassNotFoundException, SQLException {
 		System.out.println("getAllDetail conn");
 		
 		List<ScheduleBoard> prevList = service.getAllPrev(project_num);
 		List<ScheduleBoard> currList = service.getAllCurr(project_num);
 		List<ScheduleBoard> nextList = service.getAllNext(project_num);
 
-		System.out.println("plist: ");
-		System.out.println(prevList);
+		List<ScheduleBoard> prevList = service.getAllPrev();
+		List<ScheduleBoard> currList = service.getAllCurr();
+		List<ScheduleBoard> nextList = service.getAllNext();
+		List<Schedule_Project> p=service.getProject(2);
+
+		System.out.println("proejct contorlllrlelele=======");
+		System.out.println(p);
 
 		model.addAttribute("plist", prevList);
 		model.addAttribute("clist", currList);
 		model.addAttribute("nlist", nextList);
+		model.addAttribute("p", p);
 
 		return "/kanban/kanbanViewPage";
 	}
+ 
 }
