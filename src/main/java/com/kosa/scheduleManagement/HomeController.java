@@ -6,12 +6,15 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,13 +59,13 @@ public class HomeController {
 	
 	//GET 요청
 	//join.jsp 화면
-	@GetMapping("/join")  //  /joinus/join.htm
+	@GetMapping("/login")  //  /joinus/join.htm
 	public String join() {
 		return "login";
 	}
 	
 	//POST 요청
-	@PostMapping("/join")
+	@PostMapping("/login")
 	public String join2() {
 		return "home";
 	}
@@ -81,5 +84,14 @@ public class HomeController {
 		return "404";
 	}
 	
-	
+	@PostMapping("/logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("emp");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+      	if (auth != null && auth.isAuthenticated()) {
+      		new SecurityContextLogoutHandler().logout(request, response, auth);
+      	}
+		return "redirect:/";
+	}
 }
