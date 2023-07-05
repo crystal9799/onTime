@@ -124,7 +124,7 @@ body {
 						<div class="pro" id="todo-p">
 							<c:forEach var="p" items="${p}">
 								<h3 class="heading" href="#">
-									[ P2023-0${p.project_num} ] : ${p.project_name}<i
+									[ P-00${p.project_num} ] <br>: ${p.project_name}<i
 										class="fa fa-trash" aria-hidden="true" id="delBtn"
 										type="button"></i>
 								</h3>

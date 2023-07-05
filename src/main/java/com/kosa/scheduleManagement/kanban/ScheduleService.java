@@ -60,7 +60,7 @@ public class ScheduleService {
 	
 	public List<Schedule_Project> getProject(int project_num)  throws ClassNotFoundException, SQLException {
 		ScheduleProjectDao boardDao= sqlSession.getMapper(ScheduleProjectDao.class);
-		List<Schedule_Project> p=boardDao.getProject(2);
+		List<Schedule_Project> p=boardDao.getProject(project_num);
 		return p;
 	}
 
