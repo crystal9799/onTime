@@ -71,8 +71,8 @@
 										<table class="table table-striped">
 											<thead>
 												<tr>
-													<th width="37%">프로젝트명</th>
-													<th width="63%">진행률</th>
+													<th width="40%">프로젝트명</th>
+													<th width="60%">진행률</th>
 												</tr>
 											</thead>
 											<tbody>

@@ -5,13 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper
 	namespace="com.kosa.scheduleManagement.global.dao.ScheduleBoard_Project_EmpDao">
 
-	<select id="getAllProjectEmpList"
+	<!-- 이거 안씀 -->
+ <select id="getAllProjectEmpList"
 		resultType="com.kosa.scheduleManagement.global.dto.Project_Emp">
 		select user_id, project_num
 		from project_emp
 	</select>
 	
-		<select id="getAllProjectEmpListByProject"
+	<select id="getAllProjectEmpListByProject"
 		resultType="com.kosa.scheduleManagement.global.dto.Project_Emp">
 		select user_id, project_num
 		from project_emp

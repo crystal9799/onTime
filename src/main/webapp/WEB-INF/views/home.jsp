@@ -10,6 +10,8 @@
     <script src="https://unpkg.com/fullcalendar@5.10.1/main.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Project.css">
     <script>
+
+    
 	    document.addEventListener('DOMContentLoaded', function() {
 	        fetch('${pageContext.request.contextPath}/admin/async')
 	            .then(res => res.json())
@@ -93,5 +95,21 @@
 			</div>
 		</div>
 	</div>
+<script>
+
+</script>	
 </body>
+<script src="${pageContext.request.contextPath}/resources/js/vendor.bundle.base.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/Chart.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.dataTables.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/dataTables.bootstrap4.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/dataTables.select.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/off-canvas.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/hoverable-collapse.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/template.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/todolist.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/dashboard.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/Chart.roundedBarCharts.js"></script>
+
 </html>

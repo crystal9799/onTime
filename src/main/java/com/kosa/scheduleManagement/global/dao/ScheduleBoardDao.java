@@ -11,9 +11,9 @@ public interface ScheduleBoardDao {
 //	HashMap<String, ScheduleBoard> getAllUpdate() throws ClassNotFoundException, SQLException;
 
 	List<ScheduleBoard> getAllList() throws ClassNotFoundException, SQLException;
-	List<ScheduleBoard> getAllPrev() throws ClassNotFoundException, SQLException;
-	List<ScheduleBoard> getAllCurr() throws ClassNotFoundException, SQLException;
-	List<ScheduleBoard> getAllNext() throws ClassNotFoundException, SQLException;
+	List<ScheduleBoard> getAllPrev(int project_num) throws ClassNotFoundException, SQLException;
+	List<ScheduleBoard> getAllCurr(int project_num) throws ClassNotFoundException, SQLException;
+	List<ScheduleBoard> getAllNext(int project_num) throws ClassNotFoundException, SQLException;
 
 //	ScheduleBoard searchByEmp(int sched_num) throws ClassNotFoundException, SQLException;
 	void insertBoard(ScheduleBoard scheduleBoard) throws ClassNotFoundException, SQLException;
@@ -24,5 +24,6 @@ public interface ScheduleBoardDao {
 	void updatePrev(ScheduleBoard scheduleBoard)throws ClassNotFoundException, SQLException;
 	void updateCurr(ScheduleBoard scheduleBoard)throws ClassNotFoundException, SQLException;
 	void updateNext(ScheduleBoard scheduleBoard)throws ClassNotFoundException, SQLException;
+	String getSinfoByUserId(int sched_num)throws ClassNotFoundException, SQLException;
 
 }
