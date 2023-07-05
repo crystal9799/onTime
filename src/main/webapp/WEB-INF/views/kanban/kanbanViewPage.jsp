@@ -8,6 +8,7 @@
 <title>Schedule Board</title>
 <jsp:include page="/common/Head.jsp" />
 <script
+
 	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
