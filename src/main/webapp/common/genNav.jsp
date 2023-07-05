@@ -6,7 +6,7 @@
 		fetch("${pageContext.request.contextPath}/admin/projectlist.do?user_id="+${emp.user_id})
 						.then(res => res.json())
 						.then(data => {
-							const defaultLink = "${pageContext.request.contextPath}/getProjectDetail.do?project_id=";
+							const defaultLink = "${pageContext.request.contextPath}/getProjectDetail.do?project_num=";
 							let linklist = [];
 							for(let i in data){
 								console.log(defaultLink+data[i].PROJECT_NUM);
