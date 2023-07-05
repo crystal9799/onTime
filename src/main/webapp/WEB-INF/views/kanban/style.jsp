@@ -91,13 +91,6 @@ p {
 	cursor: pointer;
 }
 
-.jbBox {
-	border: 1px solid #bcbcbc;
-	padding: 20px;
-	color: #fff;
-	background-color: #4b49ac;
-}
-
 #todo-prev {
 	background-color: #E6E6F4;
 }
@@ -153,15 +146,40 @@ p {
 	float: right;
 }
 
+.jbBox {
+	padding: 20px;
+	color: #fff;
+	background-color: #4B49AC;
+}
+.swim-lane p:visited {
+	padding: 20px;
+	color: #fff;
+	background-color: #4B49AC;
+}
+
+.swim-lane p:hover {
+	padding: 20px;
+	color: #fff;
+	background-color: #4B49AC;
+}
+
+.swim-lane p:active {
+	padding: 30px;
+	color: #fff;
+	background-color: #4B49AC;
+}
+
 .swim-lane p {
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
 	border-radius: 1px;
+	padding: 20px;
 	background-color: #F5F7FF;
 	min-height: 70px;
 	/* 	text-align : center; */
 	font-size: 15px;
-	border-radius: 10px;
+	color: #4B49AC; border-radius : 10px;
 	text-align: left;
+	border-radius: 10px;
 }
 
 .swim-lane {
@@ -187,9 +205,9 @@ p {
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
 	background-color: #4B49AC;
 	border-radius: 4px;
-/*	width: 500px;*/
-	width:100%;
-	max-width:700px;
+	/*	width: 500px;*/
+	width: 100%;
+	max-width: 700px;
 	min-height: 500px;
 	flex-shrink: 0;
 	color: #fff;
@@ -204,7 +222,7 @@ p {
 	background-color: #fff;
 }
 
-.task{
+.task {
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
 	border-radius: 1px;
 	background-color: #F5F7FF;
@@ -213,7 +231,7 @@ p {
 	font-size: 15px;
 	border-radius: 10px;
 	text-align: left;
-	}
+}
 
 /* #task {
 	background: white;
@@ -224,7 +242,6 @@ p {
 	font-size: 50px;
 	cursor: move;
 } */
-
 .p-inner {
 	padding: 55px 0px 0px 50px;
 	background: white;
