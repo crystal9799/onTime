@@ -14,8 +14,6 @@
 			<div class="collapse" id="ui-basic">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-<!--					<a class="nav-link"
-						href="${pageContext.request.contextPath}/getProjectDetail.do?project_num=2">project1</a></li>-->
 				</ul>
 			</div></li>
 		<li class="nav-item"><a class="nav-link"
