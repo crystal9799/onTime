@@ -6,8 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Schedule Board</title>
+<style>
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: 'GmarketSansMedium', sans-serif;
+}
+</style>
 <jsp:include page="/common/Head.jsp" />
 <script
+
 	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -28,8 +43,7 @@
 				<div class="modal">
 					<div class="modal_body">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Create
-								Schedule</h5>
+							<h5 class="modal-title" id="exampleModalLabel">Create Schedule</h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -40,7 +54,7 @@
 								<br>
 								<div class="form-group">
 									<label for="project_num">프로젝트 번호</label> <input type="number"
-										class="form-control" id="project_num" name="id" value="11"
+										class="form-control" id="project_num" name="id" value="${project_num}"
 										disabled="disabled">
 								</div>
 								<br>
@@ -76,9 +90,8 @@
 							<span> 
 							<i class="fa fa-plus" id="modalBtn" aria-hidden="true" type="button"></i> 
 							<i class="fa fa-floppy-o" aria-hidden="true" id="saveBtn" type="button"></i> 
-							<a href="${pageContext.request.contextPath}/getProjectDetail.do"
-								id="reBtn" class="fa fa-refresh" type="button"
-								style="text-decoration: none; color: #4b49ac;"> </a>
+							<a href="${pageContext.request.contextPath}/getProjectDetail.do?project_num=${project_num}"
+								id="reBtn" class="fa fa-refresh hover" type="button" style="text-decoration: none;"> </a>
 
 							</span>
 						</div>

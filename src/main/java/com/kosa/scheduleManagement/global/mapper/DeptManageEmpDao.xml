@@ -59,10 +59,10 @@
 	<insert id="insertEmp"
 		parameterType="com.kosa.scheduleManagement.global.dto.Emp">
 		INSERT INTO emp (user_id, deptno,
-		ename,  email, password,
+		ename,  emp_pic, email, password,
 		enabled, job, dhead_num)
 		VALUES (emp_seq.NEXTVAL,
-		#{deptno}, #{ename}, #{email},
+		#{deptno}, #{ename}, 'https://jumun-bucket.s3.ap-northeast-2.amazonaws.com/defaultImg.png', #{email},
 		#{password}, '1',
 		#{job}, #{dhead_num})
 	</insert>
