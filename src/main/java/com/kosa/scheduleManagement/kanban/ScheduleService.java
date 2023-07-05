@@ -78,6 +78,12 @@ public class ScheduleService {
 		ScheduleBoard board = new ScheduleBoard(sched_num, "", 0, 0, 0);
 		boardDao.deleteBoard(board);
 	}
+	public void deleteSchedule(int sched_num) throws ClassNotFoundException, SQLException {
+		System.out.println("conn service del");
+		ScheduleDao boardDao = sqlSession.getMapper(ScheduleDao.class);
+		boardDao.deleteSchedule(sched_num);
+	}
+
 
 	public void updateNext(int sched_num, int sched_seq, String sched_info, int project_num)
 			throws ClassNotFoundException, SQLException {
@@ -134,6 +140,7 @@ public class ScheduleService {
 		board.setSched_num(createSeq());
 		// 값 변경에정///////////////////////////////////////////////
 		System.out.println("bbbbbbbbbbbbboard" + board);
+		System.out.println("bbbbbbnnnnnnnd" + board.getSched_num());
 		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
 		boardDao.insertBoard(board);
 	}
@@ -150,6 +157,8 @@ public class ScheduleService {
 
 			tmp = Collections.max(progList) + 1;
 		}
+		
+		System.out.println("pro g max va"+tmp);
 		return tmp;
 	}
 
@@ -162,7 +171,7 @@ public class ScheduleService {
 			for (ScheduleBoard s : getAllList())
 				list.add(s.getSched_num());
 			int tmp = Collections.max(list) + 1;
-			System.out.println("snum max:" + tmp);
+			System.out.println("all list snum max:" + tmp);
 			return tmp;
 		}
 	}
@@ -171,7 +180,7 @@ public class ScheduleService {
 	public void insertSchedule(Schedule schedule) throws ClassNotFoundException, SQLException {
 		System.out.println("servie 스캐줄 값 :" + schedule);
 		schedule.setSched_num(createSeq() - 1);
-		System.out.println(schedule.getSched_num());
+		System.out.println("serive 스케줄 넘버 : "+schedule.getSched_num());
 		ScheduleDao scheduleDao = sqlSession.getMapper(ScheduleDao.class);
 		scheduleDao.insertSchedule(schedule);
 	}

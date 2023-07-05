@@ -234,6 +234,7 @@ public class KanbanAjaxController {
 	@RequestMapping(value = "/scheduleDel.ajax", method = { RequestMethod.POST })
 	public void deleteBoard(@RequestParam("sched_num") String sched_num) throws ClassNotFoundException, SQLException {
 		service.deleteBoard(Integer.parseInt(sched_num));
+		service.deleteSchedule(Integer.parseInt(sched_num));
 	}
 
 	@RequestMapping(value = "/scheduleAdd.ajax", method = { RequestMethod.POST })

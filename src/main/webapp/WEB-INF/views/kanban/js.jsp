@@ -14,8 +14,7 @@
 		
 		/*local storage 처리 */
 		
-		var iv;
-		var i;
+
 		
         $( '.swim-lane p' ).click( function() {
             $( this ).toggleClass( 'jbBox' );
@@ -32,7 +31,7 @@
         	 newDIV.style.backgroundColor="yellow";
         	 var p = document.getElementById("pap"); // <p "id=p"> 태그의 DOM 객체 찾기
         	 p.appendChild(newDiv); */
-        	
+        	 
 			$.ajax({
 				url : "getEmp.ajax",
 				type : "post",
@@ -40,23 +39,23 @@
 					sched_num : i 
 				}, 
 				    success: function(result){
-						console.log(result); 
-						console.log(result.ename);
+						createPtag(result);
 				    }
 				});
-/* 			$.ajax({
-				url : "getSinfo.ajax",
-				type : "post",
-  				data : {
-					sched_num : i 
-				}, 
-				    success: function(result){
-						console.log(result);
-						console.log(result.sched_num);
-						console.log(result.sched_info);
+        	 
 
-				    }
-				}); */
+/*         	 let tagArea = document.getElementById('pap');
+        	 let em = document.createElement('p');
+        	 console.log(em+":em");
+        	 console.log(tagArea+":parna");
+        	 console.log(tagArea.value+":parna");
+        	 console.log(tagArea.text+":parna");
+        	 em.setAttribute('value' , '1');
+        	 tagArea.appendChild(em);
+        	 
+        	  */
+        	 
+        	 
          	console.log('일정 번호: '+i);
         	 
         	
@@ -104,7 +103,24 @@
 
 
 	  };
-	  
+	  function createPtag(data){
+		  console.log("load create p tag");
+		  console.log(data);
+		  
+		  
+		  
+/* 			console.log("test");
+			console.log(emp);
+		    new_pTag.innerHTML =emp;
+			console.log(new_pTag);
+			
+			let emp;
+			console.log(data); 
+			console.log(data.ename);
+			emp=data.ename;
+			console.log("emp:"+emp); */
+
+	  }
 	  
 	  
 
@@ -568,27 +584,7 @@
 
 	  
 
-		 
-		 
-		 
-
-		 /*선택된 값 전달*/
-		 /*클라이언트 값 ajax로 보내줌 매핑 필요*/
-	  	function addSchedule(data){
-	 	console.log("ready data send method: "+data);
-
-
-			
-	 	
-		 }
-
-
-
-
-
-
-
-		 
+ 
 
         
 		 
