@@ -109,7 +109,7 @@ $(document).ready(function(){
         	Swal.fire({
       		  position: 'center',
       		  icon: 'success',
-      		  title: 'Create Project.',
+      		  title: '프로젝트 생성 성공',
       		  showConfirmButton: false,
       		  timer: 1500
       		})
