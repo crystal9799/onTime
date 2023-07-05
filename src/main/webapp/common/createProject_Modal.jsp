@@ -18,6 +18,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	$('#deptno').val(${emp.deptno});
     $('#createBttn').click(function() {
         let seq;
         //시퀀스
@@ -137,9 +138,9 @@ $(document).ready(function(){
 });
 </script>
 <se:authorize access="hasRole('ROLE_ADMIN')">
-	<button type="button" class="custom-btn btn-8" data-toggle="modal"
-		data-target="#createProjectModal" id="createBttn">Create
-		Project</button>
+	<button type="button" class="custom-btn btn-12" data-toggle="modal"
+		data-target="#createProjectModal" id="createBttn">
+		<span>Gen</span><span>Create Project</span></button>
 </se:authorize>
 <style>
 .datepicker table tr td, .datepicker table tr th {
@@ -162,6 +163,11 @@ $(document).ready(function(){
 					<div class="form-group">
 						<label for="project_num">Project Number</label> <input
 							type="number" class="form-control" id="project_num" name="id"
+							disabled="disabled">
+					</div>
+					<div class="form-group">
+						<label for="project_num">Dept No</label> <input
+							type="number" class="form-control" id="deptno" name="id"
 							disabled="disabled">
 					</div>
 					<div class="form-group">
@@ -197,6 +203,11 @@ $(document).ready(function(){
 							<input class="form-check-input" type="radio" name="colorRadio"
 								id="color" value="green"> <label
 								class="form-check-label" for="colorGreen">Green</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="colorRadio"
+								id="color" value="#4E4CAD"> <label
+								class="form-check-label" for="Violet">Vilet</label>
 						</div>
 					</div>
 					<div class="form-group">

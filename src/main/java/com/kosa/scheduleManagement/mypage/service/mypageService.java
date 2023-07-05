@@ -1,5 +1,6 @@
 package com.kosa.scheduleManagement.mypage.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -147,5 +148,42 @@ public class mypageService {
 				System.out.println("getMypageAdminProjectDoneNumService 오류 :" + e.getMessage());
 			}
 			return project;
+		}
+		
+//		개인별 전체업무일정 project_num 불러오기
+		public List<Integer> getTotalSchedList(int user_id) {
+			Mypage_EmpDao mypage_empdao = sqlsession.getMapper(Mypage_EmpDao.class);
+			
+			List<Integer> result = new ArrayList<>();
+			
+			try {
+				System.out.println("service 진입");
+				result = mypage_empdao.getTotalScheduleList(user_id);
+				System.out.println("getTotalSchedNum 성공");
+			} catch (Exception e) {
+				e.getStackTrace();
+				System.out.println("getTotalSchedNumService 오류 :" + e.getMessage());
+			}
+			return result;
+		}
+//		부서장의 개인별 전체업무일정 project_num 불러오기
+		public List<Integer> getDheadTotalSchedList(int user_id) {
+			Mypage_EmpDao mypage_empdao = sqlsession.getMapper(Mypage_EmpDao.class);
+			
+			List<Project> result = new ArrayList<>();
+			List<Integer> projectList = new ArrayList<>();
+			
+			try {
+				System.out.println("service 진입");
+				result = mypage_empdao.getMypageAdminProjectInfo(user_id);
+				for(int i = 0; i<result.size(); i++) {
+					projectList.add(result.get(i).getProject_num());
+				}
+				System.out.println("getTotalSchedNum 성공");
+			} catch (Exception e) {
+				e.getStackTrace();
+				System.out.println("getTotalSchedNumService 오류 :" + e.getMessage());
+			}
+			return projectList;
 		}
 }
