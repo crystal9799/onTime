@@ -122,7 +122,6 @@ public class ScheduleService {
 		board.setSched_seq(createMaxProg(project_num));
 		board.setSched_num(createSeq());
 		// 값 변경에정///////////////////////////////////////////////
-		board.setProject_num(2);
 
 		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
 		boardDao.insertBoard(board);

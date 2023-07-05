@@ -144,15 +144,17 @@
 				type : "post",
 				data : {
 					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
-					project_num : "2", // 클라이언트 값 전달
+					project_num : 2, // 클라이언트 값 전달
 					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
 				}, 
 				success : function(data) {
-						console.log('add'); 
+						console.log('add');
+						location.reload();
 			    }, 
 				error : function() {
 					alert("error");
-				}  
+				},
+				
 			});
     	 
 /*      	 let s=document.querySelector('#todo-input').value;
@@ -166,7 +168,6 @@
     	 s+="</p>"; */
     	 
 //    	 let vs="<p class="'task'" draggable="'true'">"+vt+"</p>";
-	   	 console.log(s);
 		
 	//	let v1=`<p class="task" draggable="true">$("#todo-input").val</p>`;
 		//let v2=`<p class="task" draggable="true">vt</p>`;
