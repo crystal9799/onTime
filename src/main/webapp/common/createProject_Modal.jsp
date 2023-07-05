@@ -137,9 +137,9 @@ $(document).ready(function(){
 });
 </script>
 <se:authorize access="hasRole('ROLE_ADMIN')">
-	<button type="button" class="custom-btn btn-8" data-toggle="modal"
-		data-target="#createProjectModal" id="createBttn">Create
-		Project</button>
+	<button type="button" class="custom-btn btn-12" data-toggle="modal"
+		data-target="#createProjectModal" id="createBttn">
+		<span>Gen</span><span>Create Project</span></button>
 </se:authorize>
 <style>
 .datepicker table tr td, .datepicker table tr th {
