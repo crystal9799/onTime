@@ -78,15 +78,15 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th width="40%">프로젝트명</th>
-											<th width="60%">진행률</th>
+											<th width="50%">프로젝트명</th>
+											<th width="50%">진행률</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach var="chart" items="${chart}">
 											<tr>
-												<td>${chart.projectName}</td>
-												<td>
+												<td >${chart.projectName}</td>
+												<td id="tableProgess">
 													<div class="grogressWrapper">
 														<div class="progress mr-3">
 															<div class="progress-bar bg-success" role="progressbar"
