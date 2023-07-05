@@ -164,7 +164,7 @@ p {
     }
 }
 
-#delBtn:hover,#delBtn:active {
+#delBtn:hover, #delBtn:active {
 	font: bold;
 	font-size: 35px;
 	color: #fff;
@@ -198,16 +198,7 @@ p {
 	margin-right: 25px;
 	float: right;
 
-}    @keyframes fadeInDown {
-        0% {
-            opacity: 0;
-            transform: translate3d(0, -100%, 0);
-        }
-        to {
-            opacity: 1;
-            transform: translateZ(0);
-        }
-    }
+}  
 
 .jbBox {
 	padding: 20px;
@@ -243,7 +234,8 @@ p {
 	font-size: 15px;
 	color: #4B49AC; border-radius : 10px;
 	text-align: left;
-	border-radius: 10px;
+	border-radius: 10px;	position: relative;
+        animation: fadeInDown 0.6s;
 }
 
 .swim-lane {
@@ -290,8 +282,18 @@ p {
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
 	width: 600x;
 	min-height: 430px;
-	line-height:30px;
-}
+	line-height:30px;	position: relative;
+        animation: fadeInDown 0.5s;
+}  @keyframes fadeInDown {
+        0% {
+            opacity: 0;
+            transform: translate3d(0, -100%, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
 .p-inner p{
 	margin-top:10px;
 	margin-left:20px;

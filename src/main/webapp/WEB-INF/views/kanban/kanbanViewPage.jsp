@@ -92,6 +92,7 @@ body {
 							<i class="bi bi-download hover" aria-hidden="true" id="saveBtn" type="button"></i> 
 							<a href="${pageContext.request.contextPath}/getProjectDetail.do?project_num=${project_num}"
 								id="reBtn" class="fa fa-refresh hover" type="button" style="text-decoration: none;"> </a>
+
 							</span>
 						</div>
 					</div>
