@@ -71,39 +71,42 @@ public class ScheduleService {
 		boardDao.deleteBoard(board);
 	}
 
-	public void updateNext(int sched_num, int sched_seq, String sched_info)
+	public void updateNext(int sched_num, int sched_seq, String sched_info, int project_num)
 			throws ClassNotFoundException, SQLException {
 		System.out.println("updateNext serviece====================================");
 		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
-		ScheduleBoard board = new ScheduleBoard(sched_num, sched_info, 2, sched_seq, 0);
+		ScheduleBoard board = new ScheduleBoard(sched_num, sched_info, 2, sched_seq, project_num);
 		boardDao.updateNext(board);
 		System.out.println("sched_num:" + sched_num);
 		System.out.println("sched_info:" + sched_info);
 		System.out.println("sched_seq:" + sched_seq);
+		System.out.println("project_num:" + project_num);
 	}
 
-	public void updatePrev(int sched_num, int sched_seq, String sched_info)
+	public void updatePrev(int sched_num, int sched_seq, String sched_info, int project_num)
 			throws ClassNotFoundException, SQLException {
 		System.out.println("serviece====================================");
 		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
-		ScheduleBoard board = new ScheduleBoard(sched_num, sched_info, 0, sched_seq, 0);
+		ScheduleBoard board = new ScheduleBoard(sched_num, sched_info, 0, sched_seq, project_num);
 		boardDao.updatePrev(board);
 //			boardDao.updatePrev(sched_seq, sched_info);
 		System.out.println("sched_num:" + sched_num);
 		System.out.println("sched_info:" + sched_info);
 		System.out.println("sched_seq:" + sched_seq);
+		System.out.println("project_num:" + project_num);
 	}
 
-	public void updateCurr(int sched_num, int sched_seq, String sched_info)
+	public void updateCurr(int sched_num, int sched_seq, String sched_info, int project_num)
 			throws ClassNotFoundException, SQLException {
 		System.out.println("serviece====================================");
 		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
-		ScheduleBoard board = new ScheduleBoard(sched_num, sched_info, 1, sched_seq, 0);
+		ScheduleBoard board = new ScheduleBoard(sched_num, sched_info, 1, sched_seq, project_num);
 		boardDao.updateCurr(board);
 //			boardDao.updatePrev(sched_seq, sched_info);
 		System.out.println("sched_num:" + sched_num);
 		System.out.println("sched_info:" + sched_info);
 		System.out.println("sched_seq:" + sched_seq);
+		System.out.println("project_num:" + project_num);
 
 	}
 
@@ -122,8 +125,7 @@ public class ScheduleService {
 		board.setSched_seq(createMaxProg(project_num));
 		board.setSched_num(createSeq());
 		// 값 변경에정///////////////////////////////////////////////
-		board.setProject_num(2);
-
+		System.out.println("bbbbbbbbbbbbboard" + board);
 		ScheduleBoardDao boardDao = sqlSession.getMapper(ScheduleBoardDao.class);
 		boardDao.insertBoard(board);
 	}
@@ -212,11 +214,13 @@ public class ScheduleService {
 	 * return resultList; }
 	 */
 	// string 으로 임시 변환 상태 --> emp ;service mapper interface
-	public List<String> getEmpListByProject() throws ClassNotFoundException, SQLException {
-		System.out.println("getEmpListByProject conn");
+	public List<String> getEmpListByProject(int project_num) throws ClassNotFoundException, SQLException {
+
 		ScheduleBoard_EmpDao dao = sqlSession.getMapper(ScheduleBoard_EmpDao.class);
-		List<String> list = dao.getEmpListByProject();
-		System.out.println("list: " + list);
+		List<String> list = dao.getEmpListByProject(project_num);
+		System.out.println("getEmpListByProject conn");
+		System.out.println("pnsss"+project_num);
+		System.out.println("list: test" + list);
 		return list;
 	}
 
