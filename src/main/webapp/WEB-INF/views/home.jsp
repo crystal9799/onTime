@@ -40,8 +40,9 @@
 	                        // 모달을 보여줍니다.
 	                        $('#eventModal').modal('show');
 	                        $('#eventModal').on('shown.bs.modal', function (event) {
-	                            let defaultLink = "/Team4_WebProject_2/schedule.do?project_num=";
-	                            let project_num = $('#project_num2').val();
+	                            let defaultLink = "${pageContext.request.contextPath}/getProjectDetail.do?project_num=";
+	                            let project_num = parseInt($('#project_num2').val());
+	                            let toScheduleButton = $('#toSchedule');
 	                            let hrefLink = defaultLink + project_num;
 	                            console.log(hrefLink);
 	                            $('#toschedule').attr("href", hrefLink);
