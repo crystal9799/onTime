@@ -205,7 +205,7 @@ p {
 	gap: 12px;
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
 	background-color: #4B49AC;
-	border-radius: 4px;
+	border-radius: 10px;
 	/*	width: 500px;*/
 	width: 100%;
 	max-width: 700px;
@@ -214,6 +214,27 @@ p {
 	color: #fff;
 }
 
+#pap{
+	font: bold;
+		font-size: 20px;
+			border-radius: 10px;
+}
+.p-inner {
+	padding: 55px 0px 0px 50px;
+	background: white;
+	opacity:0.8;
+	color: black;
+	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+	width: 600x;
+	min-height: 430px;
+	line-height:30px;
+}
+.p-inner p{
+	margin-top:10px;
+	margin-left:20px;
+	line-height:40px;
+	font-size: 15px;
+}
 #addBtn {
 	background-color: #4b49ac;
 	border: none;
@@ -243,17 +264,7 @@ p {
 	font-size: 50px;
 	cursor: move;
 } */
-.p-inner {
-	padding: 55px 0px 0px 50px;
-	background: white;
-	color: black;
-	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
-	border-radius: 4px;
-	font-size: 20px;
-	width: 600x;
-	min-height: 430px;
-	line-height:30px;
-}
+
 
 .is-dragging {
 	scale: 1.05;

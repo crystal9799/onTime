@@ -130,9 +130,9 @@ body {
 								</h3>
 								<div class="p-inner" id="pap">
 									프로젝트 일정 :
-									<p>${p.project_start} - ${p.project_end}</p>
-									<br> 상세 내용 :
-									<p>${p.project_info}</p>
+									<p>	${p.project_start} - ${p.project_end}</p>
+									<br><br> 상세 내용 :
+									<p>	${p.project_info}</p>
 									<br>
 								</div>
 							</c:forEach>
