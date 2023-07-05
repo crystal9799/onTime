@@ -231,7 +231,7 @@ public class KanbanAjaxController {
 		int user_id = service.getUseridByEname(ename);
 		System.out.println(user_id);
 
-		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, 0, 2);
+		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, 0, project_num);
 		Schedule schedule = new Schedule(user_id, 2);
 
 		System.out.println(sched_info);
