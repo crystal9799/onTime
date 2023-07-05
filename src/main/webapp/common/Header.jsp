@@ -78,7 +78,7 @@
 			<li class="nav-item nav-profile dropdown"><a
 				class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 				id="profileDropdown"> <img
-					src="https://jumun-bucket.s3.ap-northeast-2.amazonaws.com/skglim/profileImage/2023/07/03/39a59452-ebe8-4cf2-ad44-6ca92bed772e_초코사진.jpeg"
+					src="${emp.emp_pic}"
 					alt="profile" />
 			</a>
 				<div class="dropdown-menu dropdown-menu-right navbar-dropdown"

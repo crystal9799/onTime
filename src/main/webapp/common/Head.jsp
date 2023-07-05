@@ -32,9 +32,6 @@
 <link rel="stylesheet"                                                                                                                                                                                                                                                                                                                                                                                                                                       
 	href="${pageContext.request.contextPath}/resources/vendors/css/mypage.css">
 
-
-
-
 <!-- script -->
 <!-- header, nav layout -->
 <script src="${pageContext.request.contextPath}/resources/js/vendor.bundle.base.js"></script>
@@ -49,7 +46,6 @@
 <script src="${pageContext.request.contextPath}/resources/js/todolist.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/dashboard.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/Chart.roundedBarCharts.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/genNav.js"></script>
 
 <!-- mypage chart script -->
 <script src="https://kit.fontawesome.com/b6bfd9ecde.js" crossorigin="anonymous"></script>

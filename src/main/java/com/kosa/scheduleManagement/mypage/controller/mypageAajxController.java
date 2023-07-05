@@ -40,9 +40,6 @@ public class mypageAajxController {
 	@PostMapping("/update.do")
 	@ResponseBody
 	public ResponseEntity<String> mypageUpdate(@RequestPart(value = "key") Emp emp,@RequestPart(value = "file", required=false) MultipartFile file) {
-		System.out.println("controller");
-		System.out.println(file);
-		System.out.println("emppppppp" + emp);
 		String S3Path = "";
 		
 		try {
@@ -50,7 +47,6 @@ public class mypageAajxController {
 				logger.info("originalName: " + file.getOriginalFilename());	
 				S3Path = s3service.fileToS3(file);
 				emp.setEmp_pic(S3Path);
-				System.out.println("S3Path" + S3Path);
 			}
 			mypageservice.updateEmpInfo(emp);
 			return new ResponseEntity<String>("insert sucess", HttpStatus.OK);

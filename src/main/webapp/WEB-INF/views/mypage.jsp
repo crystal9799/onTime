@@ -126,34 +126,67 @@
 		fileInput.click();
 	});
 	
-	$(document).ready(function() {
+	/* chart */
+	var ctx = document.getElementById('chart-line');
+	var totalnum = ${totalSchedNum};
+	var doneNum = ${doneSchedNum};
+	var resultDone = (doneNum/totalnum) * 100;
+	var resultProg = 100 - resultDone;
+	
+	var myLineChart = new Chart(ctx, {
+		type : 'pie',
+		data : {
+			labels : [ "완료", "진행중" ],
+			datasets : [ {
+				data : [ resultDone, resultProg ],
+				backgroundColor : [ "#4b49ac", "#CDCDFF" ]
+			} ]
+		},
+		options : {
+			title : {
+				display : true,
+				text : '업무 진행도'
+			}
+		}
+	});
+	
+	window.onload = function() {
 		// 회원정보 수정 기능
-		$('#submit').click(function () {
+		document.getElementById('submit').addEventListener('click', (event) => {
 					console.log("회원정보 수정 클릭");
-					console.log($('#passwordChange').val());
 					
-					 var passwordValue = $("#passwordChange").val();
+					 var passwordValue = document.getElementById('passwordChange').value; 
+					 var passwordConfirm = document.getElementById('passwordConfirm').value; 
+					 var fileImageUpload = document.getElementById('fileImageUpload'); 
+					 var emp_pic = document.getElementById('emp_pic');
 					 var num = passwordValue.search(/[0-9]/g);
 					 var eng = passwordValue.search(/[a-z]/ig);
 					 var spe = passwordValue.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
 					
-					if ($("#passwordChange").val() == "" && $("#passwordConfirm").val() == "" && fileChange == true) {
-						const empPic = `$('#emp_pic')[0].files[0].name`;
+					if (passwordValue == "" && passwordConfirm == "" && fileChange == true) {
+						const empPic = `emp_pic[0].files[0].name`;
 						const emp = {user_id: ${emp.user_id}, password: `${emp.password}`, emp_pic: empPic};
-						var form = $('#userfrom')[0];
+						var form = document.forms[0];
 						var formData = new FormData(form);
-						formData.append('file', $('#fileImageUpload')[0].files[0]);
-						 formData.append('key', new Blob([JSON.stringify(emp)], {type: 'application/json'}));
+						formData.append('file', fileImageUpload.files[0]);
+						formData.append('key', new Blob([JSON.stringify(emp)], {type: 'application/json'}));
 							
-						 for (var key of formData.keys()) {
-						    console.log(key);
-						  }
-						  for (var value of formData.values()) {
-						    console.log(value);
-						  }
+						for (var key of formData.keys()) {
+						   console.log(key);
+						}
+						for (var value of formData.values()) {
+						   console.log(value);
+						}
 						
-						$.ajax({
+						fetch('${pageContext.request.contextPath}/mypage/update.do', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded'
+							},
+							body: formData
+						});
+/* 						$.ajax({
 							url : "mypage/update.do",
 							type : 'POST',
 							data : formData,
@@ -167,14 +200,11 @@
 								console.log("code:" + request.status + "\n"
 										+ "message:" + request.responseText + "\n"
 										+ "error:" + error);
-							},
-							complete: function() {
-								//location.reload();
 							}
-						});
+						}); */
 						Swal.fire('변경 완료','변경되었습니다.', 'success');
 						return false;
-					} else if(($("#passwordChange").val() == "" && fileChange == false) || ($("#passwordConfirm").val() == "" && fileChange == false)) {
+					} else if((passwordValue == "" && fileChange == false) || ($("#passwordConfirm").val() == "" && fileChange == false)) {
 						Swal.fire('변경 실패','비밀번호를 입력해주세요', 'warning');
 						return false;
 					} else if (passwordValue.length < 8 || passwordValue.length > 20){
@@ -189,12 +219,12 @@
 					 } else if ($("#passwordChange").val() != $("#passwordConfirm").val() ) {
 						 Swal.fire('변경 실패','변경 비밀번호와 확인 비밀번호가 일치하지 않습니다.', 'warning');
 					 } else {					 
-						const empPic = (fileChange==true) ? `$('#emp_pic')[0].files[0].name` : `${emp.emp_pic}`;
+						const empPic = (fileChange==true) ? `emp_pic[0].files[0].name` : `${emp.emp_pic}`;
 						const emp = {user_id: ${emp.user_id}, password: passwordValue, emp_pic: empPic};
-						var form = $('#userfrom')[0];
+						var form = document.forms[0];
 						var formData = new FormData(form);
-						formData.append('file', $('#fileImageUpload')[0].files[0]);
-						 formData.append('key', new Blob([JSON.stringify(emp)], {type: 'application/json'}));
+						formData.append('file', fileImageUpload.files[0]);
+						formData.append('key', new Blob([JSON.stringify(emp)], {type: 'application/json'}));
 							
 						 for (var key of formData.keys()) {
 						    console.log(key);
@@ -217,41 +247,13 @@
 								console.log("code:" + request.status + "\n"
 										+ "message:" + request.responseText + "\n"
 										+ "error:" + error);
-							},
-							complete: function() {
-								//location.reload();
 							}
 						});
 						Swal.fire('변경 완료','변경되었습니다.', 'success');
 						return true;
 					 }
 				});
-		
-		
-		/* chart */
-		var ctx = $("#chart-line");
-		var totalnum = ${totalSchedNum};
-		var doneNum = ${doneSchedNum};
-		var resultDone = (doneNum/totalnum) * 100;
-		var resultProg = 100 - resultDone;
-		
-		var myLineChart = new Chart(ctx, {
-			type : 'pie',
-			data : {
-				labels : [ "완료", "진행중" ],
-				datasets : [ {
-					data : [ resultDone, resultProg ],
-					backgroundColor : [ "#4b49ac", "#CDCDFF" ]
-				} ]
-			},
-			options : {
-				title : {
-					display : true,
-					text : '업무 진행도'
-				}
-			}
-		});
-	}); 
+	}; 
 </script>
 </body>
 </html>
