@@ -14,6 +14,7 @@ public class Emp {
 	private String ename;
 	private String emp_pic;
 	private String job;
+	private String email;
 	private int deptno;
 	private int dhead_num;
 	private MultipartFile file;

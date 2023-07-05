@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="se"
+	uri="http://www.springframework.org/security/tags"%>
 <%
 request.setCharacterEncoding("UTF-8");
 response.setCharacterEncoding("UTF-8");
@@ -52,16 +54,18 @@ body {
 				<div>
 					<!-- 테이블 추가 이벤트 -->
 					<div class="btn-wrapper" style="margin-bottom: 10px;">
-						<!-- 테이블 버튼 구성 -->
-						<div class="btn-wrapper" style="margin-bottom: 10px;">
-							<button id="deleteBtn" class="btnStyle btn btn-secondary"
-								style="float: right;">삭제</button>
-							<button id="saveBtn" class="btnStyle btn btn-primary "
-								style="float: right; margin-right: 20px;">수정</button>
-							<button id="appendBtn" class="btnStyle btn btn-success"
-								data-bs-toggle="modal" data-bs-target="#exampleModal"
-								style="float: right; margin-right: 20px;">추가</button>
-						</div>
+						<se:authorize access="hasRole('ROLE_ADMIN')">
+							<!-- 테이블 버튼 구성 -->
+							<div class="btn-wrapper" style="margin-bottom: 10px;">
+								<button id="deleteBtn" class="btnStyle btn btn-secondary"
+									style="float: right;">삭제</button>
+								<button id="saveBtn" class="btnStyle btn btn-primary "
+									style="float: right; margin-right: 20px;">수정</button>
+								<button id="appendBtn" class="btnStyle btn btn-success"
+									data-bs-toggle="modal" data-bs-target="#exampleModal"
+									style="float: right; margin-right: 20px;">추가</button>
+							</div>
+						</se:authorize>
 						<!-- Toast Grid Load -->
 						<div id="grid"></div>
 					</div>
@@ -83,6 +87,10 @@ body {
 							<div class="form-group">
 								<label for="enameInput">사원이름</label> <input type="text"
 									class="form-control" id="enameInput">
+							</div>
+							<div class="form-group">
+								<label for="emailInput">이메일</label> <input type="text"
+									class="form-control" id="emailInput">
 							</div>
 							<div class="form-group">
 								<label for="passwordInput">비밀번호:</label> <input type="text"
@@ -314,6 +322,7 @@ body {
 				  const ename = enameInput.value;
 				  const password = passwordInput.value;
 				  const job = jobInput.value;
+				  const email = emailInput.value;
 
 				  // Close the modal
 				  modal.style.display = 'none';
@@ -322,14 +331,17 @@ body {
 				  enameInput.value = '';
 				  passwordInput.value = '';
 				  jobInput.value = '';
+				  emailInput.value = '';
 
 				  
 				  // Create an object to store the form data
 				  const data = {
 				    ename: ename,
 				    password: password,
-				    job: job
+				    job: job,
+				    email: email
 				  };
+				  console.log(data);
 				  // Send a request to create a new row
 				  fetch('/Team4_WebProject_2/admin/empManage/createOk.do?deptno='+${deptno}, {
 					    method: 'POST',

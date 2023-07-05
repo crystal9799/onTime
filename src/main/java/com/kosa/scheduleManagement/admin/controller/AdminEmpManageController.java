@@ -149,10 +149,12 @@ public class AdminEmpManageController {
 		String ename = (String) requestBody.get("ename");
 		String password = (String) requestBody.get("password");
 		String job = (String) requestBody.get("job");
+		String email = (String) requestBody.get("email");
 		Emp emp = new Emp();
 		Map<String, Object> response = new HashMap<>();
 
 		emp.setEname(ename);
+		emp.setEmail(email);
 		emp.setPassword(password);
 		emp.setJob(job);
 		emp.setDeptno(deptno);
@@ -179,7 +181,7 @@ public class AdminEmpManageController {
 		return ResponseEntity.ok(jsonResponse);
 	}
 
-//사원삭
+//사원삭제
 	@PostMapping("/empManage/deleteOk.do")
 	public ResponseEntity<String> deleteEmp(@RequestBody Object data ) {
 		System.out.println(data);
