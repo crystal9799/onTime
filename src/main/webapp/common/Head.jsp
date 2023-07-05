@@ -29,7 +29,7 @@
 
 <!-- mypage chart layout link -->
 <!-- chart -->
-<link rel="stylesheet"
+<link rel="stylesheet"                                                                                                                                                                                                                                                                                                                                                                                                                                       
 	href="${pageContext.request.contextPath}/resources/vendors/css/mypage.css">
 
 
