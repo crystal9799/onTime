@@ -33,9 +33,6 @@
 <link rel="stylesheet"                                                                                                                                                                                                                                                                                                                                                                                                                                       
 	href="${pageContext.request.contextPath}/resources/vendors/css/mypage.css">
 
-
-
-
 <!-- script -->
 <!-- header, nav layout -->
 <script src="${pageContext.request.contextPath}/resources/js/vendor.bundle.base.js"></script>

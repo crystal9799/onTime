@@ -5,11 +5,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper
 	namespace="com.kosa.scheduleManagement.global.dao.ScheduleDao">
 
-	<insert id="insertSchedule" parameterType="com.kosa.scheduleManagement.global.dto.Schedule">
+	<insert id="insertSchedule"
+		parameterType="com.kosa.scheduleManagement.global.dto.Schedule">
 		insert into
 		schedule(user_id, sched_num)
 		values(#{user_id}, #{sched_num})
 	</insert>
+
+	<delete id="deleteSchedule"
+		parameterType="int">
+		delete from schedule where sched_num=#{sched_num}
+	</delete>
 
 </mapper>
 	
