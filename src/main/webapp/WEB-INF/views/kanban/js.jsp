@@ -134,11 +134,14 @@
     		$("#todo_prev").append(html); */
     	 
 //    		let tt=$("#");
-    		let t="<p class='task' draggable='true'>";
+    		
+    		
+    		
+/*     		let t="<p class='task' draggable='true'>";
     		t+=$("#todo-input").val();
     		console.log(t);
     		t+="</p>";
-    		$("#todo-prev").append(t);
+    		$("#todo-prev").append(t); */
     		
     		$.ajax({
 				url : "scheduleAdd.ajax",
