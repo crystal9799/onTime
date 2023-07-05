@@ -76,7 +76,7 @@
 							<span> 
 							<i class="fa fa-plus" id="modalBtn" aria-hidden="true" type="button"></i> 
 							<i class="fa fa-floppy-o" aria-hidden="true" id="saveBtn" type="button"></i> 
-							<a href="${pageContext.request.contextPath}/getProjectDetail.do"
+							<a href="${pageContext.request.contextPath}/getProjectDetail.do?project_num=${project_num}"
 								id="reBtn" class="fa fa-refresh" type="button"
 								style="text-decoration: none; color: #4b49ac;"> </a>
 
