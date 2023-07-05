@@ -30,29 +30,18 @@ public class KanbanScheduleController {
 		this.service = service;
 	}
 
+ 
 	/*
-	 * @GetMapping("getProjectDetail.do") public String getAllList(Model model)
-	 * throws ClassNotFoundException, SQLException { List<ScheduleBoard> prevList =
-	 * service.getAllPrev(); List<ScheduleBoard> currList = service.getAllCurr();
-	 * List<ScheduleBoard> nextList = service.getAllNext();
+	 * @GetMapping("schedule.do") public String getAllList(Model model) throws
+	 * ClassNotFoundException, SQLException { System.out.println("getAllLIst conn");
 	 * 
-	 * model.addAttribute("plist", prevList); model.addAttribute("clist", currList);
-	 * model.addAttribute("nlist", nextList);
+	 * List<ScheduleBoard> prevList = service.getAllPrev();
+	 * System.out.println("controll list check===================================="
+	 * ); model.addAttribute("plist", prevList); System.out.println(prevList);
 	 * 
-	 * return "/kanban/temp/kanbanViewTestPage"; }
+	 * return "/kanban/temp/kanbanViewTestPage"; // return "/kanban/kanbanViewPage";
+	 * }
 	 */
-	@GetMapping("schedule.do")
-	public String getAllList(Model model) throws ClassNotFoundException, SQLException {
-		System.out.println("getAllLIst conn");
-		
-		List<ScheduleBoard> prevList = service.getAllPrev();
-		System.out.println("controll list check====================================");
-		model.addAttribute("plist", prevList);
-		System.out.println(prevList);
-		
-		return "/kanban/temp/kanbanViewTestPage";
-//		return "/kanban/kanbanViewPage";
-	}
 
 	/*
 	 * @GetMapping("getDetail.do") public String getProjectDetail() throws

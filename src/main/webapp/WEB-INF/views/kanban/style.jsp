@@ -60,7 +60,7 @@
 	align-items: flex-start;
 	justify-content: start;
 	gap: 16px;
-	padding: 24px 32px;
+/* 	padding: 24px 32px; */
 	overflow: scroll;
 	height: 100%;
 }
@@ -68,29 +68,139 @@
 .heading {
 	font-size: 22px;
 	font-weight: bold;
-	margin-bottom: 8px;
+	margin-bottom: 30px;
+	margin-left: 15px;
+/*	text-align:center; */
+}
+
+/* #todo-curr{
+background-color:#D8E3FF;}
+ */
+
+p {
+	cursor: pointer;
+}
+
+.jbBox {
+	border: 1px solid #bcbcbc;
+	padding: 20px;
+	color:#fff;
+	background-color: #4b49ac;	
+}
+ #todo-prev{
+background-color:#E6E6F4;}
+
+ #todo-curr{
+background-color:#C7C7E6;}
+ 
+
+#todo-next{
+background-color:#8988C9;
+color:#E6E6F4;} 
+ 
+
+.modal-footer{
+border:none;
+} 
+
+#modalBtn{
+	font:bold;
+	font-size:41px;
+	color:#4b49ac;
+	margin-bottom:12px;
+}
+#reBtn{
+	margin-left:8px;
+	font:bold;
+	font-size:36px;
+	color:#4b49ac;  
+}
+
+#delBtn{
+	font:bold;
+	font-size:30px;
+	color:#fff; 
+	margin-right:12px; 
+	float: right;
+}
+ #saveBtn{
+	font:bold;
+	font-size:47px;
+	color:#4b49ac;  
+	margin-right:30px; 
+	float: right;
+} 
+.swim-lane p{
+	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+	border-radius: 1px;
+	background-color: #F5F7FF;
+	min-height: 70px;
+/* 	text-align : center; */
+	font-size: 15px; 
+	border-radius: 10px;
+	text-align:left;
 }
 
 .swim-lane {
+	background-color:white;
+	padding : 45px 20px 20px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 1px; 
+	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+/*	border: 1px solid #4b49ac;*/
+	border-radius: 4px;
+	width: 280px;
+	min-height: 550px;
+	flex-shrink: 0;
+	color:#4b49ac;
+}
+
+.pro{
+	padding : 40px 20px 20px 20px;
 	display: flex;
 	flex-direction: column;
 	gap: 12px; 
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
-	padding: 12px;
+	background-color:#4B49AC;
 	border-radius: 4px;
-	width: 225px;
-	min-height: 120px;
+	width: 500px;
+	min-height: 500px;
 	flex-shrink: 0;
+	color:#fff;
+	
 }
 
-.task {
+ #addBtn{
+background-color:#4b49ac;
+border:none;}
+#closeBtn{
+background-color:#fff;
+} 
+
+.pro > p{
+
+}
+
+/* #task {
 	background: white;
 	color: black;
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
-	padding: 12px;
+	padding: 12px 12px 12px 12px;
 	border-radius: 4px;
-	font-size: 16px;
+	font-size: 50px;
 	cursor: move;
+} */
+
+.p-inner {
+	padding : 55px 40px 30px 50px;
+	background: white;
+	color: black;
+	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+	border-radius: 4px;
+	font-size: 20px;
+	width: 680x;
+	min-height: 430px; 
 }
 
 .is-dragging {
@@ -113,7 +223,11 @@
 .modal.show {
 	display: block;
 }
-
+/* .modalBtn {
+font-size:30px;
+	color:#4b49ac;
+}
+ */
 .modal_body {
 	position: absolute;
 	top: 50%;

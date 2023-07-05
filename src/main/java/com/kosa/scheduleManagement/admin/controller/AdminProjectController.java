@@ -60,6 +60,25 @@ public class AdminProjectController {
 		}
     }
     
+    //시퀀스 불러오기
+    @GetMapping("/getSeq.do")
+    public  ResponseEntity<Map<String,Integer>> getSeq(){
+    	int seq;
+    	Map<String,Integer> project_num;
+    	try {
+    		System.out.println("try실행");
+    		seq = project_Service.getSeq();	
+    		System.out.println("seq 의 값은 : "+seq);
+    		project_num = new HashMap<String, Integer>();
+    		project_num.put("seq", seq);
+    		return new ResponseEntity<Map<String,Integer>>(project_num,HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			project_num = new HashMap<String, Integer>();
+			return new ResponseEntity<Map<String,Integer>>(project_num,HttpStatus.BAD_REQUEST);
+		}
+    }
+    
     //프로젝트 생성하고, Project / Project_Sub 에 Insert
     @PostMapping("/createProjectOk.do")
     public ResponseEntity<Map<String, String>> insertProject(@RequestBody Project_Sub genproject){    	
@@ -112,12 +131,31 @@ public class AdminProjectController {
 			return projectlist;
 		} catch (Exception e) {
 			System.out.println("예외발생");
-			e.getMessage();
+			System.out.println(e.getMessage());
 			return null;
 		}
     	
     }
     
-    //프로젝트 상세보기(캘린더 클릭 시)
-    
+    //로그인한 유저가 속한 프로젝트 리스트
+    @GetMapping("/projectlist.do")
+    public ResponseEntity<List<Map<String, Integer>>> getProjectList(@RequestParam int user_id){
+    	//프로젝트 리스트 저장하는 맵 리스트(ResponseEntity 사용)
+    	List<Map<String,Integer>> projectlist = new ArrayList<Map<String,Integer>>();
+    	//프로젝트번호 리스트
+    	List<Integer> pnumlist;
+    	try {
+    		pnumlist = project_empservice.getProjectList(user_id);
+    		for(int i=0; i<pnumlist.size(); i++) {
+    			Map<String, Integer> project = new HashMap<String,Integer>();
+    			project.put("project_num",pnumlist.get(i));
+    			projectlist.add(project);
+    			System.out.println(project.toString());
+    		}
+    		return new ResponseEntity<List<Map<String,Integer>>>(projectlist,HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+    };
 }
