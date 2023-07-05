@@ -198,6 +198,11 @@ $(document).ready(function(){
 								id="color" value="green"> <label
 								class="form-check-label" for="colorGreen">Green</label>
 						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="colorRadio"
+								id="color" value="#4E4CAD"> <label
+								class="form-check-label" for="Violet">Vilet</label>
+						</div>
 					</div>
 					<div class="form-group">
 						<div class="row d-flex justify-content-center mt-100">
