@@ -45,7 +45,7 @@
 	                        $('#eventModal').modal('show');
 	                        $('#eventModal').on('shown.bs.modal', function (event) {
 	                            let defaultLink = "/Team4_WebProject_2/schedule.do?project_num=";
-	                            let project_num = $('#project_num2').val();
+	                            let project_num = parseInt($('#project_num2').val());
 	                            let toScheduleButton = $('#toSchedule');
 	                            let hrefLink = defaultLink + project_num;
 	                            console.log(hrefLink);
@@ -68,6 +68,7 @@
 	                            console.log(projectList);
 	                            console.log(project_num);
 	                            // 프로젝트 리스트에 project_num이 포함되어 있는지 확인
+	                            console.log(projectList.includes(project_num));
 	                            if (projectList.includes(project_num)) {
 	                            	$('#toschedule').css('display', 'inline-block');
 	                            } else {
