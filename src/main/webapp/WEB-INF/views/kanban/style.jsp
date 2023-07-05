@@ -107,44 +107,107 @@ p {
 .modal-footer {
 	border: none;
 }
-
+.btnClass{
+	margin-bottom:10px;
+}
 #modalBtn {
 	font: bold;
-	font-size: 41px;
+	font-size: 48px;
 	color: #4b49ac;
-	margin-bottom: 12px;
+		margin-right:5px;
 }
 
 #modalBtn:hover {
-	color: #8988C9;
+	font-size: 52px;
+/* 	background-color:#E6E6F4;
+	opacity:0.8; */
+	border-radius: 10px;
+	margin-right:5px;
 }
 
 #reBtn {
-	margin-left: 8px;
+	margin-left: 3px;
 	font: bold;
 	font-size: 36px;
 	color: #8988C9;
 }
 
-#reBtn:hover {
-	color: #4b49ac;
+#reBtn:hover { 
+	animation: rotate_image 2.5s linear infinite;transform-origin: 50% 50%;
 }
-
+@keyframes rotate_image{
+    100% {
+        transform: rotate(360deg);
+    }
+}
 #delBtn {
 	font: bold;
-	font-size: 30px;
+	font-size: 35px;
 	color: #fff;
 	margin-right: 12px;
 	float: right;
+}@keyframes shake {
+  0% {
+    transform: rotate(0deg)
+    }
+  25% {
+      transform: rotate(-10deg);
+    }
+  50% {
+      transform: rotate(10deg);
+    }
+  75% {
+      transform: rotate(-10deg);
+    }
+  100% {
+      transform: rotate(0deg);
+    }
+}
+
+#delBtn:hover,#delBtn:active {
+	font: bold;
+	font-size: 35px;
+	color: #fff;
+	margin-right: 12px;
+	float: right;
+	 animation-name: shake;
+  animation-duration: 1s;
+}
+#delBtn:visited {
+	font: bold;
+	font-size: 35px;
+	color: #fff;
+	margin-right: 12px;
+	float: right;
+	 animation-name: shake;
+  animation-duration: 1s;
 }
 
 #saveBtn {
 	font: bold;
-	font-size: 40px;
+	font-size: 35px;
 	color: #4b49ac;
 	margin-right: 25px;
-	float: right;
+	float: right;        position: relative;
+        animation: fadeInDown 1s;
 }
+#saveBtn:hover {
+	font: bold;
+	font-size: 40px;
+	color: #8988C9;
+	margin-right: 25px;
+	float: right;
+
+}    @keyframes fadeInDown {
+        0% {
+            opacity: 0;
+            transform: translate3d(0, -100%, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
 
 .jbBox {
 	padding: 20px;
@@ -211,7 +274,7 @@ p {
 	max-width: 700px;
 	min-height: 500px;
 	flex-shrink: 0;
-	color: #fff;
+	color: #fff;	line-height:50px;
 }
 
 #pap{
@@ -303,5 +366,20 @@ font-size:30px;
 	border-radius: 10px;
 	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 	transform: translateX(-50%) translateY(-50%);
+}
+
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+ 
+
+.fa fa-trash {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    
+  margin-right: 2rem;
+    
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 </style>
