@@ -48,9 +48,17 @@ public class Project_Service {
 		return projectdao.getSeq();
 	}
 	
+	//유저용 네브바
 	public List<Map<String, Object>> getProjectList(int user_id){
 	    ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
 	    
 	    return projectdao.getprojectList(user_id);
+	}
+	
+	//어드민용 네브바
+	public List<Map<String, Object>> getProjectList_Admin(int deptno){
+	    ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
+	    
+	    return projectdao.getprojectList_Admin(deptno);
 	}
 }
