@@ -3,6 +3,7 @@ package com.kosa.scheduleManagement;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,6 +77,12 @@ public class HomeController {
 		Emp emp = mypageservice.getEmpInfo(Integer.valueOf(principal.getName()));
 		model.addAttribute("emp",emp);
 		session.setAttribute("emp", emp);
+		//프로젝트 배정에 따라 상세보기버튼보이기 로직(유저일 경우)
+		List<Integer> getUserProjectList = mypageservice.getTotalSchedList(emp.getUser_id());
+		//(부서장일 경우)
+		List<Integer> getDheaedProjectList = mypageservice.getDheadTotalSchedList(emp.getUser_id());
+		model.addAttribute("getUserProjectList",getUserProjectList);
+		model.addAttribute("getDheaedProjectList",getDheaedProjectList);
 		return "home";
 	}
 	

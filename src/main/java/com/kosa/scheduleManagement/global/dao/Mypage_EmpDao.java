@@ -31,4 +31,6 @@ public interface Mypage_EmpDao {
 	int getMypageAdminProjectTotalNum(@Param("user_id") int user_id, @Param("project_num") int project_num);
 	
 	int getMypageAdminProjectDoneNum(@Param("user_id") int user_id, @Param("project_num") int project_num);
+
+	List<Integer> getTotalScheduleList(int user_id);
 }
