@@ -53,5 +53,4 @@ public class ScheduleBoardController {
 
 		return "/kanban/kanbanViewPage";
 	}
- 
 }

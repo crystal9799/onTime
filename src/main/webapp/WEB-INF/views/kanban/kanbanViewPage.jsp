@@ -8,6 +8,7 @@
 <title>Schedule Board</title>
 <jsp:include page="/common/Head.jsp" />
 <script
+
 	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -76,7 +77,7 @@
 							<span> 
 							<i class="fa fa-plus" id="modalBtn" aria-hidden="true" type="button"></i> 
 							<i class="fa fa-floppy-o" aria-hidden="true" id="saveBtn" type="button"></i> 
-							<a href="${pageContext.request.contextPath}/getProjectDetail.do"
+							<a href="${pageContext.request.contextPath}/getProjectDetail.do?project_num=${project_num}"
 								id="reBtn" class="fa fa-refresh" type="button"
 								style="text-decoration: none; color: #4b49ac;"> </a>
 
