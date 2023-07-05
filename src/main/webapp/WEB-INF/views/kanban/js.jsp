@@ -144,7 +144,7 @@
 				type : "post",
 				data : {
 					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
-					project_num : 2, // 클라이언트 값 전달
+					project_num : ${project_num}, // 클라이언트 값 전달
 					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
 				}, 
 				success : function(data) {
@@ -391,6 +391,7 @@
 			data.sched_seq = i ;
 			data.sched_info =  divNode.children[i].innerText;
 			data.sched_num =  divNode.children[i].id;
+			data.project_num = ${project_num};
 			
 			//console.log("data -- test ");
 			//console.log(divNode.children[i]);
@@ -425,6 +426,7 @@
 				data2.sched_seq = i ;
 				data2.sched_info =  divNode2.children[i].innerText;
 				data2.sched_num =  divNode2.children[i].id;
+				data2.project_num = ${project_num};
 				//console.log("data -- test ");
 				//console.log(divNode.children[i]);
 				//console.log(divNode.children[i].id);
@@ -459,6 +461,7 @@
 					data3.sched_seq = i ;
 					data3.sched_info =  divNode3.children[i].innerText;
 					data3.sched_num =  divNode3.children[i].id;
+					data3.project_num = ${project_num};
 					//console.log("data -- test ");
 					//console.log(divNode.children[i]);
 					//console.log(divNode.children[i].id);
