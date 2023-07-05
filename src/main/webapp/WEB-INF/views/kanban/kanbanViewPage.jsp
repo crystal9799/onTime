@@ -128,7 +128,7 @@ body {
 										class="fa fa-trash" aria-hidden="true" id="delBtn"
 										type="button"></i>
 								</h3>
-								<div class="p-inner">
+								<div class="p-inner" id="pap">
 									시작 일자 :
 									<p>${p.project_start}</p>
 									<br> 종료 일자 :

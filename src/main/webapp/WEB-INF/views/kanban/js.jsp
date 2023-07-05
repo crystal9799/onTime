@@ -23,21 +23,41 @@
         	iv="#"+$(this).attr('id');
         	console.log('iv: '+iv);
         	console.log('i: '+i);
-//        	$('.p-inner').empty();
+        	$('.p-inner').empty();
+        	
+/*         	 var newDIV = document.createElement("div");​
+        	 newDIV.innerHTML = "새로 생성된 DIV입니다.";
+        	 newDIV.setAttribute("id","myDiv");
+
+        	 newDIV.style.backgroundColor="yellow";
+        	 var p = document.getElementById("pap"); // <p "id=p"> 태그의 DOM 객체 찾기
+        	 p.appendChild(newDiv); */
         	
 			$.ajax({
+				url : "getEmp.ajax",
+				type : "post",
+  				data : {
+					sched_num : i 
+				}, 
+				    success: function(result){
+						console.log(result); 
+				    }
+				});
+/* 			$.ajax({
 				url : "getSinfo.ajax",
 				type : "post",
   				data : {
 					sched_num : i 
 				}, 
-				success : function(data){ 
-						console.log(data); 
-			    },
-				error : function() {
-					alert("error");
-				}
-			});
+				    success: function(result){
+						console.log(result);
+						console.log(result.sched_num);
+						console.log(result.sched_info);
+
+				    }
+				}); */
+         	console.log('일정 번호: '+i);
+        	 
         	
           });
 		
@@ -156,11 +176,11 @@
 						location.reload();
 			    }, 
 				error : function() {
-					alert("error");
+//					alert("error");
 				},
 				
 			});
-    	 
+      });
 /*      	 let s=document.querySelector('#todo-input').value;
     	 $("#todo-prev").append($("<p class="'task'" draggable="'true'">").text(s));  */
     	 
@@ -192,7 +212,7 @@
 					alert("error");
 				}  
 			}); */
-      });
+ 
 
 
 	  const modal2 = document.querySelector('.modal_body');

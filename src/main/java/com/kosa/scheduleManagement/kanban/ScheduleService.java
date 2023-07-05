@@ -42,10 +42,18 @@ public class ScheduleService {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
+	
+	public List<Emp> getEmpBySchedNum(int sched_num) throws ClassNotFoundException, SQLException {
+		ScheduleBoard_EmpDao empDao = sqlSession.getMapper(ScheduleBoard_EmpDao.class);
+		List<Emp> emp=empDao.getEmpBySchedNum(sched_num);
+		System.out.println("sevice emp");
+		System.out.println(sched_num);
+		return emp;
+	}
 
-	public String getSinfoByUserId(int sched_num) throws ClassNotFoundException, SQLException {
+	public ScheduleBoard getSinfoBySchedNum(int sched_num) throws ClassNotFoundException, SQLException {
 		ScheduleBoardDao scheduleDao = sqlSession.getMapper(ScheduleBoardDao.class);
-		return scheduleDao.getSinfoByUserId(sched_num);
+		return scheduleDao.getSinfoBySchedNum(sched_num);
 	}
 	
 	public int getUseridByEname(String ename) throws ClassNotFoundException, SQLException {
@@ -122,7 +130,7 @@ public class ScheduleService {
 	 */
 
 	public void insertBoard(ScheduleBoard board, int project_num) throws ClassNotFoundException, SQLException {
-		board.setSched_seq(createMaxProg(project_num));
+		board.setSched_seq(createMaxSeq(project_num));
 		board.setSched_num(createSeq());
 		// 값 변경에정///////////////////////////////////////////////
 		System.out.println("bbbbbbbbbbbbboard" + board);
@@ -130,7 +138,7 @@ public class ScheduleService {
 		boardDao.insertBoard(board);
 	}
 
-	public int createMaxProg(int project_num) throws ClassNotFoundException, SQLException {
+	public int createMaxSeq(int project_num) throws ClassNotFoundException, SQLException {
 		int tmp = 1;
 		if (getAllPrev(project_num).size() == 0) {
 			tmp = 1;
@@ -148,8 +156,6 @@ public class ScheduleService {
 	public int createSeq() throws ClassNotFoundException, SQLException {
 		List<Integer> list = new ArrayList<Integer>();
 
-		// 3개 있으면 size4
-		// 0개 size 1
 		if (getAllList().size() == 0) {
 			return 1;
 		} else {
