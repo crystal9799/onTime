@@ -67,8 +67,9 @@ public class KanbanAjaxController {
 			String sched_info = object.get("sched_info").getAsString();
 			int sched_seq = Integer.parseInt(object.get("sched_seq").getAsString());
 			int sched_num = Integer.parseInt(object.get("sched_num").getAsString());
+			int project_num = object.get("sched_num").getAsInt();
 			System.out.println("controller val: " + sched_info + ", " + sched_seq + ", " + sched_num);
-			service.updatePrev(sched_num, sched_seq, sched_info);
+			service.updatePrev(sched_num, sched_seq, sched_info, project_num);
 		}
 	}
 
@@ -86,8 +87,9 @@ public class KanbanAjaxController {
 			String sched_info = object.get("sched_info").getAsString();
 			int sched_seq = Integer.parseInt(object.get("sched_seq").getAsString());
 			int sched_num = Integer.parseInt(object.get("sched_num").getAsString());
+			int project_num = object.get("sched_num").getAsInt();
 			System.out.println("controller val: " + sched_info + ", " + sched_seq + ", " + sched_num);
-			service.updateCurr(sched_num, sched_seq, sched_info);
+			service.updateCurr(sched_num, sched_seq, sched_info, project_num);
 		}
 	}
 
@@ -103,9 +105,10 @@ public class KanbanAjaxController {
 			String sched_info = object.get("sched_info").getAsString();
 			int sched_seq = Integer.parseInt(object.get("sched_seq").getAsString());
 			int sched_num = Integer.parseInt(object.get("sched_num").getAsString());
+			int project_num = object.get("sched_num").getAsInt();
 			System.out.println("next --------------------------------controller val: " + sched_info + ", " + sched_seq
 					+ ", " + sched_num);
-			service.updateNext(sched_num, sched_seq, sched_info);
+			service.updateNext(sched_num, sched_seq, sched_info, project_num);
 		}
 	}
 
