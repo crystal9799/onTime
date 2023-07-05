@@ -18,6 +18,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	$('#deptno').val(${emp.deptno});
     $('#createBttn').click(function() {
         let seq;
         //시퀀스
@@ -162,6 +163,11 @@ $(document).ready(function(){
 					<div class="form-group">
 						<label for="project_num">Project Number</label> <input
 							type="number" class="form-control" id="project_num" name="id"
+							disabled="disabled">
+					</div>
+					<div class="form-group">
+						<label for="project_num">Dept No</label> <input
+							type="number" class="form-control" id="deptno" name="id"
 							disabled="disabled">
 					</div>
 					<div class="form-group">
