@@ -6,4 +6,5 @@ import com.kosa.scheduleManagement.global.dto.Schedule;
 
 public interface ScheduleDao {
 	void insertSchedule(Schedule schedule) throws ClassNotFoundException, SQLException;
+	void deleteSchedule(int sched_num) throws ClassNotFoundException, SQLException;
 }

@@ -43,7 +43,7 @@ public class ScheduleBoardController {
 		List<Schedule_Project> p=service.getProject(project_num);
 
 		System.out.println("proejct contorlllrlelele=======");
-		System.out.println(p);
+		
 
 		model.addAttribute("plist", prevList);
 		model.addAttribute("clist", currList);

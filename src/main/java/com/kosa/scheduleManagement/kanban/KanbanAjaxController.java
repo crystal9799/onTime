@@ -14,6 +14,7 @@ import org.apache.tomcat.util.json.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,8 +73,6 @@ public class KanbanAjaxController {
 			service.updatePrev(sched_num, sched_seq, sched_info, project_num);
 		}
 	}
-
-////////////////////////////////////////////////
 
 	@ResponseBody
 	@RequestMapping("/scheduleCurrUpdate.ajax")
@@ -212,21 +211,36 @@ public class KanbanAjaxController {
 	 */
 
 	@RequestMapping(value = "/getSinfo.ajax", method = { RequestMethod.POST })
-	public void getSinfo(@RequestParam("sched_num") String sched_num) throws ClassNotFoundException, SQLException {
-		System.out.println("getSinfo ccccc");
-		String  board=service.getSinfoByUserId(Integer.parseInt(sched_num));
+	public ScheduleBoard getSinfo(@RequestParam("sched_num") String sched_num)
+			throws ClassNotFoundException, SQLException {
+		System.out.println(sched_num);
+		ScheduleBoard board = service.getSinfoBySchedNum(Integer.parseInt(sched_num));
+		System.out.println();
 		System.out.println(board);
+		return board;
+	}
+
+	@RequestMapping(value = "/getEmp.ajax", method = { RequestMethod.POST })
+	public Emp getEmp(@RequestParam("sched_num") String sched_num)
+			throws ClassNotFoundException, SQLException {
+		System.out.println("getSinfo ccccc");
+
+		Emp emp=service.getEmpBySchedNum(Integer.parseInt(sched_num));
+		System.out.println(sched_num);
+		
+		return emp;
 	}
 
 	@RequestMapping(value = "/scheduleDel.ajax", method = { RequestMethod.POST })
 	public void deleteBoard(@RequestParam("sched_num") String sched_num) throws ClassNotFoundException, SQLException {
 		service.deleteBoard(Integer.parseInt(sched_num));
+		service.deleteSchedule(Integer.parseInt(sched_num));
 	}
 
 	@RequestMapping(value = "/scheduleAdd.ajax", method = { RequestMethod.POST })
 	public String scheduleAdd(@RequestParam("ename") String ename, @RequestParam("project_num") int project_num,
 			@RequestParam("sched_info") String sched_info) throws ClassNotFoundException, SQLException {
-		System.out.println("add controller");
+		System.out.println("add--------------------------------------- controller");
 		System.out.println(ename);
 		System.out.println(project_num);
 		System.out.println(sched_info);
@@ -235,7 +249,7 @@ public class KanbanAjaxController {
 		System.out.println(user_id);
 
 		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, 0, project_num);
-		Schedule schedule = new Schedule(user_id, 2);
+		Schedule schedule = new Schedule(user_id, 0);
 
 		System.out.println(sched_info);
 
@@ -247,10 +261,11 @@ public class KanbanAjaxController {
 	// string 으로 임시 변환 상태 --> emp ;service mapper interface
 	@RequestMapping(value = "/projectEnamelist.ajax", method = RequestMethod.GET)
 	@ResponseBody
-	public List<String> getEmpListByProject(@RequestParam("project_num") int project_num) throws ClassNotFoundException, SQLException {
+	public List<String> getEmpListByProject(@RequestParam("project_num") int project_num)
+			throws ClassNotFoundException, SQLException {
 		System.out.println("projectemplist controller connection");
 		List<String> list = service.getEmpListByProject(project_num);
-		System.out.println("controller pn"+project_num);
+		System.out.println("controller pn" + project_num);
 		System.out.println("list: " + list);
 		return list;
 	}
@@ -352,7 +367,8 @@ public class KanbanAjaxController {
 
 	@RequestMapping(value = "/listPrev.ajax", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ScheduleBoard> getAllPrev(@RequestParam("project_num") int project_num) throws ClassNotFoundException, SQLException {
+	public List<ScheduleBoard> getAllPrev(@RequestParam("project_num") int project_num)
+			throws ClassNotFoundException, SQLException {
 		System.out.println("ajaxlist connection");
 		List<ScheduleBoard> list = service.getAllPrev(project_num);
 		System.out.println("list: " + list);
@@ -361,7 +377,8 @@ public class KanbanAjaxController {
 
 	@RequestMapping(value = "/listCurr.ajax", method = RequestMethod.GET)
 	@ResponseBody
-	public List<ScheduleBoard> getAllCurr(@RequestParam("project_num") int project_num) throws ClassNotFoundException, SQLException {
+	public List<ScheduleBoard> getAllCurr(@RequestParam("project_num") int project_num)
+			throws ClassNotFoundException, SQLException {
 		System.out.println("ajaxlist connection");
 		List<ScheduleBoard> list = service.getAllNext(project_num);
 		System.out.println("list: " + list);
@@ -370,7 +387,8 @@ public class KanbanAjaxController {
 
 	@RequestMapping(value = "/listNext.ajax", method = RequestMethod.GET)
 	@ResponseBody
-	public List<ScheduleBoard> getAllNext(@RequestParam("project_num") int project_num) throws ClassNotFoundException, SQLException {
+	public List<ScheduleBoard> getAllNext(@RequestParam("project_num") int project_num)
+			throws ClassNotFoundException, SQLException {
 		System.out.println("ajaxlist connection");
 		List<ScheduleBoard> list = service.getAllNext(project_num);
 		System.out.println("list: " + list);

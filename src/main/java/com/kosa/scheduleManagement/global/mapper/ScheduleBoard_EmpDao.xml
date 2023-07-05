@@ -4,20 +4,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.kosa.scheduleManagement.global.dao.ScheduleBoard_EmpDao">
-	
- 	<select id="getAllEmpList" resultType="com.kosa.scheduleManagement.global.dto.Emp">
-		select user_id, password, enabled, ename, emp_pic, job, deptno, dhead_num
+
+	<select id="getAllEmpList"
+		resultType="com.kosa.scheduleManagement.global.dto.Emp">
+		select user_id, password, enabled, ename, emp_pic, job,
+		deptno, dhead_num
 		from emp
 	</select>
-	
- 	<select id="getEmpListByProject" resultType="String">
+
+	<select id="getEmpListByProject" resultType="String">
 		select e.ename
-		from emp e, project_emp pmp
-		where e.user_id = pmp.user_id and pmp.project_num=#{project_num}
+		from
+		emp e, project_emp pmp
+		where e.user_id = pmp.user_id and
+		pmp.project_num=#{project_num}
 	</select>
-	
+
 	<select id="getUseridByEname" resultType="int">
-		select user_id from emp where ename=#{ename}
+		select user_id from emp
+		where ename=#{ename}
+	</select>
+
+	<select id="getEmpBySchedNum"
+		resultType="com.kosa.scheduleManagement.global.dto.Emp">
+		select e.user_id, e.password, e.enabled, e.ename, e.emp_pic, e.job,
+		e.deptno, e.dhead_num
+		from emp e, schedule s
+		where e.user_id = s.user_id AND s.sched_num=#{sched_num}
 	</select>
 </mapper>
 	
