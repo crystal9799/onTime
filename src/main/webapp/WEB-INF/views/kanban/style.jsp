@@ -64,6 +64,7 @@
 	overflow: scroll;
 	height: 100%;
 }
+
 .heading {
 	font-size: 22px;
 	font-weight: bold;
@@ -155,13 +156,8 @@ border:none;
 	color:#4b49ac;
 }
 
-
-#h2{
-	margin-top: 25px;
-}
-
 .pro{
-	padding : 10px 25px 60px 25px;
+	padding : 40px 20px 20px 20px;
 	display: flex;
 	flex-direction: column;
 	gap: 12px; 
@@ -169,7 +165,7 @@ border:none;
 	background-color:#4B49AC;
 	border-radius: 4px;
 	width: 500px;
-	height:550px;
+	min-height: 500px;
 	flex-shrink: 0;
 	color:#fff;
 	
@@ -181,7 +177,11 @@ border:none;}
 #closeBtn{
 background-color:#fff;
 } 
- 
+
+.pro > p{
+
+}
+
 /* #task {
 	background: white;
 	color: black;
@@ -193,14 +193,14 @@ background-color:#fff;
 } */
 
 .p-inner {
-	padding : 40px 40px 30px 50px;
+	padding : 55px 40px 30px 50px;
 	background: white;
 	color: black;
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
 	border-radius: 4px;
 	font-size: 20px;
 	width: 680x;
-	min-height: 420px; 
+	min-height: 430px; 
 }
 
 .is-dragging {
