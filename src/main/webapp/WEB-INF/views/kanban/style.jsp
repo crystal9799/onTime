@@ -140,9 +140,9 @@ p {
 
 #saveBtn {
 	font: bold;
-	font-size: 47px;
+	font-size: 40px;
 	color: #4b49ac;
-	margin-right: 30px;
+	margin-right: 25px;
 	float: right;
 }
 
