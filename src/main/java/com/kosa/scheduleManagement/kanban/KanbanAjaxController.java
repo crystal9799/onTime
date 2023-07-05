@@ -221,7 +221,7 @@ public class KanbanAjaxController {
 	}
 
 	@RequestMapping(value = "/scheduleAdd.ajax", method = { RequestMethod.POST })
-	public void scheduleAdd(@RequestParam("ename") String ename, @RequestParam("project_num") int project_num,
+	public String scheduleAdd(@RequestParam("ename") String ename, @RequestParam("project_num") int project_num,
 			@RequestParam("sched_info") String sched_info) throws ClassNotFoundException, SQLException {
 		System.out.println("add controller");
 		System.out.println(ename);
@@ -238,7 +238,7 @@ public class KanbanAjaxController {
 
 		service.insertBoard(board, project_num);
 		service.insertSchedule(schedule);
-
+		return "/kanban/kanbanViewPage";
 	}
 
 	// string 으로 임시 변환 상태 --> emp ;service mapper interface
