@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <style>
+
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: 'GmarketSansMedium', sans-serif;
+}
  {
 	padding: 0;
 	margin: 0;
@@ -113,7 +127,7 @@ border:none;
 	margin-left:8px;
 	font:bold;
 	font-size:36px;
-	color:#4b49ac;  
+	color:#7473BF;  
 }
 
 #delBtn{
