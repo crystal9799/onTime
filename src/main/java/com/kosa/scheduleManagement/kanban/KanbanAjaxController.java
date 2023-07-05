@@ -244,9 +244,10 @@ public class KanbanAjaxController {
 	// string 으로 임시 변환 상태 --> emp ;service mapper interface
 	@RequestMapping(value = "/projectEnamelist.ajax", method = RequestMethod.GET)
 	@ResponseBody
-	public List<String> getEmpListByProject() throws ClassNotFoundException, SQLException {
+	public List<String> getEmpListByProject(@RequestParam("project_num") int project_num) throws ClassNotFoundException, SQLException {
 		System.out.println("projectemplist controller connection");
-		List<String> list = service.getEmpListByProject();
+		List<String> list = service.getEmpListByProject(project_num);
+		System.out.println("controller pn"+project_num);
 		System.out.println("list: " + list);
 		return list;
 	}
