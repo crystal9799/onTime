@@ -14,13 +14,14 @@
 		
 		/*local storage 처리 */
 		
-
-		
+/* 	 $('.swim-lane p').dblclick(function() {
+            $(this).css("color", "black");
+        })
+ */
 
 		let i, iv;
-        $( '.swim-lane p' ).click( function() {
-        	
-       //     $( this ).toggleClass( '.jbBox' );
+        $( '.swim-lane p' ).click( function() { 
+//           $( this ).toggleClass( '.jbBox' );
             $(this).addClass('active');
         	i=$(this).attr('id');
         	 iv="#"+$(this).attr('id');

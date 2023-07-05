@@ -156,8 +156,9 @@ p {
 	color: #fff;
 	background-color: #4B49AC;
 }
+ 
 
-.swim-lane p:hover {
+ .swim-lane p:hover {
 	padding: 20px;
 	color: #fff;
 	background-color: #4B49AC;
@@ -167,7 +168,7 @@ p {
 	padding: 30px;
 	color: #fff;
 	background-color: #4B49AC;
-}
+} 
 
 .swim-lane p {
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
@@ -251,6 +252,7 @@ p {
 	font-size: 20px;
 	width: 600x;
 	min-height: 430px;
+	line-height:30px;
 }
 
 .is-dragging {

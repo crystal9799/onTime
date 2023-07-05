@@ -129,11 +129,9 @@ body {
 										type="button"></i>
 								</h3>
 								<div class="p-inner" id="pap">
-									시작 일자 :
-									<p>${p.project_start}</p>
-									<br> 종료 일자 :
-									<p>${p.project_end}</p>
-									<br> 내 용 :
+									프로젝트 일정 :
+									<p>${p.project_start} - ${p.project_end}</p>
+									<br> 상세 내용 :
 									<p>${p.project_info}</p>
 									<br>
 								</div>
