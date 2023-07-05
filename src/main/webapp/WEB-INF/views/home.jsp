@@ -40,7 +40,7 @@
 	                    	$('#project_info2').text(event.extendedProps.project_info);
 	                    	$('#start2').val(event.start.toISOString().slice(0, 10));
 	                    	$('#end2').val(event.end.toISOString().slice(0, 10));
-
+							
 	                        // 모달을 보여줍니다.
 	                        $('#eventModal').modal('show');
 	                        $('#eventModal').on('shown.bs.modal', function (event) {
