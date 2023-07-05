@@ -123,11 +123,17 @@ border:none;
 	color:#4b49ac;
 	margin-bottom:12px;
 }
+#modalBtn:hover{
+	color:#8988C9;
+}
 #reBtn{
 	margin-left:8px;
 	font:bold;
 	font-size:36px;
-	color:#7473BF;  
+	color:#8988C9;  
+}
+#reBtn:hover{
+	color:#4b49ac;  
 }
 
 #delBtn{
