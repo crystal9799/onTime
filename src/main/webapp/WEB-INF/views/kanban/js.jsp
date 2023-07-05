@@ -16,13 +16,15 @@
 		
 
 		
+
+		let i, iv;
         $( '.swim-lane p' ).click( function() {
             $( this ).toggleClass( 'jbBox' );
         	i=$(this).attr('id');
-        	iv="#"+$(this).attr('id');
-        	console.log('iv: '+iv);
-        	console.log('i: '+i);
-        	$('.p-inner').empty();
+        	 iv="#"+$(this).attr('id');
+        	let ival=$(this).html();
+        	console.log(i);
+//        	iv="#"+$(this).attr('id');
         	
 /*         	 var newDIV = document.createElement("div");​
         	 newDIV.innerHTML = "새로 생성된 DIV입니다.";
@@ -39,7 +41,7 @@
 					sched_num : i 
 				}, 
 				    success: function(result){
-						createPtag(result);
+						createPtag(result, i, ival);
 				    }
 				});
         	 
@@ -54,10 +56,7 @@
         	 tagArea.appendChild(em);
         	 
         	  */
-        	 
-        	 
-         	console.log('일정 번호: '+i);
-        	 
+        	  
         	
           });
 		
@@ -83,6 +82,8 @@
         });
         
         
+
+        
         
         //append
 /*     	i="일정 번호 : "+$(this).attr('id');
@@ -103,12 +104,30 @@
 
 
 	  };
-	  function createPtag(data){
+	  function createPtag(data, i, ival){
+      	$('.p-inner').empty();
+		  console.log("num s:"+i);
+		  
 		  console.log("load create p tag");
 		  console.log(data);
-		  
-		  
-		  
+		  console.log(data.ename);
+  
+ 		    let new_pTag = document.createElement('p');
+
+ 		    $('.p-inner').append(`일정 번호 : `+i); 
+ 		    let brTag = document.createElement('br');
+			$('.p-inner').append(brTag); 
+ 		    $('.p-inner').append(`<br>`); 
+ 		    $('.p-inner').append(`일정 내용 : `+ival); 
+ 		    $('.p-inner').append(`<br><br>`); 
+ 		    $('.p-inner').append(`참여 사원 : `+data.ename); 
+
+//			let s=`참여 사원 : <br>`;
+//			$('.p-inner').append(s); 
+//			s=`참여 사원 : <br>`;
+			console.log(new_pTag);
+		    
+
 /* 			console.log("test");
 			console.log(emp);
 		    new_pTag.innerHTML =emp;
