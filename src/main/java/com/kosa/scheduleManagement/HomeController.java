@@ -71,9 +71,10 @@ public class HomeController {
 	}
 	
 	@GetMapping("/main.do")
-	public String login(HttpServletRequest request, Principal principal) {
+	public String login(HttpServletRequest request, Principal principal, Model model) {
 		HttpSession session = request.getSession();
 		Emp emp = mypageservice.getEmpInfo(Integer.valueOf(principal.getName()));
+		model.addAttribute("emp",emp);
 		session.setAttribute("emp", emp);
 		return "home";
 	}
