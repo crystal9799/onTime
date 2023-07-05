@@ -214,11 +214,13 @@ public class ScheduleService {
 	 * return resultList; }
 	 */
 	// string 으로 임시 변환 상태 --> emp ;service mapper interface
-	public List<String> getEmpListByProject() throws ClassNotFoundException, SQLException {
-		System.out.println("getEmpListByProject conn");
+	public List<String> getEmpListByProject(int project_num) throws ClassNotFoundException, SQLException {
+
 		ScheduleBoard_EmpDao dao = sqlSession.getMapper(ScheduleBoard_EmpDao.class);
-		List<String> list = dao.getEmpListByProject();
-		System.out.println("list: " + list);
+		List<String> list = dao.getEmpListByProject(project_num);
+		System.out.println("getEmpListByProject conn");
+		System.out.println("pnsss"+project_num);
+		System.out.println("list: test" + list);
 		return list;
 	}
 

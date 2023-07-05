@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="getEmpListByProject" resultType="String">
 		select e.ename
 		from emp e, project_emp pmp
-		where e.user_id = pmp.user_id and pmp.project_num=2
+		where e.user_id = pmp.user_id and pmp.project_num=#{project_num}
 	</select>
 	
 	<select id="getUseridByEname" resultType="int">
