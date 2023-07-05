@@ -144,15 +144,17 @@
 				type : "post",
 				data : {
 					ename : $("select[id=nameList] option:selected").val(), // selected: 값 전달
-					project_num : "2", // 클라이언트 값 전달
+					project_num : ${project_num}, // 클라이언트 값 전달
 					sched_info : document.querySelector('#todo-input').value // 내용 태그 값 전달
 				}, 
 				success : function(data) {
-						console.log('add'); 
+						console.log('add');
+						location.reload();
 			    }, 
 				error : function() {
 					alert("error");
-				}  
+				},
+				
 			});
     	 
 /*      	 let s=document.querySelector('#todo-input').value;
@@ -166,7 +168,6 @@
     	 s+="</p>"; */
     	 
 //    	 let vs="<p class="'task'" draggable="'true'">"+vt+"</p>";
-	   	 console.log(s);
 		
 	//	let v1=`<p class="task" draggable="true">$("#todo-input").val</p>`;
 		//let v2=`<p class="task" draggable="true">vt</p>`;
@@ -390,6 +391,7 @@
 			data.sched_seq = i ;
 			data.sched_info =  divNode.children[i].innerText;
 			data.sched_num =  divNode.children[i].id;
+			data.project_num = ${project_num};
 			
 			//console.log("data -- test ");
 			//console.log(divNode.children[i]);
@@ -424,6 +426,7 @@
 				data2.sched_seq = i ;
 				data2.sched_info =  divNode2.children[i].innerText;
 				data2.sched_num =  divNode2.children[i].id;
+				data2.project_num = ${project_num};
 				//console.log("data -- test ");
 				//console.log(divNode.children[i]);
 				//console.log(divNode.children[i].id);
@@ -458,6 +461,7 @@
 					data3.sched_seq = i ;
 					data3.sched_info =  divNode3.children[i].innerText;
 					data3.sched_num =  divNode3.children[i].id;
+					data3.project_num = ${project_num};
 					//console.log("data -- test ");
 					//console.log(divNode.children[i]);
 					//console.log(divNode.children[i].id);
@@ -496,9 +500,11 @@
       
 	  /* ename list dynamic create */
 	  function getNameList(){
+		  console.log('aaaddd');
 			$.ajax({
 				url: "projectEnamelist.ajax",
 				type: "GET", dataType:"json",
+		        data: {"project_num" : ${project_num} },
 				success : function(data){
 					console.log(data); 
 					for(var i=0; i<data.length; i++){

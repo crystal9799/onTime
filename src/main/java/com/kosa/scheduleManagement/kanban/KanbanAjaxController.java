@@ -67,8 +67,9 @@ public class KanbanAjaxController {
 			String sched_info = object.get("sched_info").getAsString();
 			int sched_seq = Integer.parseInt(object.get("sched_seq").getAsString());
 			int sched_num = Integer.parseInt(object.get("sched_num").getAsString());
+			int project_num = object.get("sched_num").getAsInt();
 			System.out.println("controller val: " + sched_info + ", " + sched_seq + ", " + sched_num);
-			service.updatePrev(sched_num, sched_seq, sched_info);
+			service.updatePrev(sched_num, sched_seq, sched_info, project_num);
 		}
 	}
 
@@ -86,8 +87,9 @@ public class KanbanAjaxController {
 			String sched_info = object.get("sched_info").getAsString();
 			int sched_seq = Integer.parseInt(object.get("sched_seq").getAsString());
 			int sched_num = Integer.parseInt(object.get("sched_num").getAsString());
+			int project_num = object.get("sched_num").getAsInt();
 			System.out.println("controller val: " + sched_info + ", " + sched_seq + ", " + sched_num);
-			service.updateCurr(sched_num, sched_seq, sched_info);
+			service.updateCurr(sched_num, sched_seq, sched_info, project_num);
 		}
 	}
 
@@ -103,9 +105,10 @@ public class KanbanAjaxController {
 			String sched_info = object.get("sched_info").getAsString();
 			int sched_seq = Integer.parseInt(object.get("sched_seq").getAsString());
 			int sched_num = Integer.parseInt(object.get("sched_num").getAsString());
+			int project_num = object.get("sched_num").getAsInt();
 			System.out.println("next --------------------------------controller val: " + sched_info + ", " + sched_seq
 					+ ", " + sched_num);
-			service.updateNext(sched_num, sched_seq, sched_info);
+			service.updateNext(sched_num, sched_seq, sched_info, project_num);
 		}
 	}
 
@@ -221,7 +224,7 @@ public class KanbanAjaxController {
 	}
 
 	@RequestMapping(value = "/scheduleAdd.ajax", method = { RequestMethod.POST })
-	public void scheduleAdd(@RequestParam("ename") String ename, @RequestParam("project_num") int project_num,
+	public String scheduleAdd(@RequestParam("ename") String ename, @RequestParam("project_num") int project_num,
 			@RequestParam("sched_info") String sched_info) throws ClassNotFoundException, SQLException {
 		System.out.println("add controller");
 		System.out.println(ename);
@@ -231,22 +234,23 @@ public class KanbanAjaxController {
 		int user_id = service.getUseridByEname(ename);
 		System.out.println(user_id);
 
-		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, 0, 2);
+		ScheduleBoard board = new ScheduleBoard(0, sched_info, 0, 0, project_num);
 		Schedule schedule = new Schedule(user_id, 2);
 
 		System.out.println(sched_info);
 
 		service.insertBoard(board, project_num);
 		service.insertSchedule(schedule);
-
+		return "/kanban/kanbanViewPage";
 	}
 
 	// string 으로 임시 변환 상태 --> emp ;service mapper interface
 	@RequestMapping(value = "/projectEnamelist.ajax", method = RequestMethod.GET)
 	@ResponseBody
-	public List<String> getEmpListByProject() throws ClassNotFoundException, SQLException {
+	public List<String> getEmpListByProject(@RequestParam("project_num") int project_num) throws ClassNotFoundException, SQLException {
 		System.out.println("projectemplist controller connection");
-		List<String> list = service.getEmpListByProject();
+		List<String> list = service.getEmpListByProject(project_num);
+		System.out.println("controller pn"+project_num);
 		System.out.println("list: " + list);
 		return list;
 	}
