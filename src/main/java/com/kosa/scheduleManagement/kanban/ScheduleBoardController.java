@@ -48,6 +48,7 @@ public class ScheduleBoardController {
 		model.addAttribute("plist", prevList);
 		model.addAttribute("clist", currList);
 		model.addAttribute("nlist", nextList);
+		model.addAttribute("project_num", project_num);
 		model.addAttribute("p", p);
 
 		return "/kanban/kanbanViewPage";
