@@ -148,19 +148,25 @@ body {
 						{
 							header: "사원번호",
 							name: "user_id",
+							sortingType: 'asc',
+							sortable: true,
 							width: 15,
 							align: 'center'
 						},
 						{
 							header: "사원이름",
 							name: "ename",
+							sortingType: 'asc',
 							editor: 'text',
-							align: 'center'
+							align: 'center',
+							sortable: true
 						},
 						{
 							header: "직종",
 							name: "job",
 							editor: 'text',
+							sortingType: 'asc',
+							sortable: true,
 							align: 'center'
 						},
 						{
@@ -281,6 +287,8 @@ body {
 						        }
 						    }
 						});
+				
+				
 			  const gridLoad = async () => {
 			    try {
 			      const response = await fetch('/Team4_WebProject_2/admin/empManage/show.do?deptno=${deptno}');
