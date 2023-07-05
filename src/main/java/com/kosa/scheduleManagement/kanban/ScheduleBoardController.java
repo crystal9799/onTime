@@ -33,16 +33,13 @@ public class ScheduleBoardController {
 	}
 
 	@GetMapping("getProjectDetail.do")
-	public String getScheduleList(Model model) throws ClassNotFoundException, SQLException {
+	public String getScheduleList(@RequestParam("project_num") int project_num, Model model) throws ClassNotFoundException, SQLException {
 		System.out.println("getAllDetail conn");
 		
 		List<ScheduleBoard> prevList = service.getAllPrev(project_num);
 		List<ScheduleBoard> currList = service.getAllCurr(project_num);
 		List<ScheduleBoard> nextList = service.getAllNext(project_num);
 
-		List<ScheduleBoard> prevList = service.getAllPrev();
-		List<ScheduleBoard> currList = service.getAllCurr();
-		List<ScheduleBoard> nextList = service.getAllNext();
 		List<Schedule_Project> p=service.getProject(2);
 
 		System.out.println("proejct contorlllrlelele=======");
