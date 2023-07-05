@@ -43,9 +43,9 @@ public class ScheduleService {
 		this.sqlSession = sqlSession;
 	}
 	
-	public List<Emp> getEmpBySchedNum(int sched_num) throws ClassNotFoundException, SQLException {
+	public Emp getEmpBySchedNum(int sched_num) throws ClassNotFoundException, SQLException {
 		ScheduleBoard_EmpDao empDao = sqlSession.getMapper(ScheduleBoard_EmpDao.class);
-		List<Emp> emp=empDao.getEmpBySchedNum(sched_num);
+		Emp emp=empDao.getEmpBySchedNum(sched_num);
 		System.out.println("sevice emp");
 		System.out.println(sched_num);
 		return emp;

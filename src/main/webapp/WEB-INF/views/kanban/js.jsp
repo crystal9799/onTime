@@ -41,6 +41,7 @@
 				}, 
 				    success: function(result){
 						console.log(result); 
+						console.log(result.ename);
 				    }
 				});
 /* 			$.ajax({

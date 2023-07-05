@@ -221,11 +221,11 @@ public class KanbanAjaxController {
 	}
 
 	@RequestMapping(value = "/getEmp.ajax", method = { RequestMethod.POST })
-	public List<Emp> getEmp(@RequestParam("sched_num") String sched_num)
+	public Emp getEmp(@RequestParam("sched_num") String sched_num)
 			throws ClassNotFoundException, SQLException {
 		System.out.println("getSinfo ccccc");
 
-		List<Emp> emp=service.getEmpBySchedNum(Integer.parseInt(sched_num));
+		Emp emp=service.getEmpBySchedNum(Integer.parseInt(sched_num));
 		System.out.println(sched_num);
 		
 		return emp;

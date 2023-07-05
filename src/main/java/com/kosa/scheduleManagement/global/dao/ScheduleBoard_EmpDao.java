@@ -9,7 +9,7 @@ public interface ScheduleBoard_EmpDao {
 	List<Emp> getAllEmpList() throws ClassNotFoundException, SQLException;
 	List<String> getEmpListByProject(int project_num) throws ClassNotFoundException, SQLException;
 	int getUseridByEname(String ename) throws ClassNotFoundException, SQLException;
-	List<Emp> getEmpBySchedNum(int sched_num) throws ClassNotFoundException, SQLException;
+	Emp getEmpBySchedNum(int sched_num) throws ClassNotFoundException, SQLException;
 //	Emp getEmpBySchedNum(int sched_num) throws ClassNotFoundException, SQLException;
 //		List<Emp> getEmpListByProject() throws ClassNotFoundException, SQLException;
 }
