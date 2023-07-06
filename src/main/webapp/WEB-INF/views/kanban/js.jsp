@@ -598,13 +598,11 @@
       
 	  /* ename list dynamic create */
 	  function getNameList(){
-		  console.log('aaaddd');
 			$.ajax({
 				url: "projectEnamelist.ajax",
 				type: "GET", dataType:"json",
 		        data: {"project_num" : ${project_num} },
 				success : function(data){
-					console.log(data); 
 					for(var i=0; i<data.length; i++){
 						$("#nameList").append('<option id="'+data[i]+'" value="' + data[i] + '">' + data[i] + '</option');
 					}
