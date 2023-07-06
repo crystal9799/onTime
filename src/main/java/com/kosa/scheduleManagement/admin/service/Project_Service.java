@@ -24,7 +24,6 @@ public class Project_Service {
 	//Project테이블 INSERT
 	public int insertProject(Project project) {
 		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
-		
 		return projectdao.insertProject(project);
 	}
 	
@@ -38,7 +37,6 @@ public class Project_Service {
 	//Project 전체 호출
 	public List<Project> getAllProjectList(){
 		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
-		System.out.println(projectdao.getAllProjectList().toString());
 		return projectdao.getAllProjectList();
 	}
 	

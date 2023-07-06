@@ -92,22 +92,11 @@ public class AdminProjectController {
 	@PostMapping("/createProjectOk.do")
 	public ResponseEntity<Map<String, String>> insertProject(@RequestBody Project_Sub genproject) {
 		try {
-			System.out.println(genproject.toString());
-			System.out.println("try블록의 시작");
 			project_Service.insertProject(genproject.getProject());
-
-			System.out.println("project insert success");
-			System.out.println("Project : " + genproject.getProject().toString());
-			System.out.println("List<Emp> : " + genproject.getEmplist().toString());
-
 			project_empservice.insert_Project_Emp(genproject);
-			System.out.println("empinsert success");
 
 			try {
-				System.out.println("mail전송 로직 실행");
 				boolean isSuccess = mailSendService.sendMail(genproject);
-
-				System.out.println("메일전송성공 결과 : " + isSuccess);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -150,7 +139,6 @@ public class AdminProjectController {
 			System.out.println(projectlist.toString());
 			return projectlist;
 		} catch (Exception e) {
-			System.out.println("예외발생");
 			System.out.println(e.getMessage());
 			return null;
 		}
@@ -162,22 +150,19 @@ public class AdminProjectController {
     public ResponseEntity<List<Map<String, Object>>> getProjectList(@RequestParam int user_id){
         List<Map<String,Object>> projectlist = new ArrayList<Map<String,Object>>();
         try {
-            projectlist = project_Service.getProjectList(user_id);
-            
+            projectlist = project_Service.getProjectList(user_id);         
             return new ResponseEntity<List<Map<String,Object>>>(projectlist,HttpStatus.OK);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
-    };
-    
+    }; 
     //어드민이 보는 네브바
     @GetMapping("/projectlist_Admin.do")
     public ResponseEntity<List<Map<String, Object>>> getProjectList_Admin(@RequestParam int deptno){
         List<Map<String,Object>> projectlist = new ArrayList<Map<String,Object>>();
         try {
             projectlist = project_Service.getProjectList_Admin(deptno);
-            
             return new ResponseEntity<List<Map<String,Object>>>(projectlist,HttpStatus.OK);
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -25,7 +25,7 @@
 	                    	
 	                    	var event = info.event;
 	                    	
-	                        console.log(event.id); // Log each field to the console
+	                        console.log(event.id); 
 	                        console.log(event.title);
 	                        console.log(event.extendedProps.project_info);
 	                        console.log(event.start.toISOString().slice(0, 10));
@@ -53,34 +53,6 @@
 	                
 	            }) 
 	
-			 /* fetch("${pageContext.request.contextPath}/admin/projectlist.do?user_id=${emp.user_id}")
-				.then(res => res.json())
-				.then(data => {
-					const defaultLink = "${pageContext.request.contextPath}/getProjectDetail.do?project_id=";
-					let linklist = [];
-					for(let i in data){
-						console.log(defaultLink+data[i].project_num);
-						linklist.push(defaultLink+data[i].project_num);
-						//네브바 만들기
-			      		console.log("Creating newProject");
-			        	let newProject = $("<li></li>").addClass("nav-item");
-			        	console.log("newProject:", newProject);
-
-			        	newProject.appendTo($('.nav.flex-column.sub-menu'));
-
-			        	console.log("Creating newLink");
-			        	let newLink = $("<a></a>")
-			        	    .addClass("nav-link")
-			        	    .attr("href", linklist[i])
-			        	    .text("생성되었음");
-
-			        	console.log("newLink:", newLink);
-
-			        	newLink.appendTo(newProject);
-
-			        	console.log("newProject after append:", newProject);
-					}
-				}) */
 	    });
     </script>
 </head>

@@ -48,8 +48,6 @@ $(document).ready(function(){
             select.add(option);
         });
 
-        // After populating the <select> with new <option> elements, 
-        // create a new instance of Choices to refresh the UI.
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
             removeItemButton: true,
             maxItemCount:10,
