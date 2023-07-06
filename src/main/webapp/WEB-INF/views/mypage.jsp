@@ -15,7 +15,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
-
 </head>
 <body>
 	<jsp:include page="/common/Header.jsp" />
@@ -135,14 +134,17 @@
 	window.onload = function() {
 		/* chart */
 		var ctx = document.getElementById('chart-line');
-		
+		console.log(${totalSchedNum});
+		console.log(${resultDone});
+		console.log(${resultProg});
+		console.log(${resultBefore});
 		var myLineChart = new Chart(ctx, {
 			type : 'pie',
 			data : {
-				labels : [ "완료", "진행중" ],
+				labels : [ "시작전", "진행중", "완료" ],
 				datasets : [ {
-					data : [ ${resultDone}, ${resultProg} ],
-					backgroundColor : [ "#4b49ac", "#CDCDFF" ]
+					data : [ ${resultBefore}, ${resultProg}, ${resultDone} ],
+					backgroundColor : [ "#CDCDFF", "#8989E8", "#4b49ac" ]
 				} ]
 			},
 			options : {
