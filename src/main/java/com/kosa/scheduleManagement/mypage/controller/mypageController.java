@@ -46,12 +46,17 @@ public class mypageController {
 			};
 			model.addAttribute("chart", adminChartInfo);	
 		} else if (emp.getDhead_num() > 0) {
-			int totalSchedNum = mypageservice.getTotalSchedNum(user_id);
+			int beforeSchedNum = mypageservice.getBeforeSchedNum(user_id);
+			int progSchedNum = mypageservice.getProgSchedNum(user_id);
 			int doneSchedNum = mypageservice.getDoneSchedNum(user_id);
-			int resultDone = totalSchedNum == 0 ? 0 : (int) (doneSchedNum/totalSchedNum) * 100;
-			int resultProg = 100 - resultDone;
+			int totalSchedNum = beforeSchedNum + progSchedNum + doneSchedNum;
+			double resultDone = Math.floor((double) doneSchedNum/(double)totalSchedNum * 100);
+			double resultProg = Math.floor((double) progSchedNum/(double)totalSchedNum * 100);
+			double resultBefore = Math.floor((double) beforeSchedNum/(double)totalSchedNum * 100);
 			model.addAttribute("resultDone", resultDone);
-			model.addAttribute("resultProg", resultProg);	
+			model.addAttribute("resultBefore", resultBefore);
+			model.addAttribute("resultProg", resultProg);
+			model.addAttribute("empDhead_num", emp.getDhead_num());
 		}
 		
 		model.addAttribute("emp", emp);

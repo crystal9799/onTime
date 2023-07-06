@@ -25,11 +25,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<!-- 전체 업무 일정 -->
-	<select id="getTotalSchedNum" resultType="int">
+	<select id="getBeforeSchedNum" resultType="int">
 		select count(*) as
-		totalnum from (select sb.sched_num, sb.project_num, sb.sched_prog from
+		donenum from (select sb.sched_num, sb.project_num, sb.sched_prog from
 		schedule_board sb join schedule s on sb.sched_num = s.sched_num where
-		s.user_id=#{user_id})
+		s.user_id=#{user_id} and sb.sched_prog=0)
+	</select>
+	
+	<!-- 진행중 업무 일정 -->
+	<select id="getProgSchedNum" resultType="int">
+		select count(*) as
+		donenum from (select sb.sched_num, sb.project_num, sb.sched_prog from
+		schedule_board sb join schedule s on sb.sched_num = s.sched_num where
+		s.user_id=#{user_id} and sb.sched_prog=1)
 	</select>
 
 	<!-- 완료 일정 -->
@@ -37,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) as
 		donenum from (select sb.sched_num, sb.project_num, sb.sched_prog from
 		schedule_board sb join schedule s on sb.sched_num = s.sched_num where
-		s.user_id=#{user_id} and sb.sched_prog=3)
+		s.user_id=#{user_id} and sb.sched_prog=2)
 	</select>
 
 	<!-- 부서장 -->

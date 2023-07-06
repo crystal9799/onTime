@@ -15,7 +15,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
-
 </head>
 <body>
 	<jsp:include page="/common/Header.jsp" />
@@ -85,7 +84,7 @@
 									<tbody>
 										<c:forEach var="chart" items="${chart}">
 											<tr>
-												<td >${chart.projectName}</td>
+												<td>${chart.projectName}</td>
 												<td id="tableProgess">
 													<div class="grogressWrapper">
 														<div class="progress mr-3">
@@ -133,28 +132,31 @@
 	});
 	
 	window.onload = function() {
-		/* chart */
-		var ctx = document.getElementById('chart-line');
-		
-		var myLineChart = new Chart(ctx, {
-			type : 'pie',
-			data : {
-				labels : [ "완료", "진행중" ],
-				datasets : [ {
-					data : [ ${resultDone}, ${resultProg} ],
-					backgroundColor : [ "#4b49ac", "#CDCDFF" ]
-				} ]
-			},
-			options : {
-				title : {
-					display : true,
-					text : '업무 진행도'
+		if (`${empDhead_num}` > 0) {
+			/* chart */
+			var ctx = document.getElementById('chart-line');
+			
+			var myLineChart = new Chart(ctx, {
+				type : 'pie',
+				data : {
+					labels : [ "시작전", "진행중", "완료" ],
+					datasets : [ {
+						data : [ ${resultBefore}, ${resultProg}, ${resultDone} ],
+						backgroundColor : [ "#CDCDFF", "#8989E8", "#4b49ac" ]
+					} ]
+				},
+				options : {
+					title : {
+						display : true,
+						text : '업무 진행도'
+					}
 				}
-			}
-		});
+			});
+		}
 		
 		// 회원정보 수정 기능
 		document.getElementById('submit').addEventListener('click', (event) => {
+					console.log('클릭');
 					 var passwordValue = document.getElementById('passwordChange').value; 
 					 var passwordConfirm = document.getElementById('passwordConfirm').value; 
 					 var fileImageUpload = document.getElementById('fileImageUpload'); 
@@ -206,6 +208,25 @@
 							cache: 'no-cache',
 							body: formData,
 						})
+						
+						$.ajax({
+						url : "mypage/update.do",
+						type : 'POST',
+						data : formData,
+					 	processData:false,
+					  	contentType:false,
+						success : function(data) {
+							console.log("mypageUpdate : " + data);
+						},
+						error : function(request, status, error) {
+							console.log("code:" + request.status + "\n"
+									+ "message:" + request.responseText + "\n"
+									+ "error:" + error);
+						}
+					});
+						document.getElementById('passwordChange').value = null;
+						document.getElementById('passwordConfirm').value = null; 
+						
 						Swal.fire('변경 완료','변경되었습니다.', 'success');
 						return true;
 					 }

@@ -39,7 +39,8 @@ public class mypageAajxController {
 
 	@PostMapping("/update.do")
 	@ResponseBody
-	public ResponseEntity<String> mypageUpdate(@RequestPart(value = "key") Emp emp,@RequestPart(value = "file", required=false) MultipartFile file) {
+	public ResponseEntity<String> mypageUpdate(@RequestPart(value = "key") Emp emp,
+			@RequestPart(value = "file", required=false) MultipartFile file) {
 		String S3Path = "";
 		
 		try {
