@@ -19,11 +19,14 @@ public interface Mypage_EmpDao {
 	//부서 정보
 	Dept getMypageDeptInfo(int user_id);
 	
-	//	전체업무 개수 
-		int getTotalSchedNum(int user_id);
+	//	전체 업무 개수 
+	int getBeforeSchedNum(int user_id);
+	
+	//	진행중 업무 개수 
+	int getProgSchedNum(int user_id);
 		
-	//	완료업무 개수	
-		int getDoneSchedNum(int user_id);
+	//	완료 업무 개수	
+	int getDoneSchedNum(int user_id);
 		
 	//부사장
 	List<Project> getMypageAdminProjectInfo(int user_id);
@@ -33,4 +36,5 @@ public interface Mypage_EmpDao {
 	int getMypageAdminProjectDoneNum(@Param("user_id") int user_id, @Param("project_num") int project_num);
 
 	List<Integer> getTotalScheduleList(int user_id);
+
 }
