@@ -14,30 +14,52 @@
 		
 		/*local storage 처리 */
 		
-		var iv;
-		var i;
-		
-        $( '.swim-lane p' ).click( function() {
-            $( this ).toggleClass( 'jbBox' );
+/* 	 $('.swim-lane p').dblclick(function() {
+            $(this).css("color", "black");
+        })
+ */
+
+		let i, iv;
+        $( '.swim-lane p' ).click( function() { 
+//           $( this ).toggleClass( '.jbBox' );
+            $(this).addClass('active');
         	i=$(this).attr('id');
-        	iv="#"+$(this).attr('id');
-        	console.log('iv: '+iv);
-        	console.log('i: '+i);
-//        	$('.p-inner').empty();
+        	 iv="#"+$(this).attr('id');
+        	let ival=$(this).html();
+        	console.log(i);
+//        	iv="#"+$(this).attr('id');
         	
+/*         	 var newDIV = document.createElement("div");​
+        	 newDIV.innerHTML = "새로 생성된 DIV입니다.";
+        	 newDIV.setAttribute("id","myDiv");
+
+        	 newDIV.style.backgroundColor="yellow";
+        	 var p = document.getElementById("pap"); // <p "id=p"> 태그의 DOM 객체 찾기
+        	 p.appendChild(newDiv); */
+        	 
 			$.ajax({
-				url : "getSinfo.ajax",
+				url : "getEmp.ajax",
 				type : "post",
   				data : {
 					sched_num : i 
 				}, 
-				success : function(data){ 
-						console.log(data); 
-			    },
-				error : function() {
-					alert("error");
-				}
-			});
+				    success: function(result){
+						createPtag(result, i, ival);
+				    }
+				});
+        	 
+
+/*         	 let tagArea = document.getElementById('pap');
+        	 let em = document.createElement('p');
+        	 console.log(em+":em");
+        	 console.log(tagArea+":parna");
+        	 console.log(tagArea.value+":parna");
+        	 console.log(tagArea.text+":parna");
+        	 em.setAttribute('value' , '1');
+        	 tagArea.appendChild(em);
+        	 
+        	  */
+        	  
         	
           });
 		
@@ -63,6 +85,34 @@
         });
         
         
+   var div2 = document.getElementsByClassName("pc");
+
+        function handleClick(event) {
+          console.log(event.target);
+          // console.log(this);
+          // 콘솔창을 보면 둘다 동일한 값이 나온다
+
+          console.log(event.target.classList);
+
+          if (event.target.classList[1] === "clicked") {
+            event.target.classList.remove("clicked");
+          } else {
+            for (var i = 0; i < div2.length; i++) {
+              div2[i].classList.remove("clicked");
+            }
+
+            event.target.classList.add("clicked");
+          }
+        }
+
+        function init() {
+          for (var i = 0; i < div2.length; i++) {
+            div2[i].addEventListener("click", handleClick);
+          }
+        }
+
+        init();
+        
         
         //append
 /*     	i="일정 번호 : "+$(this).attr('id');
@@ -83,10 +133,51 @@
 
 
 	  };
-	  
-	  
-	  
+	  function createPtag(data, i, ival){
+      	$('.p-inner').empty();
+		  console.log("num s:"+i);
+		  
+		  console.log("load create p tag");
+		  console.log(data);
+		  console.log(data.ename);
+  
+ 		    let new_pTag = document.createElement('p');
 
+ 		    $('.p-inner').append(`일정 번호 : `+i); 
+ 		    let brTag = document.createElement('br');
+			$('.p-inner').append(brTag); 
+ 		    $('.p-inner').append(`<br>`); 
+ 		    $('.p-inner').append(`일정 내용 : `+ival); 
+ 		    $('.p-inner').append(`<br><br>`); 
+ 		    $('.p-inner').append(`참여 사원 : `+data.ename); 
+
+//			let s=`참여 사원 : <br>`;
+//			$('.p-inner').append(s); 
+//			s=`참여 사원 : <br>`;
+			console.log(new_pTag);
+		    
+
+/* 			console.log("test");
+			console.log(emp);
+		    new_pTag.innerHTML =emp;
+			console.log(new_pTag);
+			
+			let emp;
+			console.log(data); 
+			console.log(data.ename);
+			emp=data.ename;
+			console.log("emp:"+emp); */
+
+	  }
+	  
+	  
+	  const vibration = (target) => {
+		  target.classList.add("vibration");
+
+		  setTimeout(function() {
+		    target.classList.remove("vibration");
+		  }, 400);
+		}
 /*       $(document).on("click","#addBtn",function(){
 		console.log('addbtn');	  
 		
@@ -134,11 +225,14 @@
     		$("#todo_prev").append(html); */
     	 
 //    		let tt=$("#");
-    		let t="<p class='task' draggable='true'>";
+    		
+    		
+    		
+/*     		let t="<p class='task' draggable='true'>";
     		t+=$("#todo-input").val();
     		console.log(t);
     		t+="</p>";
-    		$("#todo-prev").append(t);
+    		$("#todo-prev").append(t); */
     		
     		$.ajax({
 				url : "scheduleAdd.ajax",
@@ -153,11 +247,11 @@
 						location.reload();
 			    }, 
 				error : function() {
-					alert("error");
+//					alert("error");
 				},
 				
 			});
-    	 
+      });
 /*      	 let s=document.querySelector('#todo-input').value;
     	 $("#todo-prev").append($("<p class="'task'" draggable="'true'">").text(s));  */
     	 
@@ -189,7 +283,7 @@
 					alert("error");
 				}  
 			}); */
-      });
+ 
 
 
 	  const modal2 = document.querySelector('.modal_body');
@@ -544,27 +638,7 @@
 
 	  
 
-		 
-		 
-		 
-
-		 /*선택된 값 전달*/
-		 /*클라이언트 값 ajax로 보내줌 매핑 필요*/
-	  	function addSchedule(data){
-	 	console.log("ready data send method: "+data);
-
-
-			
-	 	
-		 }
-
-
-
-
-
-
-
-		 
+ 
 
         
 		 
