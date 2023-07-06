@@ -40,10 +40,10 @@ public class ScheduleBoardController {
 		List<ScheduleBoard> currList = service.getAllCurr(project_num);
 		List<ScheduleBoard> nextList = service.getAllNext(project_num);
 
-		List<Schedule_Project> p=service.getProject(2);
+		List<Schedule_Project> p=service.getProject(project_num);
 
 		System.out.println("proejct contorlllrlelele=======");
-		System.out.println(p);
+		
 
 		model.addAttribute("plist", prevList);
 		model.addAttribute("clist", currList);

@@ -32,8 +32,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update schedule_board set sched_seq=#{sched_seq}, sched_prog=2 where sched_num=#{sched_num}
 	</update>
 
-	<select id="getSinfoByUserId" resultType="String">
-		select sched_info
+	<select id="getSinfoBySchedNum" resultType="com.kosa.scheduleManagement.global.dto.ScheduleBoard">
+		select sched_num, sched_info, sched_prog, sched_seq, project_num
 		from schedule_board
 		where sched_num=#{sched_num}
 	</select>
