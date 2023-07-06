@@ -142,7 +142,10 @@
 		  console.log(data.ename);
   
  		    let new_pTag = document.createElement('p');
-
+ 		   //$('.p-inner').setAttribute("height", "600px");
+	 		  $('.p-inner').attr( 'id', 'psp' );
+	 		  $('#psp').attr( 'height', '80%' );
+			
  		    $('.p-inner').append(`일정 번호 : `+i); 
  		    let brTag = document.createElement('br');
 			$('.p-inner').append(brTag); 
