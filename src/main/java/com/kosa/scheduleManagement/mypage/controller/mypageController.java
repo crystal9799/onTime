@@ -56,7 +56,7 @@ public class mypageController {
 			model.addAttribute("resultDone", resultDone);
 			model.addAttribute("resultBefore", resultBefore);
 			model.addAttribute("resultProg", resultProg);
-			model.addAttribute("totalSchedNum", totalSchedNum);
+			model.addAttribute("empDhead_num", emp.getDhead_num());
 		}
 		
 		model.addAttribute("emp", emp);
