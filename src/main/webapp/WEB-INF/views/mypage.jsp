@@ -78,15 +78,15 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th width="40%">프로젝트명</th>
-											<th width="60%">진행률</th>
+											<th width="50%">프로젝트명</th>
+											<th width="50%">진행률</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach var="chart" items="${chart}">
 											<tr>
-												<td>${chart.projectName}</td>
-												<td>
+												<td >${chart.projectName}</td>
+												<td id="tableProgess">
 													<div class="grogressWrapper">
 														<div class="progress mr-3">
 															<div class="progress-bar bg-success" role="progressbar"
@@ -132,31 +132,27 @@
 		fileInput.click();
 	});
 	
-	/* chart */
-	var ctx = document.getElementById('chart-line');
-	var totalnum = ${totalSchedNum};
-	var doneNum = ${doneSchedNum};
-	var resultDone = (doneNum/totalnum) * 100;
-	var resultProg = 100 - resultDone;
-	
-	var myLineChart = new Chart(ctx, {
-		type : 'pie',
-		data : {
-			labels : [ "완료", "진행중" ],
-			datasets : [ {
-				data : [ resultDone, resultProg ],
-				backgroundColor : [ "#4b49ac", "#CDCDFF" ]
-			} ]
-		},
-		options : {
-			title : {
-				display : true,
-				text : '업무 진행도'
-			}
-		}
-	});
-	
 	window.onload = function() {
+		/* chart */
+		var ctx = document.getElementById('chart-line');
+		
+		var myLineChart = new Chart(ctx, {
+			type : 'pie',
+			data : {
+				labels : [ "완료", "진행중" ],
+				datasets : [ {
+					data : [ ${resultDone}, ${resultProg} ],
+					backgroundColor : [ "#4b49ac", "#CDCDFF" ]
+				} ]
+			},
+			options : {
+				title : {
+					display : true,
+					text : '업무 진행도'
+				}
+			}
+		});
+		
 		// 회원정보 수정 기능
 		document.getElementById('submit').addEventListener('click', (event) => {
 					 var passwordValue = document.getElementById('passwordChange').value; 

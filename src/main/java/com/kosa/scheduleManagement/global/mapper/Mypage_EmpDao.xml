@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- mypage 사원 정보 -->
 	<select id="getEmpInfo"
 		resultType="com.kosa.scheduleManagement.global.dto.Emp">
-		select user_id, password, ename, emp_pic, deptno from emp
+		select user_id, password, ename, emp_pic, deptno, dhead_num from emp
 		where user_id=#{user_id}
 	</select>
 

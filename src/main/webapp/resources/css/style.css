@@ -24622,12 +24622,15 @@ dl li {
   vertical-align: middle;
   line-height: 1;
   white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
 }
 
 
 .table td,
 .jsgrid .jsgrid-table td {
   font-size: 0.875rem;
+  padding: 10px 5px;
 }
 
 .table td img, .jsgrid .jsgrid-table td img {
