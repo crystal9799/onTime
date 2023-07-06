@@ -84,7 +84,7 @@
 									<tbody>
 										<c:forEach var="chart" items="${chart}">
 											<tr>
-												<td >${chart.projectName}</td>
+												<td>${chart.projectName}</td>
 												<td id="tableProgess">
 													<div class="grogressWrapper">
 														<div class="progress mr-3">
@@ -205,6 +205,24 @@
 							cache: 'no-cache',
 							body: formData,
 						})
+						
+						$.ajax({
+						url : "mypage/update.do",
+						type : 'POST',
+						data : formData,
+					 	processData:false,
+					  	contentType:false,
+						success : function(data) {
+							console.log("mypageUpdate : " + data);
+						},
+						error : function(request, status, error) {
+							console.log("code:" + request.status + "\n"
+									+ "message:" + request.responseText + "\n"
+									+ "error:" + error);
+						}
+
+					});
+						
 						Swal.fire('변경 완료','변경되었습니다.', 'success');
 						return true;
 					 }
