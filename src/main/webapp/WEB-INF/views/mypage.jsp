@@ -15,7 +15,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
-
 </head>
 <body>
 	<jsp:include page="/common/Header.jsp" />
@@ -85,7 +84,7 @@
 									<tbody>
 										<c:forEach var="chart" items="${chart}">
 											<tr>
-												<td >${chart.projectName}</td>
+												<td>${chart.projectName}</td>
 												<td id="tableProgess">
 													<div class="grogressWrapper">
 														<div class="progress mr-3">
@@ -139,10 +138,10 @@
 		var myLineChart = new Chart(ctx, {
 			type : 'pie',
 			data : {
-				labels : [ "완료", "진행중" ],
+				labels : [ "시작전", "진행중", "완료" ],
 				datasets : [ {
-					data : [ ${resultDone}, ${resultProg} ],
-					backgroundColor : [ "#4b49ac", "#CDCDFF" ]
+					data : [ ${resultBefore}, ${resultProg}, ${resultDone} ],
+					backgroundColor : [ "#CDCDFF", "#8989E8", "#4b49ac" ]
 				} ]
 			},
 			options : {
@@ -206,6 +205,24 @@
 							cache: 'no-cache',
 							body: formData,
 						})
+						
+						$.ajax({
+						url : "mypage/update.do",
+						type : 'POST',
+						data : formData,
+					 	processData:false,
+					  	contentType:false,
+						success : function(data) {
+							console.log("mypageUpdate : " + data);
+						},
+						error : function(request, status, error) {
+							console.log("code:" + request.status + "\n"
+									+ "message:" + request.responseText + "\n"
+									+ "error:" + error);
+						}
+
+					});
+						
 						Swal.fire('변경 완료','변경되었습니다.', 'success');
 						return true;
 					 }

@@ -68,15 +68,15 @@ public class mypageService {
 		return dept;
 	}
 	
-//	전체업무일정 개수
-	public int getTotalSchedNum(int user_id) {
+//	시작 전 업무일정 개수
+	public int getBeforeSchedNum(int user_id) {
 		Mypage_EmpDao mypage_empdao = sqlsession.getMapper(Mypage_EmpDao.class);
 		
 		int result = -1;
 		
 		try {
 			System.out.println("service 진입");
-			result = mypage_empdao.getTotalSchedNum(user_id);
+			result = mypage_empdao.getBeforeSchedNum(user_id);
 			System.out.println("getTotalSchedNum 성공");
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -85,7 +85,24 @@ public class mypageService {
 		return result;
 	}
 	
-//	전체업무일정 개수
+//	진행중업무일정 개수
+	public int getProgSchedNum(int user_id) {
+		Mypage_EmpDao mypage_empdao = sqlsession.getMapper(Mypage_EmpDao.class);
+		
+		int result = -1;
+		
+		try {
+			System.out.println("service 진입");
+			result = mypage_empdao.getProgSchedNum(user_id);
+			System.out.println("getProgSchedNumb 성공");
+		} catch (Exception e) {
+			e.getStackTrace();
+			System.out.println("getProgSchedNumbService 오류 :" + e.getMessage());
+		}
+		return result;
+	}
+	
+//	완료업무일정 개수
 	public int getDoneSchedNum(int user_id) {
 		Mypage_EmpDao mypage_empdao = sqlsession.getMapper(Mypage_EmpDao.class);
 		
