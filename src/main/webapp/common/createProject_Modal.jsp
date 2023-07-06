@@ -48,8 +48,6 @@ $(document).ready(function(){
             select.add(option);
         });
 
-        // After populating the <select> with new <option> elements, 
-        // create a new instance of Choices to refresh the UI.
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
             removeItemButton: true,
             maxItemCount:10,
@@ -109,7 +107,7 @@ $(document).ready(function(){
         	Swal.fire({
       		  position: 'center',
       		  icon: 'success',
-      		  title: 'Create Project.',
+      		  title: '프로젝트 생성 성공',
       		  showConfirmButton: false,
       		  timer: 1500
       		})
