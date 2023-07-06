@@ -132,31 +132,27 @@
 		fileInput.click();
 	});
 	
-	/* chart */
-	var ctx = document.getElementById('chart-line');
-	var totalnum = ${totalSchedNum};
-	var doneNum = ${doneSchedNum};
-	var resultDone = (doneNum/totalnum) * 100;
-	var resultProg = 100 - resultDone;
-	
-	var myLineChart = new Chart(ctx, {
-		type : 'pie',
-		data : {
-			labels : [ "완료", "진행중" ],
-			datasets : [ {
-				data : [ resultDone, resultProg ],
-				backgroundColor : [ "#4b49ac", "#CDCDFF" ]
-			} ]
-		},
-		options : {
-			title : {
-				display : true,
-				text : '업무 진행도'
-			}
-		}
-	});
-	
 	window.onload = function() {
+		/* chart */
+		var ctx = document.getElementById('chart-line');
+		
+		var myLineChart = new Chart(ctx, {
+			type : 'pie',
+			data : {
+				labels : [ "완료", "진행중" ],
+				datasets : [ {
+					data : [ ${resultDone}, ${resultProg} ],
+					backgroundColor : [ "#4b49ac", "#CDCDFF" ]
+				} ]
+			},
+			options : {
+				title : {
+					display : true,
+					text : '업무 진행도'
+				}
+			}
+		});
+		
 		// 회원정보 수정 기능
 		document.getElementById('submit').addEventListener('click', (event) => {
 					 var passwordValue = document.getElementById('passwordChange').value; 

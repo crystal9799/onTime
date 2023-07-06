@@ -184,6 +184,7 @@ card-footer, .card-header {
 .grogressWrapper {
 	position: relative;
 	width: 150px;
+	margin-left: 5px;
 }
 
 /* 부사장 프로젝트 차트 css */
