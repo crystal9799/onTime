@@ -6,6 +6,11 @@ body {
 		Arial, sans-serif;
 }
 
+table {
+  width: 100%;
+  padding: 0px;
+}
+
 /* 데스크탑 환경 */
 @media only screen and (min-width: 1025px) {
 	.padding {
@@ -68,8 +73,8 @@ body {
 }
 
 .mypageCard {
-	min-width: 600px;
-	width: 65%;
+	min-width: 300px;
+	width: 55%;
 	min-height: 650px;
 	margin-bottom: 2rem;
 	position: relative;
@@ -141,7 +146,7 @@ body {
 
 /*  */
 .card {
-	width: 400px;
+	width: 520px;
 	height: 120%;
 	position: relative;
 	display: flex;
@@ -172,20 +177,25 @@ card-footer, .card-header {
 	background-clip: padding-box
 }
 
-.grogressWrapper {
-	position: relative;
-	width: 90%;
-}
-
 .chartjs-render-monitor {
 	margin-bottom: 2rem;
+}
+
+.grogressWrapper {
+	position: relative;
+	width: 150px;
+	margin-left: 5px;
 }
 
 /* 부사장 프로젝트 차트 css */
 .grogressWrapper span {
 	position: absolute;
 	top: 4px;
-	left: 140px;
+	left: 150px;
 	width: 100%;
 	color: black;
+}
+
+.tableProgess {
+	padding-right: 30px;
 }
