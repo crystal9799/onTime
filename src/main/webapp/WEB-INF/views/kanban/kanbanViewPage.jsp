@@ -89,7 +89,7 @@ body {
 						<div>
 							<span> 
 							<i class="fa fa-plus" id="modalBtn" aria-hidden="true" type="button"></i> 
-							<i class="bi bi-download hover" aria-hidden="true" id="saveBtn" type="button"></i> 
+							<i class="bi bi-download" aria-hidden="true" id="saveBtn" type="button"></i> 
 							<a href="${pageContext.request.contextPath}/getProjectDetail.do?project_num=${project_num}"
 								id="reBtn" class="fa fa-refresh hover" type="button" style="text-decoration: none;"> </a>
 
@@ -131,7 +131,7 @@ body {
 								<div class="p-inner" id="pap">
 									프로젝트 일정 :
 									<p>	${p.project_start} - ${p.project_end}</p>
-									<br><br> 상세 내용 :
+									<br> 상세 내용 :
 									<p>	${p.project_info}</p>
 									<br>
 								</div>

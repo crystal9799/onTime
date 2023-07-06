@@ -81,6 +81,7 @@ body {
 	font-weight: bold;
 	margin-bottom: 15px;
 	margin-left: 15px;
+	margin-right: 10px;
 	/*	text-align:center; */
 }
 
@@ -187,7 +188,7 @@ p {
 	font: bold;
 	font-size: 35px;
 	color: #4b49ac;
-	margin-right: 25px;
+	margin-right: 60px;
 	float: right;        position: relative;
         animation: fadeInDown 1s;
 }
@@ -195,8 +196,9 @@ p {
 	font: bold;
 	font-size: 40px;
 	color: #8988C9;
-	margin-right: 25px;
-	float: right;
+	margin-right: 60px;
+	float: right; position: relative;
+        animation: fadeInDown 1s;
 
 }  
 
@@ -261,29 +263,39 @@ p {
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
 	background-color: #4B49AC;
 	border-radius: 10px;
-	/*	width: 500px;*/
-	width: 100%;
+		width: 500px;
+/* 		maigin-right:10px; */
+	/*width: 100%;*/
 	max-width: 700px;
-	min-height: 500px;
+	min-height: 520px;
 	flex-shrink: 0;
-	color: #fff;	line-height:50px;
+	color: #fff;	
+	line-height:50px;
 }
 
-#pap{
+#pap, #psp{
 	font: bold;
 		font-size: 20px;
 			border-radius: 10px;
+			min-height: 400px;
 }
+
+#psp{
+/* height: 100%; */
+}
+
 .p-inner {
-	padding: 55px 0px 0px 50px;
+	padding: 55px 40px 10px 50px;
 	background: white;
 	opacity:0.8;
 	color: black;
 	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
 	width: 600x;
-	min-height: 430px;
-	line-height:30px;	position: relative;
-        animation: fadeInDown 0.5s;
+/*	min-height: 430px;*/
+	height: 70%;
+	line-height:30px;	
+	position: relative;
+     animation: fadeInDown 0.5s;
 }  @keyframes fadeInDown {
         0% {
             opacity: 0;

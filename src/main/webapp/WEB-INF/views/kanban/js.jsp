@@ -142,7 +142,10 @@
 		  console.log(data.ename);
   
  		    let new_pTag = document.createElement('p');
-
+ 		   //$('.p-inner').setAttribute("height", "600px");
+	 		  $('.p-inner').attr( 'id', 'psp' );
+	 		  $('#psp').attr( 'height', '80%' );
+			
  		    $('.p-inner').append(`일정 번호 : `+i); 
  		    let brTag = document.createElement('br');
 			$('.p-inner').append(brTag); 
@@ -595,13 +598,11 @@
       
 	  /* ename list dynamic create */
 	  function getNameList(){
-		  console.log('aaaddd');
 			$.ajax({
 				url: "projectEnamelist.ajax",
 				type: "GET", dataType:"json",
 		        data: {"project_num" : ${project_num} },
 				success : function(data){
-					console.log(data); 
 					for(var i=0; i<data.length; i++){
 						$("#nameList").append('<option id="'+data[i]+'" value="' + data[i] + '">' + data[i] + '</option');
 					}

@@ -221,13 +221,12 @@ public class KanbanAjaxController {
 	}
 
 	@RequestMapping(value = "/getEmp.ajax", method = { RequestMethod.POST })
-	public Emp getEmp(@RequestParam("sched_num") String sched_num)
-			throws ClassNotFoundException, SQLException {
+	public Emp getEmp(@RequestParam("sched_num") String sched_num) throws ClassNotFoundException, SQLException {
 		System.out.println("getSinfo ccccc");
 
-		Emp emp=service.getEmpBySchedNum(Integer.parseInt(sched_num));
+		Emp emp = service.getEmpBySchedNum(Integer.parseInt(sched_num));
 		System.out.println(sched_num);
-		
+
 		return emp;
 	}
 
@@ -263,10 +262,7 @@ public class KanbanAjaxController {
 	@ResponseBody
 	public List<String> getEmpListByProject(@RequestParam("project_num") int project_num)
 			throws ClassNotFoundException, SQLException {
-		System.out.println("projectemplist controller connection");
 		List<String> list = service.getEmpListByProject(project_num);
-		System.out.println("controller pn" + project_num);
-		System.out.println("list: " + list);
 		return list;
 	}
 
