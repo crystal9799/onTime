@@ -20,11 +20,9 @@ public class Project_EmpService {
 		this.sqlsession = sqlsession;
 	}
 	
+	//Project_Emp 테이블 INSERT
 	public void insert_Project_Emp(Project_Sub genproject) {
-		System.out.println("Project : " + genproject.getProject().toString());
-		System.out.println("emplist : " + genproject.getEmplist().toString());
 		Project_EmpDao project_empdao = sqlsession.getMapper(Project_EmpDao.class);
-		System.out.println("Project_Emp insert 시작");
 		
 		for(int i=0; i<genproject.getEmplist().size(); i++) {
 			int project_num= genproject.getProject().getProject_num();
