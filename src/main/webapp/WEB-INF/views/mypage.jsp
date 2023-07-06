@@ -132,28 +132,31 @@
 	});
 	
 	window.onload = function() {
-		/* chart */
-		var ctx = document.getElementById('chart-line');
-		
-		var myLineChart = new Chart(ctx, {
-			type : 'pie',
-			data : {
-				labels : [ "시작전", "진행중", "완료" ],
-				datasets : [ {
-					data : [ ${resultBefore}, ${resultProg}, ${resultDone} ],
-					backgroundColor : [ "#CDCDFF", "#8989E8", "#4b49ac" ]
-				} ]
-			},
-			options : {
-				title : {
-					display : true,
-					text : '업무 진행도'
+		if (`${empDhead_num}` > 0) {
+			/* chart */
+			var ctx = document.getElementById('chart-line');
+			
+			var myLineChart = new Chart(ctx, {
+				type : 'pie',
+				data : {
+					labels : [ "시작전", "진행중", "완료" ],
+					datasets : [ {
+						data : [ ${resultBefore}, ${resultProg}, ${resultDone} ],
+						backgroundColor : [ "#CDCDFF", "#8989E8", "#4b49ac" ]
+					} ]
+				},
+				options : {
+					title : {
+						display : true,
+						text : '업무 진행도'
+					}
 				}
-			}
-		});
+			});
+		}
 		
 		// 회원정보 수정 기능
 		document.getElementById('submit').addEventListener('click', (event) => {
+					console.log('클릭');
 					 var passwordValue = document.getElementById('passwordChange').value; 
 					 var passwordConfirm = document.getElementById('passwordConfirm').value; 
 					 var fileImageUpload = document.getElementById('fileImageUpload'); 
@@ -220,8 +223,9 @@
 									+ "message:" + request.responseText + "\n"
 									+ "error:" + error);
 						}
-
 					});
+						document.getElementById('passwordChange').value = null;
+						document.getElementById('passwordConfirm').value = null; 
 						
 						Swal.fire('변경 완료','변경되었습니다.', 'success');
 						return true;
