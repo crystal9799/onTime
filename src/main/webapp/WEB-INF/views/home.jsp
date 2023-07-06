@@ -29,12 +29,6 @@
 	                    	
 	                    	var event = info.event;
 	                    	
-	                        console.log(event.id); 
-	                        console.log(event.title);
-	                        console.log(event.extendedProps.project_info);
-	                        console.log(event.start.toISOString().slice(0, 10));
-	                        console.log(event.end.toISOString().slice(0, 10));
-	                    	
 	                    	$('#project_num2').val(event.id);
 	                    	$('#project_name2').val(event.title);
 	                    	$('#project_info2').text(event.extendedProps.project_info);
@@ -53,10 +47,7 @@
 	                            let getUserProjectList = ${getUserProjectList};
 	                            //부서장 프로젝트 리스트
 	                            let getDheaedProjectList = ${getDheaedProjectList};
-	                           
-	                            
-	                            console.log("유저플젝리스트"+getUserProjectList);
-	                            console.log("부서장플젝리스"+getDheaedProjectList);
+
 	                         	// 유저의 권한에 따라 프로젝트 리스트 선택
 	                            let projectList;
 	                            <se:authorize access="hasRole('ROLE_ADMIN')">
@@ -65,8 +56,6 @@
 	                            <se:authorize access="hasRole('ROLE_USER')">
 	                              projectList = getUserProjectList;
 	                            </se:authorize>
-	                            console.log(projectList);
-	                            console.log(project_num);
 	                            const result = projectList.includes(project_num);
 	                            // 프로젝트 리스트에 project_num이 포함되어 있는지 확인
 	                            console.log(projectList.includes(project_num));
@@ -75,19 +64,21 @@
 	                            } else {
 	                            	/* $('#toschedule').attr("href", "/Team4_WebProject_2/error"); */
 	                            }
-	                             $('#toschedule').click(function() {
-	                                 if (!result) {
-	                                	 Swal.fire(
-	     										{
-	     								    		  position: 'center',
-	     								    		  icon: 'error',
-	     								    		  title: '배정받은 사원이 아닙니다.',
-	     								    		  showConfirmButton: false,
-	     								    		  timer: 1500
-	     								    		}
-	     										);
-	                                 }
-	                               });
+	                             $('#toschedule').click(function(e) {
+	                            	    if (!result) {
+	                            	        e.preventDefault();
+	                            	        Swal.fire({
+	                            	            position: 'center',
+	                            	            icon: 'error',
+	                            	            title: '배정받은 사원이 아닙니다.',
+	                            	            showConfirmButton: false,
+	                            	            timer: 2000
+	                            	        }).then(() => {
+	                            	            // 알림이 사라진 후에 페이지 로드를 진행합니다.
+	                            	            window.location.reload();
+	                            	        });
+	                            	    }
+	                            	});
 	                        });
 	                    }
 	                });
