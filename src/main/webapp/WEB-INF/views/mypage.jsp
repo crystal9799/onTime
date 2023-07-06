@@ -134,10 +134,7 @@
 	window.onload = function() {
 		/* chart */
 		var ctx = document.getElementById('chart-line');
-		console.log(${totalSchedNum});
-		console.log(${resultDone});
-		console.log(${resultProg});
-		console.log(${resultBefore});
+		
 		var myLineChart = new Chart(ctx, {
 			type : 'pie',
 			data : {
