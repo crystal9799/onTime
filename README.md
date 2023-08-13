@@ -3,7 +3,6 @@
 ![image](https://github.com/crystal9799/onTime/assets/68013488/7f813e13-7deb-4586-b9f0-3f06d8b0601c)
 
 ![image](https://github.com/crystal9799/onTime/assets/68013488/654e3195-dc5a-46f8-b56a-111a47a9ce38)
-![image](https://github.com/crystal9799/onTime/assets/68013488/dc90a330-e58b-4466-924e-6f5d4324e91a)
 
 
 ![image](https://github.com/crystal9799/onTime/assets/68013488/b58e9c18-8601-47af-8bd7-15bdfafe4f16)
@@ -11,6 +10,7 @@
 ![image](https://github.com/crystal9799/onTime/assets/68013488/e95c68f7-73bd-43b4-ad6f-2db7f2a06073)
 
 ![image](https://github.com/crystal9799/onTime/assets/68013488/f64a66a6-9052-4b09-8114-380ec488e984)
+![image](https://github.com/crystal9799/onTime/assets/68013488/dc90a330-e58b-4466-924e-6f5d4324e91a)
 
 ![image](https://github.com/crystal9799/onTime/assets/68013488/ade5f51c-022d-4134-8944-5f3aa12ad810)
 
